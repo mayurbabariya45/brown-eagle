@@ -1,4 +1,4 @@
-# B2B-Client
+﻿# B2B-Client
 …or create a new repository on the command line
 
 echo "# B2B-Client" >> README.md
