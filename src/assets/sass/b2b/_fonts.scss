@@ -1,0 +1,19 @@
+
+//ubunturegular
+@include font-face("ubunturegular","../fonts/ubuntu-r-webfont",normal,normal,woff2 woff);
+@include font-face("ubuntuitalic","../fonts/ubuntu-ri-webfont",normal,normal,woff2 woff);
+
+//ubuntumedium
+@include font-face("ubuntumedium","../fonts/ubuntu-m-webfont",normal,normal,woff2 woff);
+@include font-face("ubuntumedium_italic","../fonts/ubuntu-mi-webfont",normal,normal,woff2 woff);
+
+//ubuntulight
+@include font-face("ubuntulight_italic","../fonts/ubuntu-li-webfont",normal,normal, woff2 woff);
+@include font-face("ubuntulight","../fonts/ubuntu-l-webfont",normal,normal, woff2 woff);
+
+//ubuntu_condensedregular
+@include font-face("ubuntu_condensedregular","../fonts/ubuntu-c-webfont",normal,normal, woff2 woff);
+
+//ubuntubold
+@include font-face("ubuntubold_italic","../fonts/ubuntu-bi-webfont",normal,normal, woff2 woff);
+@include font-face("ubuntubold","../fonts/ubuntu-b-webfont",normal,normal, woff2 woff);
