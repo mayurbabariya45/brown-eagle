@@ -2,60 +2,77 @@ import React from "react";
 import className from "classnames";
 import PropTypes from "prop-types";
 import { Row, Col, ButtonGroup } from "react-bootstrap";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 import Button from "../../elements/CustomButton/CustomButton";
 import Languages from "../../components/Languages/Languages";
 import SearchProductCategories from "./SearchProductCategories";
-import ProductInformation from "./form/ProductInformation";
+import ProductImageForm from "./form/ProductImageForm";
+import ProductInformationForm from "./form/ProductInformationForm";
 
 const Tabs = props => {
-  const { translate, activeTabs } = props;
+  const { translate, activeTabs, loading } = props;
   let tabsContent;
-  switch (2) {
+  switch (activeTabs) {
     case 1:
       tabsContent = (
         <div
-          className={className("fade tab-pane in active", {
+          className={className("fade tab-pane", {
             active: activeTabs === 1,
             in: activeTabs === 1
           })}
         >
           <div className="box">
-            <div className="box-header">
-              <div className="title">{translate("a_category")}</div>
-              <div className="text">
-                <a href="#quick">{translate("a_quick")}</a>
-              </div>
-            </div>
-            <div className="box-navbar">
-              <ButtonGroup>
-                <Button fill radius simple>
-                  {translate("a_search")}
-                </Button>
-                <Button fill radius simple>
-                  {translate("a_used")}
-                </Button>
-              </ButtonGroup>
-              <div className="box-language">
-                <div className="box-language-title">
-                  {translate("a_language")}
-                </div>
-                <div className="languages">
-                  <Languages {...props} dropdownButton />
+            <BlockUi tag="div" blocking={loading}>
+              <div className="box-header">
+                <div className="title">{translate("a_category")}</div>
+                <div className="text">
+                  <a href="#quick">{translate("a_quick")}</a>
                 </div>
               </div>
-            </div>
-            <div className="box-content">
-              <SearchProductCategories {...props} />
-              <Row>
-                <Col md={6}>
-                  <div className="bottom-text">
-                    <Button block fill radius simple>
-                      {translate("a_button_text")}
-                    </Button>
+              <div className="box-navbar">
+                <ButtonGroup>
+                  <Button fill radius simple>
+                    {translate("a_search")}
+                  </Button>
+                  <Button fill radius simple>
+                    {translate("a_used")}
+                  </Button>
+                </ButtonGroup>
+                <div className="box-language">
+                  <div className="box-language-title">
+                    {translate("a_language")}
                   </div>
-                </Col>
-              </Row>
-            </div>
+                  <div className="languages">
+                    <Languages {...props} dropdownButton />
+                  </div>
+                </div>
+              </div>
+              <div className="box-content">
+                <SearchProductCategories {...props} />
+                <Row>
+                  <Col md={6}>
+                    <div className="bottom-text">
+                      <Button block fill radius simple>
+                        {translate("a_button_text")}
+                      </Button>
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    <Button
+                      bsStyle="warning"
+                      onClick={props.addCategory}
+                      pullRight
+                      fill
+                      radius
+                      simple
+                    >
+                      {translate("r_next")}
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
+            </BlockUi>
           </div>
         </div>
       );
@@ -63,7 +80,7 @@ const Tabs = props => {
     case 2:
       tabsContent = (
         <div
-          className={className("fade tab-pane in active", {
+          className={className("fade tab-pane", {
             active: activeTabs === 2,
             in: activeTabs === 2
           })}
@@ -72,7 +89,8 @@ const Tabs = props => {
             <div className="product-box-title">
               <p>{translate("a_box_title")}</p>
             </div>
-            <ProductInformation {...props} />
+            <ProductInformationForm {...props} />
+            <ProductImageForm {...props} />
           </div>
         </div>
       );
@@ -143,6 +161,10 @@ const Tabs = props => {
   );
 };
 
-Tabs.propTypes = {};
+Tabs.propTypes = {
+  translate: PropTypes.func.isRequired,
+  addCategory: PropTypes.func.isRequired,
+  activeTabs: PropTypes.bool.isRequired
+};
 
 export default Tabs;

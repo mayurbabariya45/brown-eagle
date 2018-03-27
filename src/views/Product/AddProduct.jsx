@@ -35,6 +35,8 @@ class AddProduct extends React.Component {
   }
 }
 
-AddProduct.propTypes = {};
+AddProduct.propTypes = {
+  translate: PropTypes.func.isRequired
+};
 
 export default AddProduct;

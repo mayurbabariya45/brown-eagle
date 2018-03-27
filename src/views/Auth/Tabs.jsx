@@ -110,6 +110,10 @@ const Tabs = props => {
   );
 };
 
-Tabs.propTypes = {};
+Tabs.propTypes = {
+  translate: PropTypes.func.isRequired,
+  activeTabs: PropTypes.bool.isRequired,
+  hanldeSubmitForm: PropTypes.bool.isRequired
+};
 
 export default Tabs;

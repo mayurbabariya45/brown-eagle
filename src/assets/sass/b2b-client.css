@@ -3754,7 +3754,9 @@ section {
         border: none;
         color: #ffffff; }
         .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:active {
-          color: #ffffff; }
+          color: #ffffff;
+          background: transparent;
+          border: none; }
     .nav-tabs > li:nth-child(1):after, .nav-tabs > li:nth-child(2):after {
       content: " ";
       display: block;

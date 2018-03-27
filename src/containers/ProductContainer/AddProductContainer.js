@@ -3,8 +3,7 @@ import AddProduct from "../../views/Product/AddProduct";
 import * as a from "../../actions/Product/Product_actions";
 
 const mapDispatchToProps = dispatch => ({
-  onIncrement: () => dispatch(a.onIncrement()),
-  onDecrement: () => dispatch(a.onDecrement())
+  addCategory: () => dispatch(a.AddCategory())
 });
 const mapStateToProps = state => ({
   ...state.product

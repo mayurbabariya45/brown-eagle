@@ -46,6 +46,8 @@
         &:focus,
         &:active {
           color: $white-color;
+          background: transparent;
+          border: none;
         }
       }
     }
