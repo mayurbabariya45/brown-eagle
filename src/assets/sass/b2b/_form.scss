@@ -1,0 +1,14 @@
+.form-horizontal .checkbox.checkbox-inline, 
+.form-horizontal .checkbox.radio-inline, 
+.form-horizontal .checkbox:first-child,
+.form-horizontal .radio.checkbox-inline, 
+.form-horizontal .radio.radio-inline, 
+.form-horizontal .radio:first-child{
+    margin-top: 10px;
+}
+.form-horizontal{
+    & .checkbox,
+    & .radio{
+        padding-top: 0;
+    }
+}

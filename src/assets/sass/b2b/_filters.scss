@@ -1,0 +1,31 @@
+.filter-header,.filter-categories,.filter-products-price{
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 0;
+    .title{
+        float: left;
+    }
+    .filter-clear{
+        text-align: right;
+        float: right;
+        cursor: pointer;
+        color: #2874f0;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin: 5px;
+    }
+}
+.filter-header{
+    padding-top: 5px;
+}
+.filter-products-price{
+    .filter-clear{
+        margin: 10px 5px;
+    }
+   .price-filter{
+       float: left;
+       width: 100%;
+   }
+}

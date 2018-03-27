@@ -1,0 +1,141 @@
+.modal {
+    text-align: center;
+    padding: 0 !important;
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+    }
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+}
+
+.login-modal {
+    .modal-header{
+        border: none;
+        .modal-title{
+            display: inline-block;
+            color:$warning-states-color;
+            .back-button{
+                font-size: 15px;
+                cursor: pointer;
+            }
+        }
+        .close{
+            color:$warning-states-color;
+            text-shadow: 0 1px 0 $warning-states-color;
+            opacity: 1;
+        }
+    }
+    .modal-content {
+        background-color: $medium-dark-blue;
+        border: none;
+        .content {
+            height: 100%;
+            width: 100%;
+            .brand-logo-flex {
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                height: 100px;
+                width: 100%;
+            }
+            .login.brand-logo{
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                height: 100%;
+                width: 100%;
+                margin: 30px 0;   
+            }
+            .register.brand-logo{
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                height:100%;
+                width: 100%;
+                margin-bottom: 30px;   
+            }
+            .otp.brand-logo{
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                height: 150px;
+                width: 100%;
+            }
+            .form-group{
+                margin: 0;
+            }
+            .buttons {
+                margin: 30px $margin-zero 60px;
+                .btn{
+                    margin-bottom: 15px;
+                }
+            }
+            .form{
+                .card{
+                    margin-bottom: 10px;
+                }
+                .socials-button{
+                    .btn-social{
+                        font-family: "ubuntumedium","Helvetica Neue",Arial,sans-serif;
+                        margin: 0;
+                        margin-top: 10px;
+                        .fa{
+                            vertical-align: unset;
+                            font-size: $font-size-base;
+                        }
+                    }
+                }
+                .or-label{
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    color:$warning-states-color;
+                    text-align: center;
+                    margin:20px 0;
+                    p{
+                        margin: 0 auto;
+                        font-size: $font-size-base;
+                    }
+                }
+                .links{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                    margin: 40px 0 15px;
+                    text-align: center;
+                    a{
+                        color:$warning-states-color;
+                        font-size: $font-size-base;
+                    }
+                }
+                label{
+                    color:$black-color;
+                }
+                .resend-links{
+                    display: block;
+                    width: 100%;
+                    height: 50px;
+                    padding: 0;
+                    margin: 20px 0px;
+                    text-align: center;
+                    a{
+                        color:$warning-states-color;
+                        font-size: $font-size-base;
+                    }
+                }
+            }
+        }
+    }
+}

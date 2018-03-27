@@ -1,28 +1,35 @@
-import React, { Component } from 'react';
-import Classnames from 'classnames'
-import { Row, Col } from 'react-bootstrap';
+import React, { Component } from "react";
+import classNames from "classnames";
+import { Row, Col } from "react-bootstrap";
 
-class StatsCard extends Component{
-    render(){
-        return(
-            <div className={Classnames('card card-stats',{'border-l':this.props.broderLeft})}>
-                <div className="content">
-                    <Row>
-                        <Col xs={3}>
-                            <div className="icon-big text-right icon-warning">
-                                {this.props.bigIcon}
-                            </div>
-                        </Col>
-                        <Col xs={9}>
-                            <div className="small-content">
-                                <p>{this.props.statsText}</p>
-                                {this.props.statsValue}
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-            </div>
-        )
-    }
-}
-export default StatsCard
+const StatsCard = props => (
+  <div
+    className={classNames("card card-stats", {
+      "border-l": props.broderLeft,
+      "card-numbers": props.numbers
+    })}
+  >
+    <div className="content">
+      <Row>
+        <Col xs={props.fxs}>
+          {props.number !== undefined ? (
+            <div className="numbers">{props.number}</div>
+          ) : (
+            ""
+          )}
+          <div className="icon-big text-right icon-warning">
+            {props.bigIcon}
+          </div>
+        </Col>
+        <Col xs={props.lxs}>
+          <div className="small-content">
+            <p>{props.statsText}</p>
+            {props.statsValue}
+          </div>
+        </Col>
+      </Row>
+    </div>
+  </div>
+);
+
+export default StatsCard;

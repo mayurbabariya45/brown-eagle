@@ -1,0 +1,24 @@
+.news-letter{
+    background-color: $white-color-top;
+    .card.card-stats{
+        .content{
+            padding: $padding-zero;
+            .small-content{
+                font-size: $font-size-large;
+                padding-left: $padding-simple-vertical;
+                h4{
+                    margin: $margin-zero;
+                    font-family: "ubuntumedium","Helvetica Neue",Arial,sans-serif;
+                    font-size: $font-size-large-navbar;
+                    line-height: $line-height-base;
+                }
+            }
+        }
+    }
+    .form-group{
+        margin-top: 10px;
+        .form-control{
+            border-width: 0.5px;
+        }
+    }
+}

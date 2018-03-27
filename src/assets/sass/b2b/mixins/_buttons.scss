@@ -33,7 +33,12 @@
       color: $white-color;
       background-color: $btn-color;
       @include opacity(1);  
-  
+      &.btn-full{
+          width: 100%;
+      }  
+      &.btn-radius{
+          border-radius: 0;
+      }
       &:hover,
       &:focus,
       &:active,
@@ -44,10 +49,25 @@
       }
       
       .caret{
-          border-top-color: $white-color;
+          border-top-color: $black-color;
       }
     }
-    
+    &.btn-border{
+        color:$btn-color;
+        border-color:$btn-color;
+        border-width: 1px;
+        border-radius: 0px;
+        @include opacity(1);  
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        .open > &.dropdown-toggle{
+            background-color: transparent;
+            border-color:$btn-color;
+            color:$btn-color;
+        }
+    }
     .caret{
         border-top-color: $btn-color;
     }

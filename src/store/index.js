@@ -1,20 +1,21 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import {persistState} from 'redux-devtools';
 import thunk from 'redux-thunk';
-import {logger} from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
-import DevToolsContainer from '../containers/DevToolsContainer';
+import { apiMiddleware } from '../middleware/redux-api/middleware';
+import DevToolsContainer from '../containers/DevToolsContainer/DevToolsContainer';
 import rootReducer from '../reducers';
 
 const middlewares = [
     thunk,
+    apiMiddleware,
     promiseMiddleware({
         promiseTypeSuffixes: ['LOADING', 'SUCCESS', 'ERROR']
     }),
 ];
 
 if (process.env.NODE_ENV !== 'production') {
-    middlewares.push(logger );
+   // middlewares.push(logger );
 }
 
 const enhancers = [applyMiddleware(...middlewares)];

@@ -1,0 +1,8 @@
+{
+  "extends": ["react-app", "airbnb", "plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": "error",
+    "quotes": [2, "double"],
+    "linebreak-style": 0
+  }
+}
