@@ -70,6 +70,7 @@
           color: $black-color;
           font-size: 14px;
           padding: 8px 35px;
+          width: 100px;
           i {
             display: none;
           }
@@ -148,10 +149,12 @@
             &:last-child {
               border-bottom: none;
             }
-            > a {
+            > p {
               color: $black-color;
               display: block;
               padding: 0 3em 0 0;
+              margin: 0 auto;
+              cursor: pointer;
               &:hover {
                 color: $white-color;
               }
@@ -160,17 +163,17 @@
           > li.active {
             background: $warning-color;
             border-bottom-color: $warning-color;
-            > a {
+            > p {
               color: $white-color;
             }
             > ul {
               display: block;
               > li {
-                > a {
+                > p {
                   color: $black-color;
                 }
                 &.active {
-                  > a {
+                  > p {
                     color: $white-color;
                   }
                 }
@@ -191,7 +194,7 @@
                 0 0 0 1px rgba(63, 63, 68, 0.1)
               );
               > li {
-                > a {
+                > p {
                   color: $black-color;
                   &:hover {
                     color: $white-color;

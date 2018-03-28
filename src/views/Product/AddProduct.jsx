@@ -1,5 +1,4 @@
 import React from "react";
-import className from "classnames";
 import PropTypes from "prop-types";
 import { Grid, Row, Col } from "react-bootstrap";
 import Tabs from "./Tabs";
@@ -10,6 +9,12 @@ class AddProduct extends React.Component {
     this.state = {};
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
+
+  componentWillMount() {
+    const { getCategories } = this.props;
+    getCategories();
+  }
+
   hanldeSubmitForm(value) {}
   render() {
     const { translate } = this.props;
@@ -36,7 +41,8 @@ class AddProduct extends React.Component {
 }
 
 AddProduct.propTypes = {
-  translate: PropTypes.func.isRequired
+  translate: PropTypes.func.isRequired,
+  getCategories: PropTypes.func.isRequired
 };
 
 export default AddProduct;

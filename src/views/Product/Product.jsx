@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Grid, Row, Col, Tabs, Tab } from "react-bootstrap";
 import Breadcrumbs from "../../components/Breadcrumb/Breadcrumb";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
@@ -170,6 +171,7 @@ class Product extends Component {
               <Col sm={4}>
                 <ProductSlider
                   title={translate("latest_products")}
+                  translate={translate}
                   products={[
                     product1,
                     product2,
@@ -202,6 +204,7 @@ class Product extends Component {
             <Col sm={12}>
               <ProductSlider
                 title={translate("food_retail_products")}
+                translate={translate}
                 products={[
                   product1,
                   product2,
@@ -228,4 +231,10 @@ class Product extends Component {
     );
   }
 }
+Product.propTypes = {
+  translate: PropTypes.func.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired
+};
 export default Product;

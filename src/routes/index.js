@@ -32,6 +32,8 @@ const appRoutes = [
       navLinks: true,
       showHeader: "dashboard"
     },
+    secure: true,
+    type: "seller",
     path: "/dashboard",
     name: "Dashboard",
     component: DashboardContainer

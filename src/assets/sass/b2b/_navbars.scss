@@ -206,12 +206,12 @@
       top: 2px;
       padding-right: $padding-base-vertical;
     }
+
     > li > a [class^="pe"] {
-      font-size: $font-size-large + 1;
+      font-size: 30px;
       position: relative;
       line-height: 16px;
-      top: 2px;
-      padding-right: $padding-base-vertical;
+      top: 10px;
     }
     .notification {
       position: absolute;
@@ -257,6 +257,12 @@
       &::after {
         content: "|";
         padding-left: 10px;
+      }
+    }
+    > li.content-link > a:not(.btn) {
+      &:after {
+        content: "";
+        padding: 0px;
       }
     }
     > li > a:not(.btn) {

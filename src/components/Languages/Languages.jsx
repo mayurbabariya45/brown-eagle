@@ -1,14 +1,22 @@
 import _ from "lodash";
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { NavDropdown, MenuItem, DropdownButton } from "react-bootstrap";
 import { languages } from "../../variables/Variables";
 
-export default class DropdownLanguage extends Component {
+class DropdownLanguage extends Component {
   constructor(props) {
     super(props);
     this.handleDropdown = this.handleDropdown.bind(this);
   }
+
+  componentWillMount() {
+    const { locale, selectLanguage } = this.props;
+    selectLanguage && selectLanguage(locale);
+  }
+
   handleDropdown(evt) {
+    const { handleLanguage, selectLanguage } = this.props;
     const currentLang = _.find(languages, { key: evt });
     if (_.isObject(currentLang)) {
       switch (currentLang.align) {
@@ -23,13 +31,15 @@ export default class DropdownLanguage extends Component {
           break;
       }
     }
-    this.props.handleLanguage(evt);
+    selectLanguage && selectLanguage(evt);
+    handleLanguage && handleLanguage(evt);
   }
   render() {
-    const { locale, translate, dropdownButton } = this.props;
+    const { locale, translate, dropdownButton, selectedLang } = this.props;
+    const selectedLanguage = selectedLang || locale;
     const renderLanguages = languages.map(
-      ({ key, align, icon }) =>
-        locale !== key && (
+      ({ key, icon }) =>
+        selectedLanguage !== key && (
           <MenuItem key={key} eventKey={key}>
             <img src={icon} alt={key} />
             {translate(key).toUpperCase()}
@@ -39,7 +49,7 @@ export default class DropdownLanguage extends Component {
     const language = (
       <div>
         <i className="fa fa-globe" />
-        <span>{translate(locale).toUpperCase()}</span>
+        <span>{translate(selectedLanguage).toUpperCase()}</span>
         <b className="caret" />
         <p className="hidden-lg hidden-md">Localization</p>
       </div>
@@ -69,3 +79,21 @@ export default class DropdownLanguage extends Component {
     );
   }
 }
+
+DropdownLanguage.propTypes = {
+  locale: PropTypes.string,
+  selectedLang: PropTypes.string,
+  dropdownButton: PropTypes.bool,
+  translate: PropTypes.func.isRequired,
+  selectLanguage: PropTypes.func,
+  handleLanguage: PropTypes.func
+};
+
+DropdownLanguage.defaultProps = {
+  locale: "",
+  selectedLang: "",
+  selectLanguage: () => {},
+  handleLanguage: () => {},
+  dropdownButton: false
+};
+export default DropdownLanguage;

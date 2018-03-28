@@ -46,6 +46,9 @@ const HeaderLinks = props => {
     case "dashboard":
       return (
         <Nav pullRight>
+          <NavItem className="content-link" eventKey={3} href="#">
+            <i className="pe-7s-user" />
+          </NavItem>
           <NavDropdown
             eventKey={2}
             title={translate("help")}
@@ -132,5 +135,8 @@ const HeaderLinks = props => {
 HeaderLinks.propTypes = {
   translate: PropTypes.func.isRequired,
   nav_links: PropTypes.bool
+};
+HeaderLinks.defaultProps = {
+  nav_links: false
 };
 export default HeaderLinks;

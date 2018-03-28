@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Row, Col } from "react-bootstrap";
 
@@ -31,5 +32,24 @@ const StatsCard = props => (
     </div>
   </div>
 );
-
+StatsCard.propTypes = {
+  fxs: PropTypes.number,
+  lxs: PropTypes.number,
+  statsText: PropTypes.string,
+  statsValue: PropTypes.string,
+  bigIcon: PropTypes.object,
+  number: PropTypes.number,
+  broderLeft: PropTypes.bool,
+  numbers: PropTypes.bool
+};
+StatsCard.defaultProps = {
+  fxs: 3,
+  lxs: 3,
+  statsText: "",
+  statsValue: "",
+  bigIcon: {},
+  number: null,
+  broderLeft: false,
+  numbers: false
+};
 export default StatsCard;

@@ -10,8 +10,8 @@ const objectAssignProps = (prevProps, newProps) =>
   });
 const RoutesContainer = passingProps => (
   <Switch>
-    {appRoutes.map((prop, key) => {
-      if (prop.hasOwnProperty("header"))
+    {appRoutes.map(prop => {
+      if (prop.header && !prop.secure)
         return (
           <Route
             exact
@@ -20,26 +20,42 @@ const RoutesContainer = passingProps => (
               prop.component,
               objectAssignProps(passingProps, prop.header)
             )}
-            key={key}
+            key={prop.name}
           />
         );
       if (prop.redirect)
-        return <Redirect from={prop.path} to={prop.to} key={key} />;
-      if (prop.authRequired)
+        return <Redirect from={prop.path} to={prop.to} key={prop.name} />;
+      if (prop.secure) {
+        if (prop.header)
+          return (
+            <Route
+              exact
+              path={prop.path}
+              component={isAuthenticated(
+                prop.component,
+                objectAssignProps(passingProps, {
+                  ...prop.header,
+                  type: prop.type
+                })
+              )}
+              key={prop.name}
+            />
+          );
         return (
           <Route
             exact
             path={prop.path}
             component={isAuthenticated(prop.component, passingProps)}
-            key={key}
+            key={prop.name}
           />
         );
+      }
       return (
         <Route
           exact
           path={prop.path}
           component={isNotAuthenticated(prop.component, passingProps)}
-          key={key}
+          key={prop.name}
         />
       );
     })}

@@ -11,7 +11,14 @@ import ProductImageForm from "./form/ProductImageForm";
 import ProductInformationForm from "./form/ProductInformationForm";
 
 const Tabs = props => {
-  const { translate, activeTabs, loading } = props;
+  const {
+    translate,
+    activeTabs,
+    loading,
+    selectLanguage,
+    selectedLang,
+    selectedCategory
+  } = props;
   let tabsContent;
   switch (activeTabs) {
     case 1:
@@ -44,33 +51,41 @@ const Tabs = props => {
                     {translate("a_language")}
                   </div>
                   <div className="languages">
-                    <Languages {...props} dropdownButton />
+                    <Languages
+                      {...props}
+                      dropdownButton
+                      selectedLang={selectedLang}
+                      selectLanguage={selectLanguage}
+                    />
                   </div>
                 </div>
               </div>
               <div className="box-content">
                 <SearchProductCategories {...props} />
-                <Row>
-                  <Col md={6}>
-                    <div className="bottom-text">
-                      <Button block fill radius simple>
-                        {translate("a_button_text")}
-                      </Button>
-                    </div>
-                  </Col>
-                  <Col md={6}>
-                    <Button
-                      bsStyle="warning"
-                      onClick={props.addCategory}
-                      pullRight
-                      fill
-                      radius
-                      simple
-                    >
-                      {translate("r_next")}
-                    </Button>
-                  </Col>
-                </Row>
+                {selectedCategory &&
+                  selectedLang && (
+                    <Row>
+                      <Col md={6}>
+                        <div className="bottom-text">
+                          <Button block fill radius simple>
+                            {translate("a_button_text")}
+                          </Button>
+                        </div>
+                      </Col>
+                      <Col md={6}>
+                        <Button
+                          bsStyle="warning"
+                          onClick={props.addCategory}
+                          pullRight
+                          fill
+                          radius
+                          simple
+                        >
+                          {translate("r_next")}
+                        </Button>
+                      </Col>
+                    </Row>
+                  )}
               </div>
             </BlockUi>
           </div>
@@ -119,14 +134,14 @@ const Tabs = props => {
   return (
     <div>
       <div className="nav-container nav-product-container">
-        <ul className="nav-tabs nav-text nav">
+        <ul className="nav-tabs nav-custom-tabs nav-text nav">
           <li
             className={className({
               disabled: activeTabs !== 2,
               active: activeTabs > -1
             })}
           >
-            <a>
+            <a href="javascript:void(0);">
               <span>{translate("a_tab_1")}</span>
             </a>
           </li>
@@ -164,7 +179,14 @@ const Tabs = props => {
 Tabs.propTypes = {
   translate: PropTypes.func.isRequired,
   addCategory: PropTypes.func.isRequired,
-  activeTabs: PropTypes.bool.isRequired
+  activeTabs: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
+  selectLanguage: PropTypes.func.isRequired,
+  selectedLang: PropTypes.string.isRequired,
+  selectedCategory: PropTypes.string
 };
 
+Tabs.defaultProps = {
+  selectedCategory: ""
+};
 export default Tabs;

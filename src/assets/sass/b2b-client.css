@@ -1304,11 +1304,10 @@ fieldset[disabled] .form-control {
     top: 2px;
     padding-right: 8px; }
   .navbar .navbar-nav > li > a [class^="pe"] {
-    font-size: 19px;
+    font-size: 30px;
     position: relative;
     line-height: 16px;
-    top: 2px;
-    padding-right: 8px; }
+    top: 10px; }
   .navbar .navbar-nav .notification {
     position: absolute;
     background-color: #fb404b;
@@ -1345,6 +1344,9 @@ fieldset[disabled] .form-control {
   .navbar-default .navbar-nav > li:first-child > a:not(.btn)::after {
     content: "|";
     padding-left: 10px; }
+  .navbar-default .navbar-nav > li.content-link > a:not(.btn):after {
+    content: "";
+    padding: 0px; }
   .navbar-default .navbar-nav > li > a:not(.btn) {
     color: #ffffff;
     font-size: 12px;
@@ -2058,13 +2060,33 @@ section {
 [class^="icon-static"],
 [class*="icon-static"] {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 18px;
+  height: 18px;
   padding: 5px; }
 
 .icon-payment {
-  background: wheat;
-  margin-right: 5px; }
+  background: url("../img/icon/coins.png");
+  margin-right: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  vertical-align: middle; }
+
+.icon-checked {
+  background: url("../img/icon/checked.png");
+  margin-right: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  vertical-align: middle; }
+
+.icon-diamond {
+  background: url("../img/icon/diamond.png");
+  margin-right: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  vertical-align: middle; }
 
 .news-letter {
   background-color: #f8f8f8; }
@@ -2753,7 +2775,8 @@ section {
           background-color: #f7f7f9;
           color: #1f1f1f;
           font-size: 14px;
-          padding: 8px 35px; }
+          padding: 8px 35px;
+          width: 100px; }
           .box .box-navbar .box-language .languages .btn-default i {
             display: none; }
           .box .box-navbar .box-language .languages .btn-default .caret {
@@ -2808,22 +2831,24 @@ section {
               color: #ffffff; }
           .box .box-content .box-search .box-search-result ul > li:last-child {
             border-bottom: none; }
-          .box .box-content .box-search .box-search-result ul > li > a {
+          .box .box-content .box-search .box-search-result ul > li > p {
             color: #1f1f1f;
             display: block;
-            padding: 0 3em 0 0; }
-            .box .box-content .box-search .box-search-result ul > li > a:hover {
+            padding: 0 3em 0 0;
+            margin: 0 auto;
+            cursor: pointer; }
+            .box .box-content .box-search .box-search-result ul > li > p:hover {
               color: #ffffff; }
         .box .box-content .box-search .box-search-result ul > li.active {
           background: #ea8b02;
           border-bottom-color: #ea8b02; }
-          .box .box-content .box-search .box-search-result ul > li.active > a {
+          .box .box-content .box-search .box-search-result ul > li.active > p {
             color: #ffffff; }
           .box .box-content .box-search .box-search-result ul > li.active > ul {
             display: block; }
-            .box .box-content .box-search .box-search-result ul > li.active > ul > li > a {
+            .box .box-content .box-search .box-search-result ul > li.active > ul > li > p {
               color: #1f1f1f; }
-            .box .box-content .box-search .box-search-result ul > li.active > ul > li.active > a {
+            .box .box-content .box-search .box-search-result ul > li.active > ul > li.active > p {
               color: #ffffff; }
         .box .box-content .box-search .box-search-result ul > li > ul {
           z-index: 4;
@@ -2835,9 +2860,9 @@ section {
           min-width: 300px;
           -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(63, 63, 68, 0.1);
           box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(63, 63, 68, 0.1); }
-          .box .box-content .box-search .box-search-result ul > li > ul > li > a {
+          .box .box-content .box-search .box-search-result ul > li > ul > li > p {
             color: #1f1f1f; }
-            .box .box-content .box-search .box-search-result ul > li > ul > li > a:hover {
+            .box .box-content .box-search .box-search-result ul > li > ul > li > p:hover {
               color: #ffffff; }
       .box .box-content .box-search .box-search-result .selected-category {
         float: left;
@@ -3741,23 +3766,23 @@ section {
     .nav-text > li > a:focus {
       outline: none; }
 
-.nav-tabs {
+.nav-custom-tabs {
   border: none; }
-  .nav-tabs > li {
+  .nav-custom-tabs > li {
     height: 100%;
     position: relative;
     background-color: #24303e; }
-    .nav-tabs > li.active {
+    .nav-custom-tabs > li.active {
       background-color: #ea8b02; }
-      .nav-tabs > li.active > a {
+      .nav-custom-tabs > li.active > a {
         background: none;
         border: none;
         color: #ffffff; }
-        .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:active {
+        .nav-custom-tabs > li.active > a:hover, .nav-custom-tabs > li.active > a:focus, .nav-custom-tabs > li.active > a:active {
           color: #ffffff;
           background: transparent;
           border: none; }
-    .nav-tabs > li:nth-child(1):after, .nav-tabs > li:nth-child(2):after {
+    .nav-custom-tabs > li:nth-child(1):after, .nav-custom-tabs > li:nth-child(2):after {
       content: " ";
       display: block;
       width: 0;
@@ -3770,7 +3795,7 @@ section {
       margin-top: -20px;
       left: 100%;
       z-index: 2; }
-    .nav-tabs > li.active:nth-child(1):after, .nav-tabs > li.active:nth-child(2):after {
+    .nav-custom-tabs > li.active:nth-child(1):after, .nav-custom-tabs > li.active:nth-child(2):after {
       content: " ";
       display: block;
       width: 0;
@@ -3783,7 +3808,7 @@ section {
       margin-top: -20px;
       left: 100%;
       z-index: 2; }
-    .nav-tabs > li:nth-child(1):before, .nav-tabs > li:nth-child(2):before {
+    .nav-custom-tabs > li:nth-child(1):before, .nav-custom-tabs > li:nth-child(2):before {
       content: "";
       display: block;
       width: 0;
@@ -3797,11 +3822,11 @@ section {
       margin-left: 1px;
       left: 100%;
       z-index: 1; }
-    .nav-tabs > li > a {
+    .nav-custom-tabs > li > a {
       padding: 10px 10.07rem;
       opacity: 1;
       color: #ffffff; }
-    .nav-tabs > li.disabled > a {
+    .nav-custom-tabs > li.disabled > a {
       color: #ffffff;
       border: none; }
 

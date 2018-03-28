@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 
@@ -8,16 +9,33 @@ export default function AuthHoc(WrappedComponent, passedProps) {
       super(props);
       this.state = {};
     }
+    componentWillMount() {
+      const { auth, history } = this.props;
+      const { user } = auth;
+      if (user.length < 1) {
+        history.push("/login");
+      }
+    }
     render() {
       const props = Object.assign({}, this.props, passedProps);
+      if (passedProps.header) {
+        return (
+          <div className="main-panel">
+            <WrappedComponent {...props} />
+          </div>
+        );
+      }
       return (
         <div className="main-panel">
-          <Header {...this.props} />
+          <Header {...props} />
           <WrappedComponent {...props} />
-          <Footer {...this.props} />
+          <Footer {...props} />
         </div>
       );
     }
   }
-  return WrapperComponent;
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
+  return connect(mapStateToProps)(WrapperComponent);
 }

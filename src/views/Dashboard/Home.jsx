@@ -161,11 +161,11 @@ const Home = props => {
                     </span>
                   </li>
                   <li>
-                    <i className="icon-static icon-payment" />
+                    <i className="icon-static icon-checked" />
                     <span>{translate("d_shipping_quality")}</span>
                   </li>
                   <li>
-                    <i className="icon-static icon-payment" />
+                    <i className="icon-static icon-diamond" />
                     <span>{translate("d_credibility")}</span>
                   </li>
                 </ul>
@@ -212,6 +212,7 @@ const Home = props => {
               multiple
               productChunk={3}
               banner={false}
+              translate={translate}
               SliderSettings={{
                 dots: false,
                 infinite: false,

@@ -1,16 +1,20 @@
-import ActionTypes from "../../constants/Product/Product_action_type";
+import { actionTypes as a } from "../../constants/Product/Product_action_type";
 
 const initialState = {
   quantity: 1,
   activeTabs: 1,
   error: false,
   success: false,
-  loading: false
+  loading: false,
+  selectedLang: "",
+  activeCategory: -1,
+  categories: [],
+  sCategories: []
 };
 export default (state = initialState, action) => {
   switch (action.type) {
     // QUANTITY_INCREMENT
-    case ActionTypes.quantityIncrement:
+    case a.QUANTITY_INCREMENT:
       return {
         ...state,
         quantity: state.quantity + 1
@@ -18,15 +22,83 @@ export default (state = initialState, action) => {
     // QUANTITY_INCREMENT
 
     // QUANTITY_DECREMENT
-    case ActionTypes.quantityDecrement:
+    case a.QUANTITY_DECREMENT:
       return {
         ...state,
         quantity: state.quantity > 1 ? state.quantity - 1 : 1
       };
     // QUANTITY_DECREMENT
 
+    // GET_PRODUCT_CATEGORY
+    case a.GET_CATEGORY_REQUEST:
+    case a.GET_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        categories: [
+          { name: "Agriculture" },
+          { name: "Apparel" },
+          { name: "Automobile & Motorcycle" },
+          { name: "Beauty & Personal Care" },
+          { name: "Bussiness" },
+          { name: "Chemicals" },
+          { name: "Constructions" },
+          {
+            name: "Consumer",
+            children: [
+              {
+                name: "test",
+                nested: true
+              }
+            ]
+          }
+        ]
+      };
+    case a.GET_CATEGORY_FAILURE:
+      return {
+        ...state
+      };
+
+    // SELECT_CATEGORY
+    case a.SELECT_CATEGORY:
+      return {
+        ...state,
+        activeCategory: action.value
+      };
+    // SEARCH_CATEGORIES
+    case a.SEARCH_CATEGORIES:
+      return {
+        ...state,
+        sCategories: state.categories.filter(
+          category =>
+            category.name.toLowerCase().search(action.value.toLowerCase()) !==
+            -1
+        )
+      };
+
+    // FLUSH_CATEGORIES
+    case a.FLUSH_CATEGORIES:
+      return {
+        ...state,
+        sCategories: [],
+        selectedCategory: "",
+        activeCategory: -1
+      };
+
+    // SELECTED_PRODUCT_CATEGORY
+    case a.SELECTED_PRODUCT_CATEGORY:
+      return {
+        ...state,
+        selectedCategory: action.category
+      };
+
+    // SELECT_PRODUCT_LANGUAGE
+    case a.SELECT_PRODUCT_LANGUAGE:
+      return {
+        ...state,
+        selectedLang: action.lang
+      };
     // ADD_PRODUCT_CATEGORY
-    case ActionTypes.ADD_PRODUCT_CATEGORY:
+    case a.ADD_PRODUCT_CATEGORY:
       return {
         ...state,
         loading: false,
