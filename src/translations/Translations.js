@@ -103,8 +103,10 @@ module.exports = {
       a_box_title: "Please complete the following form in English",
 
       // Product Information form labels
-      a_product_name: "*  Product Name",
-      a_product_keyword: "*  Product Keyword",
+      a_product_name: "* Product Name",
+      a_product_keyword: "* Product Keyword",
+      a_product_price: "* Product Price",
+      a_product_quantity: "* Product Quantity",
       a_product_group: "Product Group",
       a_brake: "Brake (F/R)",
       a_model_number: "Model Number",
@@ -133,7 +135,9 @@ module.exports = {
       r_p_placeholder: "Please Enter your phone number",
       r_supplier: "Seller",
       r_buyer: "Buyer",
-
+      r_confirmation_email:
+        "A confirmation email has been sent to your mailbox",
+      r_resend_mail: "Having problem receiving email？",
       r_static_p: "Upon creating my account, I agree to:",
       r_user_a: "User Agreement",
       r_static_text:
@@ -186,6 +190,9 @@ module.exports = {
       // Validation Messages
 
       phone_number_validation: "Invalid phone number, must be 10 digits",
+      email_validation: "Invalid email address",
+      min_length_validation: "Must be {min} characters or more",
+      c_password_validation: "This field must match with {matchName} field",
 
       // Footer
       about_us: "about us",
@@ -195,26 +202,59 @@ module.exports = {
       trade_service: "trade service",
       contact_us: "contact us",
       follow_us: "Follow Us",
-      all_collection: "all collection",
-      privacy_policy: "privacy policy",
-      terms_condition: "terms & condition",
-      custom_links: "custom links",
-      phones_tablets: "phones and tablets",
-      home_entertainment: "home entertainment",
-      video_games_toys: "video games & toys",
-      cameras_drones: "cameras & drones",
-      home_kitchen_tools: "homes,kitchen & tools",
-      my_account: "my account",
-      my_orders: "my orders",
-      credit_slips: "my credit slips",
-      my_addresses: "my addresses",
-      personal_info: "my personal info",
-      my_vouchers: "my vouchers",
-      why_choose_us: "why choose us",
-      blog: "blog",
-      company: "company",
-      investor_relations: "investor relations",
-      typography: "typography",
+      about: "About Brown-Eagle",
+      investor_desk: "Investor Desk",
+      advantage: "Brown-Eagle Advantage",
+      sitemap: "Sitemap",
+
+      seller_membership: "Seller Membership",
+      training_center: "Learning & Training Center",
+      wholesale: "WholeSale Business",
+      verified: "Verified Sellers",
+      market_trends: "Market Trends",
+      verified_buyers: "Verified Buyers",
+
+      help_center: "Help Cetner",
+      report_abuse: "Report Abuse",
+      a_dispute: "Submit a Dispute",
+      policies_rules: "Policies & Rules",
+      advertise_with_us: "Advertise with us",
+      business_identity: "Business Identity",
+      third_services: "Third Party Services",
+      logistic_services: "Logistic Services",
+      secure_payment: "Secure Payment",
+      inspection_service: "Inspection Service",
+
+      streaming: "Streaming",
+      stream_regional: "Stream regional",
+      songs: "songs",
+
+      buyer: "Buyer",
+      by_original: "by Original",
+      f_products: "products",
+
+      artificial_intelligence: "Artificial Intelligence",
+      get_advantage_of: "get advantage of",
+      future_technology: "future technology",
+      fulfillment_services: "Fulfillment Services",
+      facilitate: "Facilitate",
+      buy_seller: "buy & Seller",
+
+      business_seller: "Business Seller",
+      sell_bulk: "Sell Bulk",
+      product_globally: "Product Globally",
+      e_banker: "E-Banker",
+      connect_economy: "Connect Economy",
+      together: "together",
+
+      business_buye: "Business Buye",
+      buy_bulk: "Buy bulk",
+      verified_product: "Verified Product",
+
+      crypto_currency: "Crypto Currency",
+      go_virtual: "Go virtual",
+      save_more: "save more",
+
       copyright: `<a href="#">Conditions of Use</a> <a href="#">Privacy Notice</a> &copy; ${new Date().getFullYear()}, Brown-Eagle.com, Inc. or its affiliates`
     }
   },

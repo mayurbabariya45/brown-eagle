@@ -14,6 +14,10 @@ class Login extends Component {
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
   }
+  componentWillMount() {
+    const { flushState } = this.props;
+    flushState();
+  }
   componentWillUpdate(nextProps) {
     const { history, success, user } = nextProps;
     if (success) {
@@ -76,6 +80,7 @@ Login.propTypes = {
   success: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loginForm: PropTypes.bool.isRequired,
-  socialLogin: PropTypes.func.isRequired
+  socialLogin: PropTypes.func.isRequired,
+  flushState: PropTypes.func.isRequired
 };
 export default Login;

@@ -51,7 +51,6 @@ class DropdownLanguage extends Component {
         <i className="fa fa-globe" />
         <span>{translate(selectedLanguage).toUpperCase()}</span>
         <b className="caret" />
-        <p className="hidden-lg hidden-md">Localization</p>
       </div>
     );
     if (dropdownButton) {

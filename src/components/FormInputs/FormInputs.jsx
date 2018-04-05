@@ -79,7 +79,8 @@ const FieldGroup = ({
               </Col>
               <Col sm={xsInput || 9}>
                 <FormControl {...props} />
-                {errorText !== "Required" && <HelpBlock>{errorText}</HelpBlock>}
+                {errorText !== "Required" &&
+                  errorText && <HelpBlock>{errorText}</HelpBlock>}
               </Col>
               {removeInputDelete && (
                 <Col sm={2}>
@@ -105,6 +106,7 @@ const FieldGroup = ({
               {children}
               <FormControl {...props} />
               <span className={classNames("form-control-feedback", bsIcon)} />
+              {errorText !== "Required" && <HelpBlock>{errorText}</HelpBlock>}
             </FormGroup>
           );
         case "select-with-input":

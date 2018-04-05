@@ -3,26 +3,11 @@ import PropTypes from "prop-types";
 import { Grid, Col, Row } from "react-bootstrap";
 import Tabs from "./Tabs";
 
-const roles = ["seller", "buyer"];
-
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
-  }
-  componentDidUpdate() {
-    const { history, registerSuccess, user } = this.props;
-    if (registerSuccess) {
-      if (user) {
-        const { role } = user;
-        if (role === "seller") {
-          history.push("/dashboard");
-        } else {
-          history.push("/");
-        }
-      }
-    }
   }
   hanldeSubmitForm(value) {
     const { checkUsername, registerUser, formData, activeTabs } = this.props;
@@ -53,7 +38,7 @@ class Register extends Component {
 }
 Register.propTypes = {
   checkUsername: PropTypes.func.isRequired,
-  registerSuccess: PropTypes.func.isRequired,
+  registerSuccess: PropTypes.bool.isRequired,
   activeTabs: PropTypes.number.isRequired,
   registerUser: PropTypes.func.isRequired,
   formData: PropTypes.object.isRequired

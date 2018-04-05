@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { NavItem, Nav, NavDropdown, MenuItem, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import SearchCategories from "../SearchCategories/SearchCategories";
+import SearchCategories from "../../containers/SearchCategoriesContainer/SearchCategoriesContainer";
 import Categories from "../Categories/Categories";
 import Languages from "../Languages/Languages";
 

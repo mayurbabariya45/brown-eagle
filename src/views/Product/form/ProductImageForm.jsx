@@ -19,7 +19,7 @@ class ProductImageForm extends Component {
     this.removeProductImages = this.removeProductImages.bind(this);
   }
   onImageDrop(files) {
-    const { productImages, existingImages } = this.state;
+    const { productImages } = this.state;
     const addedImages = productImages.length;
     if (addedImages >= 5) {
       this.setState({ maxImagesAdded: true });

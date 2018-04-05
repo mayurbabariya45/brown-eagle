@@ -1,40 +1,38 @@
-import React, {Component} from 'react';
-import {Modal,Button} from 'react-bootstrap';
-class Modals extends Component {
-    constructor(props) {
-        super(props);
-    }
+import React from "react";
+import PropTypes from "prop-types";
+import { Modal } from "react-bootstrap";
 
-    render() {
-        const {
-            show,
-            onHide,
-            bsSize,
-            bContent,
-            bHeader,
-            bFooter,
-            className
-        } = this.props;
-       
-        return (
-            <Modal
-                show={show}
-                onHide={onHide}
-                bsSize={bsSize}
-                className={className}
-                aria-labelledby="contained-modal">
-                {bHeader && <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg">{bHeader}</Modal.Title>
-                </Modal.Header>}
-                <Modal.Body>
-                    {bContent}
-                </Modal.Body>
-                {bFooter && <Modal.Footer>
-                   {bFooter}
-                </Modal.Footer>}
-            </Modal>
-        )
-    }
-}
+const Component = props => {
+  const { show, onHide, bsSize, bContent, bHeader, bFooter, className } = props;
+  return (
+    <Modal
+      show={show}
+      onHide={onHide}
+      bsSize={bsSize}
+      className={className}
+      aria-labelledby="contained-modal"
+    >
+      {bHeader && (
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg">{bHeader}</Modal.Title>
+        </Modal.Header>
+      )}
+      <Modal.Body>{bContent}</Modal.Body>
+      {bFooter && <Modal.Footer>{bFooter}</Modal.Footer>}
+    </Modal>
+  );
+};
 
-export default Modals;
+Component.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  bsSize: PropTypes.string,
+  className: PropTypes.string
+};
+
+Component.defaultProps = {
+  bsSize: "small",
+  className: ""
+};
+
+export default Component;

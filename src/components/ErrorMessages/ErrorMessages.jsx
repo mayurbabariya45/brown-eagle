@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-const ErrorMessage = props => {
+export const Error = props => {
   if (props.error) {
     return (
       <Row>
@@ -16,4 +16,17 @@ const ErrorMessage = props => {
   return <div />;
 };
 
-export default ErrorMessage;
+export const Success = props => {
+  if (props.success) {
+    return (
+      <Row>
+        <Col sm={12}>
+          <div className="text-success">
+            <p>{props.message}</p>
+          </div>
+        </Col>
+      </Row>
+    );
+  }
+  return <div />;
+};

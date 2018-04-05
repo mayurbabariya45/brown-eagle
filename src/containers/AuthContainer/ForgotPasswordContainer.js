@@ -3,7 +3,9 @@ import { reduxForm } from "redux-form";
 import ForgotPassword from "../../views/Auth/ForgotPassword";
 import * as a from "../../actions/Auth/Auth_actions";
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  resetPassword: value => dispatch(a.resetPassword(value))
+});
 const mapStateToProps = state => ({
   ...state.auth
 });

@@ -3,6 +3,7 @@
   "rules": {
     "prettier/prettier": "error",
     "quotes": [2, "double"],
+    "no-script-url": 0,
     "linebreak-style": 0
   }
 }

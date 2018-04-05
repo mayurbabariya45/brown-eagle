@@ -10,7 +10,7 @@ import {
   required,
   email
 } from "../../../formValidationRules/FormValidationRules";
-import Error from "../../../components/ErrorMessages/ErrorMessages";
+import { Error } from "../../../components/ErrorMessages/ErrorMessages";
 
 class VerificationForm extends Component {
   constructor(props) {
@@ -63,9 +63,13 @@ class VerificationForm extends Component {
                       <p>{translate("r_static_p")}</p>
                       <p>
                         -{" "}
-                        <Link to="#" className="text-warning" target="_blank">
+                        <a
+                          href="http://brown-eagle.com/privacy-notice"
+                          className="text-warning"
+                          target="blank"
+                        >
                           www.brown-eagle.com
-                        </Link>{" "}
+                        </a>{" "}
                         {translate("r_user_a")}
                       </p>
                       <p>- {translate("r_static_text")}</p>

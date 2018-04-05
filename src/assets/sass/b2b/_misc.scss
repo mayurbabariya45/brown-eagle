@@ -298,9 +298,30 @@ section {
         font-size: 13px;
       }
     }
+    .email-sent {
+      text-align: center;
+      height: 60vh;
+      h2 {
+        font-size: $font-size-medium;
+        padding-bottom: 10px;
+        margin-bottom: 0;
+        span {
+          padding-right: 5px;
+        }
+        em {
+          color: $warning-color;
+          font-weight: bold;
+          font-style: normal;
+        }
+      }
+    }
   }
 }
-
+.email-sent-terms {
+  padding: 6px;
+  margin: 0 auto;
+  font-size: 12px;
+}
 .wrapper {
   position: relative;
   top: 0;

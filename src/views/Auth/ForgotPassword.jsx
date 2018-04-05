@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Col, Row, Grid } from "react-bootstrap";
+import { Col, Row, Grid, Form } from "react-bootstrap";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 import { Card } from "../../components/Card/Card";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import Button from "../../elements/CustomButton/CustomButton";
-import { required, email } from "../../formValidationRules/FormValidationRules";
+import {
+  required,
+  match,
+  email,
+  minLength
+} from "../../formValidationRules/FormValidationRules";
+import { Error } from "../../components/ErrorMessages/ErrorMessages";
 import Background from "../../static/media/full-screen-image.jpg";
 import Logo from "../../assets/img/logo.png";
 
@@ -13,9 +21,20 @@ class ForgotPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
+  }
+  componentWillUpdate(nextProps) {
+    const { history, success } = nextProps;
+    if (success) {
+      history.push("/login");
+    }
+  }
+  hanldeSubmitForm(value) {
+    const { resetPassword } = this.props;
+    resetPassword(value);
   }
   render() {
-    const { translate } = this.props;
+    const { translate, handleSubmit, loading, errors, message } = this.props;
     return (
       <div className="wrapper wrapper-full-page">
         <div className="full-page login-page has-image">
@@ -29,40 +48,76 @@ class ForgotPassword extends Component {
                     </Link>
                   </div>
                   <div className="form login-form">
-                    <Card
-                      className="card-login"
-                      content={
-                        <form>
-                          <FormInputs
-                            proprieties={[
-                              {
-                                inputGroup: "feedback",
-                                bsIcon: "glyphicon glyphicon-envelope",
-                                label: translate("f_email_address"),
-                                type: "email",
-                                bsClass: "form-control form-control-simple",
-                                placeholder: translate("l_email_placeholder"),
-                                name: "email",
-                                validate: [required, email]
-                              }
-                            ]}
-                          />
-                          <Row>
-                            <Col lg={12} md={12} sm={12} xs={12}>
-                              <Button
-                                block
-                                radius
-                                fill
-                                bsStyle="warning"
-                                className="text-capitalize"
-                              >
-                                {translate("forgot_password")}
-                              </Button>
-                            </Col>
-                          </Row>
-                        </form>
-                      }
-                    />
+                    <BlockUi tag="div" blocking={loading}>
+                      <Card
+                        className="card-login"
+                        content={
+                          <Form onSubmit={handleSubmit(this.hanldeSubmitForm)}>
+                            <FormInputs
+                              proprieties={[
+                                {
+                                  inputGroup: "feedback",
+                                  bsIcon: "glyphicon glyphicon-envelope",
+                                  label: translate("f_email_address"),
+                                  type: "email",
+                                  bsClass: "form-control form-control-simple",
+                                  placeholder: translate("r_email_placeholder"),
+                                  name: "email",
+                                  validate: [required, email]
+                                }
+                              ]}
+                            />
+                            <FormInputs
+                              proprieties={[
+                                {
+                                  inputGroup: "feedback",
+                                  bsIcon: "glyphicon glyphicon-lock",
+                                  label: translate("password"),
+                                  type: "password",
+                                  bsClass: "form-control form-control-simple",
+                                  placeholder: translate(
+                                    "r_password_placeholder"
+                                  ),
+                                  name: "password",
+                                  validate: [required, minLength(6)]
+                                }
+                              ]}
+                            />
+                            <FormInputs
+                              proprieties={[
+                                {
+                                  inputGroup: "feedback",
+                                  bsIcon: "glyphicon glyphicon-repeat",
+                                  label: translate("r_c_password"),
+                                  type: "password",
+                                  bsClass: "form-control form-control-simple",
+                                  placeholder: translate(
+                                    "r_c_password_placeholder"
+                                  ),
+                                  name: "c_password",
+                                  validate: [required, match("password")]
+                                }
+                              ]}
+                            />
+                            <Error error={errors} message={message} />
+                            <Row>
+                              <Col lg={12} md={12} sm={12} xs={12}>
+                                <Button
+                                  block
+                                  radius
+                                  fill
+                                  bsStyle="warning"
+                                  className="text-capitalize"
+                                  type="submit"
+                                >
+                                  {translate("forgot_password")}
+                                </Button>
+                              </Col>
+                            </Row>
+                          </Form>
+                        }
+                      />
+                    </BlockUi>
                   </div>
                 </Col>
               </Row>
@@ -79,4 +134,15 @@ class ForgotPassword extends Component {
     );
   }
 }
+ForgotPassword.propTypes = {
+  translate: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  errors: PropTypes.bool.isRequired,
+  message: PropTypes.string
+};
+ForgotPassword.defaultProps = {
+  message: ""
+};
 export default ForgotPassword;

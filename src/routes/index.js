@@ -43,6 +43,8 @@ const appRoutes = [
       navLinks: true,
       showHeader: "dashboard"
     },
+    secure: false,
+    type: "seller",
     path: "/add_product",
     name: "AddProduct",
     component: AddProductContainer

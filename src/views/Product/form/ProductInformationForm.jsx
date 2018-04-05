@@ -184,6 +184,36 @@ class ProductInformationForm extends Component {
                       inputGroup: "horizontal",
                       xsLabel: 2,
                       xsInput: 5,
+                      label: translate("a_product_price"),
+                      type: "text",
+                      bsClass: "form-control form-control-simple",
+                      name: "product_price",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "horizontal",
+                      xsLabel: 2,
+                      xsInput: 5,
+                      label: translate("a_product_quantity"),
+                      type: "text",
+                      bsClass: "form-control form-control-simple",
+                      name: "product_quantity",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "horizontal",
+                      xsLabel: 2,
+                      xsInput: 5,
                       label: translate("a_product_keyword"),
                       type: "text",
                       bsClass: "form-control form-control-simple",

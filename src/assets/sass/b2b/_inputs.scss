@@ -327,3 +327,30 @@ fieldset[disabled] .form-control {
 .has-error .help-block {
   color: $danger-color;
 }
+.search-bar__suggestions {
+  border: 1px solid #ccc;
+  list-style: none;
+  margin: 0;
+  max-height: 240px;
+  width: 432.7px;
+  overflow: auto;
+  padding: 0;
+  position: absolute;
+  top: 40px;
+  user-select: none;
+  z-index: 2;
+  background: $white-color;
+}
+.search-bar__suggestion {
+  cursor: pointer;
+  height: 40px;
+  letter-spacing: 0.03em;
+  line-height: 40px;
+  padding: 0 7px 0 10px;
+}
+.search-bar__suggestion--focused {
+  background: #f5f5f5;
+}
+.search-bar__suggestion:last-child {
+  border: none;
+}

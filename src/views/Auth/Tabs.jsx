@@ -1,18 +1,40 @@
 import React from "react";
 import className from "classnames";
 import PropTypes from "prop-types";
-import { Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Row, OverlayTrigger, Popover, Button } from "react-bootstrap";
 import VerificationForm from "./Form/VerificationForm";
 import InformationForm from "./Form/InformationForm";
 
 const Tabs = props => {
-  const { activeTabs, translate, hanldeSubmitForm } = props;
+  const {
+    activeTabs,
+    translate,
+    hanldeSubmitForm,
+    formData,
+    emailSent
+  } = props;
+  const popoverClickRootClose = (
+    <Popover id="resend-confirmation-email">
+      <ul className="email-sent-terms">
+        <li>Please check your spam folder</li>
+        <li>
+          <span>If you have not received the email,</span>
+          <button>Email has been sent to your box successfully</button>
+        </li>
+        <li>
+          <span>Have not received? </span>
+          <Link to="/register">Try using another email address.</Link>
+        </li>
+      </ul>
+    </Popover>
+  );
   let tabsContent;
   switch (activeTabs) {
     case 1:
       tabsContent = (
         <div
-          classNam={className("fade tab-pane", {
+          className={className("fade tab-pane", {
             active: activeTabs === 1,
             in: activeTabs === 1
           })}
@@ -44,13 +66,31 @@ const Tabs = props => {
             active: activeTabs === 3,
             in: activeTabs === 3
           })}
-        />
+        >
+          <div className="email-sent">
+            <h2>
+              <span>{translate("r_confirmation_email")}</span>
+              <em>{formData.username}</em>
+            </h2>
+            <h4>{emailSent}</h4>
+            {/* <div className="email-sent-op">
+              <OverlayTrigger
+                trigger="click"
+                rootClose
+                placement="bottom"
+                overlay={popoverClickRootClose}
+              >
+                <Button>{translate("r_resend_mail")}</Button>
+              </OverlayTrigger>
+        </div> */}
+          </div>
+        </div>
       );
       break;
     default:
       tabsContent = (
         <div
-          classNam={className("fade tab-pane", {
+          className={className("fade tab-pane", {
             active: activeTabs === 1,
             in: activeTabs === 1
           })}
@@ -68,9 +108,11 @@ const Tabs = props => {
         <ul className="nav-icons nav-icons-tabs nav">
           <li
             className={className({
-              disabled: activeTabs !== 2,
-              active: activeTabs > -1
+              disabled: activeTabs > 2,
+              active: activeTabs < 2
             })}
+            disabled={activeTabs > 2}
+            style={{ pointerEvents: activeTabs > 2 ? "none" : "" }}
           >
             <a>
               <i>1</i>
@@ -112,8 +154,9 @@ const Tabs = props => {
 
 Tabs.propTypes = {
   translate: PropTypes.func.isRequired,
-  activeTabs: PropTypes.bool.isRequired,
-  hanldeSubmitForm: PropTypes.bool.isRequired
+  activeTabs: PropTypes.number.isRequired,
+  hanldeSubmitForm: PropTypes.func.isRequired,
+  emailSent: PropTypes.string.isRequired
 };
 
 export default Tabs;

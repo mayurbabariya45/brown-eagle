@@ -7,16 +7,18 @@ import {
 } from "../../config/firebase_config";
 
 export const toggleLoginForm = () => ({
-  type: a.toogleLoginForm
+  type: a.TOGGLE_LOGIN_FORM
 });
-
+export const flushState = () => ({
+  type: a.FLUSH_STATE
+});
 export const login = value => ({
   [RSAA]: {
     endpoint: "http://35.200.219.57:8000/v1/auth/login",
     method: "POST",
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
-    types: [a.loginRequest, a.loginSuccess, a.loginFailure]
+    types: [a.LOGIN_REQUEST, a.LOGIN_SUCCESS, a.LOGIN_FAILURE]
   }
 });
 
@@ -96,6 +98,19 @@ export const socialLogin = provider => dispatch => {
   });
 };
 
+export const resetPassword = value => ({
+  [RSAA]: {
+    endpoint: "http://35.200.219.57:8000/v1/auth/reset-password",
+    method: "POST",
+    body: JSON.stringify(value),
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.PASSWORD_RESET_REQUEST,
+      a.PASSWORD_RESET_SUCCESS,
+      a.PASSWORD_RESET_FAILURE
+    ]
+  }
+});
 export const register = value => ({
   [RSAA]: {
     endpoint: "http://35.200.219.57:8000/v1/auth/register",

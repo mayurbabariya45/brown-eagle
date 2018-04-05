@@ -60,7 +60,6 @@ class SearchProductCategories extends Component {
   render() {
     const {
       translate,
-      categories,
       searchCategories,
       selectedCategory,
       sCategories

@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   activeTabs: 1,
   formData: {},
   registerSuccess: false,
+  emailSent: "",
   user: []
 };
 
@@ -18,29 +19,38 @@ const INITIAL_STATE = {
  */
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case a.toogleLoginForm:
+    // TOGGLE_LOGIN_FORM
+    case a.TOGGLE_LOGIN_FORM:
       return {
         ...state,
         loginForm: !state.loginForm
       };
+    // FLUSH_STATE
+    case a.FLUSH_STATE:
+      return {
+        ...state,
+        success: false,
+        errors: false,
+        message: ""
+      };
 
     /** *** Login Request****** */
 
-    case a.loginRequest:
+    case a.LOGIN_REQUEST:
       return {
         ...state,
         loading: true,
         errors: false,
         success: false
       };
-    case a.loginSuccess:
+    case a.LOGIN_SUCCESS:
       return {
         ...state,
         user: { ...action.payload.user, ...action.payload.auth },
         success: true,
         loading: false
       };
-    case a.loginFailure:
+    case a.LOGIN_FAILURE:
       return {
         ...state,
         errors: true,
@@ -64,7 +74,28 @@ export default (state = INITIAL_STATE, action) => {
         errors: true,
         message: action.payload.message
       };
-
+    case a.PASSWORD_RESET_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        errors: false,
+        success: false
+      };
+    case a.PASSWORD_RESET_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        errors: false,
+        success: true
+      };
+    case a.PASSWORD_RESET_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: true,
+        success: false,
+        message: action.payload.response.message
+      };
     case a.USERNAME_REQUEST:
       return {
         ...state,
@@ -102,7 +133,7 @@ export default (state = INITIAL_STATE, action) => {
         success: true,
         errors: false,
         registerSuccess: true,
-        user: { ...action.payload.user, ...action.payload.auth }
+        emailSent: action.payload.message
       };
     case a.REGISTER_FAILURE:
       return {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { reduxForm, Field } from "redux-form";
 import {
   Col,
@@ -16,45 +17,35 @@ import Radio from "../../../elements/CustomRadio/CustomRadio";
 import Select from "../../../elements/CustomSelect/CustomSelect";
 import {
   required,
-  normalizePhone
+  normalizePhone,
+  phoneNumber,
+  minLength,
+  match
 } from "../../../formValidationRules/FormValidationRules";
-import Error from "../../../components/ErrorMessages/ErrorMessages";
+import { Error } from "../../../components/ErrorMessages/ErrorMessages";
+import { countries } from "../../../variables/Variables";
+
+const renderField = ({ input, labels, type, inline }) => {
+  switch (type) {
+    case "radio":
+      return (
+        <Radio
+          {...input}
+          type={type}
+          inline={inline}
+          number={input.value}
+          label={labels}
+        />
+      );
+    default:
+      return <div />;
+  }
+};
 
 class InformationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.renderField = this.renderField.bind(this);
-  }
-  renderField({
-    input,
-    label,
-    labels,
-    checked,
-    values,
-    type,
-    inline,
-    meta: { touched, error, warning, active },
-    ...props
-  }) {
-    // let validationState;
-    // if (touched && error) {
-    //     validationState = "error";
-    // }
-    switch (type) {
-      case "radio":
-        return (
-          <Radio
-            {...input}
-            type={type}
-            inline={inline}
-            number={input.value}
-            label={labels}
-          />
-        );
-      default:
-        return <div />;
-    }
   }
 
   render() {
@@ -67,12 +58,9 @@ class InformationForm extends Component {
       errors,
       message,
       loading,
-      translate
+      translate,
+      invalid
     } = this.props;
-    const phoneNumber = value =>
-      value && !/^(0|[1-9][0-9]{9})$/i.test(value)
-        ? translate("phone_number_validation")
-        : undefined;
 
     return (
       <Row>
@@ -103,7 +91,7 @@ class InformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     placeholder: translate("r_password_placeholder"),
                     name: "password",
-                    validate: [required]
+                    validate: [required, minLength(6)]
                   }
                 ]}
               />
@@ -117,7 +105,7 @@ class InformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     placeholder: translate("r_c_password_placeholder"),
                     name: "confirm_password",
-                    validate: [required]
+                    validate: [required, match("password")]
                   }
                 ]}
               />
@@ -128,7 +116,7 @@ class InformationForm extends Component {
                       {translate("r_location")}
                     </Col>
                     <Col sm={9}>
-                      <Select searchable={false} />
+                      <Select searchable={false} options={countries} />
                     </Col>
                   </FormGroup>
                 </Col>
@@ -143,7 +131,7 @@ class InformationForm extends Component {
                       <Field
                         name="businessRole"
                         type="radio"
-                        component={this.renderField}
+                        component={renderField}
                         value="seller"
                         inline
                         name="role"
@@ -154,7 +142,7 @@ class InformationForm extends Component {
                       <Field
                         name="businessRole"
                         type="radio"
-                        component={this.renderField}
+                        component={renderField}
                         value="buyer"
                         name="role"
                         inline
@@ -230,7 +218,7 @@ class InformationForm extends Component {
                     radius
                     fill
                     bsStyle="warning"
-                    disabled={pristine || submitting}
+                    disabled={invalid}
                   >
                     {translate("r_confirm")}
                   </Button>
@@ -243,5 +231,17 @@ class InformationForm extends Component {
     );
   }
 }
-
+InformationForm.propTypes = {
+  submitting: PropTypes.bool.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  hanldeSubmitForm: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  message: PropTypes.string,
+  errors: PropTypes.bool.isRequired
+};
+InformationForm.defaultProps = {
+  message: ""
+};
 export default reduxForm({ form: "informationForm" })(InformationForm);
