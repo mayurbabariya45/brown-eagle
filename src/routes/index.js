@@ -4,6 +4,7 @@ import ProductsContainer from "../containers/ProductsContainer/ProductsContainer
 import RegisterContainer from "../containers/AuthContainer/RegisterContainer";
 import LoginContainer from "../containers/AuthContainer/LoginContainer";
 import ForgotPasswordContainer from "../containers/AuthContainer/ForgotPasswordContainer";
+import PasswordResetContainer from "../containers/AuthContainer/PasswordResetContainer";
 import DashboardContainer from "../containers/DashboardContainer/DashboardContainer";
 import AddProductContainer from "../containers/ProductContainer/AddProductContainer";
 
@@ -14,6 +15,12 @@ const appRoutes = [
     path: "/login",
     name: "Login",
     component: LoginContainer
+  },
+  {
+    header: { header: true },
+    path: "/reset-password",
+    name: "PasswordReset",
+    component: PasswordResetContainer
   },
   {
     header: { header: true },
