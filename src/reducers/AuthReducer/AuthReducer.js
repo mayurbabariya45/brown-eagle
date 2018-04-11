@@ -46,7 +46,8 @@ export default (state = INITIAL_STATE, action) => {
     case a.LOGIN_SUCCESS:
       return {
         ...state,
-        user: { ...action.payload.user, ...action.payload.auth },
+        user: { ...action.payload.user },
+        auth: { ...action.payload.auth },
         success: true,
         loading: false
       };
@@ -56,6 +57,26 @@ export default (state = INITIAL_STATE, action) => {
         errors: true,
         message: action.payload.response.message,
         loading: false
+      };
+    case a.LOGOUT_REQUEST:
+      return {
+        loginForm: false,
+        loading: false,
+        success: false,
+        errors: false,
+        activeTabs: 1,
+        formData: {},
+        registerSuccess: false,
+        emailSent: "",
+        user: []
+      };
+    case a.LOGOUT_SUCCESS:
+      return {
+        ...state
+      };
+    case a.LOGOUT_FAILURE:
+      return {
+        ...state
       };
     case a.SOCIAL_LOGIN_REQUEST:
       return {
@@ -142,6 +163,24 @@ export default (state = INITIAL_STATE, action) => {
         success: false,
         errors: true,
         message: action.payload.response.message
+      };
+    case a.UPDATE_PROFILE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        user: { ...action.payload.user }
+      };
+    case a.UPDATE_PROFILE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true
       };
     default:
       return state;

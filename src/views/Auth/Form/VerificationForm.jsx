@@ -64,7 +64,7 @@ class VerificationForm extends Component {
                       <p>
                         -{" "}
                         <a
-                          href="http://brown-eagle.com/privacy-notice"
+                          href="http://brown-eagle.com/conditions-of-use/"
                           className="text-warning"
                           target="blank"
                         >

@@ -30,7 +30,11 @@ const Home = props => {
                   </div>
                   <div className="profile-links">
                     <ul>
-                      <li>{translate("d_verify")}</li>
+                      <li>
+                        {user.isProfileVerified
+                          ? translate("d_approved")
+                          : translate("d_verify")}
+                      </li>
                       <li>
                         {translate("d_first_year")}
                         <span>

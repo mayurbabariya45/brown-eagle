@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as a from "../actions/Auth/Auth_actions";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 
@@ -27,8 +28,11 @@ export default function PublicHoc(WrappedComponent, passedProps) {
       );
     }
   }
+  const mapDispatchToProps = dispatch => ({
+    logout: () => dispatch(a.logout())
+  });
   const mapStateToProps = state => ({
     auth: state.auth
   });
-  return connect(mapStateToProps)(WrapperComponent);
+  return connect(mapStateToProps, mapDispatchToProps)(WrapperComponent);
 }

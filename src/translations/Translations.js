@@ -13,6 +13,7 @@ module.exports = {
 
       // common
       edit: "Edit",
+      close: "Close",
       home: "Home",
       profile: "My Profile",
       email: "Email",
@@ -146,6 +147,7 @@ module.exports = {
       l_account: "Account",
       l_email_placeholder: "Email address or member ID",
       password: "Password",
+      n_password: "New Password",
       l_detail: "Details",
       l_stay: "Stay signed in.",
       l_button: "Login",
@@ -168,7 +170,9 @@ module.exports = {
       d_supplier: "Already have a supplier ?",
       d_order_assurance: "Order with Trade Assurance",
       d_more: "learn more >",
-      d_verify: "Verify",
+      d_verify: "Pending",
+      d_approved: "Approved",
+      d_submit: "Submit",
       d_first_year: "Free Member 1st Year",
       d_upgrade: "Upgrade",
       d_minisite: "My Minisite",
@@ -186,7 +190,7 @@ module.exports = {
       d_rejected_requests: "Rejected Buying Requests",
       p_contact_information: "Contact Information",
       p_company_information: "Company Information",
-
+      d_change_password: "Change Password",
       // Validation Messages
 
       phone_number_validation: "Invalid phone number, must be 10 digits",

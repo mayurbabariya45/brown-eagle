@@ -116,7 +116,7 @@ class InformationForm extends Component {
                       {translate("r_location")}
                     </Col>
                     <Col sm={9}>
-                      <Select searchable={false} options={countries} />
+                      <Select searchable options={countries} />
                     </Col>
                   </FormGroup>
                 </Col>

@@ -99,9 +99,9 @@ class EmailLoginForm extends Component {
               <div className="legend">
                 <Row>
                   <Col sm={6}>
-                    <a onClick={toggleLoginForm}>
+                    {/* <a onClick={toggleLoginForm}>
                       {translate("l_mobile_sign")}
-                    </a>
+                    </a> */}
                   </Col>
                   <Col sm={6}>
                     <Link to="/register">{translate("l_join")}</Link>

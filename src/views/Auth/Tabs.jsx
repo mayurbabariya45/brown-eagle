@@ -2,7 +2,8 @@ import React from "react";
 import className from "classnames";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Row, OverlayTrigger, Popover, Button } from "react-bootstrap";
+import { Row, OverlayTrigger, Popover } from "react-bootstrap";
+import Button from "../../elements/CustomButton/CustomButton";
 import VerificationForm from "./Form/VerificationForm";
 import InformationForm from "./Form/InformationForm";
 
@@ -20,7 +21,9 @@ const Tabs = props => {
         <li>Please check your spam folder</li>
         <li>
           <span>If you have not received the email,</span>
-          <button>Email has been sent to your box successfully</button>
+          <Button border bsStyle="warning">
+            Click here to resend the email
+          </Button>
         </li>
         <li>
           <span>Have not received? </span>
@@ -74,15 +77,17 @@ const Tabs = props => {
             </h2>
             <h4>{emailSent}</h4>
             {/* <div className="email-sent-op">
-              <OverlayTrigger
-                trigger="click"
-                rootClose
-                placement="bottom"
-                overlay={popoverClickRootClose}
-              >
-                <Button>{translate("r_resend_mail")}</Button>
-              </OverlayTrigger>
-        </div> */}
+                <OverlayTrigger
+                  trigger="click"
+                  rootClose
+                  placement="bottom"
+                  overlay={popoverClickRootClose}
+                >
+                  <Button border bsStyle="warning">
+                    {translate("r_resend_mail")}
+                  </Button>
+                </OverlayTrigger>
+              </div> */}
           </div>
         </div>
       );

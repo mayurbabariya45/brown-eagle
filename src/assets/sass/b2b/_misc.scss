@@ -321,6 +321,16 @@ section {
   padding: 6px;
   margin: 0 auto;
   font-size: 12px;
+  li {
+    padding: 5px 0;
+    .btn-border {
+      border: 1px solid $warning-color;
+      padding: 5px 12px;
+      color: $warning-color;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  }
 }
 .wrapper {
   position: relative;

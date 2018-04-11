@@ -1,6 +1,10 @@
-import { Action } from "Directory";
+import { ActionTypes as a } from "../../constants/Dashboard/Dashboard_action_type";
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  loading: false,
+  error: false,
+  success: false
+};
 
 /**
  * @param {Object} state - Default application state
@@ -9,10 +13,22 @@ const INITIAL_STATE = {};
  */
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Action:
+    case a.PASSWORD_CHANGE_REQUEST:
       return {
         ...state,
-        ...action.payload
+        loading: true
+      };
+    case a.PASSWORD_CHANGE_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loading: false
+      };
+    case a.PASSWORD_CHANGE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false
       };
     default:
       return state;

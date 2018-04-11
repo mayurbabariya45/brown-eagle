@@ -10,7 +10,7 @@ import Categories from "../Categories/Categories";
 import Languages from "../Languages/Languages";
 
 const HeaderLinks = props => {
-  const { translate, showHeader } = props;
+  const { translate, showHeader, logout, history } = props;
   const { user } = props.auth;
   const orders = (
     <div>
@@ -86,7 +86,15 @@ const HeaderLinks = props => {
                 </MenuItem>
               )}
               {!_.isEmpty(user) && (
-                <MenuItem eventKey={1.1} href="/#/logout">
+                <MenuItem
+                  eventKey={1.1}
+                  href="/#/logout"
+                  onClick={e => {
+                    e.preventDefault();
+                    logout();
+                    history.push("/");
+                  }}
+                >
                   {translate("logout")}
                 </MenuItem>
               )}

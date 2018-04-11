@@ -100,7 +100,7 @@ export const socialLogin = provider => dispatch => {
 
 export const resetPassword = value => ({
   [RSAA]: {
-    endpoint: "http://35.200.219.57:8000/v1/auth/reset-password",
+    endpoint: "http://35.200.219.57:8000/v1/auth/passwordresetlink",
     method: "POST",
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
@@ -118,5 +118,38 @@ export const register = value => ({
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
     types: [a.REGISTER_REQUEST, a.REGISTER_SUCCESS, a.REGISTER_FAILURE]
+  }
+});
+
+export const verifyEmail = token => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `http://35.200.219.57:8000/v1/auth/verify/${token}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.VERIFY_EMAIL_REQUEST,
+        a.VERIFY_EMAIL_SUCCESS,
+        a.VERIFY_EMAIL_FAILURE
+      ]
+    }
+  });
+
+export const logout = () => dispatch =>
+  dispatch({
+    type: a.LOGOUT_REQUEST
+  });
+
+export const updateProfile = value => ({
+  [RSAA]: {
+    endpoint: `http://35.200.219.57:8000/v1/users/${value.id}`,
+    method: "PATCH",
+    body: JSON.stringify(value),
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.UPDATE_PROFILE_REQUEST,
+      a.UPDATE_PROFILE_SUCCESS,
+      a.UPDATE_PROFILE_FAILURE
+    ]
   }
 });

@@ -7,12 +7,7 @@ import "react-block-ui/style.css";
 import { Card } from "../../components/Card/Card";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import Button from "../../elements/CustomButton/CustomButton";
-import {
-  required,
-  match,
-  email,
-  minLength
-} from "../../formValidationRules/FormValidationRules";
+import { required, email } from "../../formValidationRules/FormValidationRules";
 import { Error } from "../../components/ErrorMessages/ErrorMessages";
 import Background from "../../static/media/full-screen-image.jpg";
 import Logo from "../../assets/img/logo.png";
@@ -64,38 +59,6 @@ class ForgotPassword extends Component {
                                   placeholder: translate("r_email_placeholder"),
                                   name: "email",
                                   validate: [required, email]
-                                }
-                              ]}
-                            />
-                            <FormInputs
-                              proprieties={[
-                                {
-                                  inputGroup: "feedback",
-                                  bsIcon: "glyphicon glyphicon-lock",
-                                  label: translate("password"),
-                                  type: "password",
-                                  bsClass: "form-control form-control-simple",
-                                  placeholder: translate(
-                                    "r_password_placeholder"
-                                  ),
-                                  name: "password",
-                                  validate: [required, minLength(6)]
-                                }
-                              ]}
-                            />
-                            <FormInputs
-                              proprieties={[
-                                {
-                                  inputGroup: "feedback",
-                                  bsIcon: "glyphicon glyphicon-repeat",
-                                  label: translate("r_c_password"),
-                                  type: "password",
-                                  bsClass: "form-control form-control-simple",
-                                  placeholder: translate(
-                                    "r_c_password_placeholder"
-                                  ),
-                                  name: "c_password",
-                                  validate: [required, match("password")]
                                 }
                               ]}
                             />
