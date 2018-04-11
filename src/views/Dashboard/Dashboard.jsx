@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
     const obj = Object.assign(
       {},
       {
-        email: auth.user.email,
+        id: auth.user.id,
         password: value.password
       }
     );
