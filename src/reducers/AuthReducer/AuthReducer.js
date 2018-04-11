@@ -174,7 +174,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         success: true,
-        user: { ...action.payload.user }
+        user: { ...action.payload }
       };
     case a.UPDATE_PROFILE_FAILURE:
       return {
