@@ -29,6 +29,7 @@ const FieldGroup = ({
   errorText,
   ...props
 }) => {
+  // console.log(children);
   switch (props.type) {
     case "checkbox":
       return (
@@ -205,7 +206,10 @@ export class FormInputs extends Component {
       for (let i = 0; i < this.props.ncols.length; i++) {
         row.push(
           <div key={i} className={this.props.ncols[i]}>
-            <Fields {...this.props.proprieties[i]} />
+            <Fields
+              {...this.props.proprieties[i]}
+              children={this.props.children}
+            />
           </div>
         );
       }

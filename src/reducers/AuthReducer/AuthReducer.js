@@ -95,6 +95,29 @@ export default (state = INITIAL_STATE, action) => {
         errors: true,
         message: action.payload.message
       };
+    case a.PASSWORD_RESET_EMAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        errors: false,
+        success: false
+      };
+    case a.PASSWORD_RESET_EMAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        errors: false,
+        success: true,
+        message: action.payload.message
+      };
+    case a.PASSWORD_RESET_EMAIL_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: true,
+        success: false,
+        message: action.payload.response.message
+      };
     case a.PASSWORD_RESET_REQUEST:
       return {
         ...state,

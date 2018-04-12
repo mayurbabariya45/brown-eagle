@@ -8,7 +8,10 @@ import { Card } from "../../components/Card/Card";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import Button from "../../elements/CustomButton/CustomButton";
 import { required, email } from "../../formValidationRules/FormValidationRules";
-import { Error } from "../../components/ErrorMessages/ErrorMessages";
+import {
+  Error,
+  AlertSuccess
+} from "../../components/ErrorMessages/ErrorMessages";
 import Background from "../../static/media/full-screen-image.jpg";
 import Logo from "../../assets/img/logo.png";
 
@@ -18,18 +21,20 @@ class ForgotPassword extends Component {
     this.state = {};
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
-  componentWillUpdate(nextProps) {
-    const { history, success } = nextProps;
-    if (success) {
-      history.push("/login");
-    }
-  }
   hanldeSubmitForm(value) {
-    const { resetPassword } = this.props;
-    resetPassword(value);
+    const { resetPasswordEmail } = this.props;
+    resetPasswordEmail(value);
   }
   render() {
-    const { translate, handleSubmit, loading, errors, message } = this.props;
+    const {
+      translate,
+      handleSubmit,
+      loading,
+      errors,
+      success,
+      message
+    } = this.props;
+    console.log(this.props);
     return (
       <div className="wrapper wrapper-full-page">
         <div className="full-page login-page has-image">
@@ -43,6 +48,7 @@ class ForgotPassword extends Component {
                     </Link>
                   </div>
                   <div className="form login-form">
+                    <AlertSuccess success={success} message={message} />
                     <BlockUi tag="div" blocking={loading}>
                       <Card
                         className="card-login"
@@ -99,7 +105,7 @@ class ForgotPassword extends Component {
 }
 ForgotPassword.propTypes = {
   translate: PropTypes.func.isRequired,
-  resetPassword: PropTypes.func.isRequired,
+  resetPasswordEmail: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   errors: PropTypes.bool.isRequired,

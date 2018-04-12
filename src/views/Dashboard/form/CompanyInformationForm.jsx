@@ -1,83 +1,137 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Col, Row, Form } from "react-bootstrap";
+import { Col, Row, Form, FormGroup, ControlLabel } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
+import Select from "react-select";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
+import { required } from "../../../formValidationRules/FormValidationRules";
 
+export const products = [
+  { value: "test1", label: "Test 1" },
+  { value: "test2", label: "Test 2" },
+  { value: "test3", label: "Test 3" },
+  { value: "test4", label: "Test 4" }
+];
 const CompanyInformationForm = props => {
-  const { translate, loading, handleSubmit, handleSubmitForm } = props;
+  const {
+    translate,
+    loading,
+    handleSubmit,
+    handleSubmitForm,
+    handleSelectChange,
+    value
+  } = props;
+  const day = new Date();
+  const currentYear = day.getFullYear();
+  const years = [];
+  for (let i = 0; i < 4; i++) {
+    years.push(
+      <option key={i} value={currentYear - i}>
+        {currentYear - i}
+      </option>
+    );
+  }
   return (
     <div className="company-information">
       <BlockUi tag="div" blocking={loading}>
         <Col sm={12}>
           <Form onSubmit={handleSubmit(handleSubmitForm)}>
             <FormInputs
-              ncols={["col-md-6", "col-md-6"]}
+              ncols={["col-md-12"]}
               proprieties={[
                 {
                   label: translate("c_name"),
                   type: "text",
                   bsClass: "form-control form-control-simple",
-                  name: "c_name"
-                },
-                {
-                  label: translate("p_selling"),
-                  type: "text",
-                  bsClass: "form-control form-control-simple",
-                  name: "p_selling"
+                  name: "companyName",
+                  validate: [required]
                 }
               ]}
             />
             <FormInputs
-              ncols={["col-md-6", "col-md-6"]}
+              ncols={["col-md-12"]}
               proprieties={[
                 {
                   label: translate("y_established"),
-                  type: "text",
+                  type: "select",
                   bsClass: "form-control form-control-simple",
-                  name: "y_established"
-                },
-                {
-                  label: translate("m_products"),
-                  type: "text",
-                  bsClass: "form-control form-control-simple",
-                  name: "m_products"
+                  name: "established",
+                  validate: [required]
                 }
               ]}
-            />
+            >
+              <option>Select Years</option>
+              {years}
+            </FormInputs>
+            <Row>
+              <Col md={12}>
+                <FormGroup>
+                  <ControlLabel> {translate("m_products")}</ControlLabel>
+                  <Select
+                    multi
+                    joinValues
+                    value={value}
+                    placeholder="Select your main products"
+                    options={products}
+                    onChange={handleSelectChange}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
             <FormInputs
-              ncols={["col-md-6", "col-md-6"]}
+              ncols={["col-md-12"]}
               proprieties={[
                 {
                   label: translate("o_website"),
                   type: "text",
                   bsClass: "form-control form-control-simple",
-                  name: "o_website"
-                },
-                {
-                  label: translate("r_address"),
-                  type: "text",
-                  bsClass: "form-control form-control-simple",
-                  name: "r_address"
+                  name: "website",
+                  validate: [required]
                 }
               ]}
             />
             <FormInputs
-              ncols={["col-md-6", "col-md-6"]}
+              ncols={["col-md-12"]}
               proprieties={[
                 {
                   label: translate("b_type"),
-                  type: "text",
+                  type: "select",
                   bsClass: "form-control form-control-simple",
-                  name: "b_type"
-                },
+                  name: "businessType",
+                  validate: [required]
+                }
+              ]}
+            >
+              <option>Select Bussiness Type</option>
+              <option>Type 1</option>
+              <option>Type 2</option>
+              <option>Type 3</option>
+            </FormInputs>
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
+                {
+                  label: translate("r_address"),
+                  type: "text",
+                  componentClass: "textarea",
+                  bsClass: "form-control form-control-simple",
+                  name: "registeredAddress",
+                  validate: [required]
+                }
+              ]}
+            />
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
                 {
                   label: translate("o_address"),
                   type: "text",
+                  componentClass: "textarea",
                   bsClass: "form-control form-control-simple",
-                  name: "o_address"
+                  name: "operationalAddress",
+                  validate: [required]
                 }
               ]}
             />
@@ -88,7 +142,8 @@ const CompanyInformationForm = props => {
                   label: translate("t_employees"),
                   type: "text",
                   bsClass: "form-control form-control-simple",
-                  name: "t_employees"
+                  name: "employeeCount",
+                  validate: [required]
                 }
               ]}
             />
@@ -96,10 +151,13 @@ const CompanyInformationForm = props => {
               ncols={["col-md-12"]}
               proprieties={[
                 {
+                  type: "text",
                   label: translate("about_us"),
                   componentClass: "textarea",
                   bsClass: "form-control form-control-simple",
-                  name: "about_us"
+                  name: "aboutUs",
+                  style: { height: 100 },
+                  validate: [required]
                 }
               ]}
             />
@@ -123,6 +181,12 @@ const CompanyInformationForm = props => {
   );
 };
 
-CompanyInformationForm.propTypes = {};
+CompanyInformationForm.propTypes = {
+  translate: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleSubmitForm: PropTypes.func.isRequired,
+  handleSelectChange: PropTypes.func.isRequired
+};
 
 export default CompanyInformationForm;

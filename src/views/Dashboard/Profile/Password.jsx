@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col, Form } from "react-bootstrap";
 import { reduxForm } from "redux-form";
@@ -10,6 +10,7 @@ import {
   match,
   minLength
 } from "../../../formValidationRules/FormValidationRules";
+import { AlertSuccess } from "../../../components/ErrorMessages/ErrorMessages";
 import Button from "../../../elements/CustomButton/CustomButton";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 
@@ -21,7 +22,6 @@ const ChangePassword = props => {
     hanldePasswordForm,
     invalid
   } = props;
-  console.log(invalid);
   return (
     <div className="password-change">
       <BlockUi tag="div" blocking={loading}>
@@ -40,6 +40,7 @@ const ChangePassword = props => {
                 content={
                   <Row>
                     <Col md={12}>
+                      <AlertSuccess {...props} />
                       <Form onSubmit={handleSubmit(hanldePasswordForm)}>
                         <FormInputs
                           proprieties={[

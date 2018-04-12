@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import {
   Row,
@@ -17,10 +18,14 @@ const Profile = props => {
     contactForm,
     companyForm,
     handleSubmitForm,
-    handleSubmit
+    handleSubmit,
+    handleSelectChange,
+    value
   } = props;
   const { user, loading } = props.auth;
-
+  const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
+  const twitter = _.find(user.socialLinks, ["platform", "twitter"]);
+  const google = _.find(user.socialLinks, ["platform", "google"]);
   return (
     <div className="profile">
       <Row>
@@ -63,10 +68,6 @@ const Profile = props => {
                     <FormGroup>
                       <ControlLabel>Joined BrownEgle.com in</ControlLabel>
                       <FormControl.Static>2018</FormControl.Static>
-                    </FormGroup>
-                    <FormGroup>
-                      <ControlLabel>Main Products are</ControlLabel>
-                      <FormControl.Static />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -124,7 +125,30 @@ const Profile = props => {
                       <FormGroup>
                         <ControlLabel>{translate("s_links")}</ControlLabel>
                         <FormControl.Static>
-                          {user.social ? user.social : "none"}
+                          {facebook && (
+                            <a
+                              href={facebook.link}
+                              className="btn-facebook btn-round btn-social btn btn-default"
+                            >
+                              <i className="fa fa-facebook" />
+                            </a>
+                          )}
+                          {twitter && (
+                            <a
+                              href={twitter.link}
+                              className="btn-twitter btn-round btn-social btn btn-default"
+                            >
+                              <i className="fa fa-twitter" />
+                            </a>
+                          )}
+                          {google && (
+                            <a
+                              href={google.link}
+                              className="btn-google btn-round btn-social btn btn-default"
+                            >
+                              <i className="fa fa-google-plus" />
+                            </a>
+                          )}
                         </FormControl.Static>
                       </FormGroup>
                     </Col>
@@ -184,6 +208,8 @@ const Profile = props => {
                       translate={translate}
                       handleSubmit={handleSubmit}
                       loading={loading}
+                      value={value}
+                      handleSelectChange={handleSelectChange}
                       handleSubmitForm={handleSubmitForm}
                     />
                   </Row>
@@ -201,57 +227,61 @@ const Profile = props => {
                           {translate("y_established")}
                         </ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile ? user.profile.established : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("o_website")}</ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile ? user.profile.website : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("b_type")}</ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile ? user.profile.businessType : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("t_employees")}</ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile ? user.profile.employeeCount : "none"}
                         </FormControl.Static>
                       </FormGroup>
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <ControlLabel>{translate("p_selling")}</ControlLabel>
-                        <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
-                        </FormControl.Static>
-                      </FormGroup>
-                      <FormGroup>
                         <ControlLabel>{translate("m_products")}</ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile
+                            ? _.map(user.profile.mainProducts, product => (
+                              <span className="label label-warning">
+                                  {product}
+                                </span>
+                              ))
+                            : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("r_address")}</ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile
+                            ? user.profile.registeredAddress
+                            : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("o_address")}</ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile
+                            ? user.profile.operationalAddress
+                            : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("about_us")}</ControlLabel>
                         <FormControl.Static>
-                          {user.company_name ? user.company_name : "none"}
+                          {user.profile ? user.profile.aboutUs : "none"}
                         </FormControl.Static>
                       </FormGroup>
                     </Col>

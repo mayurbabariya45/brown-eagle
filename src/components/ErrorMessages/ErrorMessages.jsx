@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Alert } from "react-bootstrap";
 
 export const Error = props => {
   if (props.error) {
@@ -27,6 +27,12 @@ export const Success = props => {
         </Col>
       </Row>
     );
+  }
+  return <div />;
+};
+export const AlertSuccess = props => {
+  if (props.success) {
+    return <Alert bsStyle="success">{props.message}</Alert>;
   }
   return <div />;
 };

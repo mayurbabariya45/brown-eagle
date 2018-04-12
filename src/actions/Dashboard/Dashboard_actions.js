@@ -14,3 +14,16 @@ export const changePassword = value => ({
     ]
   }
 });
+
+export const userAvatar = (value, token) => ({
+  [RSAA]: {
+    endpoint: `http://35.200.219.57:8000/v1/users/avatar/${token}`,
+    method: "POST",
+    body: value,
+    types: [
+      a.CHANGE_PROFILE_REQUEST,
+      a.CHANGE_PROFILE_SUCCESS,
+      a.CHANGE_PROFILE_FAILURE
+    ]
+  }
+});

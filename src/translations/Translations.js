@@ -158,6 +158,7 @@ module.exports = {
       l_join: "Join free",
       l_sign_with: "Sign in with:",
       forgot_password: "forgot password",
+      password_reset: "Reset Password",
       f_email_address: "Email Address",
 
       // dashboard

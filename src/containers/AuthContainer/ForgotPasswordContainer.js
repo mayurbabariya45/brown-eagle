@@ -4,7 +4,7 @@ import ForgotPassword from "../../views/Auth/ForgotPassword";
 import * as a from "../../actions/Auth/Auth_actions";
 
 const mapDispatchToProps = dispatch => ({
-  resetPassword: value => dispatch(a.resetPassword(value))
+  resetPasswordEmail: value => dispatch(a.resetPasswordEmail(value))
 });
 const mapStateToProps = state => ({
   ...state.auth

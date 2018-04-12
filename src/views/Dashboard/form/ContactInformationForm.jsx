@@ -48,14 +48,42 @@ const ContactInformationForm = props => {
               ]}
             />
             <FormInputs
-              ncols={["col-md-6", "col-md-6"]}
+              ncols={["col-md-12"]}
               proprieties={[
                 {
                   label: translate("s_links"),
                   type: "text",
+                  placeholder: "Facebook",
                   bsClass: "form-control form-control-simple",
-                  name: "s_links"
-                },
+                  name: "facebook"
+                }
+              ]}
+            />
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
+                {
+                  type: "text",
+                  placeholder: "Twitter",
+                  bsClass: "form-control form-control-simple",
+                  name: "twitter"
+                }
+              ]}
+            />
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
+                {
+                  type: "text",
+                  placeholder: "Google",
+                  bsClass: "form-control form-control-simple",
+                  name: "google"
+                }
+              ]}
+            />
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
                 {
                   label: translate("mobile"),
                   type: "text",

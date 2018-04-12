@@ -7,7 +7,11 @@ import "react-block-ui/style.css";
 import { Card } from "../../components/Card/Card";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import Button from "../../elements/CustomButton/CustomButton";
-import { required, email } from "../../formValidationRules/FormValidationRules";
+import {
+  required,
+  match,
+  minLength
+} from "../../formValidationRules/FormValidationRules";
 import { Error } from "../../components/ErrorMessages/ErrorMessages";
 import Background from "../../static/media/full-screen-image.jpg";
 import Logo from "../../assets/img/logo.png";
@@ -18,18 +22,28 @@ class PasswordReset extends Component {
     this.state = {};
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
+  componentWillMount() {}
   componentWillUpdate(nextProps) {
     const { history, success } = nextProps;
     if (success) {
       history.push("/login");
     }
   }
-  hanldeSubmitForm(value) {
-    const { resetPassword } = this.props;
-    resetPassword(value);
+  hanldeSubmitForm({ password }) {
+    const { resetPassword, location } = this.props;
+    const id = location.search.split("?key=").pop();
+    const object = Object.assign({}, { password, id });
+    resetPassword(object);
   }
   render() {
-    const { translate, handleSubmit, loading, errors, message } = this.props;
+    const {
+      translate,
+      handleSubmit,
+      loading,
+      errors,
+      message,
+      invalid
+    } = this.props;
     return (
       <div className="wrapper wrapper-full-page">
         <div className="full-page login-page has-image">
@@ -52,13 +66,31 @@ class PasswordReset extends Component {
                               proprieties={[
                                 {
                                   inputGroup: "feedback",
-                                  bsIcon: "glyphicon glyphicon-envelope",
-                                  label: translate("f_email_address"),
-                                  type: "email",
+                                  bsIcon: "glyphicon glyphicon-lock",
+                                  label: translate("n_password"),
+                                  type: "password",
                                   bsClass: "form-control form-control-simple",
-                                  placeholder: translate("r_email_placeholder"),
-                                  name: "email",
-                                  validate: [required, email]
+                                  placeholder: translate(
+                                    "r_password_placeholder"
+                                  ),
+                                  name: "password",
+                                  validate: [required, minLength(6)]
+                                }
+                              ]}
+                            />
+                            <FormInputs
+                              proprieties={[
+                                {
+                                  inputGroup: "feedback",
+                                  bsIcon: "glyphicon glyphicon-repeat",
+                                  label: translate("r_c_password"),
+                                  type: "password",
+                                  bsClass: "form-control form-control-simple",
+                                  placeholder: translate(
+                                    "r_c_password_placeholder"
+                                  ),
+                                  name: "c_password",
+                                  validate: [required, match("password")]
                                 }
                               ]}
                             />
@@ -71,9 +103,10 @@ class PasswordReset extends Component {
                                   fill
                                   bsStyle="warning"
                                   className="text-capitalize"
+                                  disabled={invalid}
                                   type="submit"
                                 >
-                                  {translate("forgot_password")}
+                                  {translate("password_reset")}
                                 </Button>
                               </Col>
                             </Row>
@@ -103,7 +136,8 @@ PasswordReset.propTypes = {
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   errors: PropTypes.bool.isRequired,
-  message: PropTypes.string
+  message: PropTypes.string,
+  invalid: PropTypes.bool.isRequired
 };
 PasswordReset.defaultProps = {
   message: ""

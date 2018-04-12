@@ -22,7 +22,8 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         success: true,
-        loading: false
+        loading: false,
+        message: "Password has been changed successfully."
       };
     case a.PASSWORD_CHANGE_FAILURE:
       return {

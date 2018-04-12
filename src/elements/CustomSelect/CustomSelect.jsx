@@ -16,11 +16,12 @@ class CustomSelect extends Component {
   render() {
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
-    const { searchable, options } = this.props;
+    const { searchable, options, multi } = this.props;
     return (
       <Select
         name="form-field-name"
         value={value}
+        multi={multi}
         onChange={this.handleChange}
         searchable={searchable}
         options={options}
