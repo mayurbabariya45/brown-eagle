@@ -3278,6 +3278,15 @@ section {
     vertical-align: middle; }
     .card .social > .social-login-links > .social-links {
       display: inline-block; }
+    .card .social > .social-login-links .languages {
+      float: right;
+      margin-top: 5px; }
+      .card .social > .social-login-links .languages .btn-simple {
+        color: #1f1f1f; }
+        .card .social > .social-login-links .languages .btn-simple .caret {
+          border-top: none; }
+        .card .social > .social-login-links .languages .btn-simple i {
+          padding-right: 5px; }
   .card .author {
     font-size: 12px;
     font-weight: 600;
@@ -4017,7 +4026,7 @@ section {
           max-height: 100%; }
         .sidebar .sidebar-user .content .author .avatar .text-label {
           background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
-          bottom: -45px;
+          bottom: 0px;
           color: #fff;
           left: 0;
           margin: 0;

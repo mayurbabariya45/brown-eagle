@@ -10,7 +10,7 @@ import Button from "../../elements/CustomButton/CustomButton";
 import {
   required,
   match,
-  minLength
+  passwordLength
 } from "../../formValidationRules/FormValidationRules";
 import { Error } from "../../components/ErrorMessages/ErrorMessages";
 import Background from "../../static/media/full-screen-image.jpg";
@@ -44,6 +44,7 @@ class PasswordReset extends Component {
       message,
       invalid
     } = this.props;
+
     return (
       <div className="wrapper wrapper-full-page">
         <div className="full-page login-page has-image">
@@ -74,7 +75,7 @@ class PasswordReset extends Component {
                                     "r_password_placeholder"
                                   ),
                                   name: "password",
-                                  validate: [required, minLength(6)]
+                                  validate: [required, passwordLength]
                                 }
                               ]}
                             />

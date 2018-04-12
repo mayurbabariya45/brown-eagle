@@ -35,7 +35,14 @@ class DropdownLanguage extends Component {
     handleLanguage && handleLanguage(evt);
   }
   render() {
-    const { locale, translate, dropdownButton, selectedLang } = this.props;
+    const {
+      locale,
+      translate,
+      dropdownButton,
+      selectedLang,
+      className,
+      dropup
+    } = this.props;
     const selectedLanguage = selectedLang || locale;
     const renderLanguages = languages.map(
       ({ key, icon }) =>
@@ -59,6 +66,8 @@ class DropdownLanguage extends Component {
           title={language}
           onSelect={this.handleDropdown}
           noCaret
+          dropup={dropup}
+          className={className}
           id="langauge-dropdown"
         >
           {renderLanguages}
@@ -85,7 +94,9 @@ DropdownLanguage.propTypes = {
   dropdownButton: PropTypes.bool,
   translate: PropTypes.func.isRequired,
   selectLanguage: PropTypes.func,
-  handleLanguage: PropTypes.func
+  handleLanguage: PropTypes.func,
+  className: PropTypes.string,
+  dropup: PropTypes.bool
 };
 
 DropdownLanguage.defaultProps = {
@@ -93,6 +104,8 @@ DropdownLanguage.defaultProps = {
   selectedLang: "",
   selectLanguage: () => {},
   handleLanguage: () => {},
-  dropdownButton: false
+  dropdownButton: false,
+  className: "",
+  dropup: false
 };
 export default DropdownLanguage;

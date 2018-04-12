@@ -34,6 +34,10 @@ module.exports = {
       add_to_cart: "Add to cart",
       review: "Review",
 
+      // verification email
+      go_to_sign_in: "Go to Sign In",
+      verification_msg: "Your Email Verification has been successful.",
+
       // Headers Links
       sign_in_h: "Hello,Sign In",
       sign_in_f: "Hello,{username}",
@@ -114,6 +118,7 @@ module.exports = {
       a_origin: "Place of Origin",
       a_brand_name: "Brand Name",
       a_add_more: "Add More",
+
       // Register
       r_complete: "Complete",
       r_verification: "Verification",
@@ -143,6 +148,7 @@ module.exports = {
       r_user_a: "User Agreement",
       r_static_text:
         "Receive emails related to brown-eagle.com membership and services",
+
       // Login Form
       l_account: "Account",
       l_email_placeholder: "Email address or member ID",
@@ -192,6 +198,7 @@ module.exports = {
       p_contact_information: "Contact Information",
       p_company_information: "Company Information",
       d_change_password: "Change Password",
+
       // Validation Messages
 
       phone_number_validation: "Invalid phone number, must be 10 digits",
@@ -259,7 +266,6 @@ module.exports = {
       crypto_currency: "Crypto Currency",
       go_virtual: "Go virtual",
       save_more: "save more",
-
       copyright: `<a href="#">Conditions of Use</a> <a href="#">Privacy Notice</a> &copy; ${new Date().getFullYear()}, Brown-Eagle.com, Inc. or its affiliates`
     }
   },
@@ -312,8 +318,11 @@ module.exports = {
       add_to_cart: "ajouter au panier",
       review: "La revue",
 
+      // verification email
+      go_to_sign_in: "Aller à la connexion",
+      verification_msg: "Votre vérification par courriel a réussi.",
       // Languages
-      it: "il",
+      it: "it",
       en: "en",
       fr: "fr",
       es: "es",
@@ -377,6 +386,10 @@ module.exports = {
 
       phone_number_validation:
         "Numéro de téléphone invalide, doit être 10 chiffres",
+      email_validation: "Adresse e-mail invalide",
+      min_length_validation: "Doit être {min} caractères ou plus",
+      c_password_validation:
+        "Ce champ doit correspondre avec le champ {matchName}",
 
       // dashboard
       trade_assurance: "Trade Assurance",
@@ -445,6 +458,34 @@ module.exports = {
       money_back: "30 giorni soddisfatti o rimborsati",
       online_support: "Supporto online 24/7",
       technical_support: "Supporto tecnico 24/7",
+
+      // common
+      edit: "modificare",
+      close: "Vicino",
+      home: "Casa",
+      profile: "Il mio profilo",
+      email: "E-mail",
+      fax: "Fax",
+      a_email: "Email alternativa",
+      s_links: "Collegamenti sociali",
+      telephone: "Telefono",
+      mobile: "Mobile",
+      c_name: "Nome della ditta",
+      p_selling: "Piattaforme per la vendita",
+      y_established: "Anno stabilito",
+      o_website: "Sito ufficiale",
+      m_products: "Prodotti Principali",
+      r_address: "Indirizzo registrato",
+      b_type: "tipo di affari",
+      o_address: "Indirizzo operativo",
+      t_employees: "Numero totale di dipendenti",
+      add_to_cart: "Aggiungi al carrello",
+      review: "Revisione",
+
+      // verification email
+      go_to_sign_in: "Vai per accedere",
+      verification_msg: "La tua verifica e-mail ha avuto successo.",
+
       // Headers Links
       sign_in: "Ciao, Accedi",
       your_orders: "I tuoi ordini",
@@ -453,43 +494,130 @@ module.exports = {
       services_membership: "Servizi e soci",
       purchase_region: "Acquista per regione",
       help_community: "Aiuto e comunità",
+
       // Languages
-      it: "esso",
-      en: "e",
-      fr: "fr.",
-      es: "cenere",
-      de: "il",
+      it: "it",
+      en: "en",
+      fr: "fr",
+      es: "es",
+      de: "de",
+
       // Categories
       categories: "Tutte le categorie",
       books: "Libri",
       baby: "bambino",
       software: "software",
       sports: "Sport, fitness e all'aperto",
+
+      // Register
+      r_complete: "Completare",
+      r_verification: "Verifica",
+      r_information: "Informazione",
+      r_email: "Email",
+      r_next: "Il prossimo",
+      r_confirm: "Confermare",
+      r_username: "Nome utente",
+      r_c_password: "Conferma password",
+      r_location: "Posizione",
+      r_firstname: "Nome di battesimo",
+      r_lastname: "Cognome",
+      r_company: "Nome della ditta",
+      r_phone: "Telefono",
+      r_i_am: "sono un",
+      r_email_placeholder: "Si prega di inserire l'email",
+      r_password_placeholder: "per favore inserisci LA TUA password",
+      r_c_password_placeholder: "Si prega di ridigitare la password",
+      r_c_placeholder: "Deve essere una società legalmente registrata",
+      r_p_placeholder: "Per favore, inserisca il suo numero di telefono",
+      r_supplier: "Venditore",
+      r_buyer: "Acquirente",
+      r_confirmation_email:
+        "Un'email di conferma è stata inviata alla tua casella di posta",
+      r_resend_mail: "Hai problemi a ricevere email?",
+      r_static_p: "Dopo aver creato il mio account, accetto di:",
+      r_user_a: "Accordo per gli utenti",
+      r_static_text:
+        "Ricevi email relative ai membri e ai servizi di brown-eagle.com",
+
+      // Login Form
+      l_account: "account",
+      l_email_placeholder: "Indirizzo Email o ID",
+      password: "Parola d'ordine",
+      n_password: "nuova password",
+      l_detail: "Dettagli",
+      l_stay: "Resta connesso.",
+      l_button: "Accesso",
+      l_mobile_sign: "Accedi al numero di cellulare",
+      l_email_sign: "Email accedi",
+      l_mobile_phone: "Numero di cellulare",
+      l_mobile_placeholder: "Si prega di inserire il numero di telefono",
+      l_join: "Iscriviti gratis",
+      l_sign_with: "Accedi con:",
+      forgot_password: "Ha dimenticato la password",
+      password_reset: "Resetta la password",
+      f_email_address: "Indirizzo email",
+
       // Footer
-      information: "informazione",
       about_us: "riguardo a noi",
-      contact_us: "Contattaci",
-      all_collection: "tutta la collezione",
-      privacy_policy: "politica sulla riservatezza",
-      terms_condition: "termini e condizioni",
-      custom_links: "collegamenti personalizzati",
-      phones_tablets: "telefoni e tablet",
-      home_entertainment: "intrattenimento domestico",
-      video_games_toys: "videogiochi e giocattoli",
-      cameras_drones: "macchine fotografiche e droni",
-      home_kitchen_tools: "case, cucina e utensili",
-      my_account: "il mio account",
-      my_orders: "i miei ordini",
-      credit_slips: "il mio credito scivola",
-      my_addresses: "i miei indirizzi",
-      personal_info: "I miei dati personali",
-      my_vouchers: "i miei buoni",
-      why_choose_us: "perché sceglierci",
-      blog: "blog",
-      company: "azienda",
-      investor_relations: "relazioni con gli investitori",
-      typography: "tipografia",
-      copyright: `diritto d'autore &copy; ${new Date().getFullYear()} xxxxxxx tutti i diritti riservati. Alimentato da xxxxxxx`
+      sell_on_brown_eagle: "Vendi su Brown Eagle",
+      buy_on_brown_eagle: "su Brown-Eagle",
+      customer_services: "customer services",
+      trade_service: "trade service",
+      contact_us: "contact us",
+      follow_us: "Follow Us",
+      about: "About Brown-Eagle",
+      investor_desk: "Investor Desk",
+      advantage: "Brown-Eagle Advantage",
+      sitemap: "Sitemap",
+
+      seller_membership: "Seller Membership",
+      training_center: "Learning & Training Center",
+      wholesale: "WholeSale Business",
+      verified: "Verified Sellers",
+      market_trends: "Market Trends",
+      verified_buyers: "Verified Buyers",
+
+      help_center: "Help Cetner",
+      report_abuse: "Report Abuse",
+      a_dispute: "Submit a Dispute",
+      policies_rules: "Policies & Rules",
+      advertise_with_us: "Advertise with us",
+      business_identity: "Business Identity",
+      third_services: "Third Party Services",
+      logistic_services: "Logistic Services",
+      secure_payment: "Secure Payment",
+      inspection_service: "Inspection Service",
+
+      streaming: "Streaming",
+      stream_regional: "Stream regional",
+      songs: "songs",
+
+      buyer: "Buyer",
+      by_original: "by Original",
+      f_products: "products",
+
+      artificial_intelligence: "Artificial Intelligence",
+      get_advantage_of: "get advantage of",
+      future_technology: "future technology",
+      fulfillment_services: "Fulfillment Services",
+      facilitate: "Facilitate",
+      buy_seller: "buy & Seller",
+
+      business_seller: "Business Seller",
+      sell_bulk: "Sell Bulk",
+      product_globally: "Product Globally",
+      e_banker: "E-Banker",
+      connect_economy: "Connect Economy",
+      together: "together",
+
+      business_buye: "Business Buye",
+      buy_bulk: "Buy bulk",
+      verified_product: "Verified Product",
+
+      crypto_currency: "Crypto Currency",
+      go_virtual: "Go virtual",
+      save_more: "save more",
+      copyright: `<a href="#">Conditions of Use</a> <a href="#">Privacy Notice</a> &copy; ${new Date().getFullYear()}, Brown-Eagle.com, Inc. or its affiliates`
     }
   },
   es: {
@@ -512,43 +640,82 @@ module.exports = {
       services_membership: "Servicios y Membresía",
       purchase_region: "Compra por región",
       help_community: "Ayuda y comunidad",
+
       // Languages
-      it: "eso",
-      en: "es",
+      it: "it",
+      en: "en",
       fr: "fr",
       es: "es",
-      de: "Delaware",
+      de: "de",
+
       // Categories
       categories: "todas las categorias",
       books: "Libros",
       baby: "Bebé",
       software: "Software",
       sports: "Deportes, estado físico y aire libre",
+
       // Footer
-      information: "información",
-      about_us: "sobre nosotros",
-      contact_us: "Contáctenos",
-      all_collection: "toda la colección",
-      privacy_policy: "política de privacidad",
-      terms_condition: "términos y Condiciones",
-      custom_links: "enlaces personalizados",
-      phones_tablets: "teléfonos y tabletas",
-      home_entertainment: "entretenimiento en el hogar",
-      video_games_toys: "videojuegos y juguetes",
-      cameras_drones: "cámaras y drones",
-      home_kitchen_tools: "hogares, cocina y herramientas",
-      my_account: "mi cuenta",
-      my_orders: "Mis ordenes",
-      credit_slips: "Mis hojas de crédito",
-      my_addresses: "Mis direcciones",
-      personal_info: "mi información personal",
-      my_vouchers: "Mis cupónes",
-      why_choose_us: "Por qué elegirnos",
-      blog: "blog",
-      company: "empresa",
-      investor_relations: "Relaciones con inversionistas",
-      typography: "tipografía",
-      copyright: `Copyright  &copy; ${new Date().getFullYear()} xxxxxxx todos los derechos reservados. Desarrollado por xxxxxxx`
+      about_us: "about us",
+      sell_on_brown_eagle: "Sell On Brown Eagle",
+      buy_on_brown_eagle: "on Brown-Eagle",
+      customer_services: "customer services",
+      trade_service: "trade service",
+      contact_us: "contact us",
+      follow_us: "Follow Us",
+      about: "About Brown-Eagle",
+      investor_desk: "Investor Desk",
+      advantage: "Brown-Eagle Advantage",
+      sitemap: "Sitemap",
+
+      seller_membership: "Seller Membership",
+      training_center: "Learning & Training Center",
+      wholesale: "WholeSale Business",
+      verified: "Verified Sellers",
+      market_trends: "Market Trends",
+      verified_buyers: "Verified Buyers",
+
+      help_center: "Help Cetner",
+      report_abuse: "Report Abuse",
+      a_dispute: "Submit a Dispute",
+      policies_rules: "Policies & Rules",
+      advertise_with_us: "Advertise with us",
+      business_identity: "Business Identity",
+      third_services: "Third Party Services",
+      logistic_services: "Logistic Services",
+      secure_payment: "Secure Payment",
+      inspection_service: "Inspection Service",
+
+      streaming: "Streaming",
+      stream_regional: "Stream regional",
+      songs: "songs",
+
+      buyer: "Buyer",
+      by_original: "by Original",
+      f_products: "products",
+
+      artificial_intelligence: "Artificial Intelligence",
+      get_advantage_of: "get advantage of",
+      future_technology: "future technology",
+      fulfillment_services: "Fulfillment Services",
+      facilitate: "Facilitate",
+      buy_seller: "buy & Seller",
+
+      business_seller: "Business Seller",
+      sell_bulk: "Sell Bulk",
+      product_globally: "Product Globally",
+      e_banker: "E-Banker",
+      connect_economy: "Connect Economy",
+      together: "together",
+
+      business_buye: "Business Buye",
+      buy_bulk: "Buy bulk",
+      verified_product: "Verified Product",
+
+      crypto_currency: "Crypto Currency",
+      go_virtual: "Go virtual",
+      save_more: "save more",
+      copyright: `<a href="#">Conditions of Use</a> <a href="#">Privacy Notice</a> &copy; ${new Date().getFullYear()}, Brown-Eagle.com, Inc. or its affiliates`
     }
   },
 
@@ -572,8 +739,8 @@ module.exports = {
       purchase_region: "Aankoop per regio",
       help_community: "Help en community",
       // Languages
-      it: "het",
-      en: "nl",
+      it: "it",
+      en: "en",
       fr: "fr",
       es: "es",
       de: "de",
@@ -585,30 +752,66 @@ module.exports = {
       sports: "Sport, fitness en buitenshuis",
 
       // Footer
-      information: "informatie",
-      about_us: "over ons",
-      contact_us: "Neem contact met ons op",
-      all_collection: "alle verzameling",
-      privacy_policy: "privacybeleid",
-      terms_condition: "regels en voorwaarden",
-      custom_links: "aangepaste koppelingen",
-      phones_tablets: "telefoons en tablets",
-      home_entertainment: "home entertainment",
-      video_games_toys: "videospellen en speelgoed",
-      cameras_drones: "camera's en drones",
-      home_kitchen_tools: "huizen, keuken & gereedschap",
-      my_account: "mijn rekening",
-      my_orders: "mijn bestellingen",
-      credit_slips: "my credit slips",
-      my_addresses: "Mijn adressen",
-      personal_info: "mijn persoonlijke info",
-      my_vouchers: "Mijn coupons",
-      why_choose_us: "Waarom voor ons kiezen",
-      blog: "blog",
-      company: "bedrijf",
-      investor_relations: "investor relations",
-      typography: "typografie",
-      copyright: `auteursrechten &copy; ${new Date().getFullYear()} xxxxxxx alle rechten voorbehouden. Mogelijk gemaakt door xxxxxxx`
+      about_us: "about us",
+      sell_on_brown_eagle: "Sell On Brown Eagle",
+      buy_on_brown_eagle: "on Brown-Eagle",
+      customer_services: "customer services",
+      trade_service: "trade service",
+      contact_us: "contact us",
+      follow_us: "Follow Us",
+      about: "About Brown-Eagle",
+      investor_desk: "Investor Desk",
+      advantage: "Brown-Eagle Advantage",
+      sitemap: "Sitemap",
+
+      seller_membership: "Seller Membership",
+      training_center: "Learning & Training Center",
+      wholesale: "WholeSale Business",
+      verified: "Verified Sellers",
+      market_trends: "Market Trends",
+      verified_buyers: "Verified Buyers",
+
+      help_center: "Help Cetner",
+      report_abuse: "Report Abuse",
+      a_dispute: "Submit a Dispute",
+      policies_rules: "Policies & Rules",
+      advertise_with_us: "Advertise with us",
+      business_identity: "Business Identity",
+      third_services: "Third Party Services",
+      logistic_services: "Logistic Services",
+      secure_payment: "Secure Payment",
+      inspection_service: "Inspection Service",
+
+      streaming: "Streaming",
+      stream_regional: "Stream regional",
+      songs: "songs",
+
+      buyer: "Buyer",
+      by_original: "by Original",
+      f_products: "products",
+
+      artificial_intelligence: "Artificial Intelligence",
+      get_advantage_of: "get advantage of",
+      future_technology: "future technology",
+      fulfillment_services: "Fulfillment Services",
+      facilitate: "Facilitate",
+      buy_seller: "buy & Seller",
+
+      business_seller: "Business Seller",
+      sell_bulk: "Sell Bulk",
+      product_globally: "Product Globally",
+      e_banker: "E-Banker",
+      connect_economy: "Connect Economy",
+      together: "together",
+
+      business_buye: "Business Buye",
+      buy_bulk: "Buy bulk",
+      verified_product: "Verified Product",
+
+      crypto_currency: "Crypto Currency",
+      go_virtual: "Go virtual",
+      save_more: "save more",
+      copyright: `<a href="#">Conditions of Use</a> <a href="#">Privacy Notice</a> &copy; ${new Date().getFullYear()}, Brown-Eagle.com, Inc. or its affiliates`
     }
   }
 };

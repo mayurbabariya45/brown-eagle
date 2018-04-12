@@ -7,12 +7,15 @@ export const email = (value, allValues, props) =>
     ? props.translate("email_validation")
     : "";
 
-// MaxLength Input
+// minLength Input
 export const minLength = min => (value, allValues, props) =>
   value && value.length < min
     ? props.translate("min_length_validation", { min })
     : undefined;
-
+export const passwordLength = (value, allValues, props) =>
+  value && value.length < 6
+    ? props.translate("min_length_validation", { min: 6 })
+    : undefined;
 export const match = matchName => (value, allValues, props) =>
   value !== allValues[matchName]
     ? props.translate("c_password_validation", { matchName })

@@ -7,6 +7,7 @@ import ForgotPasswordContainer from "../containers/AuthContainer/ForgotPasswordC
 import PasswordResetContainer from "../containers/AuthContainer/PasswordResetContainer";
 import DashboardContainer from "../containers/DashboardContainer/DashboardContainer";
 import AddProductContainer from "../containers/ProductContainer/AddProductContainer";
+import verificationContainer from "../views/Auth/VerificationEmail";
 
 const appRoutes = [
   { path: "/", exact: true, name: "Home", component: Home },
@@ -33,6 +34,12 @@ const appRoutes = [
     path: "/register",
     name: "Register",
     component: RegisterContainer
+  },
+  {
+    header: { navLinks: true, showHeader: "register" },
+    path: "/verification-email",
+    name: "Verification Email",
+    component: verificationContainer
   },
   {
     header: {

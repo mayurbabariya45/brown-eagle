@@ -50,8 +50,6 @@ class InformationForm extends Component {
 
   render() {
     const {
-      submitting,
-      pristine,
       handleSubmit,
       hanldeSubmitForm,
       formData,
@@ -232,8 +230,7 @@ class InformationForm extends Component {
   }
 }
 InformationForm.propTypes = {
-  submitting: PropTypes.bool.isRequired,
-  pristine: PropTypes.bool.isRequired,
+  invalid: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   hanldeSubmitForm: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,

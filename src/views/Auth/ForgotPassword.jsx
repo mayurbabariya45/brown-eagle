@@ -34,7 +34,6 @@ class ForgotPassword extends Component {
       success,
       message
     } = this.props;
-    console.log(this.props);
     return (
       <div className="wrapper wrapper-full-page">
         <div className="full-page login-page has-image">
@@ -64,6 +63,7 @@ class ForgotPassword extends Component {
                                   bsClass: "form-control form-control-simple",
                                   placeholder: translate("r_email_placeholder"),
                                   name: "email",
+                                  disabled: success,
                                   validate: [required, email]
                                 }
                               ]}
@@ -77,6 +77,7 @@ class ForgotPassword extends Component {
                                   fill
                                   bsStyle="warning"
                                   className="text-capitalize"
+                                  disabled={success}
                                   type="submit"
                                 >
                                   {translate("forgot_password")}

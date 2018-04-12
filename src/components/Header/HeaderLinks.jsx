@@ -41,6 +41,7 @@ const HeaderLinks = props => {
           <NavItem eventKey={1} href="#">
             {translate("help")}
           </NavItem>
+          <Languages {...props} />
         </Nav>
       );
     case "dashboard":
@@ -61,6 +62,7 @@ const HeaderLinks = props => {
           <NavItem eventKey={3} href="#">
             {translate("trade_anssurance")}
           </NavItem>
+          <Languages {...props} />
         </Nav>
       );
     default:

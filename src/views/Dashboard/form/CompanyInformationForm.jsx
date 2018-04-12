@@ -23,16 +23,7 @@ const CompanyInformationForm = props => {
     handleSelectChange,
     value
   } = props;
-  const day = new Date();
-  const currentYear = day.getFullYear();
-  const years = [];
-  for (let i = 0; i < 4; i++) {
-    years.push(
-      <option key={i} value={currentYear - i}>
-        {currentYear - i}
-      </option>
-    );
-  }
+
   return (
     <div className="company-information">
       <BlockUi tag="div" blocking={loading}>
@@ -55,16 +46,13 @@ const CompanyInformationForm = props => {
               proprieties={[
                 {
                   label: translate("y_established"),
-                  type: "select",
+                  type: "text",
                   bsClass: "form-control form-control-simple",
                   name: "established",
                   validate: [required]
                 }
               ]}
-            >
-              <option>Select Years</option>
-              {years}
-            </FormInputs>
+            />
             <Row>
               <Col md={12}>
                 <FormGroup>

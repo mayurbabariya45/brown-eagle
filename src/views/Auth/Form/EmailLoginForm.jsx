@@ -12,11 +12,17 @@ import {
   required,
   email
 } from "../../../formValidationRules/FormValidationRules";
+import Languages from "../../../components/Languages/Languages";
 
 class EmailLoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleLanguage = this.handleLanguage.bind(this);
+  }
+  handleLanguage(lang) {
+    const { setLocale } = this.props;
+    setLocale(lang);
   }
   render() {
     const {
@@ -129,6 +135,15 @@ class EmailLoginForm extends Component {
                   >
                     <i className="fa fa-google" />
                   </Button>
+                </div>
+                <div className="languages">
+                  <Languages
+                    {...this.props}
+                    dropdownButton
+                    className="btn-border btn-simple"
+                    dropup
+                    handleLanguage={this.handleLanguage}
+                  />
                 </div>
               </div>
             }

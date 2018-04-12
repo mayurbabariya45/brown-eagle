@@ -128,6 +128,19 @@
       > .social-links {
         display: inline-block;
       }
+      .languages {
+        float: right;
+        margin-top: 5px;
+        .btn-simple {
+          color: $black-color;
+          .caret {
+            border-top: none;
+          }
+          i {
+            padding-right: 5px;
+          }
+        }
+      }
     }
   }
   .author {

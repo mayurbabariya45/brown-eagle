@@ -17,6 +17,6 @@ const mergeProps = (state, actions, ownProps) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
   reduxForm({
-    form: "forgotPasswordForm"
+    form: "PasswordResetForm"
   })(PasswordReset)
 );
