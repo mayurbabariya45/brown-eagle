@@ -255,7 +255,10 @@ const Profile = props => {
                         <FormControl.Static>
                           {user.profile
                             ? _.map(user.profile.mainProducts, product => (
-                              <span className="label label-warning">
+                              <span
+                                  key={product}
+                                  className="label label-warning"
+                                >
                                   {product}
                                 </span>
                               ))
