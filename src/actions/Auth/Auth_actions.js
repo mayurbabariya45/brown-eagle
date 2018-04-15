@@ -12,9 +12,9 @@ export const toggleLoginForm = () => ({
 export const flushState = () => ({
   type: a.FLUSH_STATE
 });
-export const login = value => ({
+export const login = (value, locale) => ({
   [RSAA]: {
-    endpoint: "http://35.200.219.57:8000/v1/auth/login",
+    endpoint: `http://35.200.219.57:8000/v1/auth/login?ln=${locale}`,
     method: "POST",
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
@@ -22,10 +22,10 @@ export const login = value => ({
   }
 });
 
-export const checkUsername = username => dispatch => {
+export const checkUsername = (username, locale) => dispatch => {
   dispatch({
     [RSAA]: {
-      endpoint: `http://35.200.219.57:8000/v1/auth/checkusername/${username}`,
+      endpoint: `http://35.200.219.57:8000/v1/auth/checkusername/${username}?ln=${locale}`,
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [
@@ -98,9 +98,9 @@ export const socialLogin = provider => dispatch => {
   });
 };
 
-export const resetPasswordEmail = value => ({
+export const resetPasswordEmail = (value, locale) => ({
   [RSAA]: {
-    endpoint: "http://35.200.219.57:8000/v1/auth/passwordresetlink",
+    endpoint: `http://35.200.219.57:8000/v1/auth/passwordresetlink?ln=${locale}`,
     method: "POST",
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
@@ -111,9 +111,9 @@ export const resetPasswordEmail = value => ({
     ]
   }
 });
-export const resetPassword = value => ({
+export const resetPassword = (value, locale) => ({
   [RSAA]: {
-    endpoint: "http://35.200.219.57:8000/v1/auth/reset-password",
+    endpoint: `http://35.200.219.57:8000/v1/auth/reset-password?ln=${locale}`,
     method: "POST",
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
@@ -124,9 +124,9 @@ export const resetPassword = value => ({
     ]
   }
 });
-export const register = value => ({
+export const register = (value, locale) => ({
   [RSAA]: {
-    endpoint: "http://35.200.219.57:8000/v1/auth/register",
+    endpoint: `http://35.200.219.57:8000/v1/auth/register?ln=${locale}`,
     method: "POST",
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
@@ -134,16 +134,31 @@ export const register = value => ({
   }
 });
 
-export const verifyEmail = token => dispatch =>
+export const verifyEmail = (token, locale) => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: `http://35.200.219.57:8000/v1/auth/verify/${token}`,
-      method: "GET",
+      endpoint: `http://35.200.219.57:8000/v1/auth/verify/email?ln=${locale}`,
+      method: "POST",
+      body: JSON.stringify(token),
       headers: { "Content-Type": "application/json" },
       types: [
         a.VERIFY_EMAIL_REQUEST,
         a.VERIFY_EMAIL_SUCCESS,
         a.VERIFY_EMAIL_FAILURE
+      ]
+    }
+  });
+export const VerificationEmail = (token, locale) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `http://35.200.219.57:8000/v1/auth/verify/email?ln=${locale}`,
+      method: "POST",
+      body: JSON.stringify(token),
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.VERIFICATION_EMAIL_REQUEST,
+        a.VERIFICATION_EMAIL_SUCCESS,
+        a.VERIFICATION_EMAIL_FAILURE
       ]
     }
   });
@@ -153,6 +168,19 @@ export const logout = () => dispatch =>
     type: a.LOGOUT_REQUEST
   });
 
+export const changePassword = value => ({
+  [RSAA]: {
+    endpoint: "http://35.200.219.57:8000/v1/auth/reset-password",
+    method: "POST",
+    body: JSON.stringify(value),
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.PASSWORD_CHANGE_REQUEST,
+      a.PASSWORD_CHANGE_SUCCESS,
+      a.PASSWORD_CHANGE_FAILURE
+    ]
+  }
+});
 export const updateProfile = value => ({
   [RSAA]: {
     endpoint: `http://35.200.219.57:8000/v1/users/${value.id}`,
@@ -163,6 +191,19 @@ export const updateProfile = value => ({
       a.UPDATE_PROFILE_REQUEST,
       a.UPDATE_PROFILE_SUCCESS,
       a.UPDATE_PROFILE_FAILURE
+    ]
+  }
+});
+
+export const userAvatar = (value, token) => ({
+  [RSAA]: {
+    endpoint: `http://35.200.219.57:8000/v1/users/avatar/${token}`,
+    method: "POST",
+    body: value,
+    types: [
+      a.UPDATE_AVATAR_REQUEST,
+      a.UPDATE_AVATAR_SUCCESS,
+      a.UPDATE_AVATAR_FAILURE
     ]
   }
 });

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Button from "../../elements/CustomButton/CustomButton";
 
 const Products = props => {
-  const { src, bAction, buttons, translate } = props;
+  const { src, bAction, buttons, translate, lists } = props;
   return (
     <div className="product-item-info per-product">
       <div className="images-container">
@@ -44,36 +44,98 @@ const Products = props => {
         </div>
       </div>
       <div className="product details product-item-details products-textlink">
-        <h2 className="product name product-item-name product-name">
-          <a href="#products" className="product-item-link">
-            Safescan 2210 Banknote Counter
-          </a>
-        </h2>
-        <div className="product-desc">
-          <p>Midnight Black Dual Rear Camera</p>
-        </div>
-        <div className="product-reviews-summary short">
-          <div className="rating-summary">
-            <div className="rating-result" title="80%">
-              <span
-                style={{
-                  width: "92%"
-                }}
-              >
-                <span>80%</span>
-              </span>
+        {lists && (
+          <div className="products-textlink clearfix">
+            <div className="left-product-text">
+              <h2 className="product name product-item-name product-name">
+                <a href="#products" className="product-item-link">
+                  Safescan 2210 Banknote Counter
+                </a>
+              </h2>
+              <div className="price-box price-final_price">
+                <span className="price">$2,506.00</span>
+              </div>
+              <div className="product-reviews-summary short">
+                <div className="rating-summary">
+                  <div className="rating-result" title="80%">
+                    <span
+                      style={{
+                        width: "92%"
+                      }}
+                    >
+                      <span>80%</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="reviews-actions">
+                  <a href="#products" className="action view">
+                    1&nbsp;<span>{translate("review")}</span>
+                  </a>
+                </div>
+              </div>
+              <div className="stock available">
+                <label htmlFor="stock">Availability:</label>
+                <span>In stock</span>
+              </div>
+            </div>
+            <div className="product-item-inner">
+              <div className="action action-edit">
+                <i className="pe-7s-edit" />
+              </div>
+              <div className="action action-delete">
+                <i className="pe-7s-trash" />
+              </div>
             </div>
           </div>
-          <div className="reviews-actions">
-            <a href="#products" className="action view">
-              1&nbsp;<span>{translate("review")}</span>
-            </a>
+        )}
+        {lists && (
+          <div className="product description product-item-description">
+            <p>
+              Lorem ipsum dolor sit amet, an munere tibique consequat mel,
+              congue albucius no qui, at everti meliore erroribus sea. Vero
+              graeco cotidieque ea duo, in eirmod insolens interpretaris nam.
+              Pro at nostrud percipit definitiones, eu tale porro cum. Sea ne
+              accusata voluptatibus. Ne cum falli dolor voluptua, duo ei sonet
+              choro facilisis, labores officiis torquatos cum ei.
+            </p>
           </div>
+        )}
+        {!lists && (
+          <div>
+            <h2 className="product name product-item-name product-name">
+              <a href="#products" className="product-item-link">
+                Safescan 2210 Banknote Counter
+              </a>
+            </h2>
+            <div className="product-desc">
+              <p>Midnight Black Dual Rear Camera</p>
+            </div>
+            <div className="product-reviews-summary short">
+              <div className="rating-summary">
+                <div className="rating-result" title="80%">
+                  <span
+                    style={{
+                      width: "92%"
+                    }}
+                  >
+                    <span>80%</span>
+                  </span>
+                </div>
+              </div>
+              <div className="reviews-actions">
+                <a href="#products" className="action view">
+                  1&nbsp;<span>{translate("review")}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      {!lists && (
+        <div className="price-box price-final_price">
+          <span className="price">$2,506.00</span>
         </div>
-      </div>
-      <div className="price-box price-final_price">
-        <span className="price">$2,506.00</span>
-      </div>
+      )}
       {bAction &&
         buttons && (
           <div className="actions-secondary add-to-links">

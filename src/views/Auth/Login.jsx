@@ -32,8 +32,8 @@ class Login extends Component {
     }
   }
   hanldeSubmitForm(value) {
-    const { login } = this.props;
-    login(value);
+    const { login, locale } = this.props;
+    login(value, locale);
   }
   handleSocialLogin(provider) {
     const { socialLogin } = this.props;

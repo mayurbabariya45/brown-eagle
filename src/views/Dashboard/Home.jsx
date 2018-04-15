@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { Card } from "../../components/Card/Card";
@@ -234,5 +235,7 @@ const Home = props => {
     </div>
   );
 };
-
+Home.propTypes = {
+  translate: PropTypes.func.isRequired
+};
 export default Home;

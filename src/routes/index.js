@@ -6,8 +6,9 @@ import LoginContainer from "../containers/AuthContainer/LoginContainer";
 import ForgotPasswordContainer from "../containers/AuthContainer/ForgotPasswordContainer";
 import PasswordResetContainer from "../containers/AuthContainer/PasswordResetContainer";
 import DashboardContainer from "../containers/DashboardContainer/DashboardContainer";
-import AddProductContainer from "../containers/ProductContainer/AddProductContainer";
-import verificationContainer from "../views/Auth/VerificationEmail";
+import AddProductContainer from "../containers/DashboardContainer/AddProductContainer";
+import verificationContainer from "../containers/AuthContainer/VerificationEmailContainer";
+import AccountContainer from "../containers/AccountContainer/AccountContainer";
 
 const appRoutes = [
   { path: "/", exact: true, name: "Home", component: Home },
@@ -46,7 +47,7 @@ const appRoutes = [
       navLinks: true,
       showHeader: "dashboard"
     },
-    secure: true,
+    secure: false,
     type: "seller",
     path: "/dashboard",
     name: "Dashboard",
@@ -55,9 +56,20 @@ const appRoutes = [
   {
     header: {
       navLinks: true,
-      showHeader: "dashboard"
+      showHeader: "myAccount"
     },
     secure: false,
+    type: "buyer",
+    path: "/my_account",
+    name: "My Account",
+    component: AccountContainer
+  },
+  {
+    header: {
+      navLinks: true,
+      showHeader: "dashboard"
+    },
+    secure: true,
     type: "seller",
     path: "/add_product",
     name: "AddProduct",

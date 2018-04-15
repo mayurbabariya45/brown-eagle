@@ -44,6 +44,24 @@ const HeaderLinks = props => {
           <Languages {...props} />
         </Nav>
       );
+    case "myAccount":
+      return (
+        <Nav pullRight>
+          <NavItem className="content-link" eventKey={3} href="#">
+            <i className="pe-7s-user" />
+          </NavItem>
+          <NavDropdown
+            eventKey={2}
+            title={translate("help")}
+            id="help-nav-right"
+          >
+            <MenuItem eventKey={1.1} href="/#/login">
+              {translate("help")}
+            </MenuItem>
+          </NavDropdown>
+          <Languages {...props} />
+        </Nav>
+      );
     case "dashboard":
       return (
         <Nav pullRight>
@@ -85,6 +103,16 @@ const HeaderLinks = props => {
               {_.isEmpty(user) && (
                 <MenuItem eventKey={1.1} href="/#/register">
                   {translate("register")}
+                </MenuItem>
+              )}
+              {!_.isEmpty(user) && (
+                <MenuItem
+                  eventKey={1.1}
+                  href={
+                    user.role === "buyer" ? "/#/my_account" : "/#/dashboard"
+                  }
+                >
+                  {translate("my_account")}
                 </MenuItem>
               )}
               {!_.isEmpty(user) && (

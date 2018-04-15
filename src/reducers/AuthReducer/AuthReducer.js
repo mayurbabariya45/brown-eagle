@@ -196,7 +196,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        success: true,
+        success: false,
         user: { ...action.payload }
       };
     case a.UPDATE_PROFILE_FAILURE:
@@ -204,6 +204,42 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: true
+      };
+    case a.PASSWORD_CHANGE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.PASSWORD_CHANGE_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loading: false,
+        message: "Password has been changed successfully."
+      };
+    case a.PASSWORD_CHANGE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false
+      };
+    case a.UPDATE_AVATAR_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.UPDATE_AVATAR_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        loading: false,
+        user: { ...action.payload }
+      };
+    case a.UPDATE_AVATAR_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false
       };
     default:
       return state;

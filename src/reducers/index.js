@@ -6,6 +6,7 @@ import newsLetterReducer from "./NewsLetterReducer/NewsLetterReducer";
 import quotationReducer from "./QuotationReducer/QuotationReducer";
 import productReducer from "./ProductReducer/ProductReducer";
 import authReducer from "./AuthReducer/AuthReducer";
+import verificationReducer from "./AuthReducer/VerificationReducer";
 import dashboardReducer from "./DashboardReducer/DashboardReducer";
 import searchCategoriesReducer from "./SearchCategoriesReducer/SearchCategoriesReducer";
 
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   form: formReducer,
   categories: searchCategoriesReducer,
   dashboard: dashboardReducer,
+  verification: verificationReducer,
   Intl,
   notifications
 });

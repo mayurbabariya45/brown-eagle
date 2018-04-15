@@ -27,6 +27,7 @@ const FieldGroup = ({
   className,
   removeInputDelete,
   errorText,
+  handleChecked,
   ...props
 }) => {
   // console.log(children);
@@ -126,6 +127,26 @@ const FieldGroup = ({
               </FormControl>
               <FormControl {...props} />
               <span className={classNames("form-control-feedback", bsIcon)} />
+            </FormGroup>
+          );
+        case "label_with_checkbox":
+          return (
+            <FormGroup validationState={validationState}>
+              <Row>
+                <Col componentClass={ControlLabel} sm={6}>
+                  {label}
+                </Col>
+                <Col sm={6} className="text-right">
+                  <Checkbox
+                    type="checkbox"
+                    name="same_address"
+                    number="same_address"
+                    onClick={handleChecked}
+                    label={children}
+                  />
+                </Col>
+              </Row>
+              <FormControl {...props} />
             </FormGroup>
           );
         default:

@@ -10,11 +10,17 @@ class Register extends Component {
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
   hanldeSubmitForm(value) {
-    const { checkUsername, registerUser, formData, activeTabs } = this.props;
+    const {
+      checkUsername,
+      registerUser,
+      formData,
+      activeTabs,
+      locale
+    } = this.props;
     if (activeTabs === 1) {
-      checkUsername(value.email);
+      checkUsername(value.email, locale);
     } else if (activeTabs === 2) {
-      registerUser({ ...value, ...formData });
+      registerUser({ ...value, ...formData }, locale);
     }
   }
   render() {

@@ -1,15 +1,13 @@
 import { connect } from "react-redux";
-import { reduxForm } from "redux-form";
-import ForgotPassword from "../../views/Auth/ForgotPassword";
+import VerificationEmail from "../../views/Auth/VerificationEmail";
 import * as a from "../../actions/Auth/Auth_actions";
 
 const mapDispatchToProps = dispatch => ({
-  resetPasswordEmail: (value, locale) =>
-    dispatch(a.resetPasswordEmail(value, locale)),
-  flushState: () => dispatch(a.flushState())
+  VerificationEmail: (value, locale) =>
+    dispatch(a.VerificationEmail(value, locale))
 });
 const mapStateToProps = state => ({
-  ...state.auth
+  ...state.verification
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,
@@ -18,7 +16,5 @@ const mergeProps = (state, actions, ownProps) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  reduxForm({
-    form: "forgotPasswordForm"
-  })(ForgotPassword)
+  VerificationEmail
 );

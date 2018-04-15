@@ -21,6 +21,10 @@ class ForgotPassword extends Component {
     this.state = {};
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
+  componentWillMount() {
+    const { flushState } = this.props;
+    flushState();
+  }
   hanldeSubmitForm(value) {
     const { resetPasswordEmail } = this.props;
     resetPasswordEmail(value);

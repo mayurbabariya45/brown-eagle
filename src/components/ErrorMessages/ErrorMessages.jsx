@@ -36,3 +36,10 @@ export const AlertSuccess = props => {
   }
   return <div />;
 };
+
+export const AlertError = props => {
+  if (props.error) {
+    return <Alert bsStyle="danger">{props.message}</Alert>;
+  }
+  return <div />;
+};

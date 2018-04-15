@@ -4,8 +4,10 @@ import { Col, Row, Form, FormGroup, ControlLabel } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import Select from "react-select";
+import SelectBox from "../../../elements/CustomSelect/CustomSelect";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
+import { countries } from "../../../variables/Variables";
 import { required } from "../../../formValidationRules/FormValidationRules";
 
 export const products = [
@@ -21,7 +23,12 @@ const CompanyInformationForm = props => {
     handleSubmit,
     handleSubmitForm,
     handleSelectChange,
-    value
+    handleChecked,
+    handleRCountry,
+    handleOCountry,
+    value,
+    oCountry,
+    rCountry
   } = props;
 
   return (
@@ -101,12 +108,50 @@ const CompanyInformationForm = props => {
               ncols={["col-md-12"]}
               proprieties={[
                 {
+                  inputGroup: "label_with_checkbox",
                   label: translate("r_address"),
                   type: "text",
                   componentClass: "textarea",
                   bsClass: "form-control form-control-simple",
                   name: "registeredAddress",
+                  handleChecked,
                   validate: [required]
+                }
+              ]}
+            >
+              Same as operational address
+            </FormInputs>
+            <Row>
+              <Col md={12}>
+                <FormGroup>
+                  <SelectBox
+                    searchable
+                    options={countries}
+                    selectedValue={rCountry}
+                    handleCountry={handleRCountry}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
+                {
+                  type: "text",
+                  bsClass: "form-control form-control-simple",
+                  placeholder: translate("city"),
+                  name: "r_city"
+                }
+              ]}
+            />
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
+                {
+                  type: "text",
+                  bsClass: "form-control form-control-simple",
+                  placeholder: translate("zip_code"),
+                  name: "r_area_code"
                 }
               ]}
             />
@@ -120,6 +165,40 @@ const CompanyInformationForm = props => {
                   bsClass: "form-control form-control-simple",
                   name: "operationalAddress",
                   validate: [required]
+                }
+              ]}
+            />
+            <Row>
+              <Col md={12}>
+                <FormGroup>
+                  <SelectBox
+                    searchable
+                    options={countries}
+                    selectedValue={oCountry}
+                    handleCountry={handleOCountry}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
+                {
+                  type: "text",
+                  bsClass: "form-control form-control-simple",
+                  placeholder: translate("city"),
+                  name: "o_city"
+                }
+              ]}
+            />
+            <FormInputs
+              ncols={["col-md-12"]}
+              proprieties={[
+                {
+                  type: "text",
+                  bsClass: "form-control form-control-simple",
+                  placeholder: translate("zip_code"),
+                  name: "o_area_code"
                 }
               ]}
             />
@@ -174,7 +253,10 @@ CompanyInformationForm.propTypes = {
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleSubmitForm: PropTypes.func.isRequired,
-  handleSelectChange: PropTypes.func.isRequired
+  handleSelectChange: PropTypes.func.isRequired,
+  handleChecked: PropTypes.func.isRequired,
+  handleRCountry: PropTypes.func.isRequired,
+  handleOCountry: PropTypes.func.isRequired
 };
 
 export default CompanyInformationForm;

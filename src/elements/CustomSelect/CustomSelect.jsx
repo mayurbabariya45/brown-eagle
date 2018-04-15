@@ -11,12 +11,17 @@ class CustomSelect extends Component {
     };
   }
   handleChange = selectedOption => {
+    const { handleCountry } = this.props;
     this.setState({ selectedOption });
+    handleCountry && handleCountry(selectedOption);
   };
   render() {
     const { selectedOption } = this.state;
-    const value = selectedOption && selectedOption.value;
-    const { searchable, options, multi } = this.props;
+    const { searchable, options, multi, selectedValue } = this.props;
+    const value = selectedValue
+      ? selectedValue && selectedValue.value
+      : selectedOption && selectedOption.value;
+
     return (
       <Select
         name="form-field-name"

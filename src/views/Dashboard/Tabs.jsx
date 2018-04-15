@@ -33,20 +33,20 @@ const Tabs = props => {
             <BlockUi tag="div" blocking={loading}>
               <div className="box-header">
                 <div className="title">{translate("a_category")}</div>
-                <div className="text">
+                {/* <div className="text">
                   <a href="#quick">{translate("a_quick")}</a>
-                </div>
+                </div> */}
               </div>
               <div className="box-navbar">
                 <ButtonGroup>
                   <Button fill radius simple>
                     {translate("a_search")}
                   </Button>
-                  <Button fill radius simple>
+                  {/* <Button fill radius simple>
                     {translate("a_used")}
-                  </Button>
+                  </Button> */}
                 </ButtonGroup>
-                <div className="box-language">
+                {/* <div className="box-language">
                   <div className="box-language-title">
                     {translate("a_language")}
                   </div>
@@ -58,7 +58,7 @@ const Tabs = props => {
                       selectLanguage={selectLanguage}
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="box-content">
                 <SearchProductCategories {...props} />

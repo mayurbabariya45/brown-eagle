@@ -225,7 +225,7 @@ class ProductInformationForm extends Component {
                     }
                   ]}
                 />
-                <Row>
+                {/* <Row>
                   <Col md={12}>
                     <FormGroup>
                       <Col componentClass={ControlLabel} sm={2}>
@@ -236,9 +236,26 @@ class ProductInformationForm extends Component {
                       </Col>
                     </FormGroup>
                   </Col>
-                </Row>
+                </Row> */}
               </div>
               <FormInputs
+                ncols={["col-md-12"]}
+                proprieties={[
+                  {
+                    inputGroup: "horizontal",
+                    xsLabel: 2,
+                    xsInput: 5,
+                    label: translate("a_description"),
+                    type: "text",
+                    componentClass: "textarea",
+                    style: { height: 100 },
+                    bsClass: "form-control form-control-simple",
+                    name: "product_brake",
+                    validate: [required]
+                  }
+                ]}
+              />
+              {/* <FormInputs
                 ncols={["col-md-12"]}
                 proprieties={[
                   {
@@ -295,7 +312,7 @@ class ProductInformationForm extends Component {
                   }
                 ]}
               />
-              <FieldArray name="members" component={this.renderExtraForm} />
+              <FieldArray name="members" component={this.renderExtraForm} /> */}
             </Form>
           </div>
         </div>

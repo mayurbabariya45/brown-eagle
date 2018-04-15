@@ -7,9 +7,9 @@ import {
   FormControl,
   FormGroup
 } from "react-bootstrap";
-import { Card } from "../../../components/Card/Card";
-import CompanyInformationForm from "../form/CompanyInformationForm";
-import ContactInformationForm from "../form/ContactInformationForm";
+import { Card } from "../../components/Card/Card";
+import CompanyInformationForm from "./form/CompanyInformationForm";
+import ContactInformationForm from "./form/ContactInformationForm";
 
 const Profile = props => {
   const {
@@ -20,12 +20,33 @@ const Profile = props => {
     handleSubmitForm,
     handleSubmit,
     handleSelectChange,
-    value
+    handleChecked,
+    handleOCountry,
+    handleRCountry,
+    value,
+    oCountry,
+    rCountry
   } = props;
   const { user, loading } = props.auth;
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
   const twitter = _.find(user.socialLinks, ["platform", "twitter"]);
   const google = _.find(user.socialLinks, ["platform", "google"]);
+  const registeredAddress =
+    user.profile && !_.isEmpty(user.profile.registeredAddress)
+      ? `${user.profile.registeredAddress.address} ${
+          user.profile.registeredAddress.areaCode
+        } ${user.profile.registeredAddress.city} ${
+          user.profile.registeredAddress.country
+        }`
+      : "none";
+  const operationalAddress =
+    user.profile && !_.isEmpty(user.profile.operationalAddress)
+      ? `${user.profile.operationalAddress.address}
+         ${user.profile.operationalAddress.areaCode}
+         ${user.profile.operationalAddress.city}
+         ${user.profile.operationalAddress.country}
+        `
+      : "none";
   return (
     <div className="profile">
       <Row>
@@ -209,7 +230,12 @@ const Profile = props => {
                       handleSubmit={handleSubmit}
                       loading={loading}
                       value={value}
+                      oCountry={oCountry}
+                      rCountry={rCountry}
                       handleSelectChange={handleSelectChange}
+                      handleChecked={handleChecked}
+                      handleRCountry={handleRCountry}
+                      handleOCountry={handleOCountry}
                       handleSubmitForm={handleSubmitForm}
                     />
                   </Row>
@@ -268,17 +294,13 @@ const Profile = props => {
                       <FormGroup>
                         <ControlLabel>{translate("r_address")}</ControlLabel>
                         <FormControl.Static>
-                          {user.profile
-                            ? user.profile.registeredAddress
-                            : "none"}
+                          {registeredAddress}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("o_address")}</ControlLabel>
                         <FormControl.Static>
-                          {user.profile
-                            ? user.profile.operationalAddress
-                            : "none"}
+                          {operationalAddress}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>

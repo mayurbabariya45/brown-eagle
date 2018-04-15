@@ -6,7 +6,7 @@ import * as a from "../../actions/Auth/Auth_actions";
 const mapDispatchToProps = dispatch => ({
   toggleLoginForm: () => dispatch(a.toggleLoginForm()),
   flushState: () => dispatch(a.flushState()),
-  login: value => dispatch(a.login(value)),
+  login: (value, locale) => dispatch(a.login(value, locale)),
   socialLogin: provider => dispatch(a.socialLogin(provider)),
   socialLoginAccessToken: (token, provider) =>
     dispatch(a.socialAccessToken(token, provider))

@@ -22,18 +22,17 @@ class PasswordReset extends Component {
     this.state = {};
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
-  componentWillMount() {}
-  componentWillUpdate(nextProps) {
-    const { history, success } = nextProps;
-    if (success) {
+  componentWillMount() {
+    const { location, history } = this.props;
+    if (!location.search) {
       history.push("/login");
     }
   }
   hanldeSubmitForm({ password }) {
-    const { resetPassword, location } = this.props;
+    const { resetPassword, location, locale } = this.props;
     const id = location.search.split("?key=").pop();
     const object = Object.assign({}, { password, id });
-    resetPassword(object);
+    resetPassword(object, locale);
   }
   render() {
     const {
@@ -44,7 +43,6 @@ class PasswordReset extends Component {
       message,
       invalid
     } = this.props;
-
     return (
       <div className="wrapper wrapper-full-page">
         <div className="full-page login-page has-image">
@@ -98,17 +96,26 @@ class PasswordReset extends Component {
                             <Error error={errors} message={message} />
                             <Row>
                               <Col lg={12} md={12} sm={12} xs={12}>
-                                <Button
-                                  block
-                                  radius
-                                  fill
-                                  bsStyle="warning"
-                                  className="text-capitalize"
-                                  disabled={invalid}
-                                  type="submit"
-                                >
-                                  {translate("password_reset")}
-                                </Button>
+                                {errors ? (
+                                  <a
+                                    href="/#/forgot-password"
+                                    className="text-capitalize btn-fill btn-block btn-radius btn btn-warning"
+                                  >
+                                    {translate("resend_password_link")}
+                                  </a>
+                                ) : (
+                                  <Button
+                                    block
+                                    radius
+                                    fill
+                                    bsStyle="warning"
+                                    className="text-capitalize"
+                                    disabled={invalid}
+                                    type="submit"
+                                  >
+                                    {translate("password_reset")}
+                                  </Button>
+                                )}
                               </Col>
                             </Row>
                           </Form>

@@ -488,3 +488,16 @@ section {
   background-position: top;
   vertical-align: middle;
 }
+.profile {
+  .checkbox {
+    margin: 0;
+    input[type="checkbox"]:checked + label::after {
+      left: 2px;
+    }
+  }
+}
+.verification {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+}

@@ -2,15 +2,30 @@ import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
+import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
+import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
+import { countries } from "../../variables/Variables";
 import Home from "./Home";
-import Profile from "./Profile/Profile";
-import Password from "./Profile/Password";
+import Profile from "./Profile";
+import Products from "./Products";
 import noAvatar from "../../assets/img/no-avatar.png";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     const mainProduct = props.auth.user.profile;
+    const rCountry = !_.isEmpty(props.auth.user)
+      ? _.find(countries, [
+          "label",
+          props.auth.user.profile.registeredAddress.country
+        ])
+      : {};
+    const oCountry = !_.isEmpty(props.auth.user)
+      ? _.find(countries, [
+          "label",
+          props.auth.user.profile.operationalAddress.country
+        ])
+      : {};
     this.state = {
       companyForm: false,
       contactForm: false,
@@ -19,33 +34,32 @@ class Dashboard extends React.Component {
             value: product,
             label: product
           }))
-        : []
+        : [],
+      rCountry: {
+        ...rCountry
+      },
+      oCountry: {
+        ...oCountry
+      }
     };
     this.handleEditForm = this.handleEditForm.bind(this);
-    this.hanldePasswordForm = this.hanldePasswordForm.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
-    this.openFileUploader = this.openFileUploader.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleChecked = this.handleChecked.bind(this);
+    this.handleRCountry = this.handleRCountry.bind(this);
+    this.handleOCountry = this.handleOCountry.bind(this);
   }
 
-  onChangeFile(event) {
-    const { updateAvatar } = this.props;
-    const { user } = this.props.auth;
-    event.stopPropagation();
-    event.preventDefault();
-    const file = event.target.files[0];
-    this.setState({ picture: window.URL.createObjectURL(file) });
-    const form = new FormData();
-    form.append("image", file);
-    updateAvatar(form, user.id);
-  }
-  openFileUploader() {
-    this.profileUploader.click();
-  }
   handleSelectChange(value) {
-    console.log("You have selected: ", value);
     this.setState({ value });
-    console.log(_.map(value, "value"));
+  }
+  handleRCountry(value) {
+    this.props.changeFieldValue("r_country", value.label);
+    this.setState({ rCountry: value });
+  }
+  handleOCountry(value) {
+    this.props.changeFieldValue("o_country", value.label);
+    this.setState({ oCountry: value });
   }
   handleEditForm(activeForm) {
     if (activeForm === 1) {
@@ -54,19 +68,39 @@ class Dashboard extends React.Component {
       this.setState({ contactForm: !this.state.contactForm });
     }
   }
-  hanldePasswordForm(value) {
-    const { changePassword, auth } = this.props;
-    const obj = Object.assign(
-      {},
-      {
-        id: auth.user.id,
-        password: value.password
-      }
-    );
-    changePassword(obj);
+  handleChecked(value) {
+    let {
+      r_city,
+      registeredAddress,
+      r_area_code,
+      r_country
+    } = this.props.initialValues;
+    let country = this.state.rCountry;
+    if (value) {
+      r_city = "";
+      registeredAddress = "";
+      r_area_code = "";
+      r_country = "";
+      country = {};
+    }
+    this.props.changeFieldValue("o_city", r_city);
+    this.props.changeFieldValue("operationalAddress", registeredAddress);
+    this.props.changeFieldValue("o_area_code", r_area_code);
+    this.props.changeFieldValue("o_country", r_country);
+    this.setState({ oCountry: country });
   }
-  handleSubmitForm(value, form) {
-    const { updateProfile } = this.props;
+  handleSubmitForm(value) {
+    const { updateProfile, initialValues } = this.props;
+    const {
+      operationalAddress,
+      registeredAddress,
+      r_city,
+      r_area_code,
+      r_country,
+      o_city,
+      o_area_code,
+      o_country
+    } = initialValues;
     const socialLinks = [];
     if (value.facebook) {
       socialLinks.push({
@@ -92,10 +126,21 @@ class Dashboard extends React.Component {
       website: value.website,
       businessType: value.businessType,
       employeeCount: value.employeeCount,
-      registeredAddress: value.registeredAddress,
-      operationalAddress: value.operationalAddress,
+
       aboutUs: value.aboutUs,
-      p_selling: value.p_selling
+      p_selling: value.p_selling,
+      registeredAddress: {
+        address: registeredAddress,
+        city: r_city,
+        country: r_country,
+        areaCode: r_area_code
+      },
+      operationalAddress: {
+        address: operationalAddress,
+        city: o_city,
+        country: o_country,
+        areaCode: o_area_code
+      }
     };
     updateProfile({ ...value, socialLinks, profile });
     if (this.state.companyForm) {
@@ -127,35 +172,12 @@ class Dashboard extends React.Component {
                     <div className="sidebar-user">
                       <div className="image" />
                       <div className="content">
-                        <div className="author" onClick={this.openFileUploader}>
-                          <div className="avatar border-gray">
-                            <img
-                              src={
-                                this.state.picture ? this.state.picture : avatar
-                              }
-                              alt="..."
-                            />
-                            <p className="text-label">
-                              <i className="pe-7s-camera" />
-                              Upload Profile Picture
-                            </p>
-                            <input
-                              className="imageUpload"
-                              ref={input => {
-                                this.profileUploader = input;
-                              }}
-                              onChange={this.onChangeFile.bind(this)}
-                              type="file"
-                              name="profile_photo"
-                              placeholder="Photo"
-                              capture
-                            />
-                          </div>
-
-                          <h4 className="title">
-                            {user && `${user.firstName} ${user.lastName}`}
-                          </h4>
-                        </div>
+                        <AvatarContainer
+                          avatar={avatar}
+                          translate={translate}
+                          id={user ? user.id : ""}
+                          name={user && `${user.firstName} ${user.lastName}`}
+                        />
                       </div>
                     </div>
                     <div className="sidebar-nav">
@@ -164,11 +186,15 @@ class Dashboard extends React.Component {
                           <i className="pe-7s-home" />
                           {translate("home")}
                         </NavItem>
-                        <NavItem eventKey="second">
+                        {/* <NavItem eventKey="second">
+                          <i className="pe-7s-portfolio" />
+                          {translate("d_products")}
+                        </NavItem> */}
+                        <NavItem eventKey="third">
                           <i className="pe-7s-users" />
                           {translate("profile")}
                         </NavItem>
-                        <NavItem eventKey="third">
+                        <NavItem eventKey="fourth">
                           <i className="pe-7s-lock" />
                           {translate("d_change_password")}
                         </NavItem>
@@ -192,6 +218,9 @@ class Dashboard extends React.Component {
                       <Home {...this.props} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
+                      <Products {...this.props} />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="third">
                       <Profile
                         {...this.props}
                         contactForm={this.state.contactForm}
@@ -201,14 +230,16 @@ class Dashboard extends React.Component {
                         handleSubmit={handleSubmit}
                         handleSubmitForm={this.handleSubmitForm}
                         handleSelectChange={this.handleSelectChange}
+                        handleChecked={this.handleChecked}
+                        handleOCountry={this.handleOCountry}
+                        handleRCountry={this.handleRCountry}
+                        oCountry={this.state.oCountry}
+                        rCountry={this.state.rCountry}
                       />
                     </Tab.Pane>
-                    <Tab.Pane eventKey="third">
-                      <Password
+                    <Tab.Pane eventKey="fourth">
+                      <PasswordContainer
                         translate={translate}
-                        loading={loading}
-                        message={message}
-                        success={success}
                         hanldePasswordForm={this.hanldePasswordForm}
                       />
                     </Tab.Pane>
@@ -226,7 +257,6 @@ Dashboard.propTypes = {
   translate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  changePassword: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   updateProfile: PropTypes.func.isRequired
 };

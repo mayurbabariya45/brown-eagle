@@ -261,6 +261,9 @@
       > li {
         display: inline-block;
         padding: 0 15px;
+        span {
+          font-size: 12px;
+        }
       }
     }
   }
@@ -374,6 +377,7 @@
         min-height: 0;
         padding-top: 0;
         padding-bottom: 0;
+        word-break: break-all;
       }
     }
   }

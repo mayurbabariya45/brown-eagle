@@ -1,9 +1,9 @@
-import { ActionTypes as a } from "../../constants/Dashboard/Dashboard_action_type";
+import { ActionTypes as a } from "../../constants/Auth/Auth_action_type";
 
 const INITIAL_STATE = {
   loading: false,
-  error: false,
-  success: false
+  success: false,
+  error: false
 };
 
 /**
@@ -13,26 +13,25 @@ const INITIAL_STATE = {
  */
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case a.ADD_PRODUCT_REQUEST:
+    case a.VERIFICATION_EMAIL_REQUEST:
       return {
         ...state,
         loading: true,
         error: false,
         success: false
       };
-    case a.ADD_PRODUCT_SUCCESS:
+    case a.VERIFICATION_EMAIL_SUCCESS:
       return {
         ...state,
-        loading: false,
-        error: false,
-        success: true
+        success: true,
+        loading: false
       };
-    case a.ADD_PRODUCT_FAILURE:
+    case a.VERIFICATION_EMAIL_FAILURE:
       return {
         ...state,
-        loading: false,
         error: true,
-        success: false
+        message: action.payload.response.message,
+        loading: false
       };
     default:
       return state;

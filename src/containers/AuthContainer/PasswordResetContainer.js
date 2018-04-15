@@ -4,7 +4,7 @@ import PasswordReset from "../../views/Auth/PasswordReset";
 import * as a from "../../actions/Auth/Auth_actions";
 
 const mapDispatchToProps = dispatch => ({
-  resetPassword: value => dispatch(a.resetPassword(value))
+  resetPassword: (value, locale) => dispatch(a.resetPassword(value, locale))
 });
 const mapStateToProps = state => ({
   ...state.auth

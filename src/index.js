@@ -12,16 +12,4 @@ import "./assets/sass/b2b-client.css";
 const rootEl = document.getElementById("root");
 ReactDOM.render(<RootContainer />, rootEl);
 
-if (module.hot) {
-  module.hot.accept("./containers/RootContainer/RootContainer", () => {
-    const NextRoot = require("./containers/RootContainer/RootContainer")
-      .default;
-    ReactDOM.render(
-      <AppContainer>
-        <NextRoot />
-      </AppContainer>,
-      rootEl
-    );
-  });
-}
 registerServiceWorker();

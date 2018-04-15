@@ -3,8 +3,9 @@ import * as a from "../../actions/Auth/Auth_actions";
 import Register from "../../views/Auth/Register";
 
 const mapDispatchToProps = dispatch => ({
-  checkUsername: username => dispatch(a.checkUsername(username)),
-  registerUser: value => dispatch(a.register(value)),
+  checkUsername: (username, locale) =>
+    dispatch(a.checkUsername(username, locale)),
+  registerUser: (value, locale) => dispatch(a.register(value, locale)),
   verifyEmail: token => dispatch(a.verifyEmail(token))
 });
 const mapStateToProps = state => ({
@@ -14,10 +15,10 @@ const mergeProps = (state, actions, ownProps) => ({
   ...state,
   ...actions,
   ...ownProps,
-  registerUser: value => {
-    actions.registerUser(value).then(data => {
+  registerUser: (value, locale) => {
+    actions.registerUser(value, locale).then(data => {
       const token = data.payload.id;
-      actions.verifyEmail(token);
+      actions.verifyEmail({ id: token });
     });
   }
 });

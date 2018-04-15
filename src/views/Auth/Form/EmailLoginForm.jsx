@@ -26,7 +26,6 @@ class EmailLoginForm extends Component {
   }
   render() {
     const {
-      toggleLoginForm,
       hanldeSubmitForm,
       handleSubmit,
       loading,
