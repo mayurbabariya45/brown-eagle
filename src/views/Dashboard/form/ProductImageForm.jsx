@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { reduxForm, Field } from "redux-form";
 import Dropzone from "react-dropzone";
-import { FormGroup, ControlLabel, FormControl } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  FormGroup,
+  ControlLabel,
+  FormControl
+} from "react-bootstrap";
 import Button from "../../../elements/CustomButton/CustomButton";
 import BlankImg from "../../../assets/img/load-image.png";
 
@@ -19,7 +25,7 @@ class ProductImageForm extends Component {
     this.removeProductImages = this.removeProductImages.bind(this);
   }
   onImageDrop(files) {
-    const { productImages } = this.state;
+    const { productImages, dropProductImages } = this.props;
     const addedImages = productImages.length;
     if (addedImages >= 5) {
       this.setState({ maxImagesAdded: true });
@@ -41,22 +47,19 @@ class ProductImageForm extends Component {
             ? this.state.productImages.concat(filesToPush)
             : filesToPush
         });
+        dropProductImages(filesToPush);
       }
     }
   }
-  /**
-   * Remove image from state based on supplied index
-   *
-   * @param {any} index
-   * @memberof NewProduct
-   */
   removeProductImages() {
     if (
       window.confirm(
         "Are you sure you want to remove these images from product images?"
       )
     ) {
+      const { flushProductImages } = this.props;
       this.setState({ productImages: [] });
+      flushProductImages();
     }
   }
   removeProductImage(index, existing) {
@@ -65,6 +68,7 @@ class ProductImageForm extends Component {
         "Are you sure you want to remove this image from product images?"
       )
     ) {
+      const { removeProductImages } = this.props;
       const { productImages, existingImages } = this.state;
       const images = existing ? existingImages : productImages;
       const itemToDelete = images.splice(index, 1)[0];
@@ -75,13 +79,16 @@ class ProductImageForm extends Component {
           existingImages: images,
           existingImagesToDelete: toDelete
         });
-      } else this.setState({ productImages: images });
-      const addedImages = productImages.length + existingImages.length;
-      if (addedImages >= 5) {
-        this.setState({ maxImagesAdded: true });
       } else {
-        this.setState({ maxImagesAdded: false });
+        this.setState({ productImages: images });
+        const addedImages = productImages.length + existingImages.length;
+        if (addedImages >= 5) {
+          this.setState({ maxImagesAdded: true });
+        } else {
+          this.setState({ maxImagesAdded: false });
+        }
       }
+      removeProductImages(images);
     }
   }
   renderField({ label, meta: { touched, error, warning, active }, ...props }) {
@@ -123,7 +130,7 @@ class ProductImageForm extends Component {
     const images = [];
     productImages.map((f, i) =>
       images.push(
-        <div key={f.name} className="preview-box">
+        <div key={i} className="preview-box">
           <img src={f.preview} className="img-blank" alt="product-images" />
           <span
             className="remove-image"
@@ -151,15 +158,18 @@ class ProductImageForm extends Component {
                 component={this.renderField}
               />
               <div className="action-buttons">
-                <div className="selected-links">
+                <div
+                  className="selected-links"
+                  onClick={this.removeProductImages}
+                >
                   {translate("a_selected_image")}
                 </div>
-                <div
+                {/* <div
                   className="remove-links"
                   onClick={this.removeProductImages}
                 >
                   {translate("a_removed_link")}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -178,6 +188,20 @@ class ProductImageForm extends Component {
               </FormControl.Static>
             </FormGroup>
           </div>
+          <Row>
+            <Col md={12}>
+              <Button
+                bsStyle="warning"
+                type="submit"
+                pullRight
+                fill
+                radius
+                simple
+              >
+                {translate("r_next")}
+              </Button>
+            </Col>
+          </Row>
         </div>
       </div>
     );

@@ -103,7 +103,7 @@ SearchProductCategories.propTypes = {
   selectedCategory: PropTypes.string,
   searchCategories: PropTypes.func.isRequired,
   flushCategories: PropTypes.func.isRequired,
-  activeCategory: PropTypes.func.isRequired
+  activeCategory: PropTypes.number.isRequired
 };
 SearchProductCategories.defaultProps = {
   selectedCategory: ""

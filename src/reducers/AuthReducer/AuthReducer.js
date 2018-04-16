@@ -3,6 +3,7 @@ import { ActionTypes as a } from "../../constants/Auth/Auth_action_type";
 const INITIAL_STATE = {
   loginForm: false,
   loading: false,
+  loader: false,
   success: false,
   errors: false,
   activeTabs: 1,
@@ -44,6 +45,10 @@ export default (state = INITIAL_STATE, action) => {
         success: false
       };
     case a.LOGIN_SUCCESS:
+      if (action.payload) {
+        localStorage.setItem("webAuthToken", action.payload.auth.key);
+        localStorage.setItem("webAuthId", action.payload.user.id);
+      }
       return {
         ...state,
         user: { ...action.payload.user },
@@ -57,6 +62,28 @@ export default (state = INITIAL_STATE, action) => {
         errors: true,
         message: action.payload.response.message,
         loading: false
+      };
+
+    /** *** AUTH_STATUS ****** */
+
+    case a.AUTH_STATUS_REQUEST:
+      return {
+        ...state,
+        loader: true,
+        errors: false,
+        success: false
+      };
+    case a.AUTH_STATUS_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loader: false
+      };
+    case a.AUTH_STATUS_FAILURE:
+      return {
+        ...state,
+        errors: true,
+        loader: false
       };
     case a.LOGOUT_REQUEST:
       return {
@@ -187,6 +214,24 @@ export default (state = INITIAL_STATE, action) => {
         errors: true,
         message: action.payload.response.message
       };
+    case a.GET_USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        loader: true
+      };
+    case a.GET_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loader: false,
+        success: false,
+        user: { ...action.payload }
+      };
+    case a.GET_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        loader: false,
+        error: true
+      };
     case a.UPDATE_PROFILE_REQUEST:
       return {
         ...state,
@@ -205,6 +250,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         error: true
       };
+
     case a.PASSWORD_CHANGE_REQUEST:
       return {
         ...state,

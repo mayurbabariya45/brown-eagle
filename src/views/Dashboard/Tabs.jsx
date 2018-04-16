@@ -5,9 +5,9 @@ import { Row, Col, ButtonGroup } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import Button from "../../elements/CustomButton/CustomButton";
-import Languages from "../../components/Languages/Languages";
+// import Languages from "../../components/Languages/Languages";
 import SearchProductCategories from "./SearchProductCategories";
-import ProductImageForm from "./form/ProductImageForm";
+
 import ProductInformationForm from "./form/ProductInformationForm";
 
 const Tabs = props => {
@@ -62,30 +62,29 @@ const Tabs = props => {
               </div>
               <div className="box-content">
                 <SearchProductCategories {...props} />
-                {selectedCategory &&
-                  selectedLang && (
-                    <Row>
-                      <Col md={6}>
-                        <div className="bottom-text">
-                          <Button block fill radius simple>
-                            {translate("a_button_text")}
-                          </Button>
-                        </div>
-                      </Col>
-                      <Col md={6}>
-                        <Button
-                          bsStyle="warning"
-                          onClick={props.addCategory}
-                          pullRight
-                          fill
-                          radius
-                          simple
-                        >
-                          {translate("r_next")}
+                {selectedCategory && (
+                  <Row>
+                    <Col md={6}>
+                      <div className="bottom-text">
+                        <Button block fill radius simple>
+                          {translate("a_button_text")}
                         </Button>
-                      </Col>
-                    </Row>
-                  )}
+                      </div>
+                    </Col>
+                    <Col md={6}>
+                      <Button
+                        bsStyle="warning"
+                        onClick={props.addCategory}
+                        pullRight
+                        fill
+                        radius
+                        simple
+                      >
+                        {translate("r_next")}
+                      </Button>
+                    </Col>
+                  </Row>
+                )}
               </div>
             </BlockUi>
           </div>
@@ -105,7 +104,6 @@ const Tabs = props => {
               <p>{translate("a_box_title")}</p>
             </div>
             <ProductInformationForm {...props} />
-            <ProductImageForm {...props} />
           </div>
         </div>
       );

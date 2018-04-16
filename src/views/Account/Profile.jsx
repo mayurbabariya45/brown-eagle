@@ -61,7 +61,7 @@ const Profile = props => {
           </Row>
         </Col>
       </Row>
-      <Row>
+      {/* <Row>
         <Col md={12}>
           <Row>
             <Card
@@ -80,7 +80,7 @@ const Profile = props => {
             />
           </Row>
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
 };

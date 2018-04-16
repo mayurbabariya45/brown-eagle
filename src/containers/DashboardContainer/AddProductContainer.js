@@ -9,7 +9,11 @@ const mapDispatchToProps = dispatch => ({
   selectLanguage: lang => dispatch(a.selectLanguage(lang)),
   searchCategories: value => dispatch(a.searchCategories(value)),
   handleCategory: value => dispatch(a.handleCategory(value)),
-  flushCategories: () => dispatch(a.flushCategories())
+  flushCategories: () => dispatch(a.flushCategories()),
+  addProduct: (value, locale) => dispatch(a.addProduct(value, locale)),
+  dropProductImages: files => dispatch(a.dropProductImages(files)),
+  removeProductImages: files => dispatch(a.removeProductImages(files)),
+  flushProductImages: () => dispatch(a.flushProductImages())
 });
 const mapStateToProps = state => ({
   ...state.product

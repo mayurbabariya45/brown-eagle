@@ -305,7 +305,7 @@ module.exports = {
       help_community: "Aide et communauté",
       trade_anssurance: "Trade Anssurance",
       help: "Aidez-moi",
-
+      my_account: "Mon compte",
       // common
       edit: "modifier",
       home: "maison",
@@ -328,6 +328,9 @@ module.exports = {
       add_to_cart: "ajouter au panier",
       review: "La revue",
       upload_text: "Importer une image de profil",
+      country: "Pays",
+      city: "Ville",
+      zip_code: "Indicatif régional",
 
       // verification email
       go_to_sign_in: "Aller à la connexion",
@@ -548,19 +551,28 @@ module.exports = {
       add_to_cart: "Aggiungi al carrello",
       review: "Revisione",
       upload_text: "Carica l'immagine del profilo",
-
+      country: "Nazione",
+      city: "Città",
+      zip_code: "Prefisso",
       // verification email
       go_to_sign_in: "Vai per accedere",
       verification_msg: "La tua verifica e-mail ha avuto successo.",
 
       // Headers Links
-      sign_in: "Ciao, Accedi",
+      sign_in_h: "Ciao, Accedi",
+      sign_in_f: "Ciao, {username}",
       your_orders: "I tuoi ordini",
       cart: "Carrello",
       login: "Accesso",
+      logout: "Disconnettersi",
+      register: "Registrare",
       services_membership: "Servizi e soci",
       purchase_region: "Acquista per regione",
       help_community: "Aiuto e comunità",
+      help: "Aiuto",
+      sign_in: "Ciao, Accedi",
+      trade_anssurance: "Garanzia commerciale",
+      my_account: "Il mio account",
 
       // Languages
       it: "it",
@@ -831,7 +843,9 @@ module.exports = {
       add_to_cart: "Añadir a la cesta",
       review: "revisión",
       upload_text: "Subir imagen de perfil",
-
+      country: "País",
+      city: "Ciudad",
+      zip_code: "Codigo de AREA",
       // verification email
       go_to_sign_in: "Ir a Iniciar sesión",
       verification_msg:
@@ -1091,7 +1105,9 @@ module.exports = {
       add_to_cart: "Voeg toe aan winkelmandje",
       review: "Beoordeling",
       upload_text: "Upload profielfoto",
-
+      country: "land",
+      city: "stad",
+      zip_code: "Netnummer",
       // verification email
       go_to_sign_in: "Ga naar Aanmelden",
       verification_msg: "Uw e-mailverificatie is geslaagd.",

@@ -211,7 +211,7 @@ const Fields = ({ mutipleFields, translate, ...props }) => {
       <div className="mutiple-form-group">
         <Field {...props} component={renderField} />
         <FieldArray
-          name="product-keywords"
+          name="keywords"
           translate={translate}
           component={renderExtraInput}
         />

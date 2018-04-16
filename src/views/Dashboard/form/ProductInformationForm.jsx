@@ -4,6 +4,7 @@ import { reduxForm, FieldArray } from "redux-form";
 import { Form, Row, Col, FormGroup, ControlLabel } from "react-bootstrap";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Select from "../../../elements/CustomSelect/CustomSelect";
+import ProductImageForm from "./ProductImageForm";
 import { required } from "../../../formValidationRules/FormValidationRules";
 import Button from "../../../elements/CustomButton/CustomButton";
 
@@ -152,80 +153,81 @@ class ProductInformationForm extends Component {
     );
   }
   render() {
-    const { translate } = this.props;
+    const { translate, handleSubmit, hanldeSubmitForm } = this.props;
     return (
-      <div className="box">
-        <div className="box-header">
-          <div className="title">{translate("a_basic")}</div>
-        </div>
-        <div className="box-content">
-          <div className="product-information-form">
-            <Form horizontal>
-              <div className="form-horizontal-box">
-                <FormInputs
-                  ncols={["col-md-12"]}
-                  proprieties={[
-                    {
-                      inputGroup: "horizontal",
-                      xsLabel: 2,
-                      xsInput: 5,
-                      label: translate("a_product_name"),
-                      type: "text",
-                      bsClass: "form-control form-control-simple",
-                      name: "product_name",
-                      validate: [required]
-                    }
-                  ]}
-                />
-                <FormInputs
-                  ncols={["col-md-12"]}
-                  proprieties={[
-                    {
-                      inputGroup: "horizontal",
-                      xsLabel: 2,
-                      xsInput: 5,
-                      label: translate("a_product_price"),
-                      type: "text",
-                      bsClass: "form-control form-control-simple",
-                      name: "product_price",
-                      validate: [required]
-                    }
-                  ]}
-                />
-                <FormInputs
-                  ncols={["col-md-12"]}
-                  proprieties={[
-                    {
-                      inputGroup: "horizontal",
-                      xsLabel: 2,
-                      xsInput: 5,
-                      label: translate("a_product_quantity"),
-                      type: "text",
-                      bsClass: "form-control form-control-simple",
-                      name: "product_quantity",
-                      validate: [required]
-                    }
-                  ]}
-                />
-                <FormInputs
-                  ncols={["col-md-12"]}
-                  proprieties={[
-                    {
-                      inputGroup: "horizontal",
-                      xsLabel: 2,
-                      xsInput: 5,
-                      label: translate("a_product_keyword"),
-                      type: "text",
-                      bsClass: "form-control form-control-simple",
-                      className: "custom-form-group",
-                      name: "product_keyword",
-                      mutipleFields: true,
-                      translate,
-                      validate: [required]
-                    }
-                  ]}
-                />
-                {/* <Row>
+      <div>
+        <Form horizontal onSubmit={handleSubmit(hanldeSubmitForm)}>
+          <div className="box">
+            <div className="box-header">
+              <div className="title">{translate("a_basic")}</div>
+            </div>
+            <div className="box-content">
+              <div className="product-information-form">
+                <div className="form-horizontal-box">
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_product_name"),
+                        type: "text",
+                        bsClass: "form-control form-control-simple",
+                        name: "name",
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_product_price"),
+                        type: "text",
+                        bsClass: "form-control form-control-simple",
+                        name: "productPrice",
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_product_quantity"),
+                        type: "text",
+                        bsClass: "form-control form-control-simple",
+                        name: "minQuantity",
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_product_keyword"),
+                        type: "text",
+                        bsClass: "form-control form-control-simple",
+                        className: "custom-form-group",
+                        name: "product_keywords",
+                        mutipleFields: true,
+                        translate,
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                  {/* <Row>
                   <Col md={12}>
                     <FormGroup>
                       <Col componentClass={ControlLabel} sm={2}>
@@ -237,25 +239,25 @@ class ProductInformationForm extends Component {
                     </FormGroup>
                   </Col>
                 </Row> */}
-              </div>
-              <FormInputs
-                ncols={["col-md-12"]}
-                proprieties={[
-                  {
-                    inputGroup: "horizontal",
-                    xsLabel: 2,
-                    xsInput: 5,
-                    label: translate("a_description"),
-                    type: "text",
-                    componentClass: "textarea",
-                    style: { height: 100 },
-                    bsClass: "form-control form-control-simple",
-                    name: "product_brake",
-                    validate: [required]
-                  }
-                ]}
-              />
-              {/* <FormInputs
+                </div>
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "horizontal",
+                      xsLabel: 2,
+                      xsInput: 5,
+                      label: translate("a_description"),
+                      type: "text",
+                      componentClass: "textarea",
+                      style: { height: 100 },
+                      bsClass: "form-control form-control-simple",
+                      name: "description",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                {/* <FormInputs
                 ncols={["col-md-12"]}
                 proprieties={[
                   {
@@ -313,9 +315,11 @@ class ProductInformationForm extends Component {
                 ]}
               />
               <FieldArray name="members" component={this.renderExtraForm} /> */}
-            </Form>
+              </div>
+            </div>
           </div>
-        </div>
+          <ProductImageForm {...this.props} />
+        </Form>
       </div>
     );
   }

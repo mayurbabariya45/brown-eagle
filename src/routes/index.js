@@ -47,7 +47,7 @@ const appRoutes = [
       navLinks: true,
       showHeader: "dashboard"
     },
-    secure: false,
+    secure: true,
     type: "seller",
     path: "/dashboard",
     name: "Dashboard",
@@ -58,7 +58,7 @@ const appRoutes = [
       navLinks: true,
       showHeader: "myAccount"
     },
-    secure: false,
+    secure: true,
     type: "buyer",
     path: "/my_account",
     name: "My Account",
@@ -69,7 +69,7 @@ const appRoutes = [
       navLinks: true,
       showHeader: "dashboard"
     },
-    secure: true,
+    secure: false,
     type: "seller",
     path: "/add_product",
     name: "AddProduct",

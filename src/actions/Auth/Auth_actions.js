@@ -12,6 +12,17 @@ export const toggleLoginForm = () => ({
 export const flushState = () => ({
   type: a.FLUSH_STATE
 });
+export const checkAuthStatus = (token, id, locale) => ({
+  [RSAA]: {
+    endpoint: `http://35.200.219.57:8000/v1/users/verify/${id}?ln=${locale}`,
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: token
+    },
+    types: [a.AUTH_STATUS_REQUEST, a.AUTH_STATUS_SUCCESS, a.AUTH_STATUS_FAILURE]
+  }
+});
 export const login = (value, locale) => ({
   [RSAA]: {
     endpoint: `http://35.200.219.57:8000/v1/auth/login?ln=${locale}`,
@@ -178,6 +189,18 @@ export const changePassword = value => ({
       a.PASSWORD_CHANGE_REQUEST,
       a.PASSWORD_CHANGE_SUCCESS,
       a.PASSWORD_CHANGE_FAILURE
+    ]
+  }
+});
+export const getUserProfile = (token, id) => ({
+  [RSAA]: {
+    endpoint: `http://35.200.219.57:8000/v1/users/${id}`,
+    method: "GET",
+    headers: { "Content-Type": "application/json", apikey: token },
+    types: [
+      a.GET_USER_PROFILE_REQUEST,
+      a.GET_USER_PROFILE_SUCCESS,
+      a.GET_USER_PROFILE_FAILURE
     ]
   }
 });

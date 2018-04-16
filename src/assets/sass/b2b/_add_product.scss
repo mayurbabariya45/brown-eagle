@@ -242,6 +242,8 @@
     margin: 12px 0;
     .form-group {
       display: inline-block;
+      margin-left: 15px;
+      margin-right: 15px;
     }
     .control-label {
       font-weight: normal;
@@ -338,6 +340,7 @@
     }
   }
 }
+
 .product-information {
   .product-information-form {
     margin-bottom: 25px;

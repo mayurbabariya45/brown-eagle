@@ -11,10 +11,25 @@ export default function AuthHoc(WrappedComponent, passedProps) {
       this.state = {};
     }
     componentWillMount() {
-      const { auth, history } = this.props;
+      const { checkAuthStatus, getUserProfile, auth, history } = this.props;
+      const { locale, type } = passedProps;
+      const token = localStorage.getItem("webAuthToken");
+      const id = localStorage.getItem("webAuthId");
       const { user } = auth;
       if (user.length < 1) {
-        history.push("/login");
+        if (token && id) {
+          checkAuthStatus(token, id, locale).then(() => {
+            getUserProfile(token, id).then(profile => {
+              if (profile.payload.role === type) {
+                return true;
+              }
+              history.push("/login");
+              return true;
+            });
+          });
+        } else {
+          history.push("/login");
+        }
       }
     }
     render() {
@@ -36,10 +51,25 @@ export default function AuthHoc(WrappedComponent, passedProps) {
     }
   }
   const mapDispatchToProps = dispatch => ({
-    logout: () => dispatch(a.logout())
+    logout: () => dispatch(a.logout()),
+    checkAuthStatus: (token, id, locale) =>
+      dispatch(a.checkAuthStatus(token, id, locale)),
+    getUserProfile: (token, id) => dispatch(a.getUserProfile(token, id))
   });
   const mapStateToProps = state => ({
     auth: state.auth
   });
-  return connect(mapStateToProps, mapDispatchToProps)(WrapperComponent);
+  const mergeProps = (state, actions, ownProps) => ({
+    ...state,
+    ...actions,
+    ...ownProps,
+    logout: () => {
+      localStorage.removeItem("webAuthId");
+      localStorage.removeItem("webAuthToken");
+      actions.logout();
+    }
+  });
+  return connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+    WrapperComponent
+  );
 }

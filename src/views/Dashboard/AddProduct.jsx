@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col } from "react-bootstrap";
@@ -15,9 +16,23 @@ class AddProduct extends React.Component {
     getCategories();
   }
 
-  hanldeSubmitForm(value) {}
+  hanldeSubmitForm(value) {
+    const { selectedCategory, addProduct } = this.props;
+    const { user } = this.props.auth;
+    if (_.isEmpty(user)) return false;
+    const category = selectedCategory;
+    const seller = user.id;
+    const keywords = value.keywords
+      ? value.keywords.concat(value.product_keywords)
+      : Object.assign([], value.product_keyword);
+    delete value.product_keywords;
+    const object = Object.assign({}, { ...value, category, keywords, seller });
+    addProduct(object);
+    return true;
+  }
   render() {
     const { translate } = this.props;
+    console.log(this.props);
     return (
       <section className="add-product-wrapper">
         <Grid>

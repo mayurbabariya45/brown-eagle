@@ -9,7 +9,8 @@ const initialState = {
   selectedLang: "",
   activeCategory: -1,
   categories: [],
-  sCategories: []
+  sCategories: [],
+  productImages: []
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -103,6 +104,46 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         activeTabs: 2
+      };
+    // DROP_PRODUCT
+    case a.DROP_PRODUCT_IMAGES:
+      return {
+        ...state,
+        productImages: [...state.productImages, action.files]
+      };
+    // DROP_DELETE_PRODUCT_IMAGES
+    case a.PRODUCT_IMAGES_REMOVE:
+      return {
+        ...state,
+        productImages: [...action.files]
+      };
+    // FLUSH_PRODUCT_IMAGES
+    case a.FLUSH_PRODUCT_IMAGES:
+      return {
+        ...state,
+        productImages: []
+      };
+    // ADD_PRODUCT
+    case a.ADD_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+        success: false
+      };
+    case a.ADD_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        success: true
+      };
+    case a.ADD_PRODUCT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        success: false
       };
     default:
       return state;

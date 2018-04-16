@@ -39,18 +39,16 @@ class VerificationEmail extends Component {
                     {error && <AlertError error={error} message={message} />}
                   </Col>
                 </Row>
-                {success && (
-                  <Row>
-                    <Col md={12} sm={12} xs={12} className="text-center">
-                      <a
-                        href="/#/login"
-                        className="btn-fill btn-radius btn btn-warning"
-                      >
-                        {translate("go_to_sign_in")}
-                      </a>
-                    </Col>
-                  </Row>
-                )}
+                <Row>
+                  <Col md={12} sm={12} xs={12} className="text-center">
+                    <a
+                      href="/#/login"
+                      className="btn-fill btn-radius btn btn-warning"
+                    >
+                      {translate("go_to_sign_in")}
+                    </a>
+                  </Col>
+                </Row>
               </Col>
             </Col>
           </Row>

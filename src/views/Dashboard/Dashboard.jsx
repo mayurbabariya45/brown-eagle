@@ -5,6 +5,7 @@ import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import { countries } from "../../variables/Variables";
+import ContentLoader from "../../components/Loader/Loader";
 import Home from "./Home";
 import Profile from "./Profile";
 import Products from "./Products";
@@ -159,7 +160,7 @@ class Dashboard extends React.Component {
       message,
       success
     } = this.props;
-    const { user } = this.props.auth;
+    const { user, loader } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
     return (
       <section className="section-dashboard">
@@ -168,49 +169,51 @@ class Dashboard extends React.Component {
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Col md={12}>
                 <Col sm={3}>
-                  <div className="sidebar">
-                    <div className="sidebar-user">
-                      <div className="image" />
-                      <div className="content">
-                        <AvatarContainer
-                          avatar={avatar}
-                          translate={translate}
-                          id={user ? user.id : ""}
-                          name={user && `${user.firstName} ${user.lastName}`}
-                        />
+                  <ContentLoader height={950} inFight={loader}>
+                    <div className="sidebar">
+                      <div className="sidebar-user">
+                        <div className="image" />
+                        <div className="content">
+                          <AvatarContainer
+                            avatar={avatar}
+                            translate={translate}
+                            id={user ? user.id : ""}
+                            name={user && `${user.firstName} ${user.lastName}`}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="sidebar-nav">
-                      <Nav bsStyle="pills" stacked>
-                        <NavItem eventKey="first">
-                          <i className="pe-7s-home" />
-                          {translate("home")}
-                        </NavItem>
-                        {/* <NavItem eventKey="second">
+                      <div className="sidebar-nav">
+                        <Nav bsStyle="pills" stacked>
+                          <NavItem eventKey="first">
+                            <i className="pe-7s-home" />
+                            {translate("home")}
+                          </NavItem>
+                          {/* <NavItem eventKey="second">
                           <i className="pe-7s-portfolio" />
                           {translate("d_products")}
                         </NavItem> */}
-                        <NavItem eventKey="third">
-                          <i className="pe-7s-users" />
-                          {translate("profile")}
-                        </NavItem>
-                        <NavItem eventKey="fourth">
-                          <i className="pe-7s-lock" />
-                          {translate("d_change_password")}
-                        </NavItem>
-                        <NavItem
-                          onClick={e => {
-                            e.preventDefault();
-                            logout();
-                            history.push("/");
-                          }}
-                        >
-                          <i className="pe-7s-users" />
-                          {translate("logout")}
-                        </NavItem>
-                      </Nav>
+                          <NavItem eventKey="third">
+                            <i className="pe-7s-users" />
+                            {translate("profile")}
+                          </NavItem>
+                          <NavItem eventKey="fourth">
+                            <i className="pe-7s-lock" />
+                            {translate("d_change_password")}
+                          </NavItem>
+                          <NavItem
+                            onClick={e => {
+                              e.preventDefault();
+                              logout();
+                              history.push("/");
+                            }}
+                          >
+                            <i className="pe-7s-users" />
+                            {translate("logout")}
+                          </NavItem>
+                        </Nav>
+                      </div>
                     </div>
-                  </div>
+                  </ContentLoader>
                 </Col>
                 <Col sm={9}>
                   <Tab.Content animation>

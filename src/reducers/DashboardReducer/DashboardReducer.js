@@ -13,27 +13,6 @@ const INITIAL_STATE = {
  */
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case a.ADD_PRODUCT_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        error: false,
-        success: false
-      };
-    case a.ADD_PRODUCT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        success: true
-      };
-    case a.ADD_PRODUCT_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: true,
-        success: false
-      };
     default:
       return state;
   }
