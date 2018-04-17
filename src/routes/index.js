@@ -69,7 +69,7 @@ const appRoutes = [
       navLinks: true,
       showHeader: "dashboard"
     },
-    secure: false,
+    secure: true,
     type: "seller",
     path: "/add_product",
     name: "AddProduct",

@@ -5,7 +5,11 @@ import { Form, Row, Col, FormGroup, ControlLabel } from "react-bootstrap";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Select from "../../../elements/CustomSelect/CustomSelect";
 import ProductImageForm from "./ProductImageForm";
-import { required } from "../../../formValidationRules/FormValidationRules";
+import {
+  required,
+  price,
+  numeric
+} from "../../../formValidationRules/FormValidationRules";
 import Button from "../../../elements/CustomButton/CustomButton";
 
 class ProductInformationForm extends Component {
@@ -190,7 +194,7 @@ class ProductInformationForm extends Component {
                         type: "text",
                         bsClass: "form-control form-control-simple",
                         name: "productPrice",
-                        validate: [required]
+                        validate: [required, price]
                       }
                     ]}
                   />
@@ -202,10 +206,10 @@ class ProductInformationForm extends Component {
                         xsLabel: 2,
                         xsInput: 5,
                         label: translate("a_product_quantity"),
-                        type: "text",
+                        type: "number",
                         bsClass: "form-control form-control-simple",
                         name: "minQuantity",
-                        validate: [required]
+                        validate: [required, numeric]
                       }
                     ]}
                   />

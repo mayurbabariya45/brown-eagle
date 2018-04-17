@@ -8,7 +8,11 @@ import SelectBox from "../../../elements/CustomSelect/CustomSelect";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
 import { countries } from "../../../variables/Variables";
-import { required } from "../../../formValidationRules/FormValidationRules";
+import {
+  required,
+  year,
+  areaCode
+} from "../../../formValidationRules/FormValidationRules";
 
 export const products = [
   { value: "test1", label: "Test 1" },
@@ -56,7 +60,7 @@ const CompanyInformationForm = props => {
                   type: "text",
                   bsClass: "form-control form-control-simple",
                   name: "established",
-                  validate: [required]
+                  validate: [required, year]
                 }
               ]}
             />
@@ -108,19 +112,15 @@ const CompanyInformationForm = props => {
               ncols={["col-md-12"]}
               proprieties={[
                 {
-                  inputGroup: "label_with_checkbox",
                   label: translate("r_address"),
                   type: "text",
                   componentClass: "textarea",
                   bsClass: "form-control form-control-simple",
                   name: "registeredAddress",
-                  handleChecked,
                   validate: [required]
                 }
               ]}
-            >
-              Same as operational address
-            </FormInputs>
+            />
             <Row>
               <Col md={12}>
                 <FormGroup>
@@ -151,7 +151,8 @@ const CompanyInformationForm = props => {
                   type: "text",
                   bsClass: "form-control form-control-simple",
                   placeholder: translate("zip_code"),
-                  name: "r_area_code"
+                  name: "r_area_code",
+                  validate: [areaCode]
                 }
               ]}
             />
@@ -159,15 +160,19 @@ const CompanyInformationForm = props => {
               ncols={["col-md-12"]}
               proprieties={[
                 {
+                  inputGroup: "label_with_checkbox",
                   label: translate("o_address"),
                   type: "text",
                   componentClass: "textarea",
                   bsClass: "form-control form-control-simple",
                   name: "operationalAddress",
+                  handleChecked,
                   validate: [required]
                 }
               ]}
-            />
+            >
+              {translate("label_address")}
+            </FormInputs>
             <Row>
               <Col md={12}>
                 <FormGroup>
@@ -198,7 +203,8 @@ const CompanyInformationForm = props => {
                   type: "text",
                   bsClass: "form-control form-control-simple",
                   placeholder: translate("zip_code"),
-                  name: "o_area_code"
+                  name: "o_area_code",
+                  validate: [areaCode]
                 }
               ]}
             />

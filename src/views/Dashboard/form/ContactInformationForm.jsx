@@ -5,6 +5,10 @@ import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
+import {
+  normalizePhone,
+  phoneNumber
+} from "../../../formValidationRules/FormValidationRules";
 
 const ContactInformationForm = props => {
   const { translate, handleSubmit, handleSubmitForm, loading } = props;
@@ -43,7 +47,8 @@ const ContactInformationForm = props => {
                   label: translate("telephone"),
                   type: "text",
                   bsClass: "form-control form-control-simple",
-                  name: "telephone"
+                  name: "telephone",
+                  normalize: normalizePhone
                 }
               ]}
             />
@@ -88,7 +93,9 @@ const ContactInformationForm = props => {
                   label: translate("mobile"),
                   type: "text",
                   bsClass: "form-control form-control-simple",
-                  name: "phone"
+                  name: "phone",
+                  validate: [phoneNumber],
+                  normalize: normalizePhone
                 }
               ]}
             />

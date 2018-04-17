@@ -17,22 +17,21 @@ class AddProduct extends React.Component {
   }
 
   hanldeSubmitForm(value) {
-    const { selectedCategory, addProduct } = this.props;
+    const { selectedCategory, addProduct, locale } = this.props;
     const { user } = this.props.auth;
     if (_.isEmpty(user)) return false;
     const category = selectedCategory;
     const seller = user.id;
     const keywords = value.keywords
       ? value.keywords.concat(value.product_keywords)
-      : Object.assign([], value.product_keyword);
+      : [value.product_keywords];
     delete value.product_keywords;
     const object = Object.assign({}, { ...value, category, keywords, seller });
-    addProduct(object);
+    addProduct(object, locale);
     return true;
   }
   render() {
     const { translate } = this.props;
-    console.log(this.props);
     return (
       <section className="add-product-wrapper">
         <Grid>

@@ -17,8 +17,8 @@ export const checkAuthStatus = (token, id, locale) => ({
     endpoint: `http://35.200.219.57:8000/v1/users/verify/${id}?ln=${locale}`,
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
-      apikey: token
+      Accept: "application/json",
+      "Content-Type": "application/json; charset=UTF-8"
     },
     types: [a.AUTH_STATUS_REQUEST, a.AUTH_STATUS_SUCCESS, a.AUTH_STATUS_FAILURE]
   }
@@ -196,7 +196,7 @@ export const getUserProfile = (token, id) => ({
   [RSAA]: {
     endpoint: `http://35.200.219.57:8000/v1/users/${id}`,
     method: "GET",
-    headers: { "Content-Type": "application/json", apikey: token },
+    headers: { "Content-Type": "application/json" },
     types: [
       a.GET_USER_PROFILE_REQUEST,
       a.GET_USER_PROFILE_SUCCESS,

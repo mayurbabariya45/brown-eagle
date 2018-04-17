@@ -43,12 +43,11 @@ const mapStateToProps = state => ({
     google:
       _.find(state.auth.user.socialLinks, ["platform", "google"]) &&
       _.find(state.auth.user.socialLinks, ["platform", "google"]).link,
-    established: formValueSelector("profileInformationForm")(
-      state,
-      "established"
-    )
-      ? formValueSelector("profileInformationForm")(state, "established")
-      : state.auth.user.profile && state.auth.user.profile.established,
+    established:
+      formValueSelector("profileInformationForm")(state, "established") ||
+      formValueSelector("profileInformationForm")(state, "established") === ""
+        ? formValueSelector("profileInformationForm")(state, "established")
+        : state.auth.user.profile && state.auth.user.profile.established,
     website: formValueSelector("profileInformationForm")(state, "website")
       ? formValueSelector("profileInformationForm")(state, "website")
       : state.auth.user.profile && state.auth.user.profile.website,

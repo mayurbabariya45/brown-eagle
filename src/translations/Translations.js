@@ -37,6 +37,7 @@ module.exports = {
       country: "Country",
       city: "City",
       zip_code: "Area Code",
+      label_address: "Same as registered address",
       // verification email
       go_to_sign_in: "Login",
       verification_msg: "Your Email Verification has been successful.",
@@ -211,6 +212,10 @@ module.exports = {
       email_validation: "Invalid email address",
       min_length_validation: "Must be {min} characters or more",
       c_password_validation: "This field must match with {matchName} field",
+      year_validation: "Invalid year, must be a numerical value",
+      year_length_validation: "The Year must be 4 digits",
+      year_match_validation:
+        "The year should be in range 1920 to the current year",
 
       // My account
       a_billing_address: "Billing Address",
@@ -331,7 +336,7 @@ module.exports = {
       country: "Pays",
       city: "Ville",
       zip_code: "Indicatif régional",
-
+      label_address: "Identique à l'adresse enregistrée",
       // verification email
       go_to_sign_in: "Aller à la connexion",
       verification_msg: "Votre vérification par courriel a réussi.",
@@ -416,6 +421,10 @@ module.exports = {
       min_length_validation: "Doit être {min} caractères ou plus",
       c_password_validation:
         "Ce champ doit correspondre avec le champ {matchName}",
+      year_validation: "Année invalide, doit être une valeur numérique",
+      year_length_validation: "une année doit avoir 4 chiffres",
+      year_match_validation:
+        "L'année devrait être comprise entre 1920 et l'année en cours",
 
       // My account
       a_billing_address: "Adresse de facturation",
@@ -554,6 +563,7 @@ module.exports = {
       country: "Nazione",
       city: "Città",
       zip_code: "Prefisso",
+      label_address: "Come l'indirizzo registrato",
       // verification email
       go_to_sign_in: "Vai per accedere",
       verification_msg: "La tua verifica e-mail ha avuto successo.",
@@ -724,6 +734,10 @@ module.exports = {
       min_length_validation: "Deve contenere {min} caratteri o più",
       c_password_validation:
         "Questo campo deve corrispondere al campo {matchName}",
+      year_validation: "Anno non valido, deve essere un valore numerico",
+      year_length_validation: "L'anno deve essere di 4 cifre",
+      year_match_validation:
+        "L'anno dovrebbe essere compreso tra il 1920 e l'anno in corso",
 
       // My account
       a_billing_address: "Indirizzo Di Fatturazione",
@@ -846,6 +860,7 @@ module.exports = {
       country: "País",
       city: "Ciudad",
       zip_code: "Codigo de AREA",
+      label_address: "Igual que la dirección registrada",
       // verification email
       go_to_sign_in: "Ir a Iniciar sesión",
       verification_msg:
@@ -1001,6 +1016,10 @@ module.exports = {
       min_length_validation: "Debe tener {min} caracteres o más",
       c_password_validation:
         "Este campo debe coincidir con el campo {matchName}",
+      year_validation: "Año inválido, debe ser un valor numérico",
+      year_length_validation: "El año debe tener 4 dígitos",
+      year_match_validation:
+        "El año debería estar en el rango de 1920 al año actual",
 
       // My account
       a_billing_address: "Dirección de Envio",
@@ -1108,6 +1127,7 @@ module.exports = {
       country: "land",
       city: "stad",
       zip_code: "Netnummer",
+      label_address: "Hetzelfde als geregistreerd adres",
       // verification email
       go_to_sign_in: "Ga naar Aanmelden",
       verification_msg: "Uw e-mailverificatie is geslaagd.",
@@ -1280,6 +1300,10 @@ module.exports = {
       min_length_validation: "Moet {min} tekens of meer zijn",
       c_password_validation:
         "Dit veld moet overeenkomen met het veld {matchName}",
+      year_validation: "Ongeldig jaar, moet een numerieke waarde zijn",
+      year_length_validation: "Het jaar moet 4 cijfers bevatten",
+      year_match_validation:
+        "Het jaar zou in het bereik van 1920 tot het huidige jaar moeten liggen",
 
       // My account
       a_billing_address: "Facturatie adres",

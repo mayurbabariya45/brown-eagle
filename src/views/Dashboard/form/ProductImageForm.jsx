@@ -158,12 +158,12 @@ class ProductImageForm extends Component {
                 component={this.renderField}
               />
               <div className="action-buttons">
-                <div
+                {/* <div
                   className="selected-links"
                   onClick={this.removeProductImages}
                 >
                   {translate("a_selected_image")}
-                </div>
+                </div> */}
                 {/* <div
                   className="remove-links"
                   onClick={this.removeProductImages}

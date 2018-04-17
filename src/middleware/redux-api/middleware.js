@@ -43,6 +43,7 @@ function apiMiddleware({ getState }) {
         options = {},
         fetch: doFetch = fetch
       } = callAPI;
+
       const { method, credentials, bailout, types } = callAPI;
       const [requestType, successType, failureType] = normalizeTypeDescriptors(
         types
@@ -150,7 +151,6 @@ function apiMiddleware({ getState }) {
       } else {
         next(requestType);
       }
-
       try {
         // Make the API call
         var res = await doFetch(endpoint, {

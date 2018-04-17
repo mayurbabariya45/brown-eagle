@@ -53,24 +53,30 @@ export const removeProductImages = files => ({
 export const flushProductImages = () => ({
   type: a.FLUSH_PRODUCT_IMAGES
 });
-export const addProduct = (product, locale) => ({
+export const addProduct = (product, locale) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `http://35.200.219.57:8000/v1/product?ln=${locale}`,
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      body: JSON.stringify(product),
+      types: [
+        a.ADD_PRODUCT_REQUEST,
+        a.ADD_PRODUCT_SUCCESS,
+        a.ADD_PRODUCT_FAILURE
+      ]
+    }
+  });
+
+export const addProductImages = (file, id, locale) => ({
   [RSAA]: {
-    endpoint: `http://35.200.219.57:8000/v1/product?ln=${locale}`,
-    method: "POST",
-    body: JSON.stringify(product),
-    headers: { "Content-Type": "application/json" },
-    types: [a.ADD_PRODUCT_REQUEST, a.ADD_PRODUCT_SUCCESS, a.ADD_PRODUCT_FAILURE]
-  }
-});
-export const addProductImage = (file, id, locale) => ({
-  [RSAA]: {
-    endpoint: `http://35.200.219.57:8000/v1/product/image/${id}?ln=${locale}`,
+    endpoint: `http://35.200.219.57:8000/v1/product/${id}/image?ln=${locale}`,
     method: "POST",
     body: file,
     types: [
-      a.ADD_PRODUCT_IMAGE_REQUEST,
-      a.ADD_PRODUCT_IMAGE_SUCCESS,
-      a.ADD_PRODUCT_IMAGE_FAILURE
+      a.ADD_PRODUCT_IMAGES_REQUEST,
+      a.ADD_PRODUCT_IMAGES_SUCCESS,
+      a.ADD_PRODUCT_IMAGES_FAILURE
     ]
   }
 });

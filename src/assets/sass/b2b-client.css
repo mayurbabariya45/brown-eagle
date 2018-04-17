@@ -3572,6 +3572,8 @@ section {
         padding-top: 0;
         padding-bottom: 0;
         word-break: break-all; }
+        .card-profile .content .form-group .form-control-static span {
+          margin-right: 5px; }
 
 .card-tasks {
   float: left;

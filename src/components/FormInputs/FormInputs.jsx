@@ -154,6 +154,7 @@ const FieldGroup = ({
             <FormGroup validationState={validationState}>
               {label && <ControlLabel>{label}</ControlLabel>}
               <FormControl {...props} />
+              {errorText !== "Required" && <HelpBlock>{errorText}</HelpBlock>}
             </FormGroup>
           );
       }

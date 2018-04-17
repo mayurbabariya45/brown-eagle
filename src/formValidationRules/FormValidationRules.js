@@ -27,6 +27,28 @@ export const phoneNumber = (value, allValues, props) =>
   !/^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(value)
     ? props.translate("phone_number_validation")
     : undefined;
+// Year Validation
+
+export const year = (value, allValues, props) => {
+  const fullYear = new Date().getFullYear();
+  if (value.length !== 4) return props.translate("year_validation");
+  if (!value.match(/\d{4}/)) return props.translate("year_length_validation");
+  if (parseInt(value) > fullYear || parseInt(value) < 1900)
+    return props.translate("year_match_validation");
+  return true;
+};
+export const numeric = value =>
+  value && isNaN(Number(value)) ? "Must be a numeric" : undefined;
+export const areaCode = value => {
+  if (value.length !== 5) return "The area code must be 5 digits";
+  if (value && !value.match(/\d{6}/)) return "The area code must be a numeric";
+  return true;
+};
+export const price = value => {
+  if (value && !/^\d+(?:\.\d{0,2})$/.test(value))
+    return "The product price must be a numeric";
+  return true;
+};
 
 export const normalizePhone = value => {
   if (!value) {

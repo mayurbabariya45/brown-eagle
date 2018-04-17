@@ -107,9 +107,16 @@ export default (state = initialState, action) => {
       };
     // DROP_PRODUCT
     case a.DROP_PRODUCT_IMAGES:
+      console.log(action);
+      if (action.files.length < 2) {
+        return {
+          ...state,
+          productImages: [...state.productImages, action.files]
+        };
+      }
       return {
         ...state,
-        productImages: [...state.productImages, action.files]
+        productImages: [...state.productImages, ...action.files]
       };
     // DROP_DELETE_PRODUCT_IMAGES
     case a.PRODUCT_IMAGES_REMOVE:
