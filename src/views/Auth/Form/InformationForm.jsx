@@ -22,7 +22,7 @@ import {
   minLength,
   match
 } from "../../../formValidationRules/FormValidationRules";
-import { Error } from "../../../components/ErrorMessages/ErrorMessages";
+// import { Error } from "../../../components/ErrorMessages/ErrorMessages";
 import { countries } from "../../../variables/Variables";
 
 const renderField = ({ input, labels, type, inline }) => {
@@ -208,7 +208,7 @@ class InformationForm extends Component {
                   }
                 ]}
               />
-              <Error error={errors} message={message} />
+              {/* <Error error={errors} message={message} /> */}
               <FormGroup>
                 <Col smOffset={3} sm={9}>
                   <Button

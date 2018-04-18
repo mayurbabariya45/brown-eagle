@@ -8,8 +8,8 @@ import {
   FormGroup
 } from "react-bootstrap";
 import { Card } from "../../components/Card/Card";
-import CompanyInformationForm from "./form/CompanyInformationForm";
-import ContactInformationForm from "./form/ContactInformationForm";
+import CompanyInformationFormContainer from "../../containers/DashboardContainer/CompanyInformationFormContainer";
+import ContactInformationFormContainer from "../../containers/DashboardContainer/ContactInformationFormContainer";
 
 const Profile = props => {
   const {
@@ -61,9 +61,9 @@ const Profile = props => {
                   <h4 className="title">
                     {user && `${user.firstName} ${user.lastName}`}
                   </h4>
-                  <div className="actions-label">
+                  {/* <div className="actions-label">
                     <div className="action">IN</div>
-                  </div>
+                  </div> */}
                 </div>
               }
               content={
@@ -79,9 +79,12 @@ const Profile = props => {
                       <ControlLabel>Email</ControlLabel>
                       <FormControl.Static>
                         {user && user.email}{" "}
-                        <span className="label label-info">
-                          {user.isEmailVerified ? "verified" : ""}
-                        </span>
+                        {user.isEmailVerified && (
+                          <span className="label label-info">verified</span>
+                        )}
+                        {!user.isEmailVerified && (
+                          <span className="label label-warning">pending</span>
+                        )}
                       </FormControl.Static>
                     </FormGroup>
                   </Col>
@@ -121,10 +124,10 @@ const Profile = props => {
               content={
                 contactForm ? (
                   <Row>
-                    <ContactInformationForm
+                    <ContactInformationFormContainer
                       translate={translate}
-                      handleSubmit={handleSubmit}
                       loading={loading}
+                      data={user}
                       handleSubmitForm={handleSubmitForm}
                     />
                   </Row>
@@ -225,17 +228,10 @@ const Profile = props => {
               content={
                 companyForm ? (
                   <Row>
-                    <CompanyInformationForm
+                    <CompanyInformationFormContainer
                       translate={translate}
-                      handleSubmit={handleSubmit}
                       loading={loading}
                       value={value}
-                      oCountry={oCountry}
-                      rCountry={rCountry}
-                      handleSelectChange={handleSelectChange}
-                      handleChecked={handleChecked}
-                      handleRCountry={handleRCountry}
-                      handleOCountry={handleOCountry}
                       handleSubmitForm={handleSubmitForm}
                     />
                   </Row>
@@ -281,7 +277,7 @@ const Profile = props => {
                         <FormControl.Static>
                           {user.profile
                             ? _.map(user.profile.mainProducts, product => (
-                              <span
+                                <span
                                   key={product}
                                   className="label label-warning"
                                 >

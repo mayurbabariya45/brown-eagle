@@ -3574,6 +3574,8 @@ section {
         word-break: break-all; }
         .card-profile .content .form-group .form-control-static span {
           margin-right: 5px; }
+    .card-profile .content form .form-group {
+      margin-bottom: 15px; }
 
 .card-tasks {
   float: left;

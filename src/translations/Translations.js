@@ -38,6 +38,13 @@ module.exports = {
       city: "City",
       zip_code: "Area Code",
       label_address: "Same as registered address",
+
+      // Confirm Modal
+      confirm_title: "Confirm",
+      confirm_logout: "Are you sure you want to logout session?",
+      confirm_button_yes: "Yes",
+      confirm_cancelText: "Cancel",
+
       // verification email
       go_to_sign_in: "Login",
       verification_msg: "Your Email Verification has been successful.",
@@ -216,6 +223,7 @@ module.exports = {
       year_length_validation: "The Year must be 4 digits",
       year_match_validation:
         "The year should be in range 1920 to the current year",
+      url_validation: "The url is not a valid",
 
       // My account
       a_billing_address: "Billing Address",
@@ -337,6 +345,13 @@ module.exports = {
       city: "Ville",
       zip_code: "Indicatif régional",
       label_address: "Identique à l'adresse enregistrée",
+
+      // Confirm Modal
+      confirm_title: "Confirm",
+      confirm_logout: "Are you sure you want to logout session?",
+      confirm_button_yes: "Yes",
+      confirm_cancelText: "Cancel",
+
       // verification email
       go_to_sign_in: "Aller à la connexion",
       verification_msg: "Votre vérification par courriel a réussi.",
@@ -564,6 +579,13 @@ module.exports = {
       city: "Città",
       zip_code: "Prefisso",
       label_address: "Come l'indirizzo registrato",
+
+      // Confirm Modal
+      confirm_title: "Confirm",
+      confirm_logout: "Are you sure you want to logout session?",
+      confirm_button_yes: "Yes",
+      confirm_cancelText: "Cancel",
+
       // verification email
       go_to_sign_in: "Vai per accedere",
       verification_msg: "La tua verifica e-mail ha avuto successo.",
@@ -861,6 +883,13 @@ module.exports = {
       city: "Ciudad",
       zip_code: "Codigo de AREA",
       label_address: "Igual que la dirección registrada",
+
+      // Confirm Modal
+      confirm_title: "Confirm",
+      confirm_logout: "Are you sure you want to logout session?",
+      confirm_button_yes: "Yes",
+      confirm_cancelText: "Cancel",
+
       // verification email
       go_to_sign_in: "Ir a Iniciar sesión",
       verification_msg:
@@ -1128,6 +1157,13 @@ module.exports = {
       city: "stad",
       zip_code: "Netnummer",
       label_address: "Hetzelfde als geregistreerd adres",
+
+      // Confirm Modal
+      confirm_title: "Confirm",
+      confirm_logout: "Are you sure you want to logout session?",
+      confirm_button_yes: "Yes",
+      confirm_cancelText: "Cancel",
+
       // verification email
       go_to_sign_in: "Ga naar Aanmelden",
       verification_msg: "Uw e-mailverificatie is geslaagd.",

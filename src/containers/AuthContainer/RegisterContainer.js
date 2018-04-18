@@ -14,13 +14,7 @@ const mapStateToProps = state => ({
 const mergeProps = (state, actions, ownProps) => ({
   ...state,
   ...actions,
-  ...ownProps,
-  registerUser: (value, locale) => {
-    actions.registerUser(value, locale).then(data => {
-      const token = data.payload.id;
-      actions.verifyEmail({ id: token });
-    });
-  }
+  ...ownProps
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(

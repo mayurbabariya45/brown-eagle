@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
+import { Confirm } from "../../components/Confirm/Confirm";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import Profile from "./Profile";
@@ -11,17 +12,12 @@ class Account extends Component {
     super(props);
     this.state = {};
   }
-
+  componentWillMount() {
+    const { removeAll } = this.props;
+    removeAll();
+  }
   render() {
-    const {
-      translate,
-      logout,
-      history,
-      loading,
-      handleSubmit,
-      message,
-      success
-    } = this.props;
+    const { translate, logout, history, showNotification } = this.props;
     const { user } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
     return (
@@ -38,6 +34,7 @@ class Account extends Component {
                         <AvatarContainer
                           avatar={avatar}
                           translate={translate}
+                          showNotification={showNotification}
                           id={user ? user.id : ""}
                           name={user && `${user.firstName} ${user.lastName}`}
                         />
@@ -53,16 +50,22 @@ class Account extends Component {
                           <i className="pe-7s-lock" />
                           {translate("d_change_password")}
                         </NavItem>
-                        <NavItem
-                          onClick={e => {
-                            e.preventDefault();
+                        <Confirm
+                          onConfirm={() => {
                             logout();
                             history.push("/");
                           }}
+                          title={translate("confirm_title")}
+                          body={translate("confirm_logout")}
+                          confirmBSStyle="danger"
+                          confirmText={translate("confirm_button_yes")}
+                          cancelText={translate("confirm_cancelText")}
                         >
-                          <i className="pe-7s-users" />
-                          {translate("logout")}
-                        </NavItem>
+                          <NavItem>
+                            <i className="pe-7s-users" />
+                            {translate("logout")}
+                          </NavItem>
+                        </Confirm>
                       </Nav>
                     </div>
                   </div>
@@ -75,6 +78,7 @@ class Account extends Component {
                     <Tab.Pane eventKey="second">
                       <PasswordContainer
                         translate={translate}
+                        showNotification={showNotification}
                         hanldePasswordForm={this.hanldePasswordForm}
                       />
                     </Tab.Pane>
@@ -89,6 +93,11 @@ class Account extends Component {
   }
 }
 
-Account.propTypes = {};
+Account.propTypes = {
+  translate: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired,
+  removeAll: PropTypes.func.isRequired
+};
 
 export default Account;

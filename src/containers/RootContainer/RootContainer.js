@@ -2,7 +2,6 @@ import React from "react";
 import { Provider } from "react-redux";
 import { HashRouter, Switch } from "react-router-dom";
 import { IntlProvider } from "react-redux-multilingual";
-import { ToastContainer } from "react-toastify";
 import configureStore from "../../store";
 import DevToolsContainer from "../DevToolsContainer/DevToolsContainer";
 import AppContainer from "../AppContainer/AppContainer";
@@ -19,7 +18,6 @@ export default () => (
             <AppContainer />
           </Switch>
         </HashRouter>
-        <ToastContainer position="top-right" />
         {process.env.NODE_ENV !== "production" && <DevToolsContainer />}
       </div>
     </IntlProvider>

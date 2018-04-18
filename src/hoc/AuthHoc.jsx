@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Notifications from "react-notification-system-redux";
 import * as a from "../actions/Auth/Auth_actions";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import { style } from "../variables/Variables";
 
 export default function AuthHoc(WrappedComponent, passedProps) {
   class WrapperComponent extends Component {
@@ -11,11 +13,18 @@ export default function AuthHoc(WrappedComponent, passedProps) {
       this.state = {};
     }
     componentWillMount() {
-      const { checkAuthStatus, getUserProfile, auth, history } = this.props;
+      const {
+        checkAuthStatus,
+        getUserProfile,
+        auth,
+        history,
+        removeAll
+      } = this.props;
       const { locale, type } = passedProps;
       const token = localStorage.getItem("webAuthToken");
       const id = localStorage.getItem("webAuthId");
       const { user } = auth;
+
       if (user.length < 1) {
         if (token && id) {
           checkAuthStatus(token, id, locale).then(() => {
@@ -24,25 +33,36 @@ export default function AuthHoc(WrappedComponent, passedProps) {
                 return true;
               }
               history.push("/login");
-              return true;
+              return false;
             });
           });
         } else {
           history.push("/login");
         }
+      } else {
+        if (user.role === type) {
+          return true;
+        }
+        history.goBack();
+        return false;
       }
+
+      return false;
     }
     render() {
+      const { notifications } = this.props;
       const props = Object.assign({}, this.props, passedProps);
       if (passedProps.header) {
         return (
           <div className="main-panel">
+            <Notifications notifications={notifications} style={style} />
             <WrappedComponent {...props} />
           </div>
         );
       }
       return (
         <div className="main-panel">
+          <Notifications notifications={notifications} style={style} />
           <Header {...props} />
           <WrappedComponent {...props} />
           <Footer {...props} />
@@ -54,10 +74,14 @@ export default function AuthHoc(WrappedComponent, passedProps) {
     logout: () => dispatch(a.logout()),
     checkAuthStatus: (token, id, locale) =>
       dispatch(a.checkAuthStatus(token, id, locale)),
-    getUserProfile: (token, id) => dispatch(a.getUserProfile(token, id))
+    getUserProfile: (token, id) => dispatch(a.getUserProfile(token, id)),
+    showNotification: (title, message, fail) =>
+      dispatch(a.showNotification(title, message, fail)),
+    removeAll: () => dispatch(Notifications.removeAll())
   });
   const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    notifications: state.notifications
   });
   const mergeProps = (state, actions, ownProps) => ({
     ...state,

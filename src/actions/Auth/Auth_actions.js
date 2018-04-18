@@ -1,3 +1,4 @@
+import { success, error } from "react-notification-system-redux";
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { ActionTypes as a } from "../../constants/Auth/Auth_action_type";
 import {
@@ -6,6 +7,37 @@ import {
   Facebookprovider
 } from "../../config/firebase_config";
 
+const notificationOpts = {
+  title: "Sample Notification",
+  message: "",
+  position: "bc",
+  autoDismiss: 5
+};
+
+/**
+ * Show growl notification
+ *
+ * @returns
+ */
+export const showNotification = (title, message, fail) => dispatch => {
+  if (fail) {
+    dispatch(
+      error({
+        ...notificationOpts,
+        title: title || "Error",
+        message
+      })
+    );
+  } else {
+    dispatch(
+      success({
+        ...notificationOpts,
+        title: title || "Success",
+        message
+      })
+    );
+  }
+};
 export const toggleLoginForm = () => ({
   type: a.TOGGLE_LOGIN_FORM
 });
@@ -33,7 +65,7 @@ export const login = (value, locale) => ({
   }
 });
 
-export const checkUsername = (username, locale) => dispatch => {
+export const checkUsername = (username, locale) => dispatch =>
   dispatch({
     [RSAA]: {
       endpoint: `http://35.200.219.57:8000/v1/auth/checkusername/${username}?ln=${locale}`,
@@ -49,7 +81,6 @@ export const checkUsername = (username, locale) => dispatch => {
       ]
     }
   });
-};
 export const socialAccessToken = (token, provider) => ({
   [RSAA]: {
     endpoint: `http://35.200.219.57:8000/v1/auth/${provider}`,
@@ -181,8 +212,8 @@ export const logout = () => dispatch =>
 
 export const changePassword = value => ({
   [RSAA]: {
-    endpoint: "http://35.200.219.57:8000/v1/auth/reset-password",
-    method: "POST",
+    endpoint: `http://35.200.219.57:8000/v1/users/${value.id}`,
+    method: "PATCH",
     body: JSON.stringify(value),
     headers: { "Content-Type": "application/json" },
     types: [

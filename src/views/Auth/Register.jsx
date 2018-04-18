@@ -13,14 +13,60 @@ class Register extends Component {
     const {
       checkUsername,
       registerUser,
+      verifyEmail,
       formData,
       activeTabs,
-      locale
+      locale,
+      showNotification
     } = this.props;
     if (activeTabs === 1) {
-      checkUsername(value.email, locale);
+      checkUsername(value.email, locale).then(response => {
+        if (response.type === "USERNAME_FAILURE") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-shield" />,
+            <div>{response.payload.response.message}</div>,
+            true
+          );
+        } else if (response.type === "USERNAME_SUCCESS") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-check" />,
+            <div>available username.</div>,
+            false
+          );
+        }
+      });
     } else if (activeTabs === 2) {
-      registerUser({ ...value, ...formData }, locale);
+      registerUser({ ...value, ...formData }, locale).then(response => {
+        const token = response.payload.id;
+        if (response.type === "REGISTER_FAILURE") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-shield" />,
+            <div>{response.payload.response.message}</div>,
+            true
+          );
+        } else if (response.type === "REGISTER_SUCCESS") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-check" />,
+            <div>{response.payload.message}</div>,
+            false
+          );
+          verifyEmail({ id: token }).then(data => {
+            if (data.type === "VERIFY_EMAIL_FAILURE") {
+              showNotification(
+                <span data-notify="icon" className="pe-7s-shield" />,
+                <div>{data.payload.response.message}</div>,
+                true
+              );
+            } else if (response.type === "VERIFY_EMAIL_SUCCESS") {
+              showNotification(
+                <span data-notify="icon" className="pe-7s-check" />,
+                <div>{data.payload.message}</div>,
+                false
+              );
+            }
+          });
+        }
+      });
     }
   }
   render() {
@@ -47,6 +93,7 @@ Register.propTypes = {
   registerSuccess: PropTypes.bool.isRequired,
   activeTabs: PropTypes.number.isRequired,
   registerUser: PropTypes.func.isRequired,
+  verifyEmail: PropTypes.func.isRequired,
   formData: PropTypes.object.isRequired
 };
 export default Register;

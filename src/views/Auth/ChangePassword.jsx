@@ -9,7 +9,6 @@ import {
   match,
   passwordLength
 } from "../../formValidationRules/FormValidationRules";
-import Notification from "../../components/Notification/Notification";
 import Button from "../../elements/CustomButton/CustomButton";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 
@@ -26,7 +25,7 @@ class ChangePassword extends Component {
   }
 
   handleSubmit(value) {
-    const { changePassword, password, history } = this.props;
+    const { changePassword, showNotification, password } = this.props;
     const obj = Object.assign(
       {},
       {
@@ -34,8 +33,19 @@ class ChangePassword extends Component {
         password: value.password
       }
     );
-    changePassword(obj);
-    history.push("/login");
+    changePassword(obj).then(response => {
+      if (response.type === "PASSWORD_CHANGE_FAILURE") {
+        return false;
+      }
+      if (response.type === "PASSWORD_CHANGE_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Password has been changed successfully.</div>,
+          false
+        );
+      }
+      return false;
+    });
   }
   render() {
     const { translate, handleSubmit, invalid } = this.props;
@@ -60,7 +70,6 @@ class ChangePassword extends Component {
                   content={
                     <Row>
                       <Col md={12}>
-                        <Notification success={success} message={message} />
                         <Form onSubmit={handleSubmit(this.handleSubmit)}>
                           <FormInputs
                             proprieties={[
@@ -90,7 +99,7 @@ class ChangePassword extends Component {
                                   "r_c_password_placeholder"
                                 ),
                                 name: "c_password",
-                                validate: [required, match("password")]
+                                validate: [required]
                               }
                             ]}
                           />

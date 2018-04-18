@@ -15,25 +15,42 @@ class Login extends Component {
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
   }
   componentWillMount() {
-    const { flushState } = this.props;
-    flushState();
-  }
-  componentWillUpdate(nextProps) {
-    const { history, success, user } = nextProps;
-    if (success) {
-      if (user) {
-        const { role } = user;
-        if (role === "seller") {
-          history.push("/dashboard");
-        } else {
-          history.push("/");
-        }
+    const { flushState, history, user } = this.props;
+    if (user) {
+      const { role } = user;
+      if (role === "seller") {
+        history.push("/dashboard");
+      } else if (role === "buyer") {
+        history.push("/");
       }
     }
+    flushState();
   }
   hanldeSubmitForm(value) {
-    const { login, locale } = this.props;
-    login(value, locale);
+    const { login, locale, showNotification, history } = this.props;
+    login(value, locale).then(response => {
+      if (response.type === "LOGIN_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{response.payload.response.message}</div>,
+          true
+        );
+      } else if (response.type === "LOGIN_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Redirecting....</div>,
+          false
+        );
+        const data = response.payload.user;
+        if (data) {
+          if (data.role === "seller") {
+            setTimeout(() => history.push("/dashboard"), 2000);
+          } else if (data.role === "buyer") {
+            setTimeout(() => history.push("/"), 2000);
+          }
+        }
+      }
+    });
   }
   handleSocialLogin(provider) {
     const { socialLogin } = this.props;
@@ -81,6 +98,7 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
   loginForm: PropTypes.bool.isRequired,
   socialLogin: PropTypes.func.isRequired,
-  flushState: PropTypes.func.isRequired
+  flushState: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired
 };
 export default Login;

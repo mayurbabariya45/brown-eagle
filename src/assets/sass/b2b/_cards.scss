@@ -378,9 +378,14 @@
         padding-top: 0;
         padding-bottom: 0;
         word-break: break-all;
-        span{
+        span {
           margin-right: 5px;
         }
+      }
+    }
+    form {
+      .form-group {
+        margin-bottom: 15px;
       }
     }
   }

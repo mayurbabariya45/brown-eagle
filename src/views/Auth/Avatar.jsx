@@ -9,20 +9,36 @@ class Avatar extends Component {
     this.onChangeFile = this.onChangeFile.bind(this);
   }
   onChangeFile(event) {
-    const { updateAvatar, id } = this.props;
+    const { updateAvatar, showNotification, id } = this.props;
     event.stopPropagation();
     event.preventDefault();
     const file = event.target.files[0];
-    this.setState({ picture: window.URL.createObjectURL(file) });
-    const form = new FormData();
-    form.append("image", file);
-    updateAvatar(form, id);
+    if (file) {
+      this.setState({ picture: window.URL.createObjectURL(file) });
+      const form = new FormData();
+      form.append("image", file);
+      updateAvatar(form, id).then(payload => {
+        if (payload.type === "UPDATE_AVATAR_SUCCESS") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-check" />,
+            <div>Profile has been changed successfully.</div>,
+            false
+          );
+        } else {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-close-circle" />,
+            <div>Profile has not been changed.</div>,
+            true
+          );
+        }
+      });
+    }
   }
   openFileUploader() {
     this.profileUploader.click();
   }
   render() {
-    const { name, avatar, translate } = this.props;
+    const { name, avatar, translate, role } = this.props;
     return (
       <div className="author" onClick={this.openFileUploader}>
         <div className="avatar border-gray">
@@ -47,6 +63,9 @@ class Avatar extends Component {
           />
         </div>
         <h4 className="title">{name}</h4>
+        <h6>
+          {role === "seller" ? translate("r_supplier") : translate("r_buyer")}
+        </h6>
       </div>
     );
   }
@@ -54,6 +73,8 @@ class Avatar extends Component {
 
 Avatar.propTypes = {
   name: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired
+  avatar: PropTypes.string.isRequired,
+  translate: PropTypes.func.isRequired,
+  role: PropTypes.string.isRequired
 };
 export default Avatar;

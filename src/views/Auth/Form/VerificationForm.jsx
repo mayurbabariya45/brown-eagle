@@ -9,7 +9,7 @@ import {
   required,
   email
 } from "../../../formValidationRules/FormValidationRules";
-import { Error } from "../../../components/ErrorMessages/ErrorMessages";
+// import { Error } from "../../../components/ErrorMessages/ErrorMessages";
 
 class VerificationForm extends Component {
   constructor(props) {
@@ -76,7 +76,7 @@ class VerificationForm extends Component {
                   </FormInputs>
                 </Col>
               </FormGroup>
-              <Error error={errors} message={message} />
+              {/* <Error error={errors} message={message} /> */}
               <FormGroup>
                 <Col smOffset={3} sm={9}>
                   <Button

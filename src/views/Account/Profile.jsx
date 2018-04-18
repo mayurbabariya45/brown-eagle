@@ -43,9 +43,12 @@ const Profile = props => {
                       <ControlLabel>Email</ControlLabel>
                       <FormControl.Static>
                         {user && user.email}{" "}
-                        <span className="label label-info">
-                          {user.isEmailVerified ? "verified" : ""}
-                        </span>
+                        {user.isEmailVerified && (
+                          <span className="label label-info">verified</span>
+                        )}
+                        {!user.isEmailVerified && (
+                          <span className="label label-warning">pending</span>
+                        )}
                       </FormControl.Static>
                     </FormGroup>
                   </Col>

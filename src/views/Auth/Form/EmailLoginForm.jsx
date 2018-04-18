@@ -89,7 +89,7 @@ class EmailLoginForm extends Component {
                     {translate("l_detail")}
                   </Link>
                 </FormInputs>
-                <Error error={errors} message={message} />
+                {/* <Error error={errors} message={message} /> */}
                 <Row>
                   <Col lg={12} md={12} sm={12} xs={12}>
                     <Button block radius fill bsStyle="warning" type="submit">
