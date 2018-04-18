@@ -8,10 +8,7 @@ import { Card } from "../../components/Card/Card";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import Button from "../../elements/CustomButton/CustomButton";
 import { required, email } from "../../formValidationRules/FormValidationRules";
-import {
-  Error,
-  AlertSuccess
-} from "../../components/ErrorMessages/ErrorMessages";
+
 import Background from "../../static/media/full-screen-image.jpg";
 import Logo from "../../assets/img/logo.png";
 
@@ -22,22 +19,30 @@ class ForgotPassword extends Component {
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
   componentWillMount() {
-    const { flushState } = this.props;
+    const { flushState, removeAll } = this.props;
     flushState();
+    removeAll();
   }
   hanldeSubmitForm(value) {
-    const { resetPasswordEmail } = this.props;
-    resetPasswordEmail(value);
+    const { resetPasswordEmail, showNotification } = this.props;
+    resetPasswordEmail(value).then(response => {
+      if (response.type === "PASSWORD_RESET_EMAIL_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{response.payload.response.message}</div>,
+          true
+        );
+      } else if (response.type === "PASSWORD_RESET_EMAIL_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{response.payload.message}</div>,
+          false
+        );
+      }
+    });
   }
   render() {
-    const {
-      translate,
-      handleSubmit,
-      loading,
-      errors,
-      success,
-      message
-    } = this.props;
+    const { translate, handleSubmit, loading, success } = this.props;
     return (
       <div className="wrapper wrapper-full-page">
         <div className="full-page login-page has-image">
@@ -51,7 +56,6 @@ class ForgotPassword extends Component {
                     </Link>
                   </div>
                   <div className="form login-form">
-                    <AlertSuccess success={success} message={message} />
                     <BlockUi tag="div" blocking={loading}>
                       <Card
                         className="card-login"
@@ -72,7 +76,7 @@ class ForgotPassword extends Component {
                                 }
                               ]}
                             />
-                            <Error error={errors} message={message} />
+
                             <Row>
                               <Col lg={12} md={12} sm={12} xs={12}>
                                 <Button
@@ -113,10 +117,10 @@ ForgotPassword.propTypes = {
   resetPasswordEmail: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  errors: PropTypes.bool.isRequired,
-  message: PropTypes.string
+  removeAll: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired,
+  flushState: PropTypes.func.isRequired,
+  success: PropTypes.bool.isRequired
 };
-ForgotPassword.defaultProps = {
-  message: ""
-};
+
 export default ForgotPassword;

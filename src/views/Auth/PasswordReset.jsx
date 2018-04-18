@@ -12,7 +12,6 @@ import {
   match,
   passwordLength
 } from "../../formValidationRules/FormValidationRules";
-import { Error } from "../../components/ErrorMessages/ErrorMessages";
 import Background from "../../static/media/full-screen-image.jpg";
 import Logo from "../../assets/img/logo.png";
 
@@ -23,16 +22,31 @@ class PasswordReset extends Component {
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
   }
   componentWillMount() {
-    const { location, history } = this.props;
+    const { location, history, removeAll } = this.props;
     if (!location.search) {
       history.push("/login");
     }
+    removeAll();
   }
   hanldeSubmitForm({ password }) {
-    const { resetPassword, location, locale } = this.props;
+    const { resetPassword, location, locale, showNotification } = this.props;
     const id = location.search.split("?key=").pop();
     const object = Object.assign({}, { password, id });
-    resetPassword(object, locale);
+    resetPassword(object, locale).then(response => {
+      if (response.type === "PASSWORD_RESET_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{response.payload.response.message}</div>,
+          true
+        );
+      } else if (response.type === "PASSWORD_RESET_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{response.payload.message}</div>,
+          false
+        );
+      }
+    });
   }
   render() {
     const {
@@ -89,11 +103,11 @@ class PasswordReset extends Component {
                                     "r_c_password_placeholder"
                                   ),
                                   name: "c_password",
-                                  validate: [required, match("password")]
+                                  validate: [required]
                                 }
                               ]}
                             />
-                            <Error error={errors} message={message} />
+
                             <Row>
                               <Col lg={12} md={12} sm={12} xs={12}>
                                 {errors ? (
@@ -145,7 +159,10 @@ PasswordReset.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   errors: PropTypes.bool.isRequired,
   message: PropTypes.string,
-  invalid: PropTypes.bool.isRequired
+  invalid: PropTypes.bool.isRequired,
+  locale: PropTypes.string.isRequired,
+  showNotification: PropTypes.func.isRequired,
+  removeAll: PropTypes.func.isRequired
 };
 PasswordReset.defaultProps = {
   message: ""

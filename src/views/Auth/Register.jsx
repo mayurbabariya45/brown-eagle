@@ -60,7 +60,7 @@ class Register extends Component {
             } else if (response.type === "VERIFY_EMAIL_SUCCESS") {
               showNotification(
                 <span data-notify="icon" className="pe-7s-check" />,
-                <div>{data.payload.message}</div>,
+                <div>confirmation email has been sent your email address</div>,
                 false
               );
             }

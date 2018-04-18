@@ -36,7 +36,8 @@ export default function PublicHoc(WrappedComponent, passedProps) {
   const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(a.logout()),
     showNotification: (title, message, fail) =>
-      dispatch(a.showNotification(title, message, fail))
+      dispatch(a.showNotification(title, message, fail)),
+    removeAll: () => dispatch(Notifications.removeAll())
   });
   const mapStateToProps = state => ({
     auth: state.auth,
