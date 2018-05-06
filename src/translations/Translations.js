@@ -41,7 +41,9 @@ module.exports = {
 
       // Confirm Modal
       confirm_title: "Confirm",
+      confirm_delete_product_title: "Delete Product",
       confirm_logout: "Are you sure you want to logout session?",
+      confirm_delete_product: "Are you sure you want to delete this product?",
       confirm_button_yes: "Yes",
       confirm_cancelText: "Cancel",
 
@@ -99,7 +101,7 @@ module.exports = {
 
       // Add product
       a_new_product: "Display a New Product",
-      a_tab_1: "Select Language Site & Category",
+      a_tab_1: "Select a Category",
       a_tab_2: "Fill in Product information",
       a_tab_3: "Waiting for approved",
       a_category: "Select Category",
@@ -123,7 +125,7 @@ module.exports = {
       a_product_name: "* Product Name",
       a_product_keyword: "* Product Keyword",
       a_product_price: "* Product Price",
-      a_product_quantity: "* Product Quantity",
+      a_product_quantity: "* Minimum Quantity",
       a_product_group: "Product Group",
       a_brake: "Brake (F/R)",
       a_model_number: "Model Number",
@@ -229,6 +231,11 @@ module.exports = {
       a_billing_address: "Billing Address",
       a_shipping_address: "Shipping Address",
 
+      // Products
+
+      availability: "Availability:",
+      in_stock: "In stock",
+      out_of_stock: "Out Of Stock",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",
@@ -440,6 +447,7 @@ module.exports = {
       year_length_validation: "une année doit avoir 4 chiffres",
       year_match_validation:
         "L'année devrait être comprise entre 1920 et l'année en cours",
+      url_validation: "L'URL n'est pas valide",
 
       // My account
       a_billing_address: "Adresse de facturation",
@@ -760,6 +768,7 @@ module.exports = {
       year_length_validation: "L'anno deve essere di 4 cifre",
       year_match_validation:
         "L'anno dovrebbe essere compreso tra il 1920 e l'anno in corso",
+      url_validation: "L'URL non è valido",
 
       // My account
       a_billing_address: "Indirizzo Di Fatturazione",
@@ -1049,6 +1058,7 @@ module.exports = {
       year_length_validation: "El año debe tener 4 dígitos",
       year_match_validation:
         "El año debería estar en el rango de 1920 al año actual",
+      url_validation: "La url no es válida",
 
       // My account
       a_billing_address: "Dirección de Envio",
@@ -1340,6 +1350,7 @@ module.exports = {
       year_length_validation: "Het jaar moet 4 cijfers bevatten",
       year_match_validation:
         "Het jaar zou in het bereik van 1920 tot het huidige jaar moeten liggen",
+      url_validation: "De URL is niet geldig",
 
       // My account
       a_billing_address: "Facturatie adres",

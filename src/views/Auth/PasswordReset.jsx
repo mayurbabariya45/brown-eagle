@@ -29,7 +29,13 @@ class PasswordReset extends Component {
     removeAll();
   }
   hanldeSubmitForm({ password }) {
-    const { resetPassword, location, locale, showNotification } = this.props;
+    const {
+      resetPassword,
+      location,
+      locale,
+      showNotification,
+      history
+    } = this.props;
     const id = location.search.split("?key=").pop();
     const object = Object.assign({}, { password, id });
     resetPassword(object, locale).then(response => {
@@ -45,6 +51,9 @@ class PasswordReset extends Component {
           <div>{response.payload.message}</div>,
           false
         );
+        setTimeout(() => {
+          history.push("/login");
+        }, 2000);
       }
     });
   }

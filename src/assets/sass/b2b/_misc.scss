@@ -501,3 +501,48 @@ section {
   display: flex;
   align-items: center;
 }
+.pac-container {
+  z-index: 1119;
+}
+.container-loader {
+  height: 250px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  .loader {
+    position: absolute;
+    top: 43%;
+    z-index: 1;
+    font-size: 18px;
+    .fa {
+      float: left;
+      margin-right: 10px;
+      line-height: 36px;
+      color: #000;
+    }
+    h5 {
+      float: left;
+      color: #000;
+    }
+  }
+}
+.dashboard-products {
+  .section-header {
+    float: left;
+    width: 100%;
+    .title {
+      float: left;
+      padding-top: 10px;
+    }
+    .product-add-button {
+      float: right;
+      a {
+        color: $white-color;
+        text-transform: capitalize;
+        &:hover {
+          color: $warning-color;
+        }
+      }
+    }
+  }
+}

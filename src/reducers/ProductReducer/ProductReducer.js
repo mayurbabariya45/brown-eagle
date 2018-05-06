@@ -107,7 +107,6 @@ export default (state = initialState, action) => {
       };
     // DROP_PRODUCT
     case a.DROP_PRODUCT_IMAGES:
-      console.log(action);
       if (action.files.length < 2) {
         return {
           ...state,
@@ -143,7 +142,8 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: false,
-        success: true
+        success: true,
+        activeTabs: 3
       };
     case a.ADD_PRODUCT_FAILURE:
       return {

@@ -2,14 +2,14 @@ import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Col, Row, Form, FormGroup, ControlLabel } from "react-bootstrap";
-import { url, date, numericality, length } from "redux-form-validators";
+import { date, numericality, format } from "redux-form-validators";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import Select from "react-select";
-import SelectBox from "../../../elements/CustomSelect/CustomSelect";
+import Modal from "../../../components/Modal/Modal";
+import GoogleMap from "../../../components/Map/Map";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
-import { countries, style } from "../../../variables/Variables";
 import { required } from "../../../formValidationRules/FormValidationRules";
 
 export const products = [
@@ -24,12 +24,6 @@ class CompanyInformationForm extends Component {
     super(props);
     const data = props.auth.user;
     const mainProduct = data.profile;
-    const rCountry = !_.isEmpty(data)
-      ? _.find(countries, ["label", data.profile.registeredAddress.country])
-      : {};
-    const oCountry = !_.isEmpty(data)
-      ? _.find(countries, ["label", data.profile.operationalAddress.country])
-      : {};
     this.state = {
       value: mainProduct
         ? _.map(mainProduct.mainProducts, product => ({
@@ -37,31 +31,69 @@ class CompanyInformationForm extends Component {
             label: product
           }))
         : [],
-      rCountry: {
-        ...rCountry
-      },
-      oCountry: {
-        ...oCountry
-      }
+      sameAddress: false,
+      showMapModal: false,
+      activeInput: "registeredAddress",
+      loading: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleChecked = this.handleChecked.bind(this);
-    this.handleRCountry = this.handleRCountry.bind(this);
-    this.handleOCountry = this.handleOCountry.bind(this);
+    this.handleInputFocus = this.handleInputFocus.bind(this);
+    this.handleHideMap = this.handleHideMap.bind(this);
+    this.onDraggableChanged = this.onDraggableChanged.bind(this);
+  }
+
+  onDraggableChanged(lat, lng) {
+    const { getLocation } = this.props;
+    getLocation(lat, lng, this.state.activeInput);
   }
   handleSelectChange(value) {
     this.setState({ value });
   }
-  handleRCountry(value) {
-    const { changeFieldValue } = this.props;
-    changeFieldValue("r_country", value.label);
-    this.setState({ rCountry: value });
+
+  handleInputFocus(event) {
+    const { locationLatLng } = this.state;
+    this.setState({
+      showMapModal: true,
+      loading: true,
+      activeInput: event.target.name
+    });
+    event.target.blur();
+    this.props.handleInputMap(event.target.name);
+    if (!_.isEmpty(locationLatLng)) {
+      this.setState({ loading: false });
+      return false;
+    }
+    navigator.geolocation.getCurrentPosition(
+      p => {
+        const LatLngBounds = Object.assign(
+          {},
+          {
+            lat: p.coords.latitude,
+            lng: p.coords.longitude
+          }
+        );
+        this.props.getLocation(
+          p.coords.latitude,
+          p.coords.longitude,
+          event.target.name
+        );
+        this.setState({ locationLatLng: LatLngBounds, loading: false });
+      },
+      () => {
+        const LatLngBounds = {
+          lat: 19.230526955858,
+          lng: 72.9730803
+        };
+        this.props.getLocation(19.230526955858, 72.9730803, event.target.name);
+        this.setState({ locationLatLng: LatLngBounds, loading: false });
+      }
+    );
+    return false;
   }
-  handleOCountry(value) {
-    const { changeFieldValue } = this.props;
-    changeFieldValue("o_country", value.label);
-    this.setState({ oCountry: value });
+  handleHideMap() {
+    this.setState({ showMapModal: false });
   }
   handleChecked(e, value) {
     const { changeFieldValue, companyInformationForm } = this.props;
@@ -71,23 +103,20 @@ class CompanyInformationForm extends Component {
       r_area_code,
       r_country
     } = companyInformationForm;
-    let country = this.state.rCountry;
-    if (value) {
+    if (this.state.sameAddress) {
       r_city = "";
       registeredAddress = "";
       r_area_code = "";
       r_country = "";
-      country = {};
     }
+    this.setState({ sameAddress: !this.state.sameAddress });
     changeFieldValue("o_city", r_city);
     changeFieldValue("operationalAddress", registeredAddress);
     changeFieldValue("o_area_code", r_area_code);
     changeFieldValue("o_country", r_country);
-    this.setState({ oCountry: country });
   }
   handleSubmit(values) {
     const { handleSubmitForm } = this.props;
-
     const data = {
       id: values.id,
       profile: {
@@ -175,10 +204,13 @@ class CompanyInformationForm extends Component {
                     type: "text",
                     bsClass: "form-control form-control-simple",
                     name: "website",
-                    validate: url({
-                      message: translate("url_validation"),
-                      allowBlank: true
-                    })
+                    validate: [
+                      format({
+                        with: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+                        message: translate("url_validation"),
+                        allowBlank: true
+                      })
+                    ]
                   }
                 ]}
               />
@@ -205,14 +237,14 @@ class CompanyInformationForm extends Component {
                   {
                     label: translate("r_address"),
                     type: "text",
-                    componentClass: "textarea",
                     bsClass: "form-control form-control-simple",
                     name: "registeredAddress",
+                    onFocus: this.handleInputFocus,
                     validate: [required]
                   }
                 ]}
               />
-              <Row>
+              {/* <Row>
                 <Col md={12}>
                   <FormGroup>
                     <SelectBox
@@ -223,7 +255,20 @@ class CompanyInformationForm extends Component {
                     />
                   </FormGroup>
                 </Col>
-              </Row>
+              </Row> */}
+              <FormInputs
+                ncols={["col-md-12"]}
+                proprieties={[
+                  {
+                    type: "text",
+                    bsClass: "form-control form-control-simple",
+                    placeholder: "Country",
+                    name: "r_country",
+                    disabled: true,
+                    validate: [required]
+                  }
+                ]}
+              />
               <FormInputs
                 ncols={["col-md-12"]}
                 proprieties={[
@@ -232,6 +277,7 @@ class CompanyInformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     placeholder: translate("city"),
                     name: "r_city",
+                    disabled: true,
                     validate: [required]
                   }
                 ]}
@@ -244,11 +290,8 @@ class CompanyInformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     placeholder: translate("zip_code"),
                     name: "r_area_code",
-                    validate: [
-                      required,
-                      numericality({ int: true }),
-                      length({ min: 6, allowBlank: true })
-                    ]
+                    disabled: true,
+                    validate: [required]
                   }
                 ]}
               />
@@ -259,9 +302,10 @@ class CompanyInformationForm extends Component {
                     inputGroup: "label_with_checkbox",
                     label: translate("o_address"),
                     type: "text",
-                    componentClass: "textarea",
                     bsClass: "form-control form-control-simple",
                     name: "operationalAddress",
+                    onFocus: this.handleInputFocus,
+                    disabled: this.state.sameAddress,
                     handleChecked: this.handleChecked,
                     validate: [required]
                   }
@@ -269,7 +313,7 @@ class CompanyInformationForm extends Component {
               >
                 {translate("label_address")}
               </FormInputs>
-              <Row>
+              {/* <Row>
                 <Col md={12}>
                   <FormGroup>
                     <SelectBox
@@ -280,7 +324,20 @@ class CompanyInformationForm extends Component {
                     />
                   </FormGroup>
                 </Col>
-              </Row>
+              </Row> */}
+              <FormInputs
+                ncols={["col-md-12"]}
+                proprieties={[
+                  {
+                    type: "text",
+                    bsClass: "form-control form-control-simple",
+                    placeholder: "Country",
+                    name: "o_country",
+                    disabled: true,
+                    validate: [required]
+                  }
+                ]}
+              />
               <FormInputs
                 ncols={["col-md-12"]}
                 proprieties={[
@@ -289,6 +346,7 @@ class CompanyInformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     placeholder: translate("city"),
                     name: "o_city",
+                    disabled: true,
                     validate: [required]
                   }
                 ]}
@@ -301,11 +359,8 @@ class CompanyInformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     placeholder: translate("zip_code"),
                     name: "o_area_code",
-                    validate: [
-                      required,
-                      numericality({ int: true }),
-                      length({ min: 6, allowBlank: true })
-                    ]
+                    disabled: true,
+                    validate: [required]
                   }
                 ]}
               />
@@ -351,6 +406,29 @@ class CompanyInformationForm extends Component {
             </Form>
           </Col>
         </BlockUi>
+        <Modal
+          className="map-modal"
+          show={this.state.showMapModal}
+          bHeader="Location Search"
+          onHide={this.handleHideMap}
+          bsSize="large"
+          bContent={
+            this.state.loading ? (
+              <Col className="container-loader">
+                <div className="loader">
+                  <i className="fa fa-refresh fa-spin" />
+                  <h5>Loading map...</h5>
+                </div>
+              </Col>
+            ) : (
+              <GoogleMap
+                isMarkerShown
+                onDrag={this.onDraggableChanged}
+                center={this.state.locationLatLng}
+              />
+            )
+          }
+        />
       </div>
     );
   }
@@ -361,7 +439,9 @@ CompanyInformationForm.propTypes = {
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleSubmitForm: PropTypes.func.isRequired,
-  changeFieldValue: PropTypes.func.isRequired
+  changeFieldValue: PropTypes.func.isRequired,
+  getLocation: PropTypes.func.isRequired,
+  handleInputMap: PropTypes.func.isRequired
 };
 
 export default CompanyInformationForm;

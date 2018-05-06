@@ -7,7 +7,6 @@ import "react-block-ui/style.css";
 import { Card } from "../../../components/Card/Card";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
-import { Error } from "../../../components/ErrorMessages/ErrorMessages";
 import {
   required,
   email
@@ -124,7 +123,7 @@ class EmailLoginForm extends Component {
                     className="btn-facebook"
                     onClick={() => handleSocialLogin("facebook")}
                   >
-                    <i className="fa fa-facebook-official" />
+                    <i className="fa fa-facebook" />
                   </Button>
                   <Button
                     simple

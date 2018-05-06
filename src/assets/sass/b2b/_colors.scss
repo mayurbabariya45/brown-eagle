@@ -16,7 +16,7 @@ $dark-gray: #9a9a9a !default;
 $default-color-top: #d9d9d9 !default;
 $default-color-bottom: #909297 !default;
 $default-color-orage: #ff6a00 !default;
-
+$default-color-bergendy: #7d1516 !default;
 $blue-color-top: #4087ea;
 $blue-color-bottom: #2632c1;
 $medium-dark-blue: #24303e;
@@ -84,9 +84,9 @@ $info-color: #1dc7ea !default;
 $info-bg: #1dc7ea !default;
 $info-states-color: lighten($info-color, 8%) !default;
 
-$warning-color: #ea8b02 !default;
-$warning-bg: #ea8b02 !default;
-$warning-states-color: #ea8b02 !default;
+$warning-color: #7d1516 !default;
+$warning-bg: #7d1516 !default;
+$warning-states-color: #7d1516 !default;
 
 $danger-color: #ff4a55 !default;
 $danger-bg: #ff4a55 !default;

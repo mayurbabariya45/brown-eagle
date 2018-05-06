@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { reduxForm, FieldArray } from "redux-form";
+import { reduxForm } from "redux-form";
+import { scroller } from "react-scroll";
 import { Form, Row, Col, FormGroup, ControlLabel } from "react-bootstrap";
+import { numericality } from "redux-form-validators";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Select from "../../../elements/CustomSelect/CustomSelect";
 import ProductImageForm from "./ProductImageForm";
-import {
-  required,
-  price,
-  numeric
-} from "../../../formValidationRules/FormValidationRules";
+import { required } from "../../../formValidationRules/FormValidationRules";
 import Button from "../../../elements/CustomButton/CustomButton";
 
 class ProductInformationForm extends Component {
@@ -194,7 +192,7 @@ class ProductInformationForm extends Component {
                         type: "text",
                         bsClass: "form-control form-control-simple",
                         name: "productPrice",
-                        validate: [required, price]
+                        validate: [required]
                       }
                     ]}
                   />
@@ -209,7 +207,7 @@ class ProductInformationForm extends Component {
                         type: "number",
                         bsClass: "form-control form-control-simple",
                         name: "minQuantity",
-                        validate: [required, numeric]
+                        validate: [required, numericality({ ">": 0 })]
                       }
                     ]}
                   />
@@ -243,6 +241,24 @@ class ProductInformationForm extends Component {
                     </FormGroup>
                   </Col>
                 </Row> */}
+                  <Row>
+                    <Col sm={12}>
+                      <FormInputs
+                        ncols={["col-md-12"]}
+                        proprieties={[
+                          {
+                            xsLabel: 2,
+                            xsInput: 5,
+                            inputGroup: "checkbox_horizontal",
+                            name: "productAvailability",
+                            number: "productAvailability"
+                          }
+                        ]}
+                      >
+                        <b>Product Availability</b>
+                      </FormInputs>
+                    </Col>
+                  </Row>
                 </div>
                 <FormInputs
                   ncols={["col-md-12"]}
@@ -330,7 +346,58 @@ class ProductInformationForm extends Component {
 }
 
 ProductInformationForm.propTypes = {
-  translate: PropTypes.func.isRequired
+  translate: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  hanldeSubmitForm: PropTypes.func.isRequired
 };
+function flatten(arr) {
+  return arr.reduce(
+    (flat, toFlatten) =>
+      flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten),
+    []
+  );
+}
+function getErrorFieldNames(obj, name = "") {
+  const errorArr = [];
+  errorArr.push(
+    Object.keys(obj)
+      .map(key => {
+        const next = obj[key];
+        if (next) {
+          if (typeof next === "string") {
+            return name + key;
+          }
+          // Keep looking
+          if (next.map) {
+            errorArr.push(
+              next
+                .map((item, index) =>
+                  getErrorFieldNames(item, `${name}${key}[${index}].`)
+                )
+                .filter(o => o)
+            );
+          }
+        }
+        return null;
+      })
+      .filter(o => o)
+  );
+  return flatten(errorArr);
+}
 
-export default reduxForm({ form: "ProductImageForm" })(ProductInformationForm);
+function scrollToFirstError(errors) {
+  const errorFields = getErrorFieldNames(errors);
+  // Using breakable for loop
+  for (let i = 0; i < errorFields.length; i++) {
+    const fieldName = errorFields[i];
+    // Checking if the marker exists in DOM
+    if (document.querySelectorAll(`[name="${fieldName}"]`).length) {
+      scroller.scrollTo(fieldName, { offset: -200, smooth: true });
+      break;
+    }
+  }
+}
+export default reduxForm({
+  form: "ProductImageForm",
+  onSubmitFail: errors => scrollToFirstError(errors)
+})(ProductInformationForm);

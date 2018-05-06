@@ -182,7 +182,6 @@
 .form-control[readonly],
 fieldset[disabled] .form-control {
   background-color: $smoke-bg;
-  color: $default-color;
   cursor: not-allowed;
 }
 .input-group-btn .btn {

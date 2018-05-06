@@ -17,7 +17,12 @@ class AddProduct extends React.Component {
   }
 
   hanldeSubmitForm(value) {
-    const { selectedCategory, addProduct, locale } = this.props;
+    const {
+      selectedCategory,
+      addProduct,
+      locale,
+      showNotification
+    } = this.props;
     const { user } = this.props.auth;
     if (_.isEmpty(user)) return false;
     const category = selectedCategory;
@@ -56,7 +61,14 @@ class AddProduct extends React.Component {
 
 AddProduct.propTypes = {
   translate: PropTypes.func.isRequired,
-  getCategories: PropTypes.func.isRequired
+  getCategories: PropTypes.func.isRequired,
+  selectedCategory: PropTypes.string,
+  showNotification: PropTypes.func.isRequired,
+  addProduct: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired
 };
 
+AddProduct.defaultProps = {
+  selectedCategory: ""
+};
 export default AddProduct;

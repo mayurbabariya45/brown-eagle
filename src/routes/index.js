@@ -6,7 +6,7 @@ import LoginContainer from "../containers/AuthContainer/LoginContainer";
 import ForgotPasswordContainer from "../containers/AuthContainer/ForgotPasswordContainer";
 import PasswordResetContainer from "../containers/AuthContainer/PasswordResetContainer";
 import DashboardContainer from "../containers/DashboardContainer/DashboardContainer";
-import AddProductContainer from "../containers/DashboardContainer/AddProductContainer";
+import AddProductContainer from "../containers/AddProductContainer/AddProductContainer";
 import verificationContainer from "../containers/AuthContainer/VerificationEmailContainer";
 import AccountContainer from "../containers/AccountContainer/AccountContainer";
 

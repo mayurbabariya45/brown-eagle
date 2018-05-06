@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Notifications from "react-notification-system-redux";
+import "react-block-ui/style.css";
 import * as a from "../actions/Auth/Auth_actions";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import { style } from "../variables/Variables";
 
+export const notificationOpts = props => ({
+  title: <span data-notify="icon" className={props.title} />,
+  message: <div>{props.message}</div>,
+  position: "bc",
+  autoDismiss: 5
+});
 export default function AuthHoc(WrappedComponent, passedProps) {
   class WrapperComponent extends Component {
     constructor(props) {
@@ -51,7 +58,12 @@ export default function AuthHoc(WrappedComponent, passedProps) {
     }
     render() {
       const { notifications } = this.props;
-      const props = Object.assign({}, this.props, passedProps);
+      const props = Object.assign(
+        {},
+        this.props,
+        passedProps,
+        notificationOpts
+      );
       if (passedProps.header) {
         return (
           <div className="main-panel">
@@ -77,7 +89,25 @@ export default function AuthHoc(WrappedComponent, passedProps) {
     getUserProfile: (token, id) => dispatch(a.getUserProfile(token, id)),
     showNotification: (title, message, fail) =>
       dispatch(a.showNotification(title, message, fail)),
-    removeAll: () => dispatch(Notifications.removeAll())
+    removeAll: () => dispatch(Notifications.removeAll()),
+    success: message =>
+      dispatch(
+        Notifications.success({
+          title: <span data-notify="icon" className="pe-7s-check" />,
+          message: <div>{message}</div>,
+          position: "bc",
+          autoDismiss: 5
+        })
+      ),
+    error: message =>
+      dispatch(
+        Notifications.error({
+          title: <span data-notify="icon" className="pe-7s-shield" />,
+          message: <div>{message}</div>,
+          position: "bc",
+          autoDismiss: 5
+        })
+      )
   });
   const mapStateToProps = state => ({
     auth: state.auth,

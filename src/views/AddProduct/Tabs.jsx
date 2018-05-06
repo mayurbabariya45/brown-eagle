@@ -64,15 +64,22 @@ const Tabs = props => {
                 <SearchProductCategories {...props} />
                 {selectedCategory && (
                   <Row>
+                    <Col md={6} />
                     <Col md={6}>
                       <div className="bottom-text">
-                        <Button block fill radius simple>
+                        <Button
+                          bsStyle="warning"
+                          onClick={props.addCategory}
+                          pullRight
+                          fill
+                          block
+                          radius
+                          simple
+                        >
                           {translate("a_button_text")}
                         </Button>
                       </div>
-                    </Col>
-                    <Col md={6}>
-                      <Button
+                      {/* <Button
                         bsStyle="warning"
                         onClick={props.addCategory}
                         pullRight
@@ -81,7 +88,7 @@ const Tabs = props => {
                         simple
                       >
                         {translate("r_next")}
-                      </Button>
+                      </Button> */}
                     </Col>
                   </Row>
                 )}
@@ -93,19 +100,21 @@ const Tabs = props => {
       break;
     case 2:
       tabsContent = (
-        <div
-          className={className("fade tab-pane", {
-            active: activeTabs === 2,
-            in: activeTabs === 2
-          })}
-        >
-          <div className="product-information">
-            <div className="product-box-title">
-              <p>{translate("a_box_title")}</p>
+        <BlockUi tag="div" blocking={loading}>
+          <div
+            className={className("fade tab-pane", {
+              active: activeTabs === 2,
+              in: activeTabs === 2
+            })}
+          >
+            <div className="product-information">
+              <div className="product-box-title">
+                <p>{translate("a_box_title")}</p>
+              </div>
+              <ProductInformationForm {...props} />
             </div>
-            <ProductInformationForm {...props} />
           </div>
-        </div>
+        </BlockUi>
       );
       break;
     case 3:
@@ -115,7 +124,9 @@ const Tabs = props => {
             active: activeTabs === 3,
             in: activeTabs === 3
           })}
-        />
+        >
+          <div className="product-information" />
+        </div>
       );
       break;
     default:
@@ -135,8 +146,8 @@ const Tabs = props => {
         <ul className="nav-tabs nav-custom-tabs nav-text nav">
           <li
             className={className({
-              disabled: activeTabs !== 2,
-              active: activeTabs > -1
+              disabled: activeTabs !== 1,
+              active: activeTabs < 2
             })}
           >
             <a href="javascript:void(0);">

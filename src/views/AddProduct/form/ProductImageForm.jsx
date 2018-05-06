@@ -25,7 +25,7 @@ class ProductImageForm extends Component {
     this.removeProductImages = this.removeProductImages.bind(this);
   }
   onImageDrop(files) {
-    const { productImages, dropProductImages } = this.props;
+    const { productImages, dropProductImages, addProductImages } = this.props;
     const addedImages = productImages.length;
     if (addedImages >= 5) {
       this.setState({ maxImagesAdded: true });
@@ -39,8 +39,12 @@ class ProductImageForm extends Component {
       const filesToPush = [];
       if (allowed > 0) {
         for (let i = 0; i < allowed; i++) {
-          files[i].fileName = files[i].name;
-          filesToPush.push(files[i]);
+          const formData = new FormData();
+          formData.append("image", files[i]);
+          filesToPush.push({
+            ...files[i],
+            formData
+          });
         }
         this.setState({
           productImages: productImages

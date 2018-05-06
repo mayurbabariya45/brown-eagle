@@ -376,3 +376,41 @@
     }
   }
 }
+.static-content {
+  .form-group {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+.editProductForm {
+  .dropzone_product {
+    border-width: 2px;
+    border-color: rgb(102, 102, 102);
+    border-style: dashed;
+    border-radius: 5px;
+    height: 100px;
+    text-align: center;
+    padding-top: 22px;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .mutiple-form-group {
+    position: relative;
+    > .custom-form-group {
+      + span {
+        > .btn {
+          position: absolute;
+          top: -7px;
+          right: -15px;
+        }
+        .btn-default {
+          background: transparent;
+          border: none;
+          color: #7491fb;
+          padding-left: 0px;
+        }
+      }
+    }
+  }
+}

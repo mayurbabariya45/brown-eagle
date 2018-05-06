@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
+import { scroller, Element } from "react-scroll";
 import { Confirm } from "../../components/Confirm/Confirm";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
@@ -30,16 +31,26 @@ class Dashboard extends React.Component {
         companyForm: !this.state.companyForm,
         contactForm: false
       });
+      if (!this.state.companyForm) {
+        scroller.scrollTo("myScrollToElement", { offset: 300, smooth: true });
+      } else {
+        scroller.scrollTo("myScrollToElement", { offset: -100, smooth: true });
+      }
     } else {
       this.setState({
         companyForm: false,
         contactForm: !this.state.contactForm
       });
+      if (!this.state.contactForm) {
+        scroller.scrollTo("myScrollToElement", { offset: 120, smooth: true });
+      } else {
+        scroller.scrollTo("myScrollToElement", { offset: -100, smooth: true });
+      }
     }
   }
   handleSubmitForm(values) {
     const { updateProfile, showNotification } = this.props;
-    this.props.updateProfile(values).then(payload => {
+    updateProfile(values).then(payload => {
       if (payload.type === "UPDATE_PROFILE_SUCCESS") {
         window.scrollTo(0, 0);
         if (this.state.companyForm) {
@@ -57,6 +68,12 @@ class Dashboard extends React.Component {
           );
           this.setState({ contactForm: false });
         }
+      } else if (payload.type === "UPDATE_PROFILE_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{payload.payload.response.message}</div>,
+          true
+        );
       }
     });
   }
@@ -66,7 +83,12 @@ class Dashboard extends React.Component {
       logout,
       history,
       loading,
-      showNotification
+      showNotification,
+      getProducts,
+      getProduct,
+      deleteProduct,
+      products,
+      upldateProductLoading
     } = this.props;
     const { user, loader } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
@@ -98,10 +120,10 @@ class Dashboard extends React.Component {
                             <i className="pe-7s-home" />
                             {translate("home")}
                           </NavItem>
-                          {/* <NavItem eventKey="second">
-                          <i className="pe-7s-portfolio" />
-                          {translate("d_products")}
-                        </NavItem> */}
+                          <NavItem eventKey="second">
+                            <i className="pe-7s-portfolio" />
+                            {translate("d_products")}
+                          </NavItem>
                           <NavItem eventKey="third">
                             <i className="pe-7s-users" />
                             {translate("profile")}
@@ -137,17 +159,29 @@ class Dashboard extends React.Component {
                       <Home {...this.props} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
-                      <Products {...this.props} />
+                      <Products
+                        translate={translate}
+                        loading={loading}
+                        upldateProductLoading={upldateProductLoading}
+                        id={user.id}
+                        getProducts={getProducts}
+                        getProduct={getProduct}
+                        deleteProduct={deleteProduct}
+                        showNotification={showNotification}
+                        products={products}
+                      />
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
-                      <Profile
-                        {...this.props}
-                        loading={loading}
-                        contactForm={this.state.contactForm}
-                        companyForm={this.state.companyForm}
-                        handleEditForm={this.handleEditForm}
-                        handleSubmitForm={this.handleSubmitForm}
-                      />
+                      <Element name="myScrollToElement">
+                        <Profile
+                          {...this.props}
+                          loading={loading}
+                          contactForm={this.state.contactForm}
+                          companyForm={this.state.companyForm}
+                          handleEditForm={this.handleEditForm}
+                          handleSubmitForm={this.handleSubmitForm}
+                        />
+                      </Element>
                     </Tab.Pane>
                     <Tab.Pane eventKey="fourth">
                       <PasswordContainer
@@ -170,9 +204,13 @@ Dashboard.propTypes = {
   translate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  upldateProductLoading: PropTypes.bool.isRequired,
   updateProfile: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
-  removeAll: PropTypes.func.isRequired
+  removeAll: PropTypes.func.isRequired,
+  getProducts: PropTypes.func.isRequired,
+  deleteProduct: PropTypes.func.isRequired,
+  getProduct: PropTypes.func.isRequired
 };
 
 export default Dashboard;

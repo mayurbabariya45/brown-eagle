@@ -73,6 +73,24 @@ const FieldGroup = ({
               </InputGroup>
             </FormGroup>
           );
+        case "checkbox_horizontal":
+          return (
+            <FormGroup validationState={validationState}>
+              <Col componentClass={ControlLabel} sm={xsLabel || 3}>
+                {label}
+              </Col>
+              <Col sm={xsInput || 9}>
+                <Checkbox
+                  name={props.name}
+                  number={props.number}
+                  type="checkbox"
+                  label={children}
+                />
+                {errorText !== "Required" &&
+                  errorText && <HelpBlock>{errorText}</HelpBlock>}
+              </Col>
+            </FormGroup>
+          );
         case "horizontal":
           return (
             <FormGroup validationState={validationState} className={className}>
@@ -150,8 +168,35 @@ const FieldGroup = ({
             </FormGroup>
           );
         default:
+          if (removeInputDelete) {
+            return (
+              <FormGroup
+                validationState={validationState}
+                className={className}
+              >
+                {label && <ControlLabel>{label}</ControlLabel>}
+                <Row>
+                  <Col sm={10}>
+                    <FormControl {...props} />
+                    {errorText !== "Required" &&
+                      errorText && <HelpBlock>{errorText}</HelpBlock>}
+                  </Col>
+                  <Col sm={2}>
+                    <Button
+                      bsStyle="danger"
+                      fill
+                      simple
+                      onClick={removeInputDelete}
+                    >
+                      <i className="pe-7s-trash" />
+                    </Button>
+                  </Col>
+                </Row>
+              </FormGroup>
+            );
+          }
           return (
-            <FormGroup validationState={validationState}>
+            <FormGroup validationState={validationState} className={className}>
               {label && <ControlLabel>{label}</ControlLabel>}
               <FormControl {...props} />
               {errorText !== "Required" && <HelpBlock>{errorText}</HelpBlock>}
@@ -186,19 +231,19 @@ const renderField = ({
     />
   );
 };
-const renderExtraInput = ({ fields, meta: { error } }) => (
+const renderExtraInput = ({ fields, inputGroup, meta: { error } }) => (
   <span>
     <Button fill onClick={() => fields.push()}>
       Add More
     </Button>
-    {fields.map((hobby, index) => (
+    {fields.map((name, index) => (
       <div key={index}>
         <Fields
-          name={hobby}
+          name={name}
           xsLabel={2}
           xsInput={5}
           type="text"
-          inputGroup="horizontal"
+          inputGroup={inputGroup || ""}
           bsClass="form-control form-control-simple"
           removeInputDelete={() => fields.remove(index)}
         />
@@ -213,6 +258,7 @@ const Fields = ({ mutipleFields, translate, ...props }) => {
         <Field {...props} component={renderField} />
         <FieldArray
           name="keywords"
+          inputGroup={props.inputGroup}
           translate={translate}
           component={renderExtraInput}
         />
@@ -255,7 +301,7 @@ FormInputs.propTypes = {
   proprieties: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      type: PropTypes.string.isRequired,
+      type: PropTypes.string,
       placeholder: PropTypes.string,
       name: PropTypes.string.isRequired
     }).isRequired

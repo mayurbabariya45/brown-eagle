@@ -1,5 +1,6 @@
 import _ from "lodash";
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Row,
   Col,
@@ -17,15 +18,7 @@ const Profile = props => {
     handleEditForm,
     contactForm,
     companyForm,
-    handleSubmitForm,
-    handleSubmit,
-    handleSelectChange,
-    handleChecked,
-    handleOCountry,
-    handleRCountry,
-    value,
-    oCountry,
-    rCountry
+    handleSubmitForm
   } = props;
   const { user, loading } = props.auth;
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
@@ -231,7 +224,6 @@ const Profile = props => {
                     <CompanyInformationFormContainer
                       translate={translate}
                       loading={loading}
-                      value={value}
                       handleSubmitForm={handleSubmitForm}
                     />
                   </Row>
@@ -264,12 +256,6 @@ const Profile = props => {
                           {user.profile ? user.profile.businessType : "none"}
                         </FormControl.Static>
                       </FormGroup>
-                      <FormGroup>
-                        <ControlLabel>{translate("t_employees")}</ControlLabel>
-                        <FormControl.Static>
-                          {user.profile ? user.profile.employeeCount : "none"}
-                        </FormControl.Static>
-                      </FormGroup>
                     </Col>
                     <Col md={6}>
                       <FormGroup>
@@ -277,7 +263,7 @@ const Profile = props => {
                         <FormControl.Static>
                           {user.profile
                             ? _.map(user.profile.mainProducts, product => (
-                                <span
+                              <span
                                   key={product}
                                   className="label label-warning"
                                 >
@@ -300,6 +286,14 @@ const Profile = props => {
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
+                        <ControlLabel>{translate("t_employees")}</ControlLabel>
+                        <FormControl.Static>
+                          {user.profile ? user.profile.employeeCount : "none"}
+                        </FormControl.Static>
+                      </FormGroup>
+                    </Col>
+                    <Col sm={12}>
+                      <FormGroup>
                         <ControlLabel>{translate("about_us")}</ControlLabel>
                         <FormControl.Static>
                           {user.profile ? user.profile.aboutUs : "none"}
@@ -315,5 +309,12 @@ const Profile = props => {
       </Row>
     </div>
   );
+};
+Profile.propTypes = {
+  translate: PropTypes.func.isRequired,
+  handleSubmitForm: PropTypes.func.isRequired,
+  contactForm: PropTypes.bool.isRequired,
+  companyForm: PropTypes.bool.isRequired,
+  handleEditForm: PropTypes.func.isRequired
 };
 export default Profile;

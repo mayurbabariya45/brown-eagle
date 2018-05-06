@@ -1,21 +1,47 @@
+import _ from "lodash";
 import React from "react";
+import className from "classnames";
 import PropTypes from "prop-types";
+import ImageLoader from "../ImageLoader/ImageLoader";
+import ContentLoader from "../Loader/Loader";
 import Button from "../../elements/CustomButton/CustomButton";
+import { Confirm } from "../../components/Confirm/Confirm";
+import noProduct from "../../assets/img/no-product.png";
+
+const preloader = () => <ContentLoader height={300} inFight />;
 
 const Products = props => {
-  const { src, bAction, buttons, translate, lists } = props;
+  const {
+    src,
+    bAction,
+    buttons,
+    translate,
+    lists,
+    product,
+    deleteProduct,
+    editProduct
+  } = props;
+  let productImages;
+  if (!_.isEmpty(product)) {
+    if (!_.isEmpty(product.productPictures)) {
+      const { productPictures } = product;
+      productImages = productPictures[0].url;
+    } else {
+      productImages = noProduct;
+    }
+  }
   return (
     <div className="product-item-info per-product">
       <div className="images-container">
-        <div className="product-hover">
+        <div
+          className={className("product-hover", {
+            noBorder: !_.isEmpty(product) ? product.isLoading : false
+          })}
+        >
           <a href="#products" className="product photo product-item-photo">
             <span className="product-image-container">
               <span className="product-image-wrapper">
-                <img
-                  className="product-image-photo"
-                  src={src}
-                  alt="Lens Zeiss Otus 28mm"
-                />
+                <ImageLoader preloader={preloader} src={productImages || src} />
               </span>
             </span>
           </a>
@@ -49,11 +75,11 @@ const Products = props => {
             <div className="left-product-text">
               <h2 className="product name product-item-name product-name">
                 <a href="#products" className="product-item-link">
-                  Safescan 2210 Banknote Counter
+                  {product.name}
                 </a>
               </h2>
               <div className="price-box price-final_price">
-                <span className="price">$2,506.00</span>
+                <span className="price">${product.productPrice}</span>
               </div>
               <div className="product-reviews-summary short">
                 <div className="rating-summary">
@@ -74,17 +100,30 @@ const Products = props => {
                 </div>
               </div>
               <div className="stock available">
-                <label htmlFor="stock">Availability:</label>
-                <span>In stock</span>
+                <label htmlFor="stock">{translate("availability")}</label>
+                <span>
+                  {product.productAvailability
+                    ? translate("in_stock")
+                    : translate("out_of_stock")}
+                </span>
               </div>
             </div>
             <div className="product-item-inner">
-              <div className="action action-edit">
-                <i className="pe-7s-edit" />
+              <div className="action action-edit" onClick={editProduct}>
+                <i className="fa fa-pencil-square-o" />
               </div>
-              <div className="action action-delete">
-                <i className="pe-7s-trash" />
-              </div>
+              <Confirm
+                onConfirm={deleteProduct}
+                title={translate("confirm_delete_product_title")}
+                body={translate("confirm_delete_product")}
+                confirmBSStyle="danger"
+                confirmText={translate("confirm_button_yes")}
+                cancelText={translate("confirm_cancelText")}
+              >
+                <div className="action action-delete">
+                  <i className="pe-7s-trash" />
+                </div>
+              </Confirm>
             </div>
           </div>
         )}
@@ -172,9 +211,19 @@ const Products = props => {
 };
 
 Products.propTypes = {
+  translate: PropTypes.func.isRequired,
+  deleteProduct: PropTypes.func,
+  editProduct: PropTypes.func,
   bAction: PropTypes.bool,
   buttons: PropTypes.bool,
+  lists: PropTypes.bool,
   src: PropTypes.string
 };
-
+Products.defaultProps = {
+  bAction: false,
+  buttons: false,
+  lists: false,
+  editProduct: () => {},
+  deleteProduct: () => {}
+};
 export default Products;

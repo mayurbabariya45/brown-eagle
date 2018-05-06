@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Grid } from "react-bootstrap";
 import EmailLoginForm from "./Form/EmailLoginForm";
 import PhoneLoginForm from "./Form/PhoneLoginForm";
-import Background from "../../static/media/full-screen-image.jpg";
+import Background from "../../assets/img/static/full-screen-image.jpg";
 import Logo from "../../assets/img/logo.png";
 
 class Login extends Component {

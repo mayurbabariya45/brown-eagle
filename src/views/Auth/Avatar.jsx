@@ -15,9 +15,9 @@ class Avatar extends Component {
     const file = event.target.files[0];
     if (file) {
       this.setState({ picture: window.URL.createObjectURL(file) });
-      const form = new FormData();
-      form.append("image", file);
-      updateAvatar(form, id).then(payload => {
+      const formData = new FormData();
+      formData.append("image", file);
+      updateAvatar(formData, id).then(payload => {
         if (payload.type === "UPDATE_AVATAR_SUCCESS") {
           showNotification(
             <span data-notify="icon" className="pe-7s-check" />,
@@ -26,7 +26,7 @@ class Avatar extends Component {
           );
         } else {
           showNotification(
-            <span data-notify="icon" className="pe-7s-close-circle" />,
+            <span data-notify="icon" className="pe-7s-shield" />,
             <div>Profile has not been changed.</div>,
             true
           );
@@ -75,6 +75,13 @@ Avatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   translate: PropTypes.func.isRequired,
-  role: PropTypes.string.isRequired
+  role: PropTypes.string,
+  showNotification: PropTypes.func.isRequired,
+  updateAvatar: PropTypes.func.isRequired,
+  id: PropTypes.string
+};
+Avatar.defaultProps = {
+  role: "",
+  id: ""
 };
 export default Avatar;

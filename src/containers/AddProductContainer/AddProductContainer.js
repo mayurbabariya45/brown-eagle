@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { connect } from "react-redux";
-import AddProduct from "../../views/Dashboard/AddProduct";
+import AddProduct from "../../views/AddProduct/AddProduct";
 import * as a from "../../actions/Product/Product_actions";
 
 const mapDispatchToProps = dispatch => ({
@@ -27,12 +27,21 @@ const mergeProps = (state, actions, ownProps) => ({
   ...ownProps,
   addProduct: (value, locale) => {
     actions.addProduct(value, locale).then(response => {
-      const productId = response.payload.id;
-      _.forEach(state.productImages, image => {
-        const form = new FormData();
-        form.append("image", image);
-        actions.addProductImages(form, productId, locale);
-      });
+      if (response.type === "ADD_PRODUCT_SUCCESS") {
+        ownProps.success("Product has been created successfully.");
+        const productId = response.payload.id;
+        _.forEach(state.productImages, image => {
+          actions.addProductImages(image.formData, productId, locale);
+        });
+        return false;
+      }
+      const { errors, message } = response.payload.response;
+      if (errors && errors.length > 0) {
+        ownProps.error(errors[0].messages);
+        return false;
+      }
+      ownProps.error(message);
+      return false;
     });
   }
 });

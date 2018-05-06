@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Col, Row, Form } from "react-bootstrap";
-import { url, length } from "redux-form-validators";
+import { format, length } from "redux-form-validators";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
@@ -99,10 +99,13 @@ class ContactInformationForm extends Component {
                     placeholder: "Facebook",
                     bsClass: "form-control form-control-simple",
                     name: "facebook",
-                    validate: url({
-                      message: translate("url_validation"),
-                      allowBlank: true
-                    })
+                    validate: [
+                      format({
+                        with: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+                        message: translate("url_validation"),
+                        allowBlank: true
+                      })
+                    ]
                   }
                 ]}
               />
@@ -114,7 +117,8 @@ class ContactInformationForm extends Component {
                     placeholder: "Twitter",
                     bsClass: "form-control form-control-simple",
                     name: "twitter",
-                    validate: url({
+                    validate: format({
+                      with: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
                       message: translate("url_validation"),
                       allowBlank: true
                     })
@@ -129,7 +133,8 @@ class ContactInformationForm extends Component {
                     placeholder: "Google",
                     bsClass: "form-control form-control-simple",
                     name: "google",
-                    validate: url({
+                    validate: format({
+                      with: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
                       message: translate("url_validation"),
                       allowBlank: true
                     })
