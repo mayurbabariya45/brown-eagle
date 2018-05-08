@@ -33,6 +33,20 @@ const FieldGroup = ({
   // console.log(children);
   switch (props.type) {
     case "checkbox":
+      if (inputGroup === "checkbox_horizontal") {
+        return (
+          <FormGroup validationState={validationState}>
+            <Col componentClass={ControlLabel} sm={xsLabel || 3}>
+              {label}
+            </Col>
+            <Col sm={xsInput || 9}>
+              <Checkbox {...props} label={children} />
+              {errorText !== "Required" &&
+                errorText && <HelpBlock>{errorText}</HelpBlock>}
+            </Col>
+          </FormGroup>
+        );
+      }
       return (
         <FormGroup validationState={validationState}>
           <Checkbox {...props} label={children} />

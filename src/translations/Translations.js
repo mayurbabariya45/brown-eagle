@@ -236,6 +236,17 @@ module.exports = {
       availability: "Availability:",
       in_stock: "In stock",
       out_of_stock: "Out Of Stock",
+
+      // shopping cart
+      cart_title: "Shopping Cart",
+      cart_trading: "Trading",
+      cart_premium: "Premium",
+      cart_details: "price details",
+      cart_total_label: "Your Total Savings on this order ₹800",
+      cart_wishlist: "move to wishlist",
+      cart_remove: "remove",
+      cart_continue: "continue shopping",
+      cart_order: "place order",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",
@@ -1063,6 +1074,9 @@ module.exports = {
       // My account
       a_billing_address: "Dirección de Envio",
       a_shipping_address: "Dirección de Envío",
+
+      // shopping cart
+      cart_title: "Shopping Cart",
 
       // Footer
       about_us: "sobre nosotros",

@@ -199,7 +199,7 @@
     padding-top: 10px;
     &.card-header-nav {
       padding: 15px;
-      background: $default-color-orage;
+      background: $default-color-bergendy;
       color: $white-color;
       .user-avatar {
         display: inline-block;
@@ -232,6 +232,12 @@
           display: inline-block;
           li {
             font-size: $font-size-base;
+            .profile-pending {
+              padding-left: 0;
+              i {
+                padding-right: 6px;
+              }
+            }
             span {
               padding-left: 5px;
               a {

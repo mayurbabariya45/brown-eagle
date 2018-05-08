@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
   dropProductImages: files => dispatch(a.dropProductImages(files)),
   removeProductImages: files => dispatch(a.removeProductImages(files)),
   flushProductImages: () => dispatch(a.flushProductImages()),
+  flushAddProduct: () => dispatch(a.flushAddProduct()),
   addProductImages: (images, id, locale) =>
     dispatch(a.addProductImages(images, id, locale))
 });

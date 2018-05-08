@@ -1,6 +1,7 @@
 import React from "react";
 import className from "classnames";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Row, Col, ButtonGroup } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
@@ -125,7 +126,22 @@ const Tabs = props => {
             in: activeTabs === 3
           })}
         >
-          <div className="product-information" />
+          <div className="product-approval">
+            <div className="box">
+              <div className="box-content">
+                <div className="approval">
+                  <h3>Waiting for approval</h3>
+                  <p>Your product is now under review.</p>
+                  <Link
+                    to="/dashboard"
+                    className="btn btn-warning btn-fill btn-radius"
+                  >
+                    Dashboard
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
       break;

@@ -79,7 +79,9 @@ const Products = props => {
                 </a>
               </h2>
               <div className="price-box price-final_price">
-                <span className="price">${product.productPrice}</span>
+                <span className="price">
+                  ${product.productPrice.toFixed(2)}
+                </span>
               </div>
               <div className="product-reviews-summary short">
                 <div className="rating-summary">

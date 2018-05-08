@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Products from "../../views/Products/Products";
+import Cart from "../../views/Cart/Cart";
 
 const mapDispatchToProps = dispatch => ({});
 const mapStateToProps = state => ({
@@ -11,6 +11,4 @@ const mergeProps = (state, actions, ownProps) => ({
   ...ownProps
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  Products
-);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Cart);

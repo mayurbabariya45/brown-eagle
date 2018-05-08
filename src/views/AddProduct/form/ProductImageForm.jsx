@@ -25,15 +25,24 @@ class ProductImageForm extends Component {
     this.removeProductImages = this.removeProductImages.bind(this);
   }
   onImageDrop(files) {
-    const { productImages, dropProductImages, addProductImages } = this.props;
+    const { dropProductImages } = this.props;
+    const { productImages } = this.state;
     const addedImages = productImages.length;
     if (addedImages >= 5) {
-      this.setState({ maxImagesAdded: true });
+      this.props.showNotification(
+        <span data-notify="icon" className="pe-7s-check" />,
+        <div>Sorry, only 5 images allowed per product</div>,
+        true
+      );
     } else {
       let allowed = 5 - addedImages;
       if (files.length < allowed) allowed = files.length;
       if (addedImages >= 5) {
-        this.setState({ maxImagesAdded: true });
+        this.props.showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Sorry, only 5 images allowed per product</div>,
+          true
+        );
         return;
       }
       const filesToPush = [];
@@ -46,12 +55,16 @@ class ProductImageForm extends Component {
             formData
           });
         }
-        this.setState({
-          productImages: productImages
-            ? this.state.productImages.concat(filesToPush)
-            : filesToPush
-        });
-        dropProductImages(filesToPush);
+        this.setState(
+          {
+            productImages: productImages
+              ? this.state.productImages.concat(filesToPush)
+              : filesToPush
+          },
+          () => {
+            dropProductImages(this.state.productImages);
+          }
+        );
       }
     }
   }
@@ -85,14 +98,8 @@ class ProductImageForm extends Component {
         });
       } else {
         this.setState({ productImages: images });
-        const addedImages = productImages.length + existingImages.length;
-        if (addedImages >= 5) {
-          this.setState({ maxImagesAdded: true });
-        } else {
-          this.setState({ maxImagesAdded: false });
-        }
       }
-      removeProductImages(images);
+      removeProductImages(this.state.productImages);
     }
   }
   renderField({ label, meta: { touched, error, warning, active }, ...props }) {
@@ -212,6 +219,10 @@ class ProductImageForm extends Component {
   }
 }
 ProductImageForm.propTypes = {
-  translate: PropTypes.func.isRequired
+  translate: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired,
+  flushProductImages: PropTypes.func.isRequired,
+  dropProductImages: PropTypes.func.isRequired,
+  removeProductImages: PropTypes.func.isRequired
 };
 export default reduxForm({ form: "ProductImageForm" })(ProductImageForm);

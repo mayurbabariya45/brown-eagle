@@ -15,14 +15,12 @@ class AddProduct extends React.Component {
     const { getCategories } = this.props;
     getCategories();
   }
-
+  componentWillUnmount() {
+    const { flushAddProduct } = this.props;
+    flushAddProduct();
+  }
   hanldeSubmitForm(value) {
-    const {
-      selectedCategory,
-      addProduct,
-      locale,
-      showNotification
-    } = this.props;
+    const { selectedCategory, addProduct, locale } = this.props;
     const { user } = this.props.auth;
     if (_.isEmpty(user)) return false;
     const category = selectedCategory;
@@ -31,7 +29,14 @@ class AddProduct extends React.Component {
       ? value.keywords.concat(value.product_keywords)
       : [value.product_keywords];
     delete value.product_keywords;
-    const object = Object.assign({}, { ...value, category, keywords, seller });
+    let productAvailability = false;
+    if (value.productAvailability) {
+      productAvailability = value.productAvailability;
+    }
+    const object = Object.assign(
+      {},
+      { ...value, category, keywords, seller, productAvailability }
+    );
     addProduct(object, locale);
     return true;
   }
@@ -65,7 +70,8 @@ AddProduct.propTypes = {
   selectedCategory: PropTypes.string,
   showNotification: PropTypes.func.isRequired,
   addProduct: PropTypes.func.isRequired,
-  locale: PropTypes.string.isRequired
+  locale: PropTypes.string.isRequired,
+  flushAddProduct: PropTypes.func.isRequired
 };
 
 AddProduct.defaultProps = {

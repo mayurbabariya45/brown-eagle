@@ -37,6 +37,10 @@ export const flushCategories = () => ({
   type: a.FLUSH_CATEGORIES
 });
 
+export const flushAddProduct = () => ({
+  type: a.FLUSH_ADD_PRODUCT
+});
+
 export const getCategories = () => dispatch => {
   dispatch({
     type: a.GET_CATEGORY_SUCCESS

@@ -56,7 +56,7 @@ class Products extends Component {
                 </div>
                 <div className="product-add-button">
                   <Link
-                    to="/add_product"
+                    to="/seller/product/new"
                     className="btn btn-fill btn-border btn-warning"
                   >
                     add product

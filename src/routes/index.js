@@ -9,6 +9,7 @@ import DashboardContainer from "../containers/DashboardContainer/DashboardContai
 import AddProductContainer from "../containers/AddProductContainer/AddProductContainer";
 import verificationContainer from "../containers/AuthContainer/VerificationEmailContainer";
 import AccountContainer from "../containers/AccountContainer/AccountContainer";
+import CartContainer from "../containers/CartContainer/CartContainer";
 
 const appRoutes = [
   { path: "/", exact: true, name: "Home", component: Home },
@@ -71,12 +72,13 @@ const appRoutes = [
     },
     secure: true,
     type: "seller",
-    path: "/add_product",
+    path: "/seller/product/new",
     name: "AddProduct",
     component: AddProductContainer
   },
   { path: "/product", name: "Product", component: ProductContainer },
-  { path: "/products", name: "Products", component: ProductsContainer }
+  { path: "/products", name: "Products", component: ProductsContainer },
+  { path: "/cart", name: "Cart", component: CartContainer }
 ];
 
 export default appRoutes;

@@ -250,6 +250,7 @@ class ProductInformationForm extends Component {
                             xsLabel: 2,
                             xsInput: 5,
                             inputGroup: "checkbox_horizontal",
+                            type: "checkbox",
                             name: "productAvailability",
                             number: "productAvailability"
                           }
@@ -398,6 +399,6 @@ function scrollToFirstError(errors) {
   }
 }
 export default reduxForm({
-  form: "ProductImageForm",
+  form: "ProductInformationForm",
   onSubmitFail: errors => scrollToFirstError(errors)
 })(ProductInformationForm);

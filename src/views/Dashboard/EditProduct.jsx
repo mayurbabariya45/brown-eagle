@@ -126,7 +126,6 @@ class EditProduct extends Component {
   }
 
   handleSubmit(values) {
-    console.log(values);
     const {
       updateProduct,
       showNotification,
@@ -135,7 +134,6 @@ class EditProduct extends Component {
       addProductImages
     } = this.props;
     const product = Object.assign({}, values, { seller: id });
-    console.log(product, "product");
     updateProduct(product).then(payload => {
       if (payload.type === "UPDATE_PRODUCT_SUCCESS") {
         showNotification(
@@ -165,7 +163,6 @@ class EditProduct extends Component {
       loading,
       categories
     } = this.props;
-    console.log(this.props);
     const categoriesValue = _.map(categories, category => ({
       value: category.name,
       label: category.name
@@ -208,6 +205,7 @@ class EditProduct extends Component {
             />
             <span
               className="remove-image"
+              role="presentation"
               onClick={() => {
                 this.removeProductImage(i);
               }}
@@ -255,19 +253,14 @@ class EditProduct extends Component {
                   ]}
                 />
                 <FormInputs
-                  ncols={["col-md-12"]}
+                  ncols={["col-md-6", "col-md-6"]}
                   proprieties={[
                     {
                       label: translate("a_product_price"),
                       type: "text",
                       bsClass: "form-control form-control-simple",
                       name: "productPrice"
-                    }
-                  ]}
-                />
-                <FormInputs
-                  ncols={["col-md-12"]}
-                  proprieties={[
+                    },
                     {
                       label: translate("a_product_quantity"),
                       type: "number",
@@ -277,6 +270,7 @@ class EditProduct extends Component {
                     }
                   ]}
                 />
+
                 <FormInputs
                   ncols={["col-md-12"]}
                   proprieties={[

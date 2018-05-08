@@ -34,9 +34,17 @@ const Home = props => {
                     <div className="profile-links">
                       <ul>
                         <li>
-                          {user.isProfileVerified
-                            ? translate("d_approved")
-                            : translate("d_verify")}
+                          {user.isProfileVerified ? (
+                            <div>
+                              <i className="icon-static icon-checked" />
+                              <span>{translate("d_approved")}</span>
+                            </div>
+                          ) : (
+                            <span className="profile-pending">
+                              <i className="fa fa-clock-o" />
+                              {translate("d_verify")}
+                            </span>
+                          )}
                         </li>
                         <li>
                           {translate("d_first_year")}

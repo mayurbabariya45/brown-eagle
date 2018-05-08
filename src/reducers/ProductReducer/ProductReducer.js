@@ -107,27 +107,30 @@ export default (state = initialState, action) => {
       };
     // DROP_PRODUCT
     case a.DROP_PRODUCT_IMAGES:
-      if (action.files.length < 2) {
-        return {
-          ...state,
-          productImages: [...state.productImages, action.files]
-        };
-      }
       return {
         ...state,
-        productImages: [...state.productImages, ...action.files]
+        productImages: action.files
       };
     // DROP_DELETE_PRODUCT_IMAGES
     case a.PRODUCT_IMAGES_REMOVE:
       return {
         ...state,
-        productImages: [...action.files]
+        productImages: action.files
       };
     // FLUSH_PRODUCT_IMAGES
     case a.FLUSH_PRODUCT_IMAGES:
       return {
         ...state,
         productImages: []
+      };
+    case a.FLUSH_ADD_PRODUCT:
+      return {
+        ...state,
+        productImages: [],
+        sCategories: [],
+        selectedCategory: "",
+        activeCategory: -1,
+        activeTabs: 1
       };
     // ADD_PRODUCT
     case a.ADD_PRODUCT_REQUEST:
