@@ -163,7 +163,7 @@ const Profile = props => {
                               href={google.link}
                               className="btn-google btn-round btn-social btn btn-default"
                             >
-                              <i className="fa fa-google-plus" />
+                              <i className="fa fa-google" />
                             </a>
                           )}
                         </FormControl.Static>
