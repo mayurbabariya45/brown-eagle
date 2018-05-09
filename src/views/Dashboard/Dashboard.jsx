@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
+import { Grid, Row, Col, Tab } from "react-bootstrap";
 import { scroller, Element } from "react-scroll";
-import { Confirm } from "../../components/Confirm/Confirm";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import ContentLoader from "../../components/Loader/Loader";
 import Home from "./Home";
 import Profile from "./Profile";
 import Products from "./Products";
+import Sidebar from "./Sidebar";
 import noAvatar from "../../assets/img/no-avatar.png";
 
 class Dashboard extends React.Component {
@@ -114,42 +114,11 @@ class Dashboard extends React.Component {
                           />
                         </div>
                       </div>
-                      <div className="sidebar-nav">
-                        <Nav bsStyle="pills" stacked>
-                          <NavItem eventKey="first">
-                            <i className="pe-7s-home" />
-                            {translate("home")}
-                          </NavItem>
-                          <NavItem eventKey="second">
-                            <i className="pe-7s-portfolio" />
-                            {translate("d_products")}
-                          </NavItem>
-                          <NavItem eventKey="third">
-                            <i className="pe-7s-users" />
-                            {translate("profile")}
-                          </NavItem>
-                          <NavItem eventKey="fourth">
-                            <i className="pe-7s-lock" />
-                            {translate("d_change_password")}
-                          </NavItem>
-                          <Confirm
-                            onConfirm={() => {
-                              logout();
-                              history.push("/");
-                            }}
-                            title={translate("confirm_title")}
-                            body={translate("confirm_logout")}
-                            confirmBSStyle="danger"
-                            confirmText={translate("confirm_button_yes")}
-                            cancelText={translate("confirm_cancelText")}
-                          >
-                            <NavItem>
-                              <i className="pe-7s-users" />
-                              {translate("logout")}
-                            </NavItem>
-                          </Confirm>
-                        </Nav>
-                      </div>
+                      <Sidebar
+                        translate={translate}
+                        logout={logout}
+                        history={history}
+                      />
                     </div>
                   </ContentLoader>
                 </Col>
@@ -159,6 +128,18 @@ class Dashboard extends React.Component {
                       <Home {...this.props} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
+                      <Element name="myScrollToElement">
+                        <Profile
+                          {...this.props}
+                          loading={loading}
+                          contactForm={this.state.contactForm}
+                          companyForm={this.state.companyForm}
+                          handleEditForm={this.handleEditForm}
+                          handleSubmitForm={this.handleSubmitForm}
+                        />
+                      </Element>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="third">
                       <Products
                         translate={translate}
                         loading={loading}
@@ -170,18 +151,6 @@ class Dashboard extends React.Component {
                         showNotification={showNotification}
                         products={products}
                       />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="third">
-                      <Element name="myScrollToElement">
-                        <Profile
-                          {...this.props}
-                          loading={loading}
-                          contactForm={this.state.contactForm}
-                          companyForm={this.state.companyForm}
-                          handleEditForm={this.handleEditForm}
-                          handleSubmitForm={this.handleSubmitForm}
-                        />
-                      </Element>
                     </Tab.Pane>
                     <Tab.Pane eventKey="fourth">
                       <PasswordContainer
@@ -204,6 +173,7 @@ Dashboard.propTypes = {
   translate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  products: PropTypes.arrayOf(PropTypes.any).isRequired,
   upldateProductLoading: PropTypes.bool.isRequired,
   updateProfile: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,

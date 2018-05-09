@@ -84,6 +84,7 @@
   .sidebar-nav {
     .nav {
       > li {
+        position: relative;
         &.active {
           border-left: 4px solid $default-color-bergendy;
           @include box-shadow(
@@ -108,6 +109,42 @@
             vertical-align: bottom;
             font-size: 25px;
             width: 30px;
+          }
+          span {
+            margin-top: -2px;
+            position: absolute;
+            right: 0px;
+            font-size: 30px;
+            -webkit-transition: all 0.15s ease-in;
+            -o-transition: all 0.15s ease-in;
+            transition: all 0.15s ease-in;
+          }
+        }
+        a[data-toggle="collapse"][aria-expanded="true"] span {
+          filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+          -webkit-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+        }
+        [data-toggle="collapse"] ~ div {
+          > ul {
+            padding: 10px 0;
+            background: #fff;
+            > li {
+              &.active {
+                border: none;
+                box-shadow: none;
+                > a {
+                  color: $default-color-bergendy;
+                }
+              }
+              > a {
+                border: none;
+                padding-left: 30px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+              }
+            }
           }
         }
       }

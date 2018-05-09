@@ -214,6 +214,13 @@ module.exports = {
       p_company_information: "Company Information",
       d_change_password: "Change Password",
       d_products: "My Products",
+      d_messages: "Message Center",
+      d_orders: "Orders",
+      d_all_orders: "All Orders",
+      d_manage_feedback: "Manage Feedback",
+      d_wholesale_dispute: "Manage Wholesale Dispute",
+      d_coupon: "My Coupons",
+      d_contacts: "Contacts",
 
       // Validation Messages
 
