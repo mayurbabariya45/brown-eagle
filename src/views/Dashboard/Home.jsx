@@ -49,7 +49,10 @@ const Home = props => {
                         <li>
                           {translate("d_first_year")}
                           <span>
-                            <a href="#profile">{translate("d_upgrade")}</a>
+                            <a href="#profile">
+                              <i className="fa fa-refresh" />{" "}
+                              {translate("d_upgrade")}
+                            </a>
                           </span>
                         </li>
                       </ul>

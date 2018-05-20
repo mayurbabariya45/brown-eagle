@@ -21,7 +21,7 @@ input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
 select::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {
+input[type="file"]>input[type="button"]::-moz-focus-inner {
   outline: 0;
 }
 
@@ -45,9 +45,11 @@ section {
     padding: $padding-zero 27px;
   }
 }
+
 .section-dashboard {
   padding: 10px 0;
 }
+
 .section-header {
   padding-bottom: $padding-simple-vertical;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -153,12 +155,12 @@ section {
     width: 100%;
     margin: $margin-vertical-auto;
     padding: $padding-base-vertical $padding-zero;
-    > h5 {
+    >h5 {
       float: left;
     }
-    > .slider-buttons {
+    >.slider-buttons {
       float: right;
-      > .product-arrow {
+      >.product-arrow {
         cursor: pointer;
         color: transparent;
         border: none;
@@ -172,7 +174,7 @@ section {
         position: relative;
         vertical-align: bottom;
       }
-      > .product-prev:before,
+      >.product-prev:before,
       .product-next:before {
         font-family: "Pe-icon-7-stroke";
         font-size: 30px;
@@ -180,10 +182,10 @@ section {
         color: $dark-gray;
         font-weight: bold;
       }
-      > .product-prev::before {
+      >.product-prev::before {
         content: "\e686";
       }
-      > .product-prev::after {
+      >.product-prev::after {
         content: "";
         position: absolute;
         right: 0;
@@ -191,7 +193,7 @@ section {
         height: 50%;
         border-left: 1px solid $medium-dark-gray;
       }
-      > .product-next::before {
+      >.product-next::before {
         content: "\e684";
       }
     }
@@ -272,7 +274,7 @@ section {
 .btn-twitter:focus,
 .btn-twitter:active,
 .btn-twitter.active,
-.open > .btn-twitter.dropdown-toggle {
+.open>.btn-twitter.dropdown-toggle {
   background-color: $social-twitter !important;
   color: $white-color !important;
   border-color: $social-twitter !important;
@@ -295,7 +297,7 @@ section {
 .btn-google:focus,
 .btn-google:active,
 .btn-google.active,
-.open > .btn-google.dropdown-toggle {
+.open>.btn-google.dropdown-toggle {
   color: $social-google !important;
   border-color: $social-google !important;
   opacity: 1;
@@ -316,7 +318,7 @@ section {
     .email-sent {
       text-align: center;
       height: 60vh;
-      h2 {
+      p {
         font-size: $font-size-medium;
         padding-bottom: 10px;
         margin-bottom: 0;
@@ -332,6 +334,7 @@ section {
     }
   }
 }
+
 .email-sent-terms {
   padding: 6px;
   margin: 0 auto;
@@ -347,6 +350,7 @@ section {
     }
   }
 }
+
 .wrapper {
   position: relative;
   top: 0;
@@ -396,7 +400,7 @@ section {
   &.has-image::after {
     opacity: 0.8;
   }
-  > .content {
+  >.content {
     position: relative;
     z-index: 4;
     min-height: calc(100vh - 70px);
@@ -446,25 +450,23 @@ section {
     }
   }
 }
+
 .Select-control {
   border-radius: 0px;
   border: 1px solid $medium-gray;
   background-color: rgba(0, 0, 0, 0.01);
 }
-.Select.has-value.Select--single
-  > .Select-control
-  .Select-value
-  .Select-value-label,
-.Select.has-value.is-pseudo-focused.Select--single
-  > .Select-control
-  .Select-value
-  .Select-value-label {
+
+.Select.has-value.Select--single>.Select-control .Select-value .Select-value-label,
+.Select.has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
   font-weight: 700;
 }
-.Select.is-focused:not(.is-open) > .Select-control {
+
+.Select.is-focused:not(.is-open)>.Select-control {
   border-color: #b3b3b3;
   box-shadow: none;
 }
+
 .error-message {
   text-align: center;
   p {
@@ -479,6 +481,7 @@ section {
   height: 18px;
   padding: 5px;
 }
+
 .icon-payment {
   background: url("../img/icon/coins.png");
   margin-right: 5px;
@@ -487,6 +490,7 @@ section {
   background-position: top;
   vertical-align: middle;
 }
+
 .icon-checked {
   background: url("../img/icon/checked.png");
   margin-right: 5px;
@@ -495,6 +499,7 @@ section {
   background-position: top;
   vertical-align: middle;
 }
+
 .icon-diamond {
   background: url("../img/icon/diamond.png");
   margin-right: 5px;
@@ -503,22 +508,26 @@ section {
   background-position: top;
   vertical-align: middle;
 }
+
 .profile {
   .checkbox {
     margin: 0;
-    input[type="checkbox"]:checked + label::after {
+    input[type="checkbox"]:checked+label::after {
       left: 2px;
     }
   }
 }
+
 .verification {
   height: 70vh;
   display: flex;
   align-items: center;
 }
+
 .pac-container {
   z-index: 1119;
 }
+
 .container-loader {
   height: 250px;
   display: flex;
@@ -541,6 +550,7 @@ section {
     }
   }
 }
+
 .dashboard-products {
   .section-header {
     float: left;
@@ -565,10 +575,14 @@ section {
 .page-header {
   margin: 0 auto;
   padding: 0px;
-  @include box-shadow(
-    0px 3px 5px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(63, 63, 68, 0.1)
-  );
+  @include box-shadow( 0px 3px 5px rgba(0,
+  0,
+  0,
+  0.2),
+  0 0 0 1px rgba(63,
+  63,
+  68,
+  0.1));
   .title {
     ul {
       list-style: none;
@@ -590,16 +604,21 @@ section {
     }
   }
 }
+
 .ads-banners {
   margin: 0 auto;
   padding: 0px;
   width: 100%;
   height: auto;
   float: left;
-  @include box-shadow(
-    0px 3px 5px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(63, 63, 68, 0.1)
-  );
+  @include box-shadow( 0px 3px 5px rgba(0,
+  0,
+  0,
+  0.2),
+  0 0 0 1px rgba(63,
+  63,
+  68,
+  0.1));
   .ads {
     width: 100%;
     height: 534px;

@@ -1,6 +1,7 @@
 .add-product-wrapper {
   background: $sidebar-default-color;
 }
+
 .nav-container {
   display: block;
   width: 100%;
@@ -8,15 +9,14 @@
   border-bottom: 2px solid $default-states-color;
   height: 56px;
   margin-bottom: 3em;
-  &.nav-product-container {
-  }
+  &.nav-product-container {}
 }
 
 .nav-icons,
 .nav-text {
   padding: 10px 0 0;
-  > li {
-    > a {
+  >li {
+    >a {
       display: block;
       padding: 0 16px;
       color: $link-disabled-color;
@@ -30,15 +30,16 @@
     }
   }
 }
+
 .nav-custom-tabs {
   border: none;
-  > li {
+  >li {
     height: 100%;
     position: relative;
     background-color: $medium-dark-blue;
     &.active {
       background-color: $warning-color;
-      > a {
+      >a {
         background: none;
         border: none;
         color: $white-color;
@@ -97,31 +98,33 @@
       left: 100%;
       z-index: 1;
     }
-    > a {
+    >a {
       padding: 10px 11.76rem;
       opacity: 1;
       color: $white-color;
     }
     &.disabled {
-      > a {
+      >a {
         color: $white-color;
         border: none;
       }
     }
   }
 }
+
 .nav-icons {
-  > li {
+  >li {
     display: inline-block;
     width: 300px;
     height: 46px;
     line-height: 36px;
     font-size: 16px;
     font-weight: 700;
-    > a {
+    >a {
       padding: 0 10px;
       vertical-align: middle;
-      > i {
+      font-family: "DIN-Regular", "Helvetica Neue", Arial, sans-serif;
+      >i {
         display: inline-block;
         zoom: 1;
         margin-right: 5px;
@@ -138,9 +141,9 @@
       }
     }
   }
-  > li.active {
+  >li.active {
     border-bottom: 2px solid $warning-color;
-    > a {
+    >a {
       color: $black-color;
       font-weight: 700;
       i {

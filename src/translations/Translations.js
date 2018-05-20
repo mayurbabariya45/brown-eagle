@@ -154,8 +154,8 @@ module.exports = {
       r_c_password_placeholder: "Please retype your password",
       r_c_placeholder: "Must be a legally registered company",
       r_p_placeholder: "Please Enter your phone number",
-      r_supplier: "Seller",
-      r_buyer: "Buyer",
+      r_supplier: "Create a Seller",
+      r_buyer: "Create a Buyer",
       r_confirmation_email:
         "A confirmation email has been sent to your mailbox",
       r_resend_mail: "Having problem receiving email？",

@@ -1983,13 +1983,13 @@ section {
   .wrap-register .register .email-sent {
     text-align: center;
     height: 60vh; }
-    .wrap-register .register .email-sent h2 {
+    .wrap-register .register .email-sent p {
       font-size: 16px;
       padding-bottom: 10px;
       margin-bottom: 0; }
-      .wrap-register .register .email-sent h2 span {
+      .wrap-register .register .email-sent p span {
         padding-right: 5px; }
-      .wrap-register .register .email-sent h2 em {
+      .wrap-register .register .email-sent p em {
         color: #7d1516;
         font-weight: bold;
         font-style: normal; }
@@ -4326,7 +4326,8 @@ section {
   font-weight: 700; }
   .nav-icons > li > a {
     padding: 0 10px;
-    vertical-align: middle; }
+    vertical-align: middle;
+    font-family: "DIN-Regular", "Helvetica Neue", Arial, sans-serif; }
     .nav-icons > li > a > i {
       display: inline-block;
       zoom: 1;
