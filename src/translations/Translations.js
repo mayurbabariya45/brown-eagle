@@ -38,6 +38,8 @@ module.exports = {
       city: "City",
       zip_code: "Area Code",
       label_address: "Same as registered address",
+      seller: "Seller",
+      buyer: "Buyer",
 
       // Confirm Modal
       confirm_title: "Confirm",
@@ -370,6 +372,8 @@ module.exports = {
       city: "Ville",
       zip_code: "Indicatif régional",
       label_address: "Identique à l'adresse enregistrée",
+      seller: "vendeur",
+      buyer: "acheteur",
 
       // Confirm Modal
       confirm_title: "Confirm",
@@ -605,6 +609,8 @@ module.exports = {
       city: "Città",
       zip_code: "Prefisso",
       label_address: "Come l'indirizzo registrato",
+      seller: "venditore",
+      buyer: "acquirente",
 
       // Confirm Modal
       confirm_title: "Confirm",
@@ -910,6 +916,8 @@ module.exports = {
       city: "Ciudad",
       zip_code: "Codigo de AREA",
       label_address: "Igual que la dirección registrada",
+      seller: "vendedor",
+      buyer: "comprador",
 
       // Confirm Modal
       confirm_title: "Confirm",
@@ -1188,7 +1196,8 @@ module.exports = {
       city: "stad",
       zip_code: "Netnummer",
       label_address: "Hetzelfde als geregistreerd adres",
-
+      seller: "verkoper",
+      buyer: "koper",
       // Confirm Modal
       confirm_title: "Confirm",
       confirm_logout: "Are you sure you want to logout session?",

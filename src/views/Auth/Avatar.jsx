@@ -40,7 +40,7 @@ class Avatar extends Component {
   render() {
     const { name, avatar, translate, role } = this.props;
     return (
-      <div className="author" onClick={this.openFileUploader}>
+      <div className="author" role="presentation" onClick={this.openFileUploader}>
         <div className="avatar border-gray">
           <img
             src={this.state.picture ? this.state.picture : avatar}
@@ -63,9 +63,7 @@ class Avatar extends Component {
           />
         </div>
         <h4 className="title">{name}</h4>
-        <h6>
-          {role === "seller" ? translate("r_supplier") : translate("r_buyer")}
-        </h6>
+        <h6>{role === "seller" ? translate("seller") : translate("buyer")}</h6>
       </div>
     );
   }
