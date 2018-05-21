@@ -147,6 +147,9 @@ class InformationForm extends Component {
                         labels={translate("r_buyer")}
                         validate={[required]}
                       />
+                      <p className="seprate-accounts">
+                        {translate("r_seprate_account")}
+                      </p>
                     </Col>
                   </FormGroup>
                 </Col>

@@ -60,7 +60,7 @@ export const flushProductImages = () => ({
 export const addProduct = (product, locale) => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: `http://35.200.219.57:8000/v1/product?ln=${locale}`,
+      endpoint: `product?ln=${locale}`,
       method: "POST",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       body: JSON.stringify(product),
@@ -74,7 +74,7 @@ export const addProduct = (product, locale) => dispatch =>
 
 export const addProductImages = (file, id, locale) => ({
   [RSAA]: {
-    endpoint: `http://35.200.219.57:8000/v1/product/${id}/image?ln=${locale}`,
+    endpoint: `product/${id}/image?ln=${locale}`,
     method: "POST",
     body: file,
     types: [

@@ -65,7 +65,7 @@ class Sidebar extends Component {
             <Collapse in={this.state.collapse.orders}>
               <div>
                 <Nav>
-                  <NavItem>{translate("d_all_orders")}</NavItem>
+                  <NavItem eventKey="six">{translate("d_all_orders")}</NavItem>
                   <NavItem>{translate("d_manage_feedback")}</NavItem>
                   <NavItem>{translate("d_wholesale_dispute")}</NavItem>
                   <NavItem>{translate("d_coupon")}</NavItem>

@@ -28,8 +28,6 @@ class EmailLoginForm extends Component {
       hanldeSubmitForm,
       handleSubmit,
       loading,
-      errors,
-      message,
       handleSocialLogin,
       translate
     } = this.props;

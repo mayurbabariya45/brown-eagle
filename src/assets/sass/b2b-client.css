@@ -2053,7 +2053,8 @@ section {
   top: 0;
   left: 0;
   background-size: cover;
-  background-position: center center; }
+  background-position: left center;
+  background-attachment: fixed; }
 
 .full-page.has-image::after {
   opacity: 0.8; }
@@ -2064,7 +2065,7 @@ section {
   min-height: calc(100vh - 70px); }
 
 .login-page {
-  padding-top: 18vh; }
+  padding-top: 10vh; }
   .login-page .login-logo {
     font-size: 35px;
     text-align: center;
@@ -2232,6 +2233,12 @@ section {
       height: 100%;
       max-width: 100%;
       max-height: 100%; }
+
+.seprate-accounts {
+  margin-bottom: 0;
+  line-height: 1;
+  margin-top: 10px;
+  font-size: 12px; }
 
 .news-letter {
   background-color: #f8f8f8; }
@@ -3935,21 +3942,33 @@ section {
 .card-numbers .small-content {
   font-size: 16.5px; }
 
-.card.card-login .btn-social {
-  margin: 0 auto;
-  margin-right: 3px; }
-
-.card.card-login .form-control.form-control-mobile {
-  background: 0 0;
-  border: none;
-  width: 100px;
-  outline: 0;
-  position: absolute;
-  padding: 0; }
-
-.card.card-login .form-control.form-control-mobile-text {
-  padding-left: 100px;
-  box-sizing: border-box; }
+.card.card-login {
+  background-color: #24303e; }
+  .card.card-login .btn-social {
+    margin: 0 auto;
+    margin-right: 3px; }
+  .card.card-login label {
+    color: #fff; }
+  .card.card-login .form-control {
+    background-color: #fff; }
+    .card.card-login .form-control.form-control-mobile {
+      background: 0 0;
+      border: none;
+      width: 100px;
+      outline: 0;
+      position: absolute;
+      padding: 0; }
+    .card.card-login .form-control.form-control-mobile-text {
+      padding-left: 100px;
+      box-sizing: border-box; }
+  .card.card-login .footer .social > .social-login-links span {
+    color: #fff; }
+  .card.card-login .footer .social > .social-login-links .caret {
+    color: #fff; }
+  .card.card-login .footer .social > .social-login-links i.fa-globe {
+    color: #fff; }
+  .card.card-login .footer .legend a {
+    color: #fff; }
 
 .modal {
   text-align: center;

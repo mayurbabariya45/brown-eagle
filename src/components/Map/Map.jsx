@@ -1,12 +1,7 @@
 import _ from "lodash";
 import React from "react";
-import { compose, withProps, withHandlers, lifecycle } from "recompose";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker
-} from "react-google-maps";
+import { compose, withProps, lifecycle } from "recompose";
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox";
 
 const { google } = window;
@@ -108,7 +103,7 @@ const GoogleMapComponent = compose(
     >
       <input
         type="text"
-        placeholder="Customized your placeholder"
+        placeholder="Search your address"
         style={{
           boxSizing: "border-box",
           border: "1px solid transparent",

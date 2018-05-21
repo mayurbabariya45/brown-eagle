@@ -49,7 +49,7 @@ class ChangePassword extends Component {
   }
   render() {
     const { translate, handleSubmit, invalid } = this.props;
-    const { success, message, loading } = this.props.password;
+    const { loading } = this.props.password;
     return (
       <div className="password-change">
         <BlockUi tag="div" blocking={loading}>

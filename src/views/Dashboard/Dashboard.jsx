@@ -9,6 +9,7 @@ import Home from "./Home";
 import Profile from "./Profile";
 import Products from "./Products";
 import Sidebar from "./Sidebar";
+import Orders from "./Orders";
 import noAvatar from "../../assets/img/no-avatar.png";
 
 class Dashboard extends React.Component {
@@ -158,6 +159,9 @@ class Dashboard extends React.Component {
                         hanldePasswordForm={this.hanldePasswordForm}
                         showNotification={showNotification}
                       />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="six">
+                      <Orders />
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>

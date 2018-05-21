@@ -3,7 +3,7 @@ import { ActionTypes as a } from "../../constants/Dashboard/Dashboard_action_typ
 
 export const getProducts = (id, token) => ({
   [RSAA]: {
-    endpoint: `http://35.197.140.149:8000/v1/product?seller=${id}&status=pending`,
+    endpoint: `product?seller=${id}&status=pending`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [
@@ -19,7 +19,7 @@ export const getProduct = product => ({
 });
 export const getProductImage = (id, token) => ({
   [RSAA]: {
-    endpoint: `http://35.197.140.149:8000/v1/product/${id}/image`,
+    endpoint: `product/${id}/image`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [
@@ -32,7 +32,7 @@ export const getProductImage = (id, token) => ({
 
 export const updateProduct = product => ({
   [RSAA]: {
-    endpoint: `http://35.200.219.57:8000/v1/product/${product.id}`,
+    endpoint: `product/${product.id}`,
     method: "PATCH",
     body: JSON.stringify(product),
     types: [
@@ -45,7 +45,7 @@ export const updateProduct = product => ({
 
 export const deleteProductImage = (productId, imageId) => ({
   [RSAA]: {
-    endpoint: `http://35.200.219.57:8000/v1/product/${productId}/image/${imageId}`,
+    endpoint: `product/${productId}/image/${imageId}`,
     method: "DELETE",
     types: [
       a.DELETE_PRODUCT_IMAGE_REQUEST,
@@ -60,7 +60,7 @@ export const deleteProductImage = (productId, imageId) => ({
 
 export const deleteProduct = id => ({
   [RSAA]: {
-    endpoint: `http://35.200.219.57:8000/v1/product/${id}`,
+    endpoint: `product/${id}`,
     method: "DELETE",
     types: [
       a.DELETE_PRODUCT_REQUEST,

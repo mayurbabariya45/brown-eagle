@@ -156,8 +156,10 @@ module.exports = {
       r_c_password_placeholder: "Please retype your password",
       r_c_placeholder: "Must be a legally registered company",
       r_p_placeholder: "Please Enter your phone number",
-      r_supplier: "Create a Seller",
-      r_buyer: "Create a Buyer",
+      r_supplier: "Seller",
+      r_buyer: "Buyer",
+      r_seprate_account:
+        "* Separate accounts are required to become seller and buyer",
       r_confirmation_email:
         "A confirmation email has been sent to your mailbox",
       r_resend_mail: "Having problem receiving email？",
@@ -290,8 +292,6 @@ module.exports = {
       streaming: "Streaming",
       stream_regional: "Stream regional",
       songs: "songs",
-
-      buyer: "Buyer",
       by_original: "by Original",
       f_products: "products",
 
@@ -435,7 +435,8 @@ module.exports = {
       r_p_placeholder: "S'il vous plait, entrez votre numéro de téléphone",
       r_supplier: "vendeur",
       r_buyer: "acheteur",
-
+      r_seprate_account:
+        "* Les comptes Seprate sont requis pour devenir vendeur et acheteur",
       r_static_p: "Lors de la création de mon compte, j'accepte de:",
       r_user_a: "Accord de l'utilisateur",
       r_static_text:
@@ -541,8 +542,6 @@ module.exports = {
       streaming: "Diffusion",
       stream_regional: "Stream régional",
       songs: "Chansons",
-
-      buyer: "Acheteur",
       by_original: "par Original",
       f_products: "des produits",
 
@@ -722,6 +721,8 @@ module.exports = {
       r_p_placeholder: "Per favore, inserisca il suo numero di telefono",
       r_supplier: "Venditore",
       r_buyer: "Acquirente",
+      r_seprate_account:
+        "* Per diventare venditore e acquirente sono necessari conti separati",
       r_confirmation_email:
         "Un'email di conferma è stata inviata alla tua casella di posta",
       r_resend_mail: "Hai problemi a ricevere email?",
@@ -832,8 +833,6 @@ module.exports = {
       streaming: "Streaming",
       stream_regional: "Stream regionale",
       songs: "canzoni",
-
-      buyer: "Acquirente",
       by_original: "di originale",
       f_products: "prodotti",
 
@@ -1014,6 +1013,8 @@ module.exports = {
       r_p_placeholder: "Por favor, introduzca su número de teléfono",
       r_supplier: "Vendedor",
       r_buyer: "Comprador",
+      r_seprate_account:
+        "* Se requieren cuentas separadas para convertirse en vendedor y comprador",
       r_confirmation_email:
         "Se ha enviado un correo electrónico de confirmación a su casilla de correo",
       r_resend_mail: "¿Tienes problemas para recibir correos electrónicos?",
@@ -1127,8 +1128,6 @@ module.exports = {
       streaming: "Transmisión",
       stream_regional: "Stream regional",
       songs: "canciones",
-
-      buyer: "Comprador",
       by_original: "por Original",
       f_products: "productos",
 
@@ -1309,6 +1308,8 @@ module.exports = {
       r_p_placeholder: "Voer uw telefoonnummer in",
       r_supplier: "Verkoper",
       r_buyer: "Koper",
+      r_seprate_account:
+        "* Aparte accounts zijn vereist om verkoper en koper te worden",
       r_confirmation_email:
         "Er is een bevestigingsmail naar uw mailbox gestuurd",
       r_resend_mail: "Problemen met het ontvangen van e-mail?",
@@ -1420,8 +1421,6 @@ module.exports = {
       streaming: "streaming",
       stream_regional: "Stream regionaal",
       songs: "songs",
-
-      buyer: "Koper",
       by_original: "door Original",
       f_products: "producten",
 

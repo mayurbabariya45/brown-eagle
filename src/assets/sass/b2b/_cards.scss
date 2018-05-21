@@ -485,11 +485,16 @@
   }
 }
 .card.card-login {
+  background-color: #24303e;
   .btn-social {
     margin: 0 auto;
     margin-right: 3px;
   }
+  label{
+    color: #fff;
+  }
   .form-control {
+    background-color: #fff;
     &.form-control-mobile {
       background: 0 0;
       border: none;
@@ -501,6 +506,24 @@
     &.form-control-mobile-text {
       padding-left: 100px;
       box-sizing: border-box;
+    }
+  }
+  .footer{
+    .social > .social-login-links{
+      span{
+        color:#fff;
+      }
+      .caret{
+        color:#fff;
+      }
+      i.fa-globe{
+        color:#fff;
+      }
+    }
+    .legend{
+      a{
+        color: #fff;
+      }
     }
   }
 }

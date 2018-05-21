@@ -395,7 +395,8 @@ section {
     top: 0;
     left: 0;
     background-size: cover;
-    background-position: center center;
+    background-position: left center;
+    background-attachment: fixed;
   }
   &.has-image::after {
     opacity: 0.8;
@@ -408,7 +409,7 @@ section {
 }
 
 .login-page {
-  padding-top: 18vh;
+  padding-top: 10vh;
   .login-logo {
     font-size: 35px;
     text-align: center;
@@ -630,4 +631,10 @@ section {
       max-height: 100%;
     }
   }
+}
+.seprate-accounts{
+  margin-bottom: 0;
+  line-height: 1;
+  margin-top: 10px;
+  font-size: 12px;
 }

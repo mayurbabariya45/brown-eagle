@@ -14,13 +14,13 @@ const mapStateToProps = state => {
     alternateEmail: state.auth.user.alternateEmail,
     facebook: _.find(state.auth.user.socialLinks, ["platform", "facebook"])
       ? _.find(state.auth.user.socialLinks, ["platform", "facebook"]).link
-      : "",
-    twitter:
-      _.find(state.auth.user.socialLinks, ["platform", "twitter"]) &&
-      _.find(state.auth.user.socialLinks, ["platform", "twitter"]).link,
-    google:
-      _.find(state.auth.user.socialLinks, ["platform", "google"]) &&
-      _.find(state.auth.user.socialLinks, ["platform", "google"]).link
+      : "http://www.facebook.com/",
+    twitter: _.find(state.auth.user.socialLinks, ["platform", "twitter"])
+      ? _.find(state.auth.user.socialLinks, ["platform", "twitter"]).link
+      : "https://twitter.com/",
+    google: _.find(state.auth.user.socialLinks, ["platform", "google"])
+      ? _.find(state.auth.user.socialLinks, ["platform", "google"]).link
+      : "https://plus.google.com/"
   };
   return {
     initialValues

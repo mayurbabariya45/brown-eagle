@@ -8,6 +8,9 @@ import { normalizeTypeDescriptors, actionWith } from "./util";
  * @type {ReduxMiddleware}
  * @access public
  */
+
+const BASE_URL = "http://35.200.219.57:8000/v1/";
+
 function apiMiddleware({ getState }) {
   return next => action => {
     // Do not process actions without an [RSAA] property
@@ -153,7 +156,10 @@ function apiMiddleware({ getState }) {
       }
       try {
         // Make the API call
-        var res = await doFetch(endpoint, {
+        const endpointUrl = !/^(f|ht)tps?:\/\//i.test(endpoint)
+          ? BASE_URL + endpoint
+          : endpoint;
+        var res = await doFetch(endpointUrl, {
           ...options,
           method,
           body: body || undefined,
