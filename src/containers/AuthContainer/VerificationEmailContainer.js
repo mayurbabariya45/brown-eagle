@@ -3,8 +3,8 @@ import VerificationEmail from "../../views/Auth/VerificationEmail";
 import * as a from "../../actions/Auth/Auth_actions";
 
 const mapDispatchToProps = dispatch => ({
-  VerificationEmail: (value, locale) =>
-    dispatch(a.VerificationEmail(value, locale))
+  verificationEmail: (value, locale) =>
+    dispatch(a.verificationEmail(value, locale))
 });
 const mapStateToProps = state => ({
   ...state.verification

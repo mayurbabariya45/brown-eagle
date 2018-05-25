@@ -486,9 +486,17 @@
 }
 .card.card-login {
   background-color: #24303e;
+  .social-login-links {
+    padding-top: 5px;
+    .languages{
+      margin-top: 0;
+    }
+  }
   .btn-social {
     margin: 0 auto;
-    margin-right: 3px;
+    &:active{
+      background: transparent;
+    }
   }
   label{
     color: #fff;

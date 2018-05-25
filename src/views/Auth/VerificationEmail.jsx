@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Row, Grid, Col } from "react-bootstrap";
-import Button from "../../elements/CustomButton/CustomButton";
 import {
   AlertSuccess,
   AlertError
@@ -13,12 +12,12 @@ class VerificationEmail extends Component {
     this.state = {};
   }
   componentWillMount() {
-    const { location, history, VerificationEmail, locale } = this.props;
+    const { location, history, verificationEmail, locale } = this.props;
     const token = location.search.split("?key=").pop();
     if (!location.search) {
       history.push("/login");
     }
-    VerificationEmail({ id: token }, locale);
+    verificationEmail({ id: token }, locale);
   }
   render() {
     const { translate, success, error, message } = this.props;
@@ -59,7 +58,19 @@ class VerificationEmail extends Component {
 }
 
 VerificationEmail.propTypes = {
-  translate: PropTypes.func.isRequired
+  translate: PropTypes.func.isRequired,
+  verificationEmail: PropTypes.func.isRequired,
+  success: PropTypes.bool,
+  error: PropTypes.bool,
+  message: PropTypes.string,
+  locale: PropTypes.string
+};
+
+VerificationEmail.defaultProps = {
+  success: false,
+  error: false,
+  message: "",
+  locale: ""
 };
 
 export default VerificationEmail;

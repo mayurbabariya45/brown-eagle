@@ -2,7 +2,7 @@ import React from "react";
 import className from "classnames";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Row, OverlayTrigger, Popover } from "react-bootstrap";
+import { Row, Popover } from "react-bootstrap";
 import Button from "../../elements/CustomButton/CustomButton";
 import VerificationForm from "./Form/VerificationForm";
 import InformationForm from "./Form/InformationForm";
@@ -15,23 +15,23 @@ const Tabs = props => {
     formData,
     emailSent
   } = props;
-  const popoverClickRootClose = (
-    <Popover id="resend-confirmation-email">
-      <ul className="email-sent-terms">
-        <li>Please check your spam folder</li>
-        <li>
-          <span>If you have not received the email,</span>
-          <Button border bsStyle="warning">
-            Click here to resend the email
-          </Button>
-        </li>
-        <li>
-          <span>Have not received? </span>
-          <Link to="/register">Try using another email address.</Link>
-        </li>
-      </ul>
-    </Popover>
-  );
+  // const popoverClickRootClose = (
+  //   <Popover id="resend-confirmation-email">
+  //     <ul className="email-sent-terms">
+  //       <li>Please check your spam folder</li>
+  //       <li>
+  //         <span>If you have not received the email,</span>
+  //         <Button border bsStyle="warning">
+  //           Click here to resend the email
+  //         </Button>
+  //       </li>
+  //       <li>
+  //         <span>Have not received? </span>
+  //         <Link to="/register">Try using another email address.</Link>
+  //       </li>
+  //     </ul>
+  //   </Popover>
+  // );
   let tabsContent;
   switch (activeTabs) {
     case 1:
@@ -71,11 +71,12 @@ const Tabs = props => {
           })}
         >
           <div className="email-sent">
-            <h2>
+            <h2>Thank you !</h2>
+            <h4>
               <span>{translate("r_confirmation_email")}</span>
               <em>{formData.username}</em>
-            </h2>
-            <h4>{emailSent}</h4>
+            </h4>
+            <h5>{emailSent}</h5>
             {/* <div className="email-sent-op">
                 <OverlayTrigger
                   trigger="click"

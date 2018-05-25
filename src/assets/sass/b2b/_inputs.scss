@@ -144,13 +144,15 @@
   }
 }
 .input-group-addon {
-  background-color: $white-color;
-  border: 1px solid $light-gray;
-  border-radius: $border-radius-base;
+  background-color: $default-color-bergendy;
+  border: 1px solid $default-color-bergendy;
+  border-radius: 0;
+  color: $white-color;
   .has-success &,
   .has-error & {
-    background-color: $white-color;
-    border: 1px solid $medium-dark-gray;
+    background-color: $default-color-bergendy;
+    border: 1px solid $default-color-bergendy;
+    color: $white-color;
   }
   .has-error .form-control:focus + & {
     border-color: $danger-color;

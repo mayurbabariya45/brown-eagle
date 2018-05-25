@@ -80,9 +80,11 @@ const FieldGroup = ({
         case "icon":
           return (
             <FormGroup validationState={validationState}>
+              {label && <ControlLabel>{label}</ControlLabel>}
               <InputGroup>
-                {label && <ControlLabel>{label}</ControlLabel>}
-                <InputGroup.Addon>{bsIcon}</InputGroup.Addon>
+                <InputGroup.Addon>
+                  <i className={bsIcon} />
+                </InputGroup.Addon>
                 <FormControl {...props} />
               </InputGroup>
             </FormGroup>

@@ -190,7 +190,7 @@ export const verifyEmail = (token, locale) => dispatch =>
       ]
     }
   });
-export const VerificationEmail = (token, locale) => dispatch =>
+export const verificationEmail = (token, locale) => dispatch =>
   dispatch({
     [RSAA]: {
       endpoint: `auth/verify/email?ln=${locale}`,

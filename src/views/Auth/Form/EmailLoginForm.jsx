@@ -41,7 +41,7 @@ class EmailLoginForm extends Component {
                 <FormInputs
                   proprieties={[
                     {
-                      inputGroup: "feedback",
+                      inputGroup: "icon",
                       bsIcon: "glyphicon glyphicon-envelope",
                       label: translate("l_account"),
                       type: "email",
@@ -55,8 +55,8 @@ class EmailLoginForm extends Component {
                 <FormInputs
                   proprieties={[
                     {
-                      inputGroup: "feedback",
-                      bsIcon: "fa fa-lock",
+                      inputGroup: "icon",
+                      bsIcon: "glyphicon glyphicon-lock",
                       label: translate("password"),
                       type: "password",
                       bsClass: "form-control form-control-simple",
@@ -121,7 +121,7 @@ class EmailLoginForm extends Component {
                     className="btn-facebook"
                     onClick={() => handleSocialLogin("facebook")}
                   >
-                    <i className="fa fa-facebook" />
+                    <i className="fa fa-facebook social-icon-auth" />
                   </Button>
                   <Button
                     simple
@@ -129,7 +129,7 @@ class EmailLoginForm extends Component {
                     className="btn-google"
                     onClick={() => handleSocialLogin("google")}
                   >
-                    <i className="fa fa-google" />
+                    <i className="fa fa-google social-icon-auth" />
                   </Button>
                 </div>
                 <div className="languages">

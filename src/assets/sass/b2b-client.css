@@ -844,13 +844,15 @@ h1 .subtitle {
   color: #87cb16; }
 
 .input-group-addon {
-  background-color: #ffffff;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px; }
+  background-color: #7d1516;
+  border: 1px solid #7d1516;
+  border-radius: 0;
+  color: #ffffff; }
   .has-success .input-group-addon,
   .has-error .input-group-addon {
-    background-color: #ffffff;
-    border: 1px solid #aaaaaa; }
+    background-color: #7d1516;
+    border: 1px solid #7d1516;
+    color: #ffffff; }
   .has-error .form-control:focus + .input-group-addon {
     border-color: #ff4a55;
     color: #ff4a55; }
@@ -1921,6 +1923,11 @@ section {
   top: -2px;
   width: 35px; }
 
+.btn-social.btn-social.btn-simple .fa.social-icon-auth {
+  font-size: 20px;
+  color: #ffffff;
+  width: 18px; }
+
 .btn-facebook {
   border-color: #3b5998;
   color: #3b5998; }
@@ -1982,7 +1989,17 @@ section {
     font-size: 13px; }
   .wrap-register .register .email-sent {
     text-align: center;
-    height: 60vh; }
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center; }
+    .wrap-register .register .email-sent h2 {
+      margin: 0;
+      margin-bottom: 5px; }
+    .wrap-register .register .email-sent h4 {
+      font-size: 16px;
+      margin-top: 0; }
     .wrap-register .register .email-sent p {
       font-size: 16px;
       padding-bottom: 10px;
@@ -2053,7 +2070,8 @@ section {
   top: 0;
   left: 0;
   background-size: cover;
-  background-position: left center;
+  background-position: 20% center;
+  background-repeat: no-repeat;
   background-attachment: fixed; }
 
 .full-page.has-image::after {
@@ -3944,9 +3962,14 @@ section {
 
 .card.card-login {
   background-color: #24303e; }
+  .card.card-login .social-login-links {
+    padding-top: 5px; }
+    .card.card-login .social-login-links .languages {
+      margin-top: 0; }
   .card.card-login .btn-social {
-    margin: 0 auto;
-    margin-right: 3px; }
+    margin: 0 auto; }
+    .card.card-login .btn-social:active {
+      background: transparent; }
   .card.card-login label {
     color: #fff; }
   .card.card-login .form-control {

@@ -243,7 +243,11 @@ section {
   top: -2px;
   width: 35px;
 }
-
+.btn-social.btn-social.btn-simple .fa.social-icon-auth{
+  font-size: 20px;
+  color:$white-color;
+  width: 18px;
+}
 .btn-facebook {
   border-color: $social-facebook;
   color: $social-facebook;
@@ -318,6 +322,18 @@ section {
     .email-sent {
       text-align: center;
       height: 60vh;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+      h2{
+        margin: 0;
+        margin-bottom: 5px;
+      }
+      h4{
+        font-size: $font-size-medium;
+        margin-top: 0;
+      }
       p {
         font-size: $font-size-medium;
         padding-bottom: 10px;
@@ -395,7 +411,8 @@ section {
     top: 0;
     left: 0;
     background-size: cover;
-    background-position: left center;
+    background-position: 20% center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
   }
   &.has-image::after {

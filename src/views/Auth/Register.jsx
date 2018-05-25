@@ -94,6 +94,12 @@ Register.propTypes = {
   activeTabs: PropTypes.number.isRequired,
   registerUser: PropTypes.func.isRequired,
   verifyEmail: PropTypes.func.isRequired,
-  formData: PropTypes.object.isRequired
+  showNotification: PropTypes.func.isRequired,
+  locale: PropTypes.string
 };
+
+Register.defaultProps = {
+  locale: ""
+}
+
 export default Register;
