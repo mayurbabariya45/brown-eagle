@@ -36,6 +36,16 @@
 .btn-info    { @include btn-styles($info-color, $info-states-color); }
 .btn-warning { @include btn-styles($warning-color, $warning-states-color); }
 .btn-danger  { @include btn-styles($danger-color, $danger-states-color); }
+.btn-border-yellow {
+    &:hover,
+    &:active
+    {
+        transform: scale(1.2);
+        background-color: #efae02;
+        border: 1px solid #efae02;
+        color: #fff;
+    }
+}
 .btn-neutral { 
     @include btn-styles($white-color, $white-color);
     

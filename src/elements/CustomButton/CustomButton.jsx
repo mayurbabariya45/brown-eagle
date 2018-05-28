@@ -40,7 +40,8 @@ CustomButton.propTypes = {
   border: PropTypes.bool,
   social: PropTypes.bool,
   radius: PropTypes.bool,
-  icon: PropTypes.bool
+  icon: PropTypes.bool,
+  className: PropTypes.string
 };
 CustomButton.defaultProps = {
   fill: false,
@@ -51,6 +52,7 @@ CustomButton.defaultProps = {
   border: false,
   social: false,
   radius: false,
-  icon: false
+  icon: false,
+  className: ""
 };
 export default CustomButton;

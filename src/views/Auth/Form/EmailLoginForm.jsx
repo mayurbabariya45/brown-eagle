@@ -72,7 +72,7 @@ class EmailLoginForm extends Component {
                     </Link>
                   </span>
                 </FormInputs>
-                <FormInputs
+                {/* <FormInputs
                   proprieties={[
                     {
                       type: "checkbox",
@@ -85,11 +85,11 @@ class EmailLoginForm extends Component {
                   <Link to="#" className="keep-login-detail">
                     {translate("l_detail")}
                   </Link>
-                </FormInputs>
+                </FormInputs> */}
                 {/* <Error error={errors} message={message} /> */}
                 <Row>
-                  <Col lg={12} md={12} sm={12} xs={12}>
-                    <Button block radius fill bsStyle="warning" type="submit">
+                  <Col lg={12} md={12} sm={12} xs={12} className="text-center">
+                    <Button type="submit" className="btn-border-yellow">
                       {translate("l_button")}
                     </Button>
                   </Col>
@@ -101,9 +101,11 @@ class EmailLoginForm extends Component {
               <div className="legend">
                 <Row>
                   <Col sm={6}>
-                    {/* <a onClick={toggleLoginForm}>
-                      {translate("l_mobile_sign")}
-                    </a> */}
+                    <span className="form-label-extra text-capitalize">
+                      <Link to="/forgot-password">
+                        {translate("forgot_password")}
+                      </Link>
+                    </span>
                   </Col>
                   <Col sm={6}>
                     <Link to="/register">{translate("l_join")}</Link>

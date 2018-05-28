@@ -589,6 +589,12 @@ h1 .subtitle {
   .btn-danger .caret {
     border-top-color: #ff4a55; }
 
+.btn-border-yellow:hover, .btn-border-yellow:active {
+  transform: scale(1.2);
+  background-color: #efae02;
+  border: 1px solid #efae02;
+  color: #fff; }
+
 .btn-neutral {
   border-color: #ffffff;
   color: #ffffff; }
@@ -844,14 +850,14 @@ h1 .subtitle {
   color: #87cb16; }
 
 .input-group-addon {
-  background-color: #7d1516;
-  border: 1px solid #7d1516;
+  background-color: #1dc7ea;
+  border: 1px solid #1dc7ea;
   border-radius: 0;
   color: #ffffff; }
   .has-success .input-group-addon,
   .has-error .input-group-addon {
-    background-color: #7d1516;
-    border: 1px solid #7d1516;
+    background-color: #1dc7ea;
+    border: 1px solid #1dc7ea;
     color: #ffffff; }
   .has-error .form-control:focus + .input-group-addon {
     border-color: #ff4a55;
@@ -2070,7 +2076,7 @@ section {
   top: 0;
   left: 0;
   background-size: cover;
-  background-position: 20% center;
+  background-position: right center;
   background-repeat: no-repeat;
   background-attachment: fixed; }
 

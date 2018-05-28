@@ -64,7 +64,7 @@ class ForgotPassword extends Component {
                             <FormInputs
                               proprieties={[
                                 {
-                                  inputGroup: "feedback",
+                                  inputGroup: "icon",
                                   bsIcon: "glyphicon glyphicon-envelope",
                                   label: translate("f_email_address"),
                                   type: "email",
@@ -77,13 +77,15 @@ class ForgotPassword extends Component {
                               ]}
                             />
                             <Row>
-                              <Col lg={12} md={12} sm={12} xs={12}>
+                              <Col
+                                lg={12}
+                                md={12}
+                                sm={12}
+                                xs={12}
+                                className="text-center"
+                              >
                                 <Button
-                                  block
-                                  radius
-                                  fill
-                                  bsStyle="warning"
-                                  className="text-capitalize"
+                                  className="text-capitalize btn-border-yellow"
                                   disabled={success}
                                   type="submit"
                                 >
