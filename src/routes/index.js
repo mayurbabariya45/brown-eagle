@@ -10,6 +10,8 @@ import AddProductContainer from "../containers/AddProductContainer/AddProductCon
 import verificationContainer from "../containers/AuthContainer/VerificationEmailContainer";
 import AccountContainer from "../containers/AccountContainer/AccountContainer";
 import CartContainer from "../containers/CartContainer/CartContainer";
+import QuotationContainer from "../containers/QuotationContainer/QuotationContainer";
+import RequestQuotationContainer from "../containers/QuotationContainer/RequestQuotationContainer";
 
 const appRoutes = [
   { path: "/", exact: true, name: "Home", component: Home },
@@ -75,6 +77,28 @@ const appRoutes = [
     path: "/seller/product/new",
     name: "AddProduct",
     component: AddProductContainer
+  },
+  {
+    header: {
+      navLinks: true,
+      showHeader: "myAccount"
+    },
+    secure: true,
+    type: "buyer",
+    path: "/quotation",
+    name: "Quotation",
+    component: QuotationContainer
+  },
+  {
+    header: {
+      navLinks: true,
+      showHeader: "myAccount"
+    },
+    secure: true,
+    type: "buyer",
+    path: "/request_quotation",
+    name: "RequestQuotation",
+    component: RequestQuotationContainer
   },
   { path: "/product", name: "Product", component: ProductContainer },
   { path: "/products", name: "Products", component: ProductsContainer },

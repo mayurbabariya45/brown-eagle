@@ -4,7 +4,7 @@ import Carousels from "../../components/Carousels/Carousels";
 import StatsCard from "../../components/StatsCard/StatsCard";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
 import { Card } from "../../components/Card/Card";
-import QuotationContainer from "../../containers/QuotationContainer/QuotationContainer";
+import QuotationContainer from "../../containers/QuotationContainer/FormQuotationContainer";
 import product1 from "../../assets/img/products/product1.png";
 import product2 from "../../assets/img/products/product2.png";
 import product3 from "../../assets/img/products/product3.png";

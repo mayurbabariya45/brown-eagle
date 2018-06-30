@@ -72,7 +72,7 @@ class EmailLoginForm extends Component {
                     </Link>
                   </span>
                 </FormInputs>
-                {/* <FormInputs
+                <FormInputs
                   proprieties={[
                     {
                       type: "checkbox",
@@ -82,10 +82,10 @@ class EmailLoginForm extends Component {
                   ]}
                 >
                   <b>{translate("l_stay")}</b>{" "}
-                  <Link to="#" className="keep-login-detail">
+                  {/* <Link to="#" className="keep-login-detail">
                     {translate("l_detail")}
-                  </Link>
-                </FormInputs> */}
+                  </Link> */}
+                </FormInputs>
                 {/* <Error error={errors} message={message} /> */}
                 <Row>
                   <Col lg={12} md={12} sm={12} xs={12} className="text-center">

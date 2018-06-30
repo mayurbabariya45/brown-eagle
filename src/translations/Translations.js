@@ -16,6 +16,7 @@ module.exports = {
       close: "Close",
       home: "Home",
       profile: "My Profile",
+      my_quotation: "My Quotation",
       email: "Email",
       fax: "Fax",
       a_email: "Alternative Email",
@@ -258,6 +259,35 @@ module.exports = {
       cart_remove: "remove",
       cart_continue: "continue shopping",
       cart_order: "place order",
+
+      // Request Quotation
+      request_quotation_title: "Request for Quotation",
+      request_quotation_form_title: "Tell Suppliers what you need",
+      request_quotation_form_title_1: "Complete Your RFQ",
+      request_quotation_form_description:
+        "The more specific your information, the more accurately we can match your request to the right suppliers",
+      request_quotation_form_product_name:
+        "Keywords of product you are looking for",
+      request_quotation_form_name_label: "Please enter the product name",
+      request_quotation_form_description_label:
+        "Please let suppliers know your detailed requirements.You may include: color,size,material,grade/standard, etc",
+      request_quotation_form_description_name:
+        "Dear Sir/Madam,I'm looking for products with following specifications",
+      request_quotation_form_product_categories: "Please select a category",
+      request_quotation_form_product_sub_categories: "Select sub category",
+      request_quotation_form_sub_category_placehholder: "Select Sub Category",
+      request_quotation_form_category_placehholder: "Select Category",
+      request_quotation_form_quote_condition:
+        "I agree to share myBusiness Cardwith quoted suppliers.",
+      request_quotation_form_condition:
+        "I have read, understood and agreed to abide by Term and Conditions Govering RFQ",
+      request_quotation_form_submit: "Submit RFQ",
+      request_quotation_form_quote: "How to Get Quotes quickly?",
+      request_quotation_form_quality: "Purchase Quality",
+      request_quotation_form_quality_label:
+        "Enter estimated bulk order quantity first even if you're requesting for samples",
+      compare_quotes: "Compare Quotes",
+      contact_suppliers: "Contact Supplier",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

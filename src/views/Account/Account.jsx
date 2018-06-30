@@ -4,6 +4,7 @@ import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
 import { Confirm } from "../../components/Confirm/Confirm";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
+import QuotationContainer from "../../containers/AccountContainer/QuotationContainer";
 import Profile from "./Profile";
 import noAvatar from "../../assets/img/no-avatar.png";
 
@@ -47,6 +48,10 @@ class Account extends Component {
                           {translate("profile")}
                         </NavItem>
                         <NavItem eventKey="second">
+                          <i className="pe-7s-users" />
+                          {translate("my_quotation")}
+                        </NavItem>
+                        <NavItem eventKey="third">
                           <i className="pe-7s-lock" />
                           {translate("d_change_password")}
                         </NavItem>
@@ -76,6 +81,13 @@ class Account extends Component {
                       <Profile {...this.props} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
+                      <QuotationContainer
+                        buyerId={user.id}
+                        translate={translate}
+                        showNotification={showNotification}
+                      />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="third">
                       <PasswordContainer
                         translate={translate}
                         showNotification={showNotification}

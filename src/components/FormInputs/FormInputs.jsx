@@ -55,7 +55,7 @@ const FieldGroup = ({
     case "select":
       return (
         <FormGroup validationState={validationState}>
-          <ControlLabel>{label}</ControlLabel>
+          {label && <ControlLabel>{label}</ControlLabel>}
           <FormControl componentClass="select" {...props} placeholder="select">
             {children}
           </FormControl>

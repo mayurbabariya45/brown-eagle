@@ -223,18 +223,22 @@ export const changePassword = value => ({
     ]
   }
 });
-export const getUserProfile = (token, id) => ({
-  [RSAA]: {
-    endpoint: `users/${id}`,
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    types: [
-      a.GET_USER_PROFILE_REQUEST,
-      a.GET_USER_PROFILE_SUCCESS,
-      a.GET_USER_PROFILE_FAILURE
-    ]
-  }
-});
+export const getUserProfile = (token, id, role) => dispatch => {
+  const promise = role === "seller" ? `seller/${id}` : `buyer/${id}`;
+  return dispatch({
+    [RSAA]: {
+      endpoint: promise,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.GET_USER_PROFILE_REQUEST,
+        a.GET_USER_PROFILE_SUCCESS,
+        a.GET_USER_PROFILE_FAILURE
+      ]
+    }
+  });
+};
+
 export const updateProfile = value => ({
   [RSAA]: {
     endpoint: `users/${value.id}`,

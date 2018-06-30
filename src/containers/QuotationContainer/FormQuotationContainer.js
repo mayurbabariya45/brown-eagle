@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
-import Quotation from "../../views/Quotation/Quotation";
+import { reduxForm } from "redux-form";
+import Quotation from "../../components/Quotation/Quotation";
 
 const mapDispatchToProps = dispatch => ({});
 const mapStateToProps = state => ({
@@ -12,5 +13,7 @@ const mergeProps = (state, actions, ownProps) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  Quotation
+  reduxForm({
+    form: "quotationForm"
+  })(Quotation)
 );

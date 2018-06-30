@@ -9,7 +9,7 @@ import { normalizeTypeDescriptors, actionWith } from "./util";
  * @access public
  */
 
-const BASE_URL = "http://35.200.219.57:8000/v1/";
+const BASE_URL = "http://35.197.140.149:8000/v1/";
 
 function apiMiddleware({ getState }) {
   return next => action => {

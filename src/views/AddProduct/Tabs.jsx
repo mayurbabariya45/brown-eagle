@@ -12,14 +12,7 @@ import SearchProductCategories from "./SearchProductCategories";
 import ProductInformationForm from "./form/ProductInformationForm";
 
 const Tabs = props => {
-  const {
-    translate,
-    activeTabs,
-    loading,
-    selectLanguage,
-    selectedLang,
-    selectedCategory
-  } = props;
+  const { translate, activeTabs, loading, selectedCategory } = props;
   let tabsContent;
   switch (activeTabs) {
     case 1:

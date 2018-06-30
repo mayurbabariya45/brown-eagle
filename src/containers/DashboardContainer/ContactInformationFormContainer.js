@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
-import { scroller } from "react-scroll";
+import formValidationScroller from "../../variables/FormValidationScroller";
 import ContactInformationForm from "../../views/Dashboard/form/ContactInformationForm";
 
 const mapStateToProps = state => {
@@ -26,58 +26,12 @@ const mapStateToProps = state => {
     initialValues
   };
 };
-function flatten(arr) {
-  return arr.reduce(
-    (flat, toFlatten) =>
-      flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten),
-    []
-  );
-}
-function getErrorFieldNames(obj, name = "") {
-  const errorArr = [];
-  errorArr.push(
-    Object.keys(obj)
-      .map(key => {
-        const next = obj[key];
-        if (next) {
-          if (typeof next === "string") {
-            return name + key;
-          }
-          // Keep looking
-          if (next.map) {
-            errorArr.push(
-              next
-                .map((item, index) =>
-                  getErrorFieldNames(item, `${name}${key}[${index}].`)
-                )
-                .filter(o => o)
-            );
-          }
-        }
-        return null;
-      })
-      .filter(o => o)
-  );
-  return flatten(errorArr);
-}
 
-function scrollToFirstError(errors) {
-  const errorFields = getErrorFieldNames(errors);
-  // Using breakable for loop
-  for (let i = 0; i < errorFields.length; i++) {
-    const fieldName = errorFields[i];
-    // Checking if the marker exists in DOM
-    if (document.querySelectorAll(`[name="${fieldName}"]`).length) {
-      scroller.scrollTo(fieldName, { offset: -200, smooth: true });
-      break;
-    }
-  }
-}
 export default connect(mapStateToProps)(
   reduxForm({
     form: "contactInformationForm",
     enableReinitialize: true,
     destroyOnUnmount: false,
-    onSubmitFail: errors => scrollToFirstError(errors)
+    onSubmitFail: errors => formValidationScroller(errors)
   })(ContactInformationForm)
 );

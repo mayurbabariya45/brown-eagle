@@ -7,17 +7,24 @@ class CustomSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: ""
+      selectedOption: {}
     };
   }
   handleChange = selectedOption => {
-    const { handleCountry } = this.props;
+    const { handleCountry, handleSelectValue } = this.props;
     this.setState({ selectedOption });
     handleCountry && handleCountry(selectedOption);
+    handleSelectValue && handleSelectValue(selectedOption);
   };
   render() {
     const { selectedOption } = this.state;
-    const { searchable, options, multi, selectedValue } = this.props;
+    const {
+      searchable,
+      options,
+      multi,
+      selectedValue,
+      placeholder
+    } = this.props;
     const value = selectedValue
       ? selectedValue && selectedValue.value
       : selectedOption && selectedOption.value;
@@ -27,6 +34,7 @@ class CustomSelect extends Component {
         name="form-field-name"
         value={value}
         multi={multi}
+        placeholder={placeholder || "Select..."}
         onChange={this.handleChange}
         searchable={searchable}
         options={options}
@@ -35,9 +43,19 @@ class CustomSelect extends Component {
   }
 }
 CustomSelect.propTypes = {
-  searchable: PropTypes.bool
+  searchable: PropTypes.bool,
+  handleSelectValue: PropTypes.func,
+  handleCountry: PropTypes.func,
+  multi: PropTypes.bool,
+  options: PropTypes.arrayOf(PropTypes.any),
+  placeholder: PropTypes.string
 };
 CustomSelect.defaultProps = {
-  searchable: false
+  searchable: false,
+  handleSelectValue: () => {},
+  handleCountry: () => {},
+  multi: false,
+  options: [],
+  placeholder: "Select..."
 };
 export default CustomSelect;
