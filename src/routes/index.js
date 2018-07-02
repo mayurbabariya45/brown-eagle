@@ -101,7 +101,11 @@ const appRoutes = [
     component: RequestQuotationContainer
   },
   { path: "/product", name: "Product", component: ProductContainer },
-  { path: "/products", name: "Products", component: ProductsContainer },
+  {
+    path: "/products/:category?/:subCategory?",
+    name: "Products",
+    component: ProductsContainer
+  },
   { path: "/cart", name: "Cart", component: CartContainer }
 ];
 

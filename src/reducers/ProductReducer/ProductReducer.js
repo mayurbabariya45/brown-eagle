@@ -5,12 +5,15 @@ const initialState = {
   activeTabs: 1,
   error: false,
   success: false,
+  loadProduct: false,
   loading: false,
   selectedLang: "",
   activeCategory: -1,
   categories: [],
   sCategories: [],
-  productImages: []
+  productImages: [],
+  products: [],
+  selectedProductCategory: {}
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -58,6 +61,28 @@ export default (state = initialState, action) => {
       return {
         ...state
       };
+    case a.GET_CATEGORIES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loadProduct: true
+      };
+
+    case a.GET_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        categories: action.payload.category
+      };
+
+    case a.GET_CATEGORIES_FAILURE:
+      return {
+        ...state,
+        loadProduct: false,
+        loading: false,
+        error: true
+      };
 
     // SELECT_CATEGORY
     case a.SELECT_CATEGORY:
@@ -91,6 +116,11 @@ export default (state = initialState, action) => {
         ...state,
         selectedCategory: action.category
       };
+    case a.SELECTED_CATEGORY:
+      return {
+        ...state,
+        selectedProductCategory: action.category
+      };
 
     // SELECT_PRODUCT_LANGUAGE
     case a.SELECT_PRODUCT_LANGUAGE:
@@ -117,6 +147,30 @@ export default (state = initialState, action) => {
         ...state,
         productImages: action.files
       };
+    // GET_CATEGORY_PRODUCTS
+    case a.GET_CATEGORY_PRODUCTS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loadProduct: true
+      };
+
+    case a.GET_CATEGORY_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loadProduct: false,
+        products: action.payload
+      };
+
+    case a.GET_CATEGORY_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        loadProduct: false,
+        loading: false,
+        error: true
+      };
+
     // FLUSH_PRODUCT_IMAGES
     case a.FLUSH_PRODUCT_IMAGES:
       return {
@@ -132,6 +186,7 @@ export default (state = initialState, action) => {
         activeCategory: -1,
         activeTabs: 1
       };
+
     // ADD_PRODUCT
     case a.ADD_PRODUCT_REQUEST:
       return {

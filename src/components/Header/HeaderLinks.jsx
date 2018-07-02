@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { NavItem, Nav, NavDropdown, MenuItem, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import SearchCategories from "../../containers/SearchCategoriesContainer/SearchCategoriesContainer";
-import Categories from "../Categories/Categories";
+import CategoriesContainer from "../../containers/CategoriesContainer/CategoriesContainer";
 import Languages from "../Languages/Languages";
 
 const HeaderLinks = props => {
@@ -152,7 +152,7 @@ const HeaderLinks = props => {
                   >
                     {categories}
                   </Link>
-                  <Categories />
+                  <CategoriesContainer />
                 </li>
               </LinkContainer>
               <NavItem eventKey={2} href="#">

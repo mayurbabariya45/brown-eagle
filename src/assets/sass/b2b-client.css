@@ -1263,6 +1263,11 @@ fieldset[disabled] .form-control {
         font-weight: 700;
         line-height: 16px;
         color: #edb519; }
+      .navbar .navbar-nav > li.header-category-wrapper > .header-category li .level-two-list {
+        display: inline-block;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px; }
       .navbar .navbar-nav > li.header-category-wrapper > .header-category li .level-two-title {
         display: block;
         padding: 0;
@@ -1308,9 +1313,6 @@ fieldset[disabled] .form-control {
           color: #ffffff;
           width: 260px;
           font-size: 12px; }
-          .navbar .navbar-nav > li.header-category-wrapper > .header-category .title a:first-child:after {
-            content: "/";
-            padding: 0 5px; }
         .navbar .navbar-nav > li.header-category-wrapper > .header-category .title i {
           position: absolute;
           padding-right: 10px;
@@ -2284,7 +2286,7 @@ section {
 .list .product-item-info {
   border: none;
   margin: 0 10px;
-  padding: 10px 0 18px; }
+  padding: 0px 0 18px; }
 
 .list .product-item.item:hover .price-box {
   opacity: 0;

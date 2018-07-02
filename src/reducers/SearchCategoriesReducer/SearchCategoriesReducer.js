@@ -35,7 +35,7 @@ const INITIAL_STATE = {
     "ambivalence"
   ],
   suggestions: [],
-  selectedCategory: "categories"
+  selectedCategory: "All Categories"
 };
 
 /**

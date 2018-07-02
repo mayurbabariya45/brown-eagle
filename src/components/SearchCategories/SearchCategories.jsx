@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -182,15 +183,22 @@ class SearchCategories extends Component {
   }
   render() {
     const {
-      translate,
       styles,
       placeholder,
       suggestions,
-      selectedCategory
+      selectedCategory,
+      categories
     } = this.props;
     const { isFocused, value } = this.state;
     // const renderClearButton = this.state.value && renderClearButton;
     const renderSuggestions = value && suggestions.length > 0;
+    const selectCategories = _.map(categories, category => {
+      return (
+        <MenuItem key={category.id} eventKey={category.name}>
+          {category.name}
+        </MenuItem>
+      );
+    });
     return (
       <Col xs={7}>
         <FormGroup className="base-top">
@@ -213,23 +221,9 @@ class SearchCategories extends Component {
                   className="btn-fill"
                   id="main-categories"
                   onSelect={this.handleDropdown}
-                  title={translate(selectedCategory)}
+                  title={selectedCategory}
                 >
-                  <MenuItem key="1" eventKey="categories">
-                    {translate("categories")}
-                  </MenuItem>
-                  <MenuItem key="2" eventKey="books">
-                    {translate("books")}
-                  </MenuItem>
-                  <MenuItem key="3" eventKey="baby">
-                    {translate("baby")}
-                  </MenuItem>
-                  <MenuItem key="4" eventKey="software">
-                    {translate("software")}
-                  </MenuItem>
-                  <MenuItem key="5" eventKey="sports">
-                    {translate("sports")}
-                  </MenuItem>
+                  {selectCategories}
                 </DropdownButton>
                 <FormControl
                   className="form-control-fill"

@@ -114,6 +114,12 @@
             line-height: 16px;
             color: $new-yellow;
           }
+          .level-two-list{
+            display: inline-block;
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+          }
           .level-two-title {
             display: block;
             padding: 0;
@@ -167,10 +173,6 @@
             color: $white-color;
             width: 260px;
             font-size: 12px;
-            &:first-child:after {
-              content: "/";
-              padding: 0 5px;
-            }
           }
           i {
             position: absolute;

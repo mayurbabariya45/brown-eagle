@@ -3,7 +3,8 @@ import SearchCategories from "../../components/SearchCategories/SearchCategories
 import * as a from "../../actions/SearchCategories/SearchCategories";
 
 const mapStateToProps = state => ({
-  ...state.categories
+  ...state.searchCategories,
+  categories: state.categories.categories
 });
 const mapDispatchToProps = dispatch => ({
   onChange: value => dispatch(a.onChange(value)),

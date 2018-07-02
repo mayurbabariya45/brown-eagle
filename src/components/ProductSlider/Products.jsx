@@ -41,7 +41,11 @@ const Products = props => {
           <a href="#products" className="product photo product-item-photo">
             <span className="product-image-container">
               <span className="product-image-wrapper">
-                <ImageLoader preloader={preloader} src={productImages || src} />
+                <ImageLoader
+                  preloader={preloader}
+                  src={productImages || src}
+                  className="img-responsive"
+                />
               </span>
             </span>
           </a>
@@ -145,11 +149,17 @@ const Products = props => {
           <div>
             <h2 className="product name product-item-name product-name">
               <a href="#products" className="product-item-link">
-                Safescan 2210 Banknote Counter
+                {!_.isEmpty(product)
+                  ? product.name
+                  : "Safescan 2210 Banknote Counter"}
               </a>
             </h2>
             <div className="product-desc">
-              <p>Midnight Black Dual Rear Camera</p>
+              <p>
+                {!_.isEmpty(product)
+                  ? product.description
+                  : "Midnight Black Dual Rear Camera"}
+              </p>
             </div>
             <div className="product-reviews-summary short">
               <div className="rating-summary">
@@ -174,7 +184,11 @@ const Products = props => {
       </div>
       {!lists && (
         <div className="price-box price-final_price">
-          <span className="price">$2,506.00</span>
+          <span className="price">
+            ${!_.isEmpty(product)
+              ? product.productPrice.toFixed(2)
+              : "2,506.00"}
+          </span>
         </div>
       )}
       {bAction &&

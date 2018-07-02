@@ -18,6 +18,10 @@ export const selectCategory = category => ({
   category
 });
 
+export const selectedCategory = category => ({
+  type: a.SELECTED_CATEGORY,
+  category
+});
 export const selectLanguage = lang => ({
   type: a.SELECT_PRODUCT_LANGUAGE,
   lang
@@ -41,11 +45,18 @@ export const flushAddProduct = () => ({
   type: a.FLUSH_ADD_PRODUCT
 });
 
-export const getCategories = () => dispatch => {
-  dispatch({
-    type: a.GET_CATEGORY_SUCCESS
+export const getCategories = () => dispatch => dispatch({
+    [RSAA]: {
+      endpoint: "category",
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.GET_CATEGORIES_REQUEST,
+        a.GET_CATEGORIES_SUCCESS,
+        a.GET_CATEGORIES_FAILURE
+      ]
+    }
   });
-};
 export const dropProductImages = files => ({
   type: a.DROP_PRODUCT_IMAGES,
   files
@@ -57,6 +68,22 @@ export const removeProductImages = files => ({
 export const flushProductImages = () => ({
   type: a.FLUSH_PRODUCT_IMAGES
 });
+export const getProducts = (categoryId, subCategoryId, page) => dispatch => {
+  const subCategory = subCategoryId ? `&subCategory=${subCategoryId}` : "";
+  return dispatch({
+    [RSAA]: {
+      endpoint: `product?page=${page}&category=${categoryId}${subCategory}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      types: [
+        a.GET_CATEGORY_PRODUCTS_REQUEST,
+        a.GET_CATEGORY_PRODUCTS_SUCCESS,
+        a.GET_CATEGORY_PRODUCTS_FAILURE
+      ]
+    }
+  });
+};
+
 export const addProduct = (product, locale) => dispatch =>
   dispatch({
     [RSAA]: {
