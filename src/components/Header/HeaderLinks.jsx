@@ -138,7 +138,7 @@ const HeaderLinks = props => {
           <div className="clearfix" />
           <Row>
             <Nav>
-              <LinkContainer to="/home" className="header-category-trigger">
+              <LinkContainer to="/#/" className="header-category-trigger">
                 <li
                   role="presentation"
                   className={classNames(
