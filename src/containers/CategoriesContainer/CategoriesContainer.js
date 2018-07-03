@@ -14,4 +14,6 @@ const mergeProps = (state, actions, ownProps) => ({
   ...ownProps
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  Categories
+);

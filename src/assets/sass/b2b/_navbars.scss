@@ -355,6 +355,15 @@
     > li > a:not(.btn) {
       line-height: 33px;
     }
+    > li.cart-link > a{
+      position: relative;
+      .cart-total{
+        position: absolute;
+        left: 14px;
+        top: 12px;
+        color:$white-color;
+      }
+    }
   }
   .navbar-nav {
     > li:first-child > a:not(.btn) {

@@ -16,12 +16,18 @@ class Products extends Component {
       subCategoryId: null,
       currentPage: 1
     };
+    this.addToCart = this.addToCart.bind(this);
   }
   componentWillMount() {
-    const { getCategories } = this.props;
-    getCategories().then(response => {
-      this.setState({ ...response });
-    });
+    const { getCategories, getProducts, match } = this.props;
+    const { category } = match.params;
+    if (!_.isEmpty(category)) {
+      getCategories().then(response => {
+        this.setState({ ...response });
+      });
+    } else {
+      getProducts("", "", 1);
+    }
   }
   onPageChanged = data => {
     const { currentPage } = data;
@@ -30,12 +36,32 @@ class Products extends Component {
     this.setState({ currentPage });
     getProducts(categoryId, subCategoryId, currentPage);
   };
+  addToCart(item) {
+    const { addToCart, showNotification } = this.props;
+    const objectProduct = Object.assign({}, item, { quantity: 1 });
+    addToCart(objectProduct).then(response => {
+      if (response.type === "ADD_TO_CART_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{`${item.name} has been added successfully in cart.`}</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>Profile has been changed successfully.</div>,
+          true
+        );
+      }
+    });
+  }
   render() {
     const {
       translate,
       products,
       selectedProductCategory,
       loadProduct,
+      addToCart,
       match
     } = this.props;
     const { currentPage } = this.state;
@@ -45,7 +71,7 @@ class Products extends Component {
     if (end > count) {
       end = count;
     }
-    let selectedCategoryName;
+    let selectedCategoryName = "Products";
     const breadcrumb = [];
     if (!_.isEmpty(selectedProductCategory)) {
       const { category, subCategory } = match.params;
@@ -92,7 +118,8 @@ class Products extends Component {
                       <div className="title">
                         <h5>{selectedCategoryName}</h5>
                         <small>
-                          (Showing {start} – {end} products of {count || 0} products)
+                          (Showing {start} – {end} products of {count || 0}{" "}
+                          products)
                         </small>
                       </div>
                       <div className="toolbar-sorter sorter">
@@ -122,6 +149,7 @@ class Products extends Component {
                           product={product}
                           translate={translate}
                           bAction={false}
+                          addToCart={() => this.addToCart(product)}
                           buttons
                         />
                       </div>
@@ -148,7 +176,9 @@ Products.propTypes = {
   getProducts: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.any),
   selectedProductCategory: PropTypes.objectOf(PropTypes.any),
-  loadProduct: PropTypes.bool
+  loadProduct: PropTypes.bool,
+  addToCart: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired
 };
 
 Products.defaultProps = {

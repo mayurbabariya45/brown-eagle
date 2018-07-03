@@ -41,7 +41,8 @@ export default function PublicHoc(WrappedComponent, passedProps) {
   });
   const mapStateToProps = state => ({
     auth: state.auth,
-    notifications: state.notifications
+    notifications: state.notifications,
+    cartProductTotal: state.cart.cartProductTotal
   });
   return connect(mapStateToProps, mapDispatchToProps)(WrapperComponent);
 }

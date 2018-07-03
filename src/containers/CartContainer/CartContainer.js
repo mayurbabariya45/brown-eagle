@@ -1,9 +1,17 @@
 import { connect } from "react-redux";
 import Cart from "../../views/Cart/Cart";
+import * as a from "../../actions/Cart/Cart_actions";
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  getCartProduct: () => {},
+  getCartTotal: () => {},
+  addToWhishlist: item => dispatch(a.addToWhishlist(item)),
+  removeCartItem: item => dispatch(a.removeCartItem(item)),
+  onIncrement: item => dispatch(a.onIncrement(item)),
+  onDecrement: item => dispatch(a.onDecrement(item))
+});
 const mapStateToProps = state => ({
-  ...state.product
+  ...state.cart
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,

@@ -2,12 +2,14 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import Products from "../../views/Products/Products";
 import * as a from "../../actions/Product/Product_actions";
+import * as c from "../../actions/Cart/Cart_actions";
 
 const mapDispatchToProps = dispatch => ({
   getProducts: (categoryId, subCategoryId, page) =>
     dispatch(a.getProducts(categoryId, subCategoryId, page)),
   getCategories: () => dispatch(a.getCategories()),
-  selectedCategory: category => dispatch(a.selectedCategory(category))
+  selectedCategory: category => dispatch(a.selectedCategory(category)),
+  addToCart: item => dispatch(c.addToCart(item))
 });
 const mapStateToProps = state => ({
   ...state.product,

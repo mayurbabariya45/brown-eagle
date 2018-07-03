@@ -10,6 +10,7 @@ import verificationReducer from "./AuthReducer/VerificationReducer";
 import dashboardReducer from "./DashboardReducer/DashboardReducer";
 import searchCategoriesReducer from "./SearchCategoriesReducer/SearchCategoriesReducer";
 import categoriesReducer from "./CategoriesReducer/CategoriesReducer";
+import cartReducer from "./CartReducer/CartReducer";
 
 const rootReducers = combineReducers({
   newsLetter: newsLetterReducer,
@@ -21,6 +22,7 @@ const rootReducers = combineReducers({
   categories: categoriesReducer,
   dashboard: dashboardReducer,
   verification: verificationReducer,
+  cart: cartReducer,
   Intl,
   notifications
 });

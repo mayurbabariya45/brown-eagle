@@ -32,7 +32,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         success: true,
         products: [
-          ...action.payload.map(product =>
+          ..._.map(action.payload, product =>
             Object.assign({}, product, {
               isLoading: true
             })
@@ -58,7 +58,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         products: [
-          ...state.products.map(product =>
+          ..._.map(state.products, product =>
             Object.assign({}, product, {
               isLoading: true
             })
@@ -115,7 +115,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         products: [
-          ...state.products.map(product => {
+          ..._.map(state.products, product => {
             const productImages = action.payload;
             const productKey = _.indexOf(
               _.map(productImages, "productId"),

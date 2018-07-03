@@ -10,7 +10,7 @@ import CategoriesContainer from "../../containers/CategoriesContainer/Categories
 import Languages from "../Languages/Languages";
 
 const HeaderLinks = props => {
-  const { translate, showHeader, logout, history } = props;
+  const { translate, showHeader, logout, history, cartProductTotal } = props;
   const { user } = props.auth;
   const orders = (
     <div>
@@ -129,8 +129,9 @@ const HeaderLinks = props => {
                 </MenuItem>
               )}
             </NavDropdown>
-            <NavItem eventKey={2} href="#">
-              <i className="pe-7s-shopbag" />
+            <NavItem eventKey={2} href="/#/cart" className="cart-link">
+              <i className="icon-shopping-bag" />
+              <span className="cart-total">{cartProductTotal}</span>
               {translate("cart")}
             </NavItem>
             <Languages {...props} />

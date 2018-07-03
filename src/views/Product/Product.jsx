@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Tabs, Tab } from "react-bootstrap";
@@ -15,10 +16,51 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.addToCart = this.addToCart.bind(this);
   }
-
+  componentWillMount() {
+    const { getProduct, match, history, locale } = this.props;
+    const { productName, productId } = match.params;
+    if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
+      getProduct(productId, locale);
+    } else {
+      history.goBack();
+    }
+  }
+  componentWillUnmount() {
+    const { flushProduct } = this.props;
+    flushProduct();
+  }
+  addToCart() {
+    const { product, addToCart,addToCartUnsafe, showNotification, quantity } = this.props;
+    const objectProduct = Object.assign({}, product, { quantity });
+    console.log(product);
+    addToCartUnsafe(objectProduct);
+    addToCart(objectProduct).then(response => {
+      if (response.type === "ADD_TO_CART_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{`${product.name} has been added successfully in cart.`}</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>Profile has been changed successfully.</div>,
+          true
+        );
+      }
+    });
+  }
   render() {
-    const { translate, onIncrement, onDecrement, quantity } = this.props;
+    const {
+      translate,
+      onIncrement,
+      onDecrement,
+      quantity,
+      product
+    } = this.props;
+    const { name, description, productPrice, productPictures } = product;
     return (
       <section className="product-view">
         <Grid>
@@ -29,17 +71,14 @@ class Product extends Component {
             <Col sm={12}>
               <Row>
                 <Col sm={6}>
-                  <ProductImageSlider />
+                  <ProductImageSlider images={productPictures} />
                 </Col>
                 <Col className="product-info-main product-shop" sm={6}>
                   <div className="product-shop-content">
                     <div className="product-info-title">
                       <div className="page-title-wrapper">
                         <h1 className="page-title">
-                          <span>
-                            Mobile smart phone touch screen display cell phone
-                            parts for i5/i6/i7/i8 series refurbishing
-                          </span>
+                          <span>{name}</span>
                         </h1>
                       </div>
                     </div>
@@ -58,19 +97,13 @@ class Product extends Component {
                     </div>
                     <div className="product-info-price">
                       <div className="price-box price-final_price">
-                        <span className="price">$2,506.00</span>
+                        <span className="price">
+                          ${productPrice ? productPrice.toFixed(2) : "0.00"}
+                        </span>
                       </div>
                     </div>
                     <div className="product attribute overview">
-                      <p>
-                        Lorem ipsum dolor sit amet, an munere tibique consequat
-                        mel, congue albucius no qui, at everti meliore erroribus
-                        sea. Vero graeco cotidieque ea duo, in eirmod insolens
-                        interpretaris nam. Pro at nostrud percipit definitiones,
-                        eu tale porro cum. Sea ne accusata voluptatibus. Ne cum
-                        falli dolor voluptua, duo ei sonet choro facilisis,
-                        labores officiis torquatos cum ei.
-                      </p>
+                      <p>{description}</p>
                     </div>
                     <div className="product-add-cart">
                       <div className="box-tocart">
@@ -85,6 +118,7 @@ class Product extends Component {
                             radius
                             bsStyle="warning"
                             className="action tocart"
+                            onClick={() => this.addToCart()}
                           >
                             <span>Add to cart</span>
                           </Button>
@@ -120,45 +154,7 @@ class Product extends Component {
                     title="Description"
                     className="product attribute description"
                   >
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries, but also the leap into electronic typesetting,
-                      remaining essentially unchanged. It was popularised in the
-                      1960s with the release of Letraset sheets containing Lorem
-                      Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem
-                      Ipsum.
-                    </p>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries, but also the leap into electronic typesetting,
-                      remaining essentially unchanged. It was popularised in the
-                      1960s with the release of Letraset sheets containing Lorem
-                      Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem
-                      Ipsum.
-                    </p>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries, but also the leap into electronic typesetting,
-                      remaining essentially unchanged. It was popularised in the
-                      1960s with the release of Letraset sheets containing Lorem
-                      Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem
-                      Ipsum.
-                    </p>
+                    <p>{description}</p>
                   </Tab>
                   <Tab eventKey={2} title="Reviews">
                     Tab 2 content
@@ -235,6 +231,15 @@ Product.propTypes = {
   translate: PropTypes.func.isRequired,
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired,
-  quantity: PropTypes.number.isRequired
+  quantity: PropTypes.number.isRequired,
+  getProduct: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired,
+  flushProduct: PropTypes.func.isRequired,
+  locale: PropTypes.string
+};
+
+Product.defaultProps = {
+  locale: ""
 };
 export default Product;

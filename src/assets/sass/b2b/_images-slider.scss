@@ -198,3 +198,28 @@
   transition-property: transform, width;
   transition-timing-function: cubic-bezier(0.1, 0, 0.25, 1);
 }
+.image-gallery-thumbnail {
+  &.active{
+    border: 2px solid #7d1516;
+  }
+  .image-gallery-thumbnails-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  img{
+    height: 92px;
+  }
+}
+.image-gallery-fullscreen-button:hover::before, .image-gallery-play-button:hover::before, .image-gallery-left-nav:hover::before, .image-gallery-right-nav:hover::before{
+  color:#7d1516
+}
+.image-gallery-slide{
+  height: 450px;
+  img{
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+}

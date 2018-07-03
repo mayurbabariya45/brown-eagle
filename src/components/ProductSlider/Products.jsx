@@ -1,5 +1,6 @@
 import _ from "lodash";
 import React from "react";
+import { Link } from "react-router-dom";
 import className from "classnames";
 import PropTypes from "prop-types";
 import ImageLoader from "../ImageLoader/ImageLoader";
@@ -19,9 +20,11 @@ const Products = props => {
     lists,
     product,
     deleteProduct,
-    editProduct
+    editProduct,
+    addToCart
   } = props;
   let productImages;
+  let productUrl = "/products";
   if (!_.isEmpty(product)) {
     if (!_.isEmpty(product.productPictures)) {
       const { productPictures } = product;
@@ -29,6 +32,7 @@ const Products = props => {
     } else {
       productImages = noProduct;
     }
+    productUrl = `/product/${_.kebabCase(product.name)}/${product.id}`;
   }
   return (
     <div className="product-item-info per-product">
@@ -38,7 +42,7 @@ const Products = props => {
             noBorder: !_.isEmpty(product) ? product.isLoading : false
           })}
         >
-          <a href="#products" className="product photo product-item-photo">
+          <Link to={productUrl} className="product photo product-item-photo">
             <span className="product-image-container">
               <span className="product-image-wrapper">
                 <ImageLoader
@@ -48,7 +52,7 @@ const Products = props => {
                 />
               </span>
             </span>
-          </a>
+          </Link>
           {!bAction &&
             buttons && (
               <div className="actions-secondary add-to-links">
@@ -78,9 +82,9 @@ const Products = props => {
           <div className="products-textlink clearfix">
             <div className="left-product-text">
               <h2 className="product name product-item-name product-name">
-                <a href="#products" className="product-item-link">
+                <Link to={productUrl} className="product-item-link">
                   {product.name}
-                </a>
+                </Link>
               </h2>
               <div className="price-box price-final_price">
                 <span className="price">
@@ -148,11 +152,11 @@ const Products = props => {
         {!lists && (
           <div>
             <h2 className="product name product-item-name product-name">
-              <a href="#products" className="product-item-link">
+              <Link to={`/${productUrl}`} className="product-item-link">
                 {!_.isEmpty(product)
                   ? product.name
                   : "Safescan 2210 Banknote Counter"}
-              </a>
+              </Link>
             </h2>
             <div className="product-desc">
               <p>
@@ -216,7 +220,12 @@ const Products = props => {
       {buttons && (
         <div className="action-showcart">
           <div className="actions-primary">
-            <Button fill bsStyle="warning" className="action tocart">
+            <Button
+              fill
+              bsStyle="warning"
+              className="action tocart"
+              onClick={addToCart}
+            >
               <span>{translate("add_to_cart")}</span>
             </Button>
           </div>
@@ -228,6 +237,7 @@ const Products = props => {
 
 Products.propTypes = {
   translate: PropTypes.func.isRequired,
+  addToCart: PropTypes.func,
   deleteProduct: PropTypes.func,
   editProduct: PropTypes.func,
   bAction: PropTypes.bool,
@@ -240,6 +250,7 @@ Products.defaultProps = {
   buttons: false,
   lists: false,
   editProduct: () => {},
-  deleteProduct: () => {}
+  deleteProduct: () => {},
+  addToCart: () => {}
 };
 export default Products;

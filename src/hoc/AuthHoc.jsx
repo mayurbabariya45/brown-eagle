@@ -111,7 +111,8 @@ export default function AuthHoc(WrappedComponent, passedProps) {
   });
   const mapStateToProps = state => ({
     auth: state.auth,
-    notifications: state.notifications
+    notifications: state.notifications,
+    cartProductTotal: state.cart.cartProductTotal
   });
   const mergeProps = (state, actions, ownProps) => ({
     ...state,

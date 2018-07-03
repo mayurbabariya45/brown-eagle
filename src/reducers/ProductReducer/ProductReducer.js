@@ -13,7 +13,8 @@ const initialState = {
   sCategories: [],
   productImages: [],
   products: [],
-  selectedProductCategory: {}
+  selectedProductCategory: {},
+  product: {}
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -170,7 +171,33 @@ export default (state = initialState, action) => {
         loading: false,
         error: true
       };
+    // GET_PRODUCT_WITH_ID
 
+    case a.GET_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case a.GET_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        product: action.payload
+      };
+
+    case a.GET_PRODUCT_FAILURE:
+      return {
+        ...state,
+        error: true
+      };
+    case a.FLUSH_PRODUCT:
+      return {
+        ...state,
+        quantity: 1,
+        product: {}
+      };
     // FLUSH_PRODUCT_IMAGES
     case a.FLUSH_PRODUCT_IMAGES:
       return {

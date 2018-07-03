@@ -526,6 +526,17 @@ section {
   background-position: top;
   vertical-align: middle;
 }
+.icon-shopping-bag {
+  background: url("../img/icon/shopping-bag.png");
+  margin-right: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  vertical-align: middle;
+  display: inline-block;
+  width: 25px;
+  height: 30px;
+}
 
 .profile {
   .checkbox {
