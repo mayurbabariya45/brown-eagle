@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
   ...state.dashboard
 });
 const mapDispatchToProps = dispatch => ({
-  updateProfile: value => dispatch(a.updateProfile(value)),
+  updateProfile: (value, profileId, profileRole) =>
+    dispatch(a.updateProfile(value, profileId, profileRole)),
   getProducts: (id, token) => dispatch(d.getProducts(id, token)),
   getProduct: product => dispatch(d.getProduct(product)),
   getProductImage: (id, token) => dispatch(d.getProductImage(id, token)),
@@ -22,7 +23,7 @@ const mergeProps = (state, actions, ownProps) => ({
   getProducts: (id, token) => {
     actions.getProducts(id, token).then(response => {
       if (response.type === "GET_PRODUCTS_SUCCESS") {
-        const products = response.payload;
+        const { products } = response.payload;
         _.forEach(products, product => actions.getProductImage(product.id));
       }
     });

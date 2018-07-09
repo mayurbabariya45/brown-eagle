@@ -239,29 +239,39 @@ export const getUserProfile = (token, id, role) => dispatch => {
   });
 };
 
-export const updateProfile = value => ({
-  [RSAA]: {
-    endpoint: `users/${value.id}`,
-    method: "PATCH",
-    body: JSON.stringify(value),
-    headers: { "Content-Type": "application/json" },
-    types: [
-      a.UPDATE_PROFILE_REQUEST,
-      a.UPDATE_PROFILE_SUCCESS,
-      a.UPDATE_PROFILE_FAILURE
-    ]
-  }
-});
+export const updateProfile = (value, profileId, role) => dispatch => {
+  const promise =
+    role === "seller" ? `seller/${profileId}` : `buyer/${profileId}`;
+  return dispatch({
+    [RSAA]: {
+      endpoint: promise,
+      method: "PATCH",
+      body: JSON.stringify(value),
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.UPDATE_PROFILE_REQUEST,
+        a.UPDATE_PROFILE_SUCCESS,
+        a.UPDATE_PROFILE_FAILURE
+      ]
+    }
+  });
+};
 
-export const userAvatar = (value, token) => ({
-  [RSAA]: {
-    endpoint: `users/avatar/${token}`,
-    method: "POST",
-    body: value,
-    types: [
-      a.UPDATE_AVATAR_REQUEST,
-      a.UPDATE_AVATAR_SUCCESS,
-      a.UPDATE_AVATAR_FAILURE
-    ]
-  }
-});
+export const userAvatar = (value, profileId, role) => dispatch => {
+  const promise =
+    role === "seller"
+      ? `seller/${profileId}/avatar`
+      : `buyer/${profileId}/avatar`;
+  return dispatch({
+    [RSAA]: {
+      endpoint: promise,
+      method: "POST",
+      body: value,
+      types: [
+        a.UPDATE_AVATAR_REQUEST,
+        a.UPDATE_AVATAR_SUCCESS,
+        a.UPDATE_AVATAR_FAILURE
+      ]
+    }
+  });
+};

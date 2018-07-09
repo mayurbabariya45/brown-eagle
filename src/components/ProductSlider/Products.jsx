@@ -88,7 +88,9 @@ const Products = props => {
               </h2>
               <div className="price-box price-final_price">
                 <span className="price">
-                  ${product.productPrice.toFixed(2)}
+                  ${!_.isEmpty(product) && _.has(product, "productPrice")
+                    ? product.productPrice.toFixed(2)
+                    : "0.00"}
                 </span>
               </div>
               <div className="product-reviews-summary short">

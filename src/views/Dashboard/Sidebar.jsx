@@ -146,7 +146,6 @@ class Sidebar extends Component {
 }
 Sidebar.propTypes = {
   translate: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
-  history: PropTypes.arrayOf(PropTypes.any).isRequired
+  logout: PropTypes.func.isRequired
 };
 export default Sidebar;

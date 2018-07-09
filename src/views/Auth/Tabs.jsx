@@ -76,7 +76,7 @@ const Tabs = props => {
               <span>{translate("r_confirmation_email")}</span>
               <em>{formData.username}</em>
             </h4>
-            <h5>{emailSent}</h5>
+            <h5> {emailSent}</h5>
             {/* <div className="email-sent-op">
                 <OverlayTrigger
                   trigger="click"

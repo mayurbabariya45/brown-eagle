@@ -28,32 +28,40 @@ export default function AuthHoc(WrappedComponent, passedProps) {
         removeAll
       } = this.props;
       const { locale, type } = passedProps;
-      const token = localStorage.getItem("webAuthToken");
-      const id = localStorage.getItem("webAuthId");
+      const webAuthToken = localStorage.getItem("webAuthToken");
+      const webAuthId = localStorage.getItem("webAuthId");
+      const webAuthRole = localStorage.getItem("webAuthRole");
       const { user } = auth;
-
       if (user.length < 1) {
-        if (token && id) {
-          checkAuthStatus(token, id, locale).then(() => {
-            getUserProfile(token, id).then(profile => {
-              if (profile.payload.role === type) {
-                return true;
+        if (webAuthToken && webAuthId && webAuthRole) {
+          checkAuthStatus(webAuthToken, webAuthId, locale).then(() => {
+            getUserProfile(webAuthToken, webAuthId, webAuthRole).then(
+              profile => {
+                if (profile.payload.role === type) {
+                  return true;
+                }
+                history.push("/login");
+                return false;
               }
-              history.push("/login");
-              return false;
-            });
+            );
           });
         } else {
           history.push("/login");
         }
       } else {
         if (user.role === type) {
+          getUserProfile(webAuthToken, user.id, user.role).then(profile => {
+            if (profile.payload.role === type) {
+              return true;
+            }
+            history.push("/login");
+            return false;
+          });
           return true;
         }
         history.goBack();
         return false;
       }
-
       return false;
     }
     render() {
@@ -86,7 +94,8 @@ export default function AuthHoc(WrappedComponent, passedProps) {
     logout: () => dispatch(a.logout()),
     checkAuthStatus: (token, id, locale) =>
       dispatch(a.checkAuthStatus(token, id, locale)),
-    getUserProfile: (token, id) => dispatch(a.getUserProfile(token, id)),
+    getUserProfile: (token, id, role) =>
+      dispatch(a.getUserProfile(token, id, role)),
     showNotification: (title, message, fail) =>
       dispatch(a.showNotification(title, message, fail)),
     removeAll: () => dispatch(Notifications.removeAll()),
@@ -121,6 +130,7 @@ export default function AuthHoc(WrappedComponent, passedProps) {
     logout: () => {
       localStorage.removeItem("webAuthId");
       localStorage.removeItem("webAuthToken");
+      localStorage.removeItem("webAuthRole");
       actions.logout();
     }
   });

@@ -118,22 +118,19 @@ class CompanyInformationForm extends Component {
   handleSubmit(values) {
     const { handleSubmitForm } = this.props;
     const data = {
-      id: values.id,
-      profile: {
-        mainProducts: _.map(this.state.value, "value"),
-        ...values,
-        registeredAddress: {
-          address: values.registeredAddress,
-          city: values.r_city,
-          country: values.r_country,
-          areaCode: values.r_area_code
-        },
-        operationalAddress: {
-          address: values.operationalAddress,
-          city: values.o_city,
-          country: values.o_country,
-          areaCode: values.o_area_code
-        }
+      mainProducts: _.map(this.state.value, "value"),
+      ...values,
+      registeredAddress: {
+        address: values.registeredAddress,
+        city: values.r_city,
+        country: values.r_country,
+        areaCode: values.r_area_code
+      },
+      operationalAddress: {
+        address: values.operationalAddress,
+        city: values.o_city,
+        country: values.o_country,
+        areaCode: values.o_area_code
       }
     };
     delete data.o_area_code;

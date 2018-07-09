@@ -9,7 +9,7 @@ class Avatar extends Component {
     this.onChangeFile = this.onChangeFile.bind(this);
   }
   onChangeFile(event) {
-    const { updateAvatar, showNotification, id } = this.props;
+    const { updateAvatar, showNotification, id, role } = this.props;
     event.stopPropagation();
     event.preventDefault();
     const file = event.target.files[0];
@@ -17,7 +17,7 @@ class Avatar extends Component {
       this.setState({ picture: window.URL.createObjectURL(file) });
       const formData = new FormData();
       formData.append("image", file);
-      updateAvatar(formData, id).then(payload => {
+      updateAvatar(formData, id, role).then(payload => {
         if (payload.type === "UPDATE_AVATAR_SUCCESS") {
           showNotification(
             <span data-notify="icon" className="pe-7s-check" />,

@@ -3,7 +3,8 @@ import Avatar from "../../views/Auth/Avatar";
 import * as a from "../../actions/Auth/Auth_actions";
 
 const mapDispatchToProps = dispatch => ({
-  updateAvatar: (value, token) => dispatch(a.userAvatar(value, token)),
+  updateAvatar: (value, profileId, profileRole) =>
+    dispatch(a.userAvatar(value, profileId, profileRole)),
   flushState: () => dispatch(a.flushState())
 });
 export default connect(null, mapDispatchToProps)(Avatar);

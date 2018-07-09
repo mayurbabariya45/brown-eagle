@@ -333,6 +333,9 @@ section {
       h4{
         font-size: $font-size-medium;
         margin-top: 0;
+        em{
+          padding-left: 5px;
+        }
       }
       p {
         font-size: $font-size-medium;

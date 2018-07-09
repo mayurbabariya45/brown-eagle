@@ -24,22 +24,18 @@ const Profile = props => {
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
   const twitter = _.find(user.socialLinks, ["platform", "twitter"]);
   const google = _.find(user.socialLinks, ["platform", "google"]);
-  const registeredAddress =
-    user.profile && !_.isEmpty(user.profile.registeredAddress)
-      ? `${user.profile.registeredAddress.address} ${
-          user.profile.registeredAddress.areaCode
-        } ${user.profile.registeredAddress.city} ${
-          user.profile.registeredAddress.country
-        }`
-      : "none";
-  const operationalAddress =
-    user.profile && !_.isEmpty(user.profile.operationalAddress)
-      ? `${user.profile.operationalAddress.address}
-         ${user.profile.operationalAddress.areaCode}
-         ${user.profile.operationalAddress.city}
-         ${user.profile.operationalAddress.country}
+  const registeredAddress = !_.isEmpty(user.registeredAddress)
+    ? `${user.registeredAddress.address} ${user.registeredAddress.areaCode} ${
+        user.registeredAddress.city
+      } ${user.registeredAddress.country}`
+    : "none";
+  const operationalAddress = !_.isEmpty(user.operationalAddress)
+    ? `${user.operationalAddress.address}
+         ${user.operationalAddress.areaCode}
+         ${user.operationalAddress.city}
+         ${user.operationalAddress.country}
         `
-      : "none";
+    : "none";
   return (
     <div className="profile">
       <Row>
@@ -263,12 +259,12 @@ const Profile = props => {
                         <FormControl.Static>
                           {user.profile
                             ? _.map(user.profile.mainProducts, product => (
-                              <span
-                                  key={product}
-                                  className="label label-warning"
-                                >
-                                  {product}
-                                </span>
+                                <span
+                                key={product}
+                                className="label label-warning"
+                              >
+                                {product}
+                              </span>
                               ))
                             : "none"}
                         </FormControl.Static>

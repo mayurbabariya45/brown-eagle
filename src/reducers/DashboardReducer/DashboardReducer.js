@@ -32,7 +32,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         success: true,
         products: [
-          ..._.map(action.payload, product =>
+          ..._.map(action.payload.products, product =>
             Object.assign({}, product, {
               isLoading: true
             })

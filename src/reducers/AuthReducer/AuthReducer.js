@@ -48,6 +48,7 @@ export default (state = INITIAL_STATE, action) => {
       if (action.payload) {
         localStorage.setItem("webAuthToken", action.payload.auth.key);
         localStorage.setItem("webAuthId", action.payload.user.id);
+        localStorage.setItem("webAuthRole", action.payload.user.role);
       }
       return {
         ...state,

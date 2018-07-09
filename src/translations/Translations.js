@@ -537,7 +537,14 @@ module.exports = {
       d_approved: "Approuvé",
       d_submit: "Soumettre",
       d_change_password: "Changer le mot de passe",
-
+      d_products: "Mes produits",
+      d_messages: "Centre de messagerie",
+      d_orders: "Ordres",
+      d_all_orders: "Tous les ordres",
+      d_manage_feedback: "Gérer les commentaires",
+      d_wholesale_dispute: "Gérer le différend de gros",
+      d_coupon: "Mes coupons",
+      d_contacts: "Contacts",
       // Footer
       about_us: "à propos de nous",
       sell_on_brown_eagle: "Vendre sur aigle marron",
@@ -810,7 +817,14 @@ module.exports = {
       p_contact_information: "Informazioni sui contatti",
       p_company_information: "Informazioni sull'azienda",
       d_change_password: "Cambia la password",
-
+      d_products: "I miei prodotti",
+      d_messages: "Centro messaggi",
+      d_orders: "Ordini",
+      d_all_orders: "Tutti gli ordini",
+      d_manage_feedback: "Gestire feedback",
+      d_wholesale_dispute: "Gestisci le controversie all'ingrosso",
+      d_coupon: "I miei coupon",
+      d_contacts: "Contatti",
       // Validation Messages
 
       phone_number_validation:
@@ -1102,7 +1116,14 @@ module.exports = {
       p_contact_information: "Información del contacto",
       p_company_information: "Información de la compañía",
       d_change_password: "Cambia la contraseña",
-
+      d_products: "Mis productos",
+      d_messages: "Centro de mensajes",
+      d_orders: "Pedidos",
+      d_all_orders: "Todas las órdenes",
+      d_manage_feedback: "Gestionar Comentarios",
+      d_wholesale_dispute: "Administre la disputa al por mayor",
+      d_coupon: "Mis cupones",
+      d_contacts: "Contactos",
       // Validation Messages
 
       phone_number_validation:
@@ -1397,8 +1418,15 @@ module.exports = {
       d_rejected_requests: "Geweigerde koopverzoeken",
       p_contact_information: "Contactgegevens",
       p_company_information: "bedrijfsinformatie",
-      d_change_password: "Change Password",
-
+      d_change_password: "Verander wachtwoord",
+      d_products: "Mijn producten",
+      d_messages: "Berichten centrum",
+      d_orders: "bestellingen",
+      d_all_orders: "Alle bestellingen",
+      d_manage_feedback: "Manage Feedback",
+      d_wholesale_dispute: "Beheer Groot geschil",
+      d_coupon: "Mijn coupons",
+      d_contacts: "Contacten",
       // Validation Messages
 
       phone_number_validation:

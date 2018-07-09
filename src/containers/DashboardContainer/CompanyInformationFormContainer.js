@@ -17,19 +17,19 @@ const mapStateToProps = state => {
   const initialValues = {
     id: state.auth.user.id,
     companyName: state.auth.user.companyName,
-    established: state.auth.user.profile.established,
-    website: state.auth.user.profile.website,
-    businessType: state.auth.user.profile.businessType,
-    employeeCount: state.auth.user.profile.employeeCount,
-    registeredAddress: state.auth.user.profile.registeredAddress.address,
-    r_city: state.auth.user.profile.registeredAddress.city,
-    r_area_code: state.auth.user.profile.registeredAddress.areaCode,
-    r_country: state.auth.user.profile.registeredAddress.country,
-    operationalAddress: state.auth.user.profile.operationalAddress.address,
-    o_country: state.auth.user.profile.operationalAddress.country,
-    o_city: state.auth.user.profile.operationalAddress.city,
-    o_area_code: state.auth.user.profile.operationalAddress.areaCode,
-    aboutUs: state.auth.user.profile.aboutUs
+    established: state.auth.user.established,
+    website: state.auth.user.website,
+    businessType: state.auth.user.businessType,
+    employeeCount: state.auth.user.employeeCount,
+    registeredAddress: state.auth.user.registeredAddress.address,
+    r_city: state.auth.user.registeredAddress.city,
+    r_area_code: state.auth.user.registeredAddress.areaCode,
+    r_country: state.auth.user.registeredAddress.country,
+    operationalAddress: state.auth.user.operationalAddress.address,
+    o_country: state.auth.user.operationalAddress.country,
+    o_city: state.auth.user.operationalAddress.city,
+    o_area_code: state.auth.user.operationalAddress.areaCode,
+    aboutUs: state.auth.user.aboutUs
   };
   return {
     auth: state.auth,

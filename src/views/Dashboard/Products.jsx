@@ -5,7 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import Product from "../../components/ProductSlider/Products";
 import EditProductContainer from "../../containers/EditProductContainer/EditProductContainer";
-// const products = [product1, product2, product3, product1, product2, product3];
+
 class Products extends Component {
   constructor(props) {
     super(props);

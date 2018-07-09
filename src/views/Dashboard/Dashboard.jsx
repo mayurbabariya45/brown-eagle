@@ -50,8 +50,11 @@ class Dashboard extends React.Component {
     }
   }
   handleSubmitForm(values) {
-    const { updateProfile, showNotification } = this.props;
-    updateProfile(values).then(payload => {
+    const { updateProfile, showNotification, auth } = this.props;
+    const { user } = auth;
+    const authId = user.id;
+    const authRole = user.role;
+    updateProfile(values, authId, authRole).then(payload => {
       if (payload.type === "UPDATE_PROFILE_SUCCESS") {
         window.scrollTo(0, 0);
         if (this.state.companyForm) {
