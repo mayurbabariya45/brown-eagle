@@ -9,6 +9,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(a.getProducts(categoryId, subCategoryId, page)),
   getCategories: () => dispatch(a.getCategories()),
   selectedCategory: category => dispatch(a.selectedCategory(category)),
+  handleSortFilter: value => dispatch(a.handleSortFilter(value)),
+  handleCategoryFilter: value => dispatch(a.handleCategoryFilter(value)),
+  handlePriceFilter: value => dispatch(a.handlePriceFilter(value)),
+  handleRatingFilter: value => dispatch(a.handleRatingFilter(value)),
+  searchProducts: (values, page) => dispatch(a.searchProducts(values, page)),
   addToCart: item => dispatch(c.addToCart(item))
 });
 const mapStateToProps = state => ({
@@ -40,13 +45,17 @@ const mergeProps = (state, actions, ownProps) => ({
               subCategoryId = findSubCategory._id;
             }
             actions.selectedCategory(findCategory);
-            actions.getProducts(categoryId, subCategoryId, 1).then(data => {
-              if (data.type === "GET_CATEGORY_PRODUCTS_SUCCESS") {
-                resolve({ categoryId, subCategoryId });
-              } else {
-                reject();
-              }
-            });
+            actions.searchProducts(
+                { ...state.filter, category: { categoryId, subCategoryId } },
+                1
+              )
+              .then(data => {
+                if (data.type === "GET_CATEGORY_PRODUCTS_SUCCESS") {
+                  resolve({ categoryId, subCategoryId });
+                } else {
+                  reject();
+                }
+              });
           }
         }
       });

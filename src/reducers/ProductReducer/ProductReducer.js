@@ -14,7 +14,22 @@ const initialState = {
   productImages: [],
   products: [],
   selectedProductCategory: {},
-  product: {}
+  product: {},
+  filter: {
+    category: {},
+    sort: {
+      type: "popularity",
+      order: ""
+    },
+    price: {
+      minPrice: 100,
+      maxPrice: 1000
+    },
+    rating: {
+      minRating: 0,
+      maxRating: 5
+    }
+  }
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -171,6 +186,30 @@ export default (state = initialState, action) => {
         loading: false,
         error: true
       };
+
+    // GET_CATEGORY_PRODUCTS
+    case a.SEARCH_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loadProduct: true
+      };
+
+    case a.SEARCH_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loadProduct: false,
+        products: action.payload
+      };
+
+    case a.SEARCH_PRODUCT_FAILURE:
+      return {
+        ...state,
+        loadProduct: false,
+        loading: false,
+        error: true
+      };
     // GET_PRODUCT_WITH_ID
 
     case a.GET_PRODUCT_REQUEST:
@@ -236,6 +275,47 @@ export default (state = initialState, action) => {
         loading: false,
         error: true,
         success: false
+      };
+    // SELECT_FILTER
+    case a.SELECT_SORT_FILTER:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          sort: {
+            ...action.value
+          }
+        }
+      };
+    case a.SELECT_PRICE_FILTER:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          price: {
+            ...action.value
+          }
+        }
+      };
+    case a.SELECT_RATING_FILTER:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          rating: {
+            ...action.value
+          }
+        }
+      };
+    case a.SELECT_CATEGORY_FILTER:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          category: {
+            ...action.value
+          }
+        }
       };
     default:
       return state;

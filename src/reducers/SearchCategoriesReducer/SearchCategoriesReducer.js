@@ -1,39 +1,9 @@
 import { actionTypes as a } from "../../constants/SearchCategories/SearchCategories";
 
 const INITIAL_STATE = {
-  categories: [
-    "abasement",
-    "abhor",
-    "abrasive",
-    "abrogate",
-    "absolution",
-    "abstain",
-    "abstemious",
-    "abstruse",
-    "accolade",
-    "acquiesce",
-    "acrid",
-    "acrophobia",
-    "acuity",
-    "adamant",
-    "adroit",
-    "adulation",
-    "adversity",
-    "advocate",
-    "aesthetic",
-    "affable",
-    "alacrity",
-    "alchemy",
-    "alibi",
-    "allay",
-    "alleviate",
-    "aloof",
-    "altruism",
-    "amass",
-    "ambiguity",
-    "ambiguous",
-    "ambivalence"
-  ],
+  loading: false,
+  success: false,
+  error: false,
   suggestions: [],
   selectedCategory: "All Categories"
 };
@@ -48,13 +18,11 @@ export default (state = INITIAL_STATE, action) => {
     case a.SEARCH_CATEGORIES_REQUEST:
       return {
         ...state,
-        ...action.payload
+        loading: true
       };
     case a.SEARCH_CATEGORIES_SUCCESS:
       return Object.assign({}, state, {
-        suggestions: state.categories.filter(category =>
-          category.startsWith(action.value)
-        )
+        suggestions: action.payload
       });
     case a.SEARCH_CATEGORIES_FAILURE:
       return Object.assign({}, state, {

@@ -2998,14 +2998,14 @@ section {
     -ms-transform: translateX(0);
     transform: translateX(0); }
 
-.filter-header, .filter-categories, .filter-products-price {
+.filter-header, .filter-categories, .filter-products-price, .filter-products-rating {
   float: left;
   width: 100%;
   margin: 0 auto;
   padding: 10px 0; }
-  .filter-header .title, .filter-categories .title, .filter-products-price .title {
+  .filter-header .title, .filter-categories .title, .filter-products-price .title, .filter-products-rating .title {
     float: left; }
-  .filter-header .filter-clear, .filter-categories .filter-clear, .filter-products-price .filter-clear {
+  .filter-header .filter-clear, .filter-categories .filter-clear, .filter-products-price .filter-clear, .filter-products-rating .filter-clear {
     text-align: right;
     float: right;
     cursor: pointer;
@@ -3022,6 +3022,14 @@ section {
   margin: 10px 5px; }
 
 .filter-products-price .price-filter {
+  float: left;
+  width: 100%;
+  margin-bottom: 2em; }
+
+.filter-products-rating .filter-clear {
+  margin: 10px 5px; }
+
+.filter-products-rating .rating-filter {
   float: left;
   width: 100%; }
 

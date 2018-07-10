@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { actionTypes as a } from "../../constants/Product/Product_action_type";
 
@@ -34,6 +35,25 @@ export const searchCategories = value => ({
 
 export const handleCategory = value => ({
   type: a.SELECT_CATEGORY,
+  value
+});
+
+export const handleSortFilter = value => ({
+  type: a.SELECT_SORT_FILTER,
+  value
+});
+
+export const handlePriceFilter = value => ({
+  type: a.SELECT_PRICE_FILTER,
+  value
+});
+
+export const handleRatingFilter = value => ({
+  type: a.SELECT_RATING_FILTER,
+  value
+});
+export const handleCategoryFilter = value => ({
+  type: a.SELECT_CATEGORY_FILTER,
   value
 });
 
@@ -104,6 +124,49 @@ export const getProduct = (productId, locale) => dispatch => {
         a.GET_PRODUCT_REQUEST,
         a.GET_PRODUCT_SUCCESS,
         a.GET_PRODUCT_FAILURE
+      ]
+    }
+  });
+};
+
+export const searchProducts = (values, page) => dispatch => {
+  let sort = "";
+  let order = "&order=des";
+  let category = "";
+  let subCategory = "";
+  const minPrice = `&minPrice=${values.price.minPrice}`;
+  const maxPrice = `&maxPrice=${values.price.maxPrice}`;
+  const minRating = `&minRating=${values.rating.minRating}`;
+  const maxRating = `&maxRating=${values.rating.maxRating}`;
+
+  if (_.has(values.sort, "type")) {
+    if (values.sort.type !== "popularity") {
+      sort = `&sort=${values.sort.type}`;
+    }
+  }
+  if (_.has(values.sort, "order")) {
+    if (values.sort.order) {
+      order = `&order=${values.sort.order}`;
+    }
+  }
+  if (!_.isEmpty(values.category)) {
+    if (values.category.categoryId) {
+      category = `&category=${values.category.categoryId}`;
+    }
+    if (values.category.subCategoryId) {
+      subCategory = `&subCategory=${values.category.subCategoryId}`;
+    }
+  }
+
+  return dispatch({
+    [RSAA]: {
+      endpoint: `product/search?lang=en&status=pending${category}${subCategory}${sort}${order}${minPrice}${maxPrice}${minRating}${maxRating}&page=${page}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      types: [
+        a.SEARCH_PRODUCT_REQUEST,
+        a.SEARCH_PRODUCT_SUCCESS,
+        a.SEARCH_PRODUCT_FAILURE
       ]
     }
   });

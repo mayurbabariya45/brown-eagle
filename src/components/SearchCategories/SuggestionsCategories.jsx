@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -58,7 +59,6 @@ class SuggestionCategories extends Component {
       suggestionRenderer
     } = this.props;
     const isFocused = focusedSuggestion === index;
-
     return (
       <Suggestion
         className={classNames({
@@ -66,7 +66,7 @@ class SuggestionCategories extends Component {
           [styles.suggestionFocused]: isFocused
         })}
         index={index}
-        key={suggestion}
+        key={suggestion.id}
         onClick={onSelection}
         onMouseMove={this.handleMouseMove}
         ref={isFocused && this.setFocusedSuggestion}
@@ -85,7 +85,7 @@ class SuggestionCategories extends Component {
         }}
         onMouseLeave={this.handleMouseLeave}
       >
-        {this.props.suggestions.map(this.renderSuggestion)}
+        {_.map(this.props.suggestions, this.renderSuggestion)}
       </ul>
     );
   }

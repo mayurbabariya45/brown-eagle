@@ -248,7 +248,12 @@ module.exports = {
       availability: "Availability:",
       in_stock: "In stock",
       out_of_stock: "Out Of Stock",
-
+      popularity: "Popularity",
+      price_low: "Price -- Low to High",
+      price_high: "Price -- High to Low",
+      rating_low: "Rating -- Low to High",
+      rating_high: "Rating -- High to Low",
+      newest_first: "Newest First",
       // shopping cart
       cart_title: "Shopping Cart",
       cart_trading: "Trading",

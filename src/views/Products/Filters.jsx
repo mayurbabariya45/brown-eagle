@@ -1,21 +1,24 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import Nouislider from "react-nouislider";
 
 class Filters extends Component {
-  componentDidMount() {
-    // var priceFilter = document.getElementById('price-filter');
-    // noUiSlider.create(priceFilter, {
-    //     start: [ 20, 60 ],
-    //     tooltips: false,
-    //     range: {
-    //         min: 0,
-    //         max: 100
-    //     },
-    //     connect: true,
-    // });
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handlePriceSlider = this.handlePriceSlider.bind(this);
+    this.handleRatingSlider = this.handleRatingSlider.bind(this);
+  }
+  handlePriceSlider(value) {
+    const { handlePriceFilter } = this.props;
+    handlePriceFilter(value);
+  }
+  handleRatingSlider(value) {
+    const { handleRatingFilter } = this.props;
+    handleRatingFilter(value);
   }
   render() {
+    const { price,rating } = this.props;
     return (
       <div>
         <div className="section-header filter-header">
@@ -42,11 +45,42 @@ class Filters extends Component {
             <span>Clear</span>
           </div>
           <div className="price-filter">
-            <Nouislider range={{ min: 0, max: 100 }} start={[20, 60]} connect />
+            <Nouislider
+              pips={{
+                mode: "range",
+                density: 3
+              }}
+              range={{ min: 100, max: 1000 }}
+              start={[price.minPrice, price.maxPrice]}
+              connect
+              onEnd={this.handlePriceSlider}
+            />
+          </div>
+        </div>
+        <div className="section-header filter-products-rating">
+          <div className="title">
+            <h6>Rating</h6>
+          </div>
+          <div className="filter-clear">
+            <span>Clear</span>
+          </div>
+          <div className="rating-filter">
+            <Nouislider
+              range={{ min: 0, max: 5 }}
+              start={[rating.minRating, rating.maxRating]}
+              connect
+              onEnd={this.handleRatingSlider}
+            />
           </div>
         </div>
       </div>
     );
   }
 }
+
+Filters.propTypes = {
+  handlePriceFilter: PropTypes.func.isRequired,
+  handleRatingFilter: PropTypes.func.isRequired
+};
+
 export default Filters;

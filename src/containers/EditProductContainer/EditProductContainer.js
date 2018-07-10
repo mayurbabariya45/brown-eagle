@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 import EditProduct from "../../views/Dashboard/EditProduct";
@@ -13,13 +14,15 @@ const mapDispatchToProps = dispatch => ({
     dispatch(d.deleteProductImage(productId, imageId))
 });
 const mapStateToProps = state => {
-  const { keywords } = state.dashboard.product;
+  const productKeywords = !_.isEmpty(state.dashboard.product)
+    ? state.dashboard.product.keywords
+    : [];
   const newKeywords = [];
   let setKeyword = "";
-  if (keywords) {
-    setKeyword = keywords[0];
-    if (keywords.length > 1) {
-      keywords.map((keyword, index) => {
+  if (!_.isEmpty(productKeywords)) {
+    setKeyword = productKeywords[0];
+    if (productKeywords.length > 1) {
+      productKeywords.map((keyword, index) => {
         if (index !== 0) {
           newKeywords.push(keyword);
         }

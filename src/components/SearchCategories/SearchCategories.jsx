@@ -18,7 +18,7 @@ import Button from "../../elements/CustomButton/CustomButton";
 const suggestionRenderer = (suggestion, searchTerm) => (
   <span>
     <span>{searchTerm}</span>
-    <strong>{suggestion.substr(searchTerm.length)}</strong>
+    <strong>{suggestion.name}</strong>
   </span>
 );
 
@@ -63,18 +63,15 @@ class SearchCategories extends Component {
     const { focusedSuggestion: index, searchTerm } = this.state;
     const { suggestions } = this.props;
     const last = suggestions.length - 1;
-
     let next;
-
     if (movingDown) {
       next = isNil(index) ? 0 : index + 1;
     } else {
       next = isNil(index) ? last : index - 1;
     }
-
     this.setState({
       focusedSuggestion: inRange(next, 0, suggestions.length) ? next : null,
-      value: suggestions[next] || searchTerm
+      value: suggestions[next].name || searchTerm
     });
   }
   clearSearch() {
@@ -169,7 +166,7 @@ class SearchCategories extends Component {
   handleSelection(suggestion) {
     this.setState({
       focusedSuggestion: null,
-      value: suggestion
+      value: suggestion.name
     });
     this.props.onClear();
     if (this.props.onSelection) {
@@ -192,13 +189,11 @@ class SearchCategories extends Component {
     const { isFocused, value } = this.state;
     // const renderClearButton = this.state.value && renderClearButton;
     const renderSuggestions = value && suggestions.length > 0;
-    const selectCategories = _.map(categories, category => {
-      return (
-        <MenuItem key={category.id} eventKey={category.name}>
-          {category.name}
-        </MenuItem>
-      );
-    });
+    const selectCategories = _.map(categories, category => (
+      <MenuItem key={category.id} eventKey={category.name}>
+        {category.name}
+      </MenuItem>
+    ));
     return (
       <Col xs={7}>
         <FormGroup className="base-top">
@@ -245,7 +240,7 @@ class SearchCategories extends Component {
                     onSuggestionHover={this.handleHover}
                     searchTerm={this.state.searchTerm}
                     styles={styles}
-                    suggestions={this.props.suggestions}
+                    suggestions={suggestions}
                     suggestionRenderer={suggestionRenderer}
                   />
                 )}

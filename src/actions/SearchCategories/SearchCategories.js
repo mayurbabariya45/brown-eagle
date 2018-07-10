@@ -1,10 +1,18 @@
-// import { CALL_API } from "../../middleware/redux-api/symbol";
+import { RSAA } from "../../middleware/redux-api/symbol";
 import { actionTypes as a } from "../../constants/SearchCategories/SearchCategories";
 
 export const onChange = value => dispatch => {
   dispatch({
-    type: a.SEARCH_CATEGORIES_SUCCESS,
-    value
+    [RSAA]: {
+      endpoint: `product/autocomplete?search=${value}&lang=en`,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.SEARCH_CATEGORIES_REQUEST,
+        a.SEARCH_CATEGORIES_SUCCESS,
+        a.SEARCH_CATEGORIES_FAILURE
+      ]
+    }
   });
 };
 export const onClear = () => dispatch => {

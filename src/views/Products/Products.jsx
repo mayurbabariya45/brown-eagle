@@ -1,4 +1,5 @@
 import _ from "lodash";
+import className from "classnames";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Row, Grid, Col } from "react-bootstrap";
@@ -12,30 +13,77 @@ class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryId: null,
-      subCategoryId: null,
       currentPage: 1
     };
     this.addToCart = this.addToCart.bind(this);
+    this.handleSort = this.handleSort.bind(this);
+    this.handlePriceFilter = this.handlePriceFilter.bind(this);
+    this.handleRatingFilter = this.handleRatingFilter.bind(this);
   }
   componentWillMount() {
-    const { getCategories, getProducts, match } = this.props;
+    const {
+      getCategories,
+      handleCategoryFilter,
+      searchProducts,
+      match
+    } = this.props;
     const { category } = match.params;
     if (!_.isEmpty(category)) {
       getCategories().then(response => {
         this.setState({ ...response });
+        handleCategoryFilter({
+          ...this.props.filter,
+          category: { ...response }
+        });
       });
     } else {
-      getProducts("", "", 1);
+      searchProducts(this.props.filter, 1);
     }
   }
   onPageChanged = data => {
     const { currentPage } = data;
-    const { categoryId, subCategoryId } = this.state;
-    const { getProducts } = this.props;
+    const { searchProducts, filter } = this.props;
     this.setState({ currentPage });
-    getProducts(categoryId, subCategoryId, currentPage);
+    searchProducts(filter, currentPage);
   };
+  handleSort(type) {
+    const { handleSortFilter, searchProducts } = this.props;
+    handleSortFilter(type);
+    searchProducts({
+      ...this.props.filter,
+      sort: {
+        ...type
+      }
+    });
+  }
+  handlePriceFilter(value) {
+    const { handlePriceFilter, searchProducts } = this.props;
+    handlePriceFilter({
+      minPrice: value[0],
+      maxPrice: value[1]
+    });
+    searchProducts({
+      ...this.props.filter,
+      price: {
+        minPrice: value[0],
+        maxPrice: value[1]
+      }
+    });
+  }
+  handleRatingFilter(value) {
+    const { handleRatingFilter, searchProducts } = this.props;
+    handleRatingFilter({
+      minRating: value[0],
+      maxRating: value[1]
+    });
+    searchProducts({
+      ...this.props.filter,
+      rating: {
+        minRating: value[0],
+        maxRating: value[1]
+      }
+    });
+  }
   addToCart(item) {
     const { addToCart, showNotification } = this.props;
     const objectProduct = Object.assign({}, item, { quantity: 1 });
@@ -59,11 +107,12 @@ class Products extends Component {
     const {
       translate,
       products,
+      filter,
       selectedProductCategory,
       loadProduct,
-      addToCart,
       match
     } = this.props;
+    const { sort } = filter;
     const { currentPage } = this.state;
     const { count } = products;
     const start = (currentPage - 1) * 20 + 1 || 0;
@@ -107,7 +156,12 @@ class Products extends Component {
           <Row>
             <Col sm={3}>
               <div className="product-filter">
-                <Filters />
+                <Filters
+                  price={filter.price}
+                  rating={filter.rating}
+                  handlePriceFilter={this.handlePriceFilter}
+                  handleRatingFilter={this.handleRatingFilter}
+                />
               </div>
             </Col>
             <Col sm={9}>
@@ -127,10 +181,72 @@ class Products extends Component {
                           <span>Sort By</span>
                         </span>
                         <ul>
-                          <li className="active">Popularity</li>
-                          <li>Price -- Low to High</li>
-                          <li>Price -- High to Low</li>
-                          <li>Newest First</li>
+                          <li
+                            className={className({
+                              active:
+                                sort.type === "popularity" && sort.order === ""
+                            })}
+                            onClick={() =>
+                              this.handleSort({ type: "popularity", order: "" })
+                            }
+                          >
+                            {translate("popularity")}
+                          </li>
+                          <li
+                            className={className({
+                              active:
+                                sort.type === "price" && sort.order === "asc"
+                            })}
+                            onClick={() =>
+                              this.handleSort({ type: "price", order: "asc" })
+                            }
+                          >
+                            {translate("price_low")}
+                          </li>
+                          <li
+                            className={className({
+                              active:
+                                sort.type === "price" && sort.order === "des"
+                            })}
+                            onClick={() =>
+                              this.handleSort({ type: "price", order: "des" })
+                            }
+                          >
+                            {translate("price_high")}
+                          </li>
+                          <li
+                            className={className({
+                              active:
+                                sort.type === "rating" && sort.order === "asc"
+                            })}
+                            onClick={() =>
+                              this.handleSort({ type: "rating", order: "asc" })
+                            }
+                          >
+                            {translate("rating_low")}
+                          </li>
+                          <li
+                            className={className({
+                              active:
+                                sort.type === "rating" && sort.order === "des"
+                            })}
+                            onClick={() =>
+                              this.handleSort({ type: "rating", order: "des" })
+                            }
+                          >
+                            {translate("rating_high")}
+                          </li>
+                          <li
+                            className={className({
+                              active:
+                                sort.type === "newest" && sort.order === "des"
+                            })}
+                            onClick={() =>
+                              this.handleSort({ type: "newest", order: "des" })
+                            }
+                          >
+                            {translate("newest_first")}
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -138,24 +254,30 @@ class Products extends Component {
                 </Row>
               </Col>
               <div className="products list items product-items">
-                <Row>
-                  {_.map(products.products, product => (
-                    <Col sm={4} key={product.id}>
-                      <div
-                        key={product.id}
-                        className="item product product-item"
-                      >
-                        <Product
-                          product={product}
-                          translate={translate}
-                          bAction={false}
-                          addToCart={() => this.addToCart(product)}
-                          buttons
-                        />
-                      </div>
-                    </Col>
-                  ))}
-                </Row>
+                <BlockUi tag="div" blocking={loadProduct}>
+                  <div>
+                    {_.map(_.chunk(products.products, 3), (parent, index) => (
+                      <Row key={index}>
+                        {_.map(parent, product => (
+                          <Col sm={4} key={product.id}>
+                            <div
+                              key={product.id}
+                              className="item product product-item"
+                            >
+                              <Product
+                                product={product}
+                                translate={translate}
+                                bAction={false}
+                                addToCart={() => this.addToCart(product)}
+                                buttons
+                              />
+                            </div>
+                          </Col>
+                        ))}
+                      </Row>
+                    ))}
+                  </div>
+                </BlockUi>
               </div>
               <Pagination
                 totalRecords={count || 0}
@@ -178,7 +300,12 @@ Products.propTypes = {
   selectedProductCategory: PropTypes.objectOf(PropTypes.any),
   loadProduct: PropTypes.bool,
   addToCart: PropTypes.func.isRequired,
-  showNotification: PropTypes.func.isRequired
+  showNotification: PropTypes.func.isRequired,
+  handleSortFilter: PropTypes.func.isRequired,
+  handlePriceFilter: PropTypes.func.isRequired,
+  handleRatingFilter: PropTypes.func.isRequired,
+  handleCategoryFilter: PropTypes.func.isRequired,
+  searchProducts: PropTypes.func.isRequired
 };
 
 Products.defaultProps = {
