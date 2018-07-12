@@ -1,10 +1,12 @@
+import _ from "lodash";
 import { ActionTypes as a } from "../../constants/Categories/Categories_action_type";
 
 const INITIAL_STATE = {
   loading: false,
   error: false,
   success: false,
-  categories: []
+  categories: [],
+  selectedCategory: {}
 };
 
 /**
@@ -34,7 +36,11 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         error: true
       };
-
+    case a.SELECTED_CATEGORY:
+      return {
+        ...state,
+        selectedCategory: _.find(state.categories, ["name", action.value])
+      };
     default:
       return state;
   }

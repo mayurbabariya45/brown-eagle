@@ -293,6 +293,13 @@ module.exports = {
         "Enter estimated bulk order quantity first even if you're requesting for samples",
       compare_quotes: "Compare Quotes",
       contact_suppliers: "Contact Supplier",
+      // Submit Quote
+      submit_quote_title: "Submit Quote",
+      quote_form_name: "Title",
+      quote_form_quote_price: "Quote Price",
+      quote_form_quote_quantity: "Quote Minimum Quantity",
+      quote_form_quote_delivery_time: "Estimated Delivery Time",
+      quote_form_description: "Cover Letter",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

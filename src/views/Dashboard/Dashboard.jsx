@@ -4,6 +4,7 @@ import { Grid, Row, Col, Tab } from "react-bootstrap";
 import { scroller, Element } from "react-scroll";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
+import QuotationContainer from "../../containers/QuotationContainer/SellerQuotationContainer";
 import ContentLoader from "../../components/Loader/Loader";
 import Home from "./Home";
 import Profile from "./Profile";
@@ -86,6 +87,7 @@ class Dashboard extends React.Component {
       translate,
       logout,
       history,
+      locale,
       loading,
       showNotification,
       getProducts,
@@ -165,6 +167,14 @@ class Dashboard extends React.Component {
                     </Tab.Pane>
                     <Tab.Pane eventKey="six">
                       <Orders />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="ten">
+                      <QuotationContainer
+                        seller={user && user.id}
+                        translate={translate}
+                        showNotification={showNotification}
+                        locale={locale}
+                      />
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>

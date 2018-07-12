@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { actionTypes as a } from "../../constants/Quotation/Quotation_action_type";
 
@@ -87,3 +88,41 @@ export const addQuotationImages = (file, id, locale) => ({
     ]
   }
 });
+
+export const searchQuotation = values => dispatch => {
+  const { search, category, page } = values;
+  let endCategory = "";
+  if (!_.isEmpty(category)) {
+    endCategory = `&category=${category.id}`;
+  }
+  dispatch({
+    [RSAA]: {
+      endpoint: `rfq/search?search=${search}${endCategory}&page=${page}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.SEARCH_QUOTATIONS_REQUEST,
+        {
+          type: a.SEARCH_QUOTATIONS_SUCCESS,
+          meta: values
+        },
+        a.SEARCH_QUOTATIONS_FAILURE
+      ]
+    }
+  });
+};
+
+export const submitQuote = (values, locale) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `rfq/${values.id}/quote?ln=${locale}`,
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      body: JSON.stringify(values),
+      types: [
+        a.SUBMIT_QUOTE_REQUEST,
+        a.SUBMIT_QUOTE_SUCCESS,
+        a.SUBMIT_QUOTE_FAILURE
+      ]
+    }
+  });

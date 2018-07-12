@@ -83,8 +83,6 @@ const appRoutes = [
       navLinks: true,
       showHeader: "myAccount"
     },
-    secure: true,
-    type: "buyer",
     path: "/quotation",
     name: "Quotation",
     component: QuotationContainer

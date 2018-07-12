@@ -5,7 +5,14 @@ const initialState = {
   error: false,
   success: false,
   loading: false,
+  submitQuoteLoading: false,
+  searchQuery: "",
   categories: [],
+  sellerQuotation: {
+    count: 0,
+    page: 0,
+    rfqs: []
+  },
   buyerQuotation: [],
   quotationImages: []
 };
@@ -133,6 +140,41 @@ export default (state = initialState, action) => {
         loading: false,
         error: true,
         success: false
+      };
+    case a.SEARCH_QUOTATIONS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.SEARCH_QUOTATIONS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        searchQuery: action.meta,
+        sellerQuotation: action.payload
+      };
+    case a.SEARCH_QUOTATIONS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        success: false
+      };
+    case a.SUBMIT_QUOTE_REQUEST:
+      return {
+        ...state,
+        submitQuoteLoading: true
+      };
+    case a.SUBMIT_QUOTE_SUCCESS:
+      return {
+        ...state,
+        submitQuoteLoading: false
+      };
+    case a.SUBMIT_QUOTE_FAILURE:
+      return {
+        ...state,
+        submitQuoteLoading: false
       };
     default:
       return state;
