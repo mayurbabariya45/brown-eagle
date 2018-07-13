@@ -61,6 +61,11 @@ export const flushCreateQuotation = () => ({
   type: a.FLUSH_ADD_QUOTATION
 });
 
+export const selectFilters = value => ({
+  type: a.SELECT_FILTER,
+  value
+});
+
 export const createQuotation = (quotation, locale) => dispatch =>
   dispatch({
     [RSAA]: {

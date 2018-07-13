@@ -39,8 +39,13 @@ class SearchQuotation extends React.Component {
     onSelectCategory(evt);
   }
   handleSearchButton() {
-    const { selectedCategory, searchQuotation } = this.props;
+    const {
+      selectedCategory,
+      searchQuotation,
+      clearViewQuotation
+    } = this.props;
     const { value } = this.state;
+    clearViewQuotation();
     if (value.length < 1) return false;
     searchQuotation({ category: selectedCategory.id, search: value, page: 1 });
     return true;
@@ -98,6 +103,7 @@ class SearchQuotation extends React.Component {
 SearchQuotation.propTypes = {
   onSelectCategory: PropTypes.func,
   searchQuotation: PropTypes.func,
+  clearViewQuotation: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.any).isRequired,
   selectedCategory: PropTypes.objectOf(PropTypes.any)
 };

@@ -9,7 +9,7 @@ import noImage from "../../assets/img/no-product.png";
 const preloader = () => <ContentLoader height={300} inFight />;
 
 const QuotationItem = props => {
-  const { quotation, locale } = props;
+  const { quotation, locale, handleViewQuotation } = props;
   let productImages;
   if (!_.isEmpty(quotation)) {
     const { rfqPictures } = quotation;
@@ -27,7 +27,11 @@ const QuotationItem = props => {
         </div>
         <div className="image-container">
           <div className="product-image-container">
-            <a href="#products" className="product photo product-item-photo">
+            <a
+              href="#products"
+              onClick={handleViewQuotation}
+              className="product photo product-item-photo"
+            >
               <ImageLoader preloader={preloader} src={productImages} />
             </a>
           </div>
@@ -51,30 +55,27 @@ const QuotationItem = props => {
       </div>
       <div className="quotation-container-button">
         <div className="quotation-button">
-          <Button
-            fill
-            radius
-            bsStyle="warning"
-            onClick={props.opneSubmitQuoteModal}
-          >
-            Quote Now
-          </Button>
-          {/* <Button
-            fill
-            bsStyle="warning"
-            className="open"
-            onClick={props.opneSubmitQuoteModal}
-          >
-            Open
-          </Button>
-          <Button
-            fill
-            bsStyle="warning"
-            className="closed"
-            onClick={props.opneSubmitQuoteModal}
-          >
-            Close
-          </Button> */}
+          {quotation.status === "open" && (
+            <Button fill bsStyle="warning" className="open">
+              Open
+            </Button>
+          )}
+          {(quotation.status === "close" ||
+            quotation.status === "rejected") && (
+            <Button fill bsStyle="warning" className="closed">
+              {quotation.status}
+            </Button>
+          )}
+          {quotation.status === "open" && (
+            <Button
+              fill
+              bsStyle="warning"
+              className="btn-quote"
+              onClick={props.opneSubmitQuoteModal}
+            >
+              Quote Now
+            </Button>
+          )}
         </div>
       </div>
     </div>
@@ -83,7 +84,8 @@ const QuotationItem = props => {
 
 QuotationItem.propTypes = {
   opneSubmitQuoteModal: PropTypes.func.isRequired,
-  locale: PropTypes.string,
+  handleViewQuotation: PropTypes.func.isRequired,
+  locale: PropTypes.string
 };
 
 QuotationItem.defaultProps = {

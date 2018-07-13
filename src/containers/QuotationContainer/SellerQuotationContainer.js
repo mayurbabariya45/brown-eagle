@@ -5,6 +5,7 @@ import * as a from "../../actions/Quotation/Quotation_actions";
 
 const mapDispatchToProps = dispatch => ({
   onSelectCategory: value => dispatch(c.onSelectCategory(value)),
+  selectFilters: value => dispatch(a.selectFilters(value)),
   searchQuotation: values => dispatch(a.searchQuotation(values))
 });
 const mapStateToProps = state => ({

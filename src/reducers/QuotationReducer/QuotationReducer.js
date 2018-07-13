@@ -6,6 +6,10 @@ const initialState = {
   success: false,
   loading: false,
   submitQuoteLoading: false,
+  selectedFilter: {
+    filter: "ALL",
+    date: ""
+  },
   searchQuery: "",
   categories: [],
   sellerQuotation: {
@@ -175,6 +179,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         submitQuoteLoading: false
+      };
+    case a.SELECT_FILTER:
+      return {
+        ...state,
+        selectedFilter: {
+          filter: action.value,
+          date: ""
+        }
       };
     default:
       return state;

@@ -1,8 +1,11 @@
 import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import BlockUi from "react-block-ui";
 import { Row, Col } from "react-bootstrap";
 import QuotationItems from "../../components/Quotation/QuotationItem";
+import StatusFilter from "../../components/Quotation/QuotationStatusFilter";
+import ViewQuotation from "./ViewQuotation";
 import SearchQuotation from "../../components/Quotation/SearchQuotation";
 import Pagination from "../../components/Pagination/Pagination";
 import SubmitQuoteContainer from "../../containers/QuotationContainer/SubmitQuoteContainer";
@@ -13,10 +16,14 @@ class Quotations extends React.Component {
     this.state = {
       currentPage: 1,
       showModal: false,
-      quotationId: ""
+      quotationId: "",
+      quotation: {},
+      viewQuotation: false
     };
     this.handleSubmitQuoteModal = this.handleSubmitQuoteModal.bind(this);
     this.hideSubmitQuoteModal = this.hideSubmitQuoteModal.bind(this);
+    this.handleViewQuotation = this.handleViewQuotation.bind(this);
+    this.clearViewQuotationState = this.clearViewQuotationState.bind(this);
   }
   onPageChanged = data => {
     const { currentPage } = data;
@@ -30,11 +37,18 @@ class Quotations extends React.Component {
   hideSubmitQuoteModal() {
     this.setState({ showModal: false, quotationId: "" });
   }
+  handleViewQuotation(quotation) {
+    this.setState({ quotation, viewQuotation: true });
+  }
+  clearViewQuotationState() {
+    this.setState({ quotation: {}, viewQuotation: false });
+  }
   render() {
     const {
       translate,
       locale,
       onSelectCategory,
+      selectFilters,
       searchQuotation,
       quotation,
       categories,
@@ -44,7 +58,6 @@ class Quotations extends React.Component {
     } = this.props;
     const { currentPage } = this.state;
     const { count, rfqs } = quotation.sellerQuotation;
-    console.log(quotation.sellerQuotation);
     const start = (currentPage - 1) * 20 + 1 || 0;
     let end = currentPage * 20 || 0;
     if (end > count) {
@@ -57,38 +70,86 @@ class Quotations extends React.Component {
             <SearchQuotation
               translate={translate}
               categories={categories}
+              clearViewQuotation={this.clearViewQuotationState}
               searchQuotation={searchQuotation}
               selectedCategory={selectedCategory}
               onSelectCategory={onSelectCategory}
             />
           </Col>
         </Row>
-        <Row>
-          <Col md={12}>
-            <div className="quotations">
-              <Row>
-                <Col md={12}>
-                  {_.map(rfqs, data => (
-                    <QuotationItems
-                      locale={locale}
-                      key={data.id}
-                      quotation={data}
-                      opneSubmitQuoteModal={() =>
-                        this.handleSubmitQuoteModal(data.id)
-                      }
-                    />
-                  ))}
-                </Col>
-              </Row>
-              <Pagination
-                totalRecords={count || 0}
-                pageLimit={20}
-                pageNeighbours={1}
-                onPageChanged={this.onPageChanged}
-              />
-            </div>
-          </Col>
-        </Row>
+        {!this.state.viewQuotation && (
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <div className="quotations-filter">
+                <StatusFilter
+                  selectFilters={selectFilters}
+                  selectedFilter={quotation.selectedFilter}
+                />
+              </div>
+            </Col>
+          </Row>
+        )}
+        {!this.state.viewQuotation && (
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <div className="result-showing">
+                <p>
+                  Showing {start} – {end} Rfq of {count} Rfqs
+                </p>
+              </div>
+            </Col>
+          </Row>
+        )}
+        {this.state.viewQuotation && (
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <div className="quotations">
+                <ViewQuotation
+                  quotation={this.state.quotation}
+                  locale={locale}
+                  handleBackButton={this.clearViewQuotationState}
+                  opneSubmitQuoteModal={() =>
+                    this.handleSubmitQuoteModal(this.state.quotation.id)
+                  }
+                />
+              </div>
+            </Col>
+          </Row>
+        )}
+        {!this.state.viewQuotation && (
+          <Row>
+            <Col md={12}>
+              <BlockUi tag="div" blocking={quotation.loading}>
+                <div className="quotations">
+                  <Row>
+                    <Col md={12}>
+                      {_.map(rfqs, data => (
+                        <QuotationItems
+                          locale={locale}
+                          key={data.id}
+                          quotation={data}
+                          handleViewQuotation={e => {
+                            e.preventDefault();
+                            this.handleViewQuotation(data);
+                          }}
+                          opneSubmitQuoteModal={() =>
+                            this.handleSubmitQuoteModal(data.id)
+                          }
+                        />
+                      ))}
+                    </Col>
+                  </Row>
+                  <Pagination
+                    totalRecords={count || 0}
+                    pageLimit={20}
+                    pageNeighbours={1}
+                    onPageChanged={this.onPageChanged}
+                  />
+                </div>
+              </BlockUi>
+            </Col>
+          </Row>
+        )}
         <SubmitQuoteContainer
           translate={translate}
           locale={locale}
@@ -106,6 +167,7 @@ class Quotations extends React.Component {
 Quotations.propTypes = {
   translate: PropTypes.func.isRequired,
   onSelectCategory: PropTypes.func.isRequired,
+  selectFilters: PropTypes.func.isRequired,
   searchQuotation: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.any).isRequired,
