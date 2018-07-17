@@ -169,6 +169,7 @@
             > ul {
               display: block;
               > li {
+                color: $white-color;
                 > p {
                   color: $black-color;
                 }
@@ -218,6 +219,16 @@
             font-weight: bold;
             line-height: 15px;
             vertical-align: middle;
+          }
+          & + .btn-link{
+            float: left;
+            width: 100%;
+            text-align: left;
+            padding-left: 0;
+            color: $warning-color;
+            & + collapse{
+              padding: 11px 10px 10px 4px;
+            }
           }
         }
       }

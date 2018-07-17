@@ -37,6 +37,10 @@ export const handleCategory = value => ({
   type: a.SELECT_CATEGORY,
   value
 });
+export const handleSubCategory = value => ({
+  type: a.SELECT_SUB_CATEGORY,
+  value
+});
 
 export const handleSortFilter = value => ({
   type: a.SELECT_SORT_FILTER,

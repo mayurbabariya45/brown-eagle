@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import className from "classnames";
 import PropTypes from "prop-types";
@@ -56,7 +57,7 @@ const Tabs = props => {
               </div>
               <div className="box-content">
                 <SearchProductCategories {...props} />
-                {selectedCategory && (
+                {!_.isEmpty(selectedCategory) && (
                   <Row>
                     <Col md={6} />
                     <Col md={6}>

@@ -20,10 +20,18 @@ class AddProduct extends React.Component {
     flushAddProduct();
   }
   hanldeSubmitForm(value) {
-    const { selectedCategory, addProduct, locale } = this.props;
+    const {
+      selectedCategory,
+      selectedSubCategory,
+      addProduct,
+      locale
+    } = this.props;
     const { user } = this.props.auth;
     if (_.isEmpty(user)) return false;
-    const category = selectedCategory;
+    const category = selectedCategory.id;
+    const subCategory = !_.isEmpty(selectedSubCategory)
+      ? selectedSubCategory._id
+      : "";
     const seller = user.id;
     const keywords = value.keywords
       ? value.keywords.concat(value.product_keywords)
@@ -35,7 +43,7 @@ class AddProduct extends React.Component {
     }
     const object = Object.assign(
       {},
-      { ...value, category, keywords, seller, productAvailability }
+      { ...value, category, subCategory, keywords, seller, productAvailability }
     );
     addProduct(object, locale);
     return true;

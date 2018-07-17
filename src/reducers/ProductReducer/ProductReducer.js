@@ -8,12 +8,15 @@ const initialState = {
   loadProduct: false,
   loading: false,
   selectedLang: "",
-  activeCategory: -1,
+  activeCategory: {},
+  activeSubCategory: {},
   categories: [],
   sCategories: [],
   productImages: [],
   products: [],
   selectedProductCategory: {},
+  selectedCategory: {},
+  selectedSubCategory: {},
   product: {},
   filter: {
     category: {},
@@ -48,35 +51,6 @@ export default (state = initialState, action) => {
         quantity: state.quantity > 1 ? state.quantity - 1 : 1
       };
     // QUANTITY_DECREMENT
-
-    // GET_PRODUCT_CATEGORY
-    case a.GET_CATEGORY_REQUEST:
-    case a.GET_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        categories: [
-          { name: "Agriculture" },
-          { name: "Apparel" },
-          { name: "Automobile & Motorcycle" },
-          { name: "Beauty & Personal Care" },
-          { name: "Bussiness" },
-          { name: "Chemicals" },
-          { name: "Constructions" },
-          {
-            name: "Consumer",
-            children: [
-              {
-                name: "test",
-                nested: true
-              }
-            ]
-          }
-        ]
-      };
-    case a.GET_CATEGORY_FAILURE:
-      return {
-        ...state
-      };
     case a.GET_CATEGORIES_REQUEST:
       return {
         ...state,
@@ -106,6 +80,12 @@ export default (state = initialState, action) => {
         ...state,
         activeCategory: action.value
       };
+    // SELECT_CATEGORY
+    case a.SELECT_SUB_CATEGORY:
+      return {
+        ...state,
+        selectedSubCategory: action.value
+      };
     // SEARCH_CATEGORIES
     case a.SEARCH_CATEGORIES:
       return {
@@ -122,8 +102,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         sCategories: [],
-        selectedCategory: "",
-        activeCategory: -1
+        selectedCategory: {},
+        selectedSubCategory: {}
       };
 
     // SELECTED_PRODUCT_CATEGORY
@@ -248,8 +228,8 @@ export default (state = initialState, action) => {
         ...state,
         productImages: [],
         sCategories: [],
-        selectedCategory: "",
-        activeCategory: -1,
+        selectedCategory: {},
+        selectedSubCategory: {},
         activeTabs: 1
       };
 

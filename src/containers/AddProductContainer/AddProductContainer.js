@@ -10,6 +10,7 @@ const mapDispatchToProps = dispatch => ({
   selectLanguage: lang => dispatch(a.selectLanguage(lang)),
   searchCategories: value => dispatch(a.searchCategories(value)),
   handleCategory: value => dispatch(a.handleCategory(value)),
+  handleSubCategory: value => dispatch(a.handleSubCategory(value)),
   flushCategories: () => dispatch(a.flushCategories()),
   addProduct: (value, locale) => dispatch(a.addProduct(value, locale)),
   dropProductImages: files => dispatch(a.dropProductImages(files)),
