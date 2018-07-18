@@ -25,9 +25,9 @@ class Filters extends Component {
           <div className="title">
             <h5>Filters</h5>
           </div>
-          <div className="filter-clear">
+          {/* <div className="filter-clear">
             <span>Clear all</span>
-          </div>
+          </div> */}
         </div>
         <div className="section-header filter-categories">
           <div className="title">
@@ -41,9 +41,9 @@ class Filters extends Component {
           <div className="title">
             <h6>price</h6>
           </div>
-          <div className="filter-clear">
+          {/* <div className="filter-clear">
             <span>Clear</span>
-          </div>
+          </div> */}
           <div className="price-filter">
             <Nouislider
               pips={{
@@ -61,9 +61,9 @@ class Filters extends Component {
           <div className="title">
             <h6>Rating</h6>
           </div>
-          <div className="filter-clear">
+          {/* <div className="filter-clear">
             <span>Clear</span>
-          </div>
+          </div> */}
           <div className="rating-filter">
             <Nouislider
               range={{ min: 0, max: 5 }}

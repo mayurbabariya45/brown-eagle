@@ -6,10 +6,17 @@ import { Card } from "../../components/Card/Card";
 import ContentLoader from "../../components/Loader/Loader";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
 import product1 from "../../assets/img/products/product1.png";
-import product2 from "../../assets/img/products/product2.png";
-import product3 from "../../assets/img/products/product3.png";
 import avatar from "../../assets/img/avatar.png";
 
+const staticProducts = [
+  {
+    id: "1",
+    name: "Safescan 2210 Banknote Counter",
+    productPictures: [product1],
+    productPrice: 10,
+    totalRatingsCount: 1
+  }
+];
 const Home = props => {
   const { translate } = props;
   const { user, loader } = props.auth;
@@ -221,14 +228,7 @@ const Home = props => {
                 <h5>{translate("recommended_products")}</h5>
               </div>
               <ProductSlider
-                products={[
-                  product1,
-                  product2,
-                  product3,
-                  product1,
-                  product2,
-                  product3
-                ]}
+                products={staticProducts}
                 buttons={false}
                 arrows={false}
                 multiple

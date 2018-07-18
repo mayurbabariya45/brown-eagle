@@ -50,8 +50,10 @@ class ProductImageForm extends Component {
         for (let i = 0; i < allowed; i++) {
           const formData = new FormData();
           formData.append("image", files[i]);
+          console.log(files[i])
           filesToPush.push({
             ...files[i],
+            name: files[i].name,
             formData
           });
         }
@@ -102,13 +104,13 @@ class ProductImageForm extends Component {
       removeProductImages(this.state.productImages);
     }
   }
-  renderField({ label, meta: { touched, error, warning, active }, ...props }) {
+  renderField({ label }) {
     const { translate } = this.props;
     return (
       <FormGroup>
         <ControlLabel>{label}</ControlLabel>
         <Dropzone
-          accept="image/jpeg, image/png"
+          accept="image/jpeg, image/png,.avi,.wmv,.mkv,.mp4"
           ref={node => {
             this.dropzoneRef = node;
           }}

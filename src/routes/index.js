@@ -1,4 +1,4 @@
-import Home from "../views/Home/Home";
+import HomeContainer from "../containers/HomeContainer/HomeContainer";
 import ProductContainer from "../containers/ProductContainer/ProductContainer";
 import ProductsContainer from "../containers/ProductsContainer/ProductsContainer";
 import RegisterContainer from "../containers/AuthContainer/RegisterContainer";
@@ -14,7 +14,7 @@ import QuotationContainer from "../containers/QuotationContainer/QuotationContai
 import RequestQuotationContainer from "../containers/QuotationContainer/RequestQuotationContainer";
 
 const appRoutes = [
-  { path: "/", exact: true, name: "Home", component: Home },
+  { path: "/", exact: true, name: "Home", component: HomeContainer },
   {
     header: { header: true },
     path: "/login",

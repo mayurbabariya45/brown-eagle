@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import Carousels from "../../components/Carousels/Carousels";
@@ -5,18 +6,59 @@ import StatsCard from "../../components/StatsCard/StatsCard";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
 import { Card } from "../../components/Card/Card";
 import QuotationContainer from "../../containers/QuotationContainer/FormQuotationContainer";
-import product1 from "../../assets/img/products/product1.png";
-import product2 from "../../assets/img/products/product2.png";
-import product3 from "../../assets/img/products/product3.png";
-import product4 from "../../assets/img/products/product4.png";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.addToCart = this.addToCart.bind(this);
+  }
+  componentWillMount() {
+    const { getCategories } = this.props;
+    getCategories();
+  }
+  addToCart(item) {
+    const { addToCart, showNotification } = this.props;
+    const objectProduct = Object.assign({}, item, { quantity: 1 });
+    addToCart(objectProduct).then(response => {
+      if (response.type === "ADD_TO_CART_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{`${item.name} has been added successfully in cart.`}</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>Somethig went wrong please try agian</div>,
+          true
+        );
+      }
+    });
   }
   render() {
-    const { translate } = this.props;
+    const { translate, products, locale } = this.props;
+    const firstCategory = !_.isEmpty(products) ? products[0] : [];
+    const secondCategory = !_.isEmpty(products) ? products[1] : [];
+    const thirdCategory = !_.isEmpty(products) ? products[2] : [];
+    const firstCategoryName = !_.isEmpty(firstCategory)
+      ? firstCategory.nameTranslations[locale]
+      : "Loading...";
+    const secondCategoryName = !_.isEmpty(secondCategory)
+      ? secondCategory.nameTranslations[locale]
+      : "Loading...";
+    const thirdCategoryName = !_.isEmpty(thirdCategory)
+      ? thirdCategory.nameTranslations[locale]
+      : "Loading...";
+    const firstCategoryProducts = !_.isEmpty(firstCategory)
+      ? firstCategory.products
+      : [];
+    const secondCategoryProducts = !_.isEmpty(secondCategory)
+      ? secondCategory.products
+      : [];
+    const thirdCategoryProducts = !_.isEmpty(thirdCategory)
+      ? thirdCategory.products
+      : [];
     return (
       <div className="home">
         <Carousels />
@@ -70,15 +112,9 @@ class Home extends Component {
             <Col sm={8}>
               <ProductSlider
                 translate={translate}
-                title={translate("light_equipment_tools")}
-                products={[
-                  product1,
-                  product2,
-                  product3,
-                  product1,
-                  product2,
-                  product3
-                ]}
+                title={firstCategoryName}
+                products={firstCategoryProducts}
+                addToCart={this.addToCart}
                 banner
                 SliderSettings={{
                   dots: false,
@@ -96,8 +132,10 @@ class Home extends Component {
               <ProductSlider
                 translate={translate}
                 title={translate("top_trending_products")}
-                products={[product4, product2]}
+                products={thirdCategoryProducts}
+                classNames="top-list-images"
                 bAction
+                addToCart={this.addToCart}
                 SliderSettings={{
                   dots: false,
                   infinite: false,
@@ -116,18 +154,12 @@ class Home extends Component {
             <Col sm={8}>
               <ProductSlider
                 translate={translate}
-                title={translate("food_retail_products")}
-                products={[
-                  product1,
-                  product2,
-                  product3,
-                  product1,
-                  product2,
-                  product3
-                ]}
+                title={thirdCategoryName}
+                products={thirdCategoryProducts}
                 banner={false}
                 multiple
                 productChunk={6}
+                addToCart={this.addToCart}
                 SliderSettings={{
                   dots: false,
                   infinite: false,
@@ -162,16 +194,10 @@ class Home extends Component {
             <Col sm={12}>
               <ProductSlider
                 translate={translate}
-                title={translate("food_retail_products")}
-                products={[
-                  product1,
-                  product2,
-                  product3,
-                  product1,
-                  product2,
-                  product3
-                ]}
+                title={secondCategoryName}
+                products={secondCategoryProducts}
                 banner={false}
+                addToCart={this.addToCart}
                 SliderSettings={{
                   dots: false,
                   infinite: false,
@@ -191,18 +217,12 @@ class Home extends Component {
               <ProductSlider
                 translate={translate}
                 title={translate("latest_products")}
-                products={[
-                  product1,
-                  product2,
-                  product3,
-                  product1,
-                  product2,
-                  product3
-                ]}
+                products={thirdCategoryProducts}
                 buttons={false}
                 arrows={false}
                 multiple
                 productChunk={3}
+                classNames="list-images"
                 banner={false}
                 SliderSettings={{
                   dots: false,
@@ -220,12 +240,13 @@ class Home extends Component {
               <ProductSlider
                 translate={translate}
                 title={translate("recommended_products")}
-                products={[product1, product2, product3]}
+                products={thirdCategoryProducts}
                 buttons={false}
                 arrows={false}
                 multiple
                 productChunk={3}
                 banner={false}
+                classNames="list-images"
                 SliderSettings={{
                   dots: false,
                   infinite: false,
@@ -242,12 +263,13 @@ class Home extends Component {
               <ProductSlider
                 translate={translate}
                 title={translate("top_rated_products")}
-                products={[product1, product2, product3]}
+                products={thirdCategoryProducts}
                 buttons={false}
                 arrows={false}
                 multiple
                 productChunk={3}
                 banner={false}
+                classNames="list-images"
                 SliderSettings={{
                   dots: false,
                   infinite: false,

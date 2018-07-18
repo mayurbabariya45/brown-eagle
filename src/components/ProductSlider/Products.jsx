@@ -21,7 +21,8 @@ const Products = props => {
     product,
     deleteProduct,
     editProduct,
-    addToCart
+    addToCart,
+    classNames
   } = props;
   let productImages;
   let productUrl = "/products";
@@ -48,7 +49,7 @@ const Products = props => {
                 <ImageLoader
                   preloader={preloader}
                   src={productImages || src}
-                  className="img-responsive"
+                  className={className("img-responsive", classNames)}
                 />
               </span>
             </span>
@@ -181,7 +182,9 @@ const Products = props => {
               </div>
               <div className="reviews-actions">
                 <a href="#products" className="action view">
-                  1&nbsp;<span>{translate("review")}</span>
+                {!_.isEmpty(product)
+                  ? product.totalRatingsCount
+                  : 1}&nbsp;<span>{translate("review")}</span>
                 </a>
               </div>
             </div>
@@ -245,12 +248,14 @@ Products.propTypes = {
   bAction: PropTypes.bool,
   buttons: PropTypes.bool,
   lists: PropTypes.bool,
-  src: PropTypes.string
+  src: PropTypes.string,
+  product: PropTypes.objectOf(PropTypes.any)
 };
 Products.defaultProps = {
   bAction: false,
   buttons: false,
   lists: false,
+  product: {},
   editProduct: () => {},
   deleteProduct: () => {},
   addToCart: () => {}

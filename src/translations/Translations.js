@@ -97,7 +97,7 @@ module.exports = {
 
       top_trending_products: "Top Trending Products",
       light_equipment_tools: "Light Equipment Tools",
-      food_retail_products: "Food & Retail Products",
+      food_retail_products: "Similar Products",
       latest_products: "Latest Products",
       recommended_products: "Recommended Products",
       top_rated_products: "Top Rated Products",
@@ -121,7 +121,7 @@ module.exports = {
       a_selected_image: "Select from the bank",
       a_removed_link: "Remove All",
       a_image_text:
-        "Image file size should be less then 5MB. Support formats .jpeg .jpg .png.",
+        "Image/Video file size should be less then 5MB. Support formats .jpeg .jpg .png .avi .wmv .mkv .mp4.",
       a_box_title: "Please complete the following form in English",
 
       // Product Information form labels

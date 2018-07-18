@@ -295,7 +295,6 @@ class Products extends Component {
 Products.propTypes = {
   translate: PropTypes.func.isRequired,
   getCategories: PropTypes.func.isRequired,
-  getProducts: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.any),
   selectedProductCategory: PropTypes.objectOf(PropTypes.any),
   loadProduct: PropTypes.bool,

@@ -133,6 +133,21 @@ export const getProduct = (productId, locale) => dispatch => {
   });
 };
 
+export const getSimilarProduct = (productId, locale) => dispatch => {
+  dispatch({
+    [RSAA]: {
+      endpoint: `product/${productId}/similar?lang=${locale}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      types: [
+        a.GET_SIMILAR_PRODUCT_REQUEST,
+        a.GET_SIMILAR_PRODUCT_SUCCESS,
+        a.GET_SIMILAR_PRODUCT_FAILURE
+      ]
+    }
+  });
+};
+
 export const searchProducts = (values, page) => dispatch => {
   let sort = "";
   let order = "&order=des";
@@ -200,6 +215,19 @@ export const addProductImages = (file, id, locale) => ({
       a.ADD_PRODUCT_IMAGES_REQUEST,
       a.ADD_PRODUCT_IMAGES_SUCCESS,
       a.ADD_PRODUCT_IMAGES_FAILURE
+    ]
+  }
+});
+
+export const addProductVideo = (file, id, locale) => ({
+  [RSAA]: {
+    endpoint: `product/${id}/video?ln=${locale}`,
+    method: "POST",
+    body: file,
+    types: [
+      a.ADD_PRODUCT_VIDEOS_REQUEST,
+      a.ADD_PRODUCT_VIDEOS_SUCCESS,
+      a.ADD_PRODUCT_VIDEOS_FAILURE
     ]
   }
 });

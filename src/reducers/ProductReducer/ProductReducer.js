@@ -14,6 +14,7 @@ const initialState = {
   sCategories: [],
   productImages: [],
   products: [],
+  similarProducts: [],
   selectedProductCategory: {},
   selectedCategory: {},
   selectedSubCategory: {},
@@ -207,6 +208,25 @@ export default (state = initialState, action) => {
       };
 
     case a.GET_PRODUCT_FAILURE:
+      return {
+        ...state,
+        error: true
+      };
+    case a.GET_SIMILAR_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case a.GET_SIMILAR_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        similarProducts: action.payload.products
+      };
+
+    case a.GET_SIMILAR_PRODUCT_FAILURE:
       return {
         ...state,
         error: true

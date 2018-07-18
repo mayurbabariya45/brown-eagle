@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import { reducer as notifications } from "react-notification-system-redux";
 import { IntlReducer as Intl } from "react-redux-multilingual";
+import homeReducer from "./HomeReducer/HomeReducer";
 import newsLetterReducer from "./NewsLetterReducer/NewsLetterReducer";
 import quotationReducer from "./QuotationReducer/QuotationReducer";
 import productReducer from "./ProductReducer/ProductReducer";
@@ -13,6 +14,7 @@ import categoriesReducer from "./CategoriesReducer/CategoriesReducer";
 import cartReducer from "./CartReducer/CartReducer";
 
 const rootReducers = combineReducers({
+  home: homeReducer,
   newsLetter: newsLetterReducer,
   quotation: quotationReducer,
   product: productReducer,

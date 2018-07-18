@@ -18,7 +18,9 @@ const mapDispatchToProps = dispatch => ({
   flushProductImages: () => dispatch(a.flushProductImages()),
   flushAddProduct: () => dispatch(a.flushAddProduct()),
   addProductImages: (images, id, locale) =>
-    dispatch(a.addProductImages(images, id, locale))
+    dispatch(a.addProductImages(images, id, locale)),
+  addProductVideo: (video, id, locale) =>
+    dispatch(a.addProductImages(video, id, locale))
 });
 const mapStateToProps = state => ({
   ...state.product
@@ -33,7 +35,11 @@ const mergeProps = (state, actions, ownProps) => ({
         ownProps.success("Product has been created successfully.");
         const productId = response.payload.id;
         _.forEach(state.productImages, image => {
-          actions.addProductImages(image.formData, productId, locale);
+          if (image.name.match(/.(jpg|jpeg|png|gif)$/i)) {
+            actions.addProductImages(image.formData, productId, locale);
+          } else {
+            actions.addProductVideo(image.formData, productId, locale);
+          }
         });
         return false;
       }

@@ -7,10 +7,18 @@ import { Card } from "../../components/Card/Card";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
 import Button from "../../elements/CustomButton/CustomButton";
 import product1 from "../../assets/img/products/product1.png";
-import product2 from "../../assets/img/products/product2.png";
-import product3 from "../../assets/img/products/product3.png";
 import adsBanner from "../../assets/img/ads/banner.jpg";
 import ProductItems from "./ProductItem";
+
+const staticProducts = [
+  {
+    id: "1",
+    name: "Safescan 2210 Banknote Counter",
+    productPictures: [product1],
+    productPrice: 10,
+    totalRatingsCount: 1
+  }
+];
 
 class Cart extends Component {
   constructor(props) {
@@ -210,14 +218,7 @@ class Cart extends Component {
                     <h5>{translate("cart_trading")}</h5>
                   </div>
                   <ProductSlider
-                    products={[
-                      product1,
-                      product2,
-                      product3,
-                      product1,
-                      product2,
-                      product3
-                    ]}
+                    products={staticProducts}
                     buttons={false}
                     arrows={false}
                     multiple
@@ -243,14 +244,7 @@ class Cart extends Component {
                     <h5>{translate("cart_premium")}</h5>
                   </div>
                   <ProductSlider
-                    products={[
-                      product1,
-                      product2,
-                      product3,
-                      product1,
-                      product2,
-                      product3
-                    ]}
+                    products={staticProducts}
                     buttons={false}
                     arrows={false}
                     multiple

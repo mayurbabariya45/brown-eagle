@@ -37,32 +37,38 @@ class ProductSlider extends Component {
       productChunk,
       buttons,
       arrows,
-      translate
+      translate,
+      classNames,
+      addToCart
     } = this.props;
     const product =
       !multiple &&
-      products.map((src, index) => (
-        <div key={index + 1} className="item product product-item">
+      products.map(value => (
+        <div key={value.id} className="item product product-item">
           <Products
-            src={src}
+            product={value}
             translate={translate}
             bAction={bAction}
             buttons={buttons}
+            classNames={classNames}
+            addToCart={() => addToCart(value)}
           />
         </div>
       ));
     const mutipleProducts =
       multiple &&
-      _.map(_.chunk(products, productChunk || 3), (value, index) => (
+      _.map(_.chunk(products, productChunk || 3), (productValue, index) => (
         <div key={index} className="product-item-list">
-          {_.map(value, (value, key) => (
+          {_.map(productValue, (value, key) => (
             <div key={key} className="item product product-item">
               <Products
                 key={key}
-                src={value}
+                product={value}
                 bAction={bAction}
                 buttons={buttons}
                 translate={translate}
+                classNames={classNames}
+                addToCart={() => addToCart(value)}
               />
             </div>
           ))}
@@ -123,12 +129,14 @@ class ProductSlider extends Component {
   }
 }
 ProductSlider.propTypes = {
-  SliderSettings: PropTypes.object.isRequired,
+  translate: PropTypes.func.isRequired,
+  SliderSettings: PropTypes.objectOf(PropTypes.any).isRequired,
   arrows: PropTypes.bool.isRequired,
   banner: PropTypes.bool.isRequired,
   multiple: PropTypes.bool.isRequired,
   productChunk: PropTypes.number.isRequired,
-  buttons: PropTypes.bool.isRequired
+  buttons: PropTypes.bool.isRequired,
+  addToCart: PropTypes.func
 };
 ProductSlider.defaultProps = {
   arrows: true,
@@ -144,6 +152,7 @@ ProductSlider.defaultProps = {
     slidesToShow: 1,
     slidesToScroll: 1,
     className: "products items list product-items"
-  }
+  },
+  addToCart: () => {}
 };
 export default ProductSlider;

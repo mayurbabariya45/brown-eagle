@@ -19,10 +19,11 @@ class Product extends Component {
     this.addToCart = this.addToCart.bind(this);
   }
   componentWillMount() {
-    const { getProduct, match, history, locale } = this.props;
+    const { getProduct, getSimilarProduct, match, history, locale } = this.props;
     const { productName, productId } = match.params;
     if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
       getProduct(productId, locale);
+      getSimilarProduct(productId, locale);
     } else {
       history.goBack();
     }
@@ -34,7 +35,6 @@ class Product extends Component {
   addToCart() {
     const { product, addToCart,addToCartUnsafe, showNotification, quantity } = this.props;
     const objectProduct = Object.assign({}, product, { quantity });
-    console.log(product);
     addToCartUnsafe(objectProduct);
     addToCart(objectProduct).then(response => {
       if (response.type === "ADD_TO_CART_SUCCESS") {
@@ -58,7 +58,8 @@ class Product extends Component {
       onIncrement,
       onDecrement,
       quantity,
-      product
+      product,
+      similarProducts
     } = this.props;
     const { name, description, productPrice, productPictures } = product;
     return (
@@ -168,18 +169,12 @@ class Product extends Component {
                 <ProductSlider
                   title={translate("latest_products")}
                   translate={translate}
-                  products={[
-                    product1,
-                    product2,
-                    product3,
-                    product1,
-                    product2,
-                    product3
-                  ]}
+                  products={similarProducts}
                   buttons={false}
                   multiple
                   productChunk={3}
                   banner={false}
+                  classNames="list-images"
                   SliderSettings={{
                     dots: false,
                     infinite: false,
@@ -201,14 +196,7 @@ class Product extends Component {
               <ProductSlider
                 title={translate("food_retail_products")}
                 translate={translate}
-                products={[
-                  product1,
-                  product2,
-                  product3,
-                  product1,
-                  product2,
-                  product3
-                ]}
+                products={similarProducts}
                 banner={false}
                 SliderSettings={{
                   dots: false,
