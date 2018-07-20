@@ -1864,7 +1864,7 @@ section {
   float: left;
   width: 100%;
   padding: 0px;
-  margin: 0px auto; }
+  margin: 20px auto 0; }
   .products-slider .section-header {
     float: left;
     width: 100%;
@@ -3017,6 +3017,76 @@ section {
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);
     transform: translateX(0); }
+
+.category-products .slick-track {
+  margin-left: 0;
+  margin-right: 0; }
+
+.category-products .slick-prev:before,
+.category-products .slick-next:before {
+  font-family: "FontAwesome";
+  color: #1f1f1f;
+  font-size: 25px; }
+
+.category-products .slick-prev {
+  border-color: #ADB1B8 #A2A6AC #8D9096;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  background: white;
+  padding: 10px;
+  width: auto;
+  height: auto; }
+  .category-products .slick-prev::before {
+    content: "\f104"; }
+
+.category-products .slick-next {
+  border-color: #ADB1B8 #A2A6AC #8D9096;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  background: white;
+  padding: 10px;
+  width: auto;
+  height: auto; }
+  .category-products .slick-next::before {
+    content: "\f105"; }
+
+.category-products .product-item > .product-item-info {
+  margin: 0 15px 15px;
+  color: #FFF;
+  text-align: center; }
+  .category-products .product-item > .product-item-info > .product-link {
+    display: block;
+    color: #373737; }
+    .category-products .product-item > .product-item-info > .product-link > .images-container {
+      margin: 1em auto 0 auto; }
+    .category-products .product-item > .product-item-info > .product-link > .product-title {
+      float: left;
+      width: 100%;
+      padding: 5px 0; }
+      .category-products .product-item > .product-item-info > .product-link > .product-title h4 {
+        font-size: 14px;
+        padding: 5px 0;
+        margin: 0;
+        line-height: 18px;
+        font-weight: 700;
+        text-transform: uppercase; }
+    .category-products .product-item > .product-item-info > .product-link > .product-price {
+      float: left;
+      width: 100%;
+      padding-bottom: 5px; }
+      .category-products .product-item > .product-item-info > .product-link > .product-price > h5 {
+        font-size: 14px;
+        color: #7d1519;
+        margin: 0;
+        line-height: 12px; }
+    .category-products .product-item > .product-item-info > .product-link > .product-conatiner {
+      font-size: 12px;
+      color: #676767;
+      text-transform: uppercase;
+      padding-top: 6px;
+      display: block; }
 
 .filter-header, .filter-categories, .filter-products-price, .filter-products-rating {
   float: left;
