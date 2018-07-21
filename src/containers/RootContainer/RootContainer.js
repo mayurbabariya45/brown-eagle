@@ -5,7 +5,7 @@ import { IntlProvider } from "react-redux-multilingual";
 import configureStore from "../../store";
 import DevToolsContainer from "../DevToolsContainer/DevToolsContainer";
 import AppContainer from "../AppContainer/AppContainer";
-import translations from "../../translations/Translations";
+import { translations } from "../../translations/Translations";
 
 const store = configureStore();
 

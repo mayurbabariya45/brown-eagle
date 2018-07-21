@@ -46,7 +46,7 @@ class CategorySlider extends Component {
             <div className="product-price">
               <h5>
                 <i className="fa fa-euro" />
-                {value.productPrice}
+                {value.productPrice.toFixed(2)}
               </h5>
             </div>
             <div className="product-conatiner">2 pieces</div>
