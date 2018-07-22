@@ -11,10 +11,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(a.getSimilarProduct(productId, locale)),
   flushProduct: () => dispatch(a.flushProduct()),
   addToCart: item => dispatch(c.addToCart(item)),
-  addToCartUnsafe: item => dispatch(c.addToCartUnsafe(item))
+  addToCartUnsafe: item => dispatch(c.addToCartUnsafe(item)),
+  addReview: (value, id, locale) =>
+    dispatch(a.addProductReview(value, id, locale))
 });
 const mapStateToProps = state => ({
-  ...state.product
+  ...state.product,
+  auth: state.auth
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,

@@ -37,13 +37,16 @@ class EditProduct extends Component {
     getCategories();
   }
   componentWillReceiveProps(nextProps) {
-    const { initialValues } = nextProps;
+    const { initialValues, categories } = nextProps;
     const { productPictures, category } = initialValues;
     const images = [];
     _.each(productPictures, value => {
       images.push(value);
     });
-    const categoryValue = { value: category, label: category };
+    const findCategory = _.find(categories, ["id", category]);
+    const categoryValue = !_.isEmpty(findCategory)
+      ? { value: findCategory.id, label: findCategory.name }
+      : {};
     this.setState({ existingImages: images, category: categoryValue });
   }
   onProductImages(files) {
@@ -98,7 +101,7 @@ class EditProduct extends Component {
         const { id } = initialValues;
         const toDelete = this.state.existingImagesToDelete || [];
         toDelete.push(itemToDelete);
-        this.props.deleteProductImage(id, toDelete[0].id).then(payload => {
+        this.props.deleteProductImage(id, toDelete[0]._id).then(payload => {
           if (payload.type === "DELETE_PRODUCT_IMAGE_SUCCESS") {
             this.props.showNotification(
               <span data-notify="icon" className="pe-7s-check" />,
@@ -108,7 +111,7 @@ class EditProduct extends Component {
           } else {
             this.props.showNotification(
               <span data-notify="icon" className="pe-7s-shield" />,
-              <div>Product Image has not been deleted.</div>,
+              <div>{payload.payload.response.message}</div>,
               true
             );
           }
@@ -133,8 +136,11 @@ class EditProduct extends Component {
       onHide,
       addProductImages
     } = this.props;
-    const product = Object.assign({}, values, { seller: id });
-    updateProduct(product).then(payload => {
+    const product = Object.assign({}, values, {
+      seller: id,
+      category: this.state.category.value
+    });
+    updateProduct(product, "en").then(payload => {
       if (payload.type === "UPDATE_PRODUCT_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
@@ -164,7 +170,7 @@ class EditProduct extends Component {
       categories
     } = this.props;
     const categoriesValue = _.map(categories, category => ({
-      value: category.name,
+      value: category.id,
       label: category.name
     }));
     const countProductImage =
@@ -270,7 +276,6 @@ class EditProduct extends Component {
                     }
                   ]}
                 />
-
                 <FormInputs
                   ncols={["col-md-12"]}
                   proprieties={[

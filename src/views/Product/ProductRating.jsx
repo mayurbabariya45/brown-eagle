@@ -2,32 +2,41 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "../../elements/CustomButton/CustomButton";
 
-const ProductRating = (props) => (
+const ProductRating = props => (
   <div className="product-ratings">
     <div className="rating-title">
       <h5>{props.translate("product_rating")}</h5>
     </div>
+
     <div className="rating-button">
-      <Button fill radius onClick={props.showRating}>
-        <span>{props.translate("product_add_rating")}</span>
-      </Button>
+      {props.showButton && (
+        <Button fill radius onClick={props.showRating}>
+          <span>{props.translate("product_add_rating")}</span>
+        </Button>
+      )}
     </div>
+
     <div className="product-rating">
       <div className="count-rating">
         <div className="rating-number">
-          <h1>3.5</h1>
+          <h1>{props.totalRatingsCount}</h1>
         </div>
         <div className="product-rating-stars">
-          <div className="rating-result" title="80%">
+          <div
+            className="rating-result"
+            title={`${props.totalRatingsCount / 5 * 100}%`}
+          >
             <span
               style={{
-                width: "62%"
+                width: `${props.totalRatingsCount / 5 * 100}%`
               }}
             >
-              <span>80%</span>
+              <span>{`${props.totalRatingsCount / 5 * 100}%`}</span>
             </span>
           </div>
-          <div className="review-count">45 Product Ratings</div>
+          <div className="review-count">
+            {props.totalRatingsCount} Product Ratings
+          </div>
         </div>
       </div>
       <div className="rating-show">
@@ -125,7 +134,8 @@ const ProductRating = (props) => (
 
 ProductRating.propTypes = {
   showRating: PropTypes.func.isRequired,
-  translate: PropTypes.func.isRequired
+  translate: PropTypes.func.isRequired,
+  showButton: PropTypes.bool.isRequired
 };
 
 export default ProductRating;

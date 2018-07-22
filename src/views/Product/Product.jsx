@@ -21,19 +21,14 @@ class Product extends Component {
       showRatingModal: false
     };
     this.handleProdutRatingModal = this.handleProdutRatingModal.bind(this);
+    this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
   }
   componentWillMount() {
-    const {
-      getProduct,
-      getSimilarProduct,
-      match,
-      history,
-      locale
-    } = this.props;
+    const { getProduct, match, history, locale } = this.props;
     const { productName, productId } = match.params;
     if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
       getProduct(productId, locale);
-      getSimilarProduct(productId, locale);
+      // getSimilarProduct(productId, locale);
     } else {
       history.goBack();
     }
@@ -42,12 +37,47 @@ class Product extends Component {
     const { flushProduct } = this.props;
     flushProduct();
   }
-  handleProdutRatingModal(){
-    this.setState({showRatingModal: !this.state.showRatingModal})
+  handleProdutRatingModal() {
+    this.setState({ showRatingModal: !this.state.showRatingModal });
+  }
+  handleRatingSubmit(values) {
+    const { addReview, showNotification, match, locale, auth } = this.props;
+    const { productId } = match.params;
+    const buyer = auth.user.id;
+    const authRole = auth.user.role;
+    if (_.isEmpty(productId)) return false;
+    if (authRole !== "buyer") return false;
+    const mergeValues = Object.assign({}, values, {
+      buyer
+    });
+    addReview(mergeValues, productId, locale).then(response => {
+      if (response.type === "ADD_PRODUCT_REVIEW_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{response.payload.response.message}</div>,
+          true
+        );
+      } else if (response.type === "ADD_PRODUCT_REVIEW_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Review has been added successfully</div>,
+          false
+        );
+      }
+    });
+    return false;
   }
   render() {
-    const { translate, product, similarProducts } = this.props;
-    const { name, description, productPrice, productPictures } = product;
+    const { translate, product, loader, auth } = this.props;
+    const authRole = auth.user.role;
+    const {
+      name,
+      description,
+      productPrice,
+      productPictures,
+      totalRatingsCount,
+      seller
+    } = product;
     return (
       <section className="product-view">
         <Grid>
@@ -115,9 +145,9 @@ class Product extends Component {
                         </a>
                       </div>
                       <div className="payment-method">
-                        <p>
+                        {/* <p>
                           Payment: <img src="" alt="" />
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                     <div className="product-nav">
@@ -148,6 +178,8 @@ class Product extends Component {
                     <ProductRating
                       translate={translate}
                       showRating={this.handleProdutRatingModal}
+                      showButton={authRole === "buyer" || false}
+                      totalRatingsCount={totalRatingsCount}
                     />
                   </div>
                 </Col>
@@ -192,7 +224,10 @@ class Product extends Component {
                             <h3>{translate("product_basic_information")}</h3>
                           </div>
                           <div className="information">
-                            <Companyinformation translate={translate} />
+                            <Companyinformation
+                              translate={translate}
+                              information={seller || {}}
+                            />
                           </div>
                         </div>
                       </Tab>
@@ -232,7 +267,9 @@ class Product extends Component {
         <ProductRatingContainer
           show={this.state.showRatingModal}
           onHide={this.handleProdutRatingModal}
+          handleRatingSubmit={this.handleRatingSubmit}
           translate={translate}
+          loader={loader}
         />
       </section>
     );
@@ -241,8 +278,9 @@ class Product extends Component {
 
 Product.propTypes = {
   translate: PropTypes.func.isRequired,
+  addReview: PropTypes.func.isRequired,
   flushProduct: PropTypes.func.isRequired,
   getProduct: PropTypes.func.isRequired,
-  getSimilarProduct: PropTypes.func.isRequired
+  showNotification: PropTypes.func.isRequired
 };
 export default Product;

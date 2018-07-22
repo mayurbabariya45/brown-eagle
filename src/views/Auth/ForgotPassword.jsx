@@ -17,11 +17,16 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {};
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
+    this.handleBackButton = this.handleBackButton.bind(this);
   }
   componentWillMount() {
     const { flushState, removeAll } = this.props;
     flushState();
     removeAll();
+  }
+  handleBackButton() {
+    const { history } = this.props;
+    history.goBack();
   }
   hanldeSubmitForm(value) {
     const { resetPasswordEmail, showNotification } = this.props;
@@ -78,11 +83,26 @@ class ForgotPassword extends Component {
                             />
                             <Row>
                               <Col
-                                lg={12}
-                                md={12}
-                                sm={12}
-                                xs={12}
-                                className="text-center"
+                                lg={6}
+                                md={6}
+                                sm={6}
+                                xs={6}
+                                className="text-left"
+                              >
+                                <Button
+                                  className="text-capitalize"
+                                  disabled={success}
+                                  onClick={this.handleBackButton}
+                                >
+                                  {translate("back_text")}
+                                </Button>
+                              </Col>
+                              <Col
+                                lg={6}
+                                md={6}
+                                sm={6}
+                                xs={6}
+                                className="text-right"
                               >
                                 <Button
                                   className="text-capitalize btn-border-yellow"

@@ -1,17 +1,13 @@
 import _ from "lodash";
-import className from "classnames";
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Col, Row } from "react-bootstrap";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ImageLoader from "../ImageLoader/ImageLoader";
 import ContentLoader from "../Loader/Loader";
-import noProduct from "../../assets/img/no-product.png";
+import ProductItem from "./ProductItem";
 
-const preloader = () => <ContentLoader height={300} inFight />;
+const Loader = () => <ContentLoader height={300} inFight />;
 
 class CategorySlider extends Component {
   constructor(props) {
@@ -19,60 +15,61 @@ class CategorySlider extends Component {
     this.state = {};
   }
   render() {
-    const {
-      translate,
-      products,
-      classNames,
-      title,
-      SliderSettings
-    } = this.props;
+    const { translate, products, title, SliderSettings, loading } = this.props;
+    const showEmpty = !loading && products.length < 1;
     const sliderSettings = {
       ...SliderSettings
     };
-    const renderProduct = products.map(value => (
-      <div key={value.id} className="item product product-item">
-        <div className="product-item-info">
-          <Link to="/" className="product-link">
-            <div className="images-container">
-              <ImageLoader
-                preloader={preloader}
-                src={value.productPictures[0]}
-                className={className("img-responsive", classNames)}
-              />
+    const renderLoader = [];
+    if (loading) {
+      for (let i = 1; i <= 6; i++) {
+        const contentLoader = (
+          <div key={i} className="item product product-item">
+            <div className="product-item-info">
+              <Loader />
             </div>
-            <div className="product-title">
-              <h4>{value.name}</h4>
-            </div>
-            <div className="product-price">
-              <h5>
-                <i className="fa fa-euro" />
-                {value.productPrice.toFixed(2)}
-              </h5>
-            </div>
-            <div className="product-conatiner">2 pieces</div>
-          </Link>
+          </div>
+        );
+        renderLoader.push(contentLoader);
+      }
+    }
+
+    const renderProduct =
+      !loading &&
+      _.map(products, value => (
+        <div key={value.id} className="item product product-item">
+          <ProductItem product={value} />
         </div>
-      </div>
-    ));
+      ));
     return (
       <div className="products-slider">
         <Col xs={12}>
           <Row>
             <div className="section-header">
-              <h5>{title}</h5>
+              <h5 className="text-uppercase">{title}</h5>
             </div>
           </Row>
         </Col>
         <Col xs={12}>
           <Row>
-            <Slider
-              ref={slider => {
-                this.slider = slider;
-              }}
-              {...sliderSettings}
-            >
-              {renderProduct}
-            </Slider>
+            {!showEmpty && (
+              <Slider
+                ref={slider => {
+                  this.slider = slider;
+                }}
+                {...sliderSettings}
+              >
+                {!loading && renderProduct}
+                {loading && renderLoader}
+              </Slider>
+            )}
+            {showEmpty && (
+              <div className="category-products">
+                <div className="empty-products">
+                  <p>{translate("empty_message")}</p>
+                </div>
+              </div>
+            )}
           </Row>
         </Col>
       </div>

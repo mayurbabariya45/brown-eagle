@@ -92,6 +92,16 @@ export const en = {
 
       request_quote: "Request a Quote",
       request_for_quotation: "Request for Quotation",
+      request_for_email_label: "Email",
+      request_for_phone_label: "Phone",
+      request_for_fname_label: "FirstName",
+      request_for_lname_label: "LastName",
+      request_for_product_label: "What you are looking for...",
+      request_for_quantity_label: "Quantity",
+      request_for_price_label: "Price",
+      request_for_price: "Request Price",
+      request_for_sample: "Request a Sample",
+      request_for_details: "Request Quatation Details",
 
       // Product Slider
 
@@ -184,6 +194,7 @@ export const en = {
       l_join: "Join free",
       l_sign_with: "Sign in with:",
       forgot_password: "forgot password",
+      back_text: "Back",
       password_reset: "Reset Password",
       f_email_address: "Email Address",
       resend_password_link: "Resend Forgot Password Link",
@@ -297,9 +308,11 @@ export const en = {
       basic_established: "Year Established:",
       basic_certification: "Product Certifications:",
       product_rating_modal: "Product Rating",
-      product_review_modal: "Product Review",
-      product_review_placeholder: "Enter Your Product Review.",
+      product_review_modal: "Comment",
+      product_review_placeholder: "Enter Your Comment.",
       product_rating_label_modal: "Rating",
+      product_review_title_label_modal: "Review Title",
+      product_review_title_placeholder: "Title",
       // shopping cart
       cart_title: "Shopping Cart",
       cart_trading: "Trading",
@@ -346,6 +359,31 @@ export const en = {
       quote_form_quote_quantity: "Quote Minimum Quantity",
       quote_form_quote_delivery_time: "Estimated Delivery Time",
       quote_form_description: "Cover Letter",
+      // Top Supllier
+      top_selected_suppliers: "TOP SELECTED SUPPLIERS",
+      // Recent View
+
+      my_recent_view: "MY RECENT VIEWS",
+      // Request Quotation section
+      request_quotation_quotes: "Get Quotes for Your",
+      request_quotation_custom_request: "Custom Request",
+      request_quotation_suppliers: "Let the Right Suppliers",
+      request_quotation_find_request: "Find You",
+      request_quotation_deals: "Close Deals with",
+      request_quotation_click: "Once Click",
+      request_quotation_how: "How it works",
+      request_quotation_submit: "Submit RFQ",
+      request_quotation_compare: "Compare Quotes",
+      request_quotation_contact: "Contact Supplier",
+
+      // empty_message
+      empty_message: "Nothing to Show",
+      // SUPPLIERS  by regions
+      supplier_by_regions: "FIND SUPPLIERS BY REGION",
+      are_you_supplier: "Are You a Supplier?",
+      join_now: "Join Now",
+      supplier_text:
+        "Join Brown-Eagle.com as a verified supplier and connect with buyers",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

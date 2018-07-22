@@ -41,10 +41,23 @@ class AddProduct extends React.Component {
     if (value.productAvailability) {
       productAvailability = value.productAvailability;
     }
-    const object = Object.assign(
+    let object = Object.assign(
       {},
-      { ...value, category, subCategory, keywords, seller, productAvailability }
+      { ...value, category, keywords, seller, productAvailability }
     );
+    if (!_.isEmpty(subCategory)) {
+      object = Object.assign(
+        {},
+        {
+          ...value,
+          category,
+          subCategory,
+          keywords,
+          seller,
+          productAvailability
+        }
+      );
+    }
     addProduct(object, locale);
     return true;
   }

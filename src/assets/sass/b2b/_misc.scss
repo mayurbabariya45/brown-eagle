@@ -687,3 +687,79 @@ section {
   margin-top: 10px;
   font-size: 12px;
 }
+
+.home-banners{
+  padding: 45px 0 20px;
+  float: left;
+  width: 100%;
+  .col-md-6{
+    padding: 0;
+  }
+  .image-banner-container{
+    img{
+      max-width: 100%;
+    }
+  }
+}
+.supplier_by_regions{
+  .regions{
+    ul{
+      list-style: none;
+      margin-top: 20px;
+      margin-left: 0;
+      float: left;
+      padding: 0;
+      li{
+        float: left;
+        padding: 15px 30px 0 0;
+        a{
+          color: #2d3c4d;
+          text-transform: uppercase;
+          display: flex;
+          align-items: center;
+          img{
+            margin-right: 10px;
+            width: 30px;
+          }
+        }
+      }
+    }
+  }
+  .supplier_banner{
+    background: url("../img/banners/suppliers_banner.png");
+    color: #FFF;
+    margin: 20px 0;
+    display: block;
+    height: 121px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    .supplier_text{
+      float: left;
+      padding: 34px;
+      h3{
+        color:#e2c029;
+        margin:0;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+      p{
+        text-transform: uppercase;
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+    .supplier_button{
+      float: left;
+      padding: 40px 6em 40px;
+      .btn-default.btn-fill{
+        background: transparent;
+        text-transform: uppercase;
+      }
+      .btn-default.btn-border{
+        color: #e2c029;
+        border-color: #e2c029;
+      }
+    }
+  }
+}

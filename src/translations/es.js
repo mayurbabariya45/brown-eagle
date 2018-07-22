@@ -239,7 +239,7 @@ export const es = {
 
       // shopping cart
       cart_title: "Shopping Cart",
-
+     
       // Footer
       about_us: "sobre nosotros",
       sell_on_brown_eagle: "Vender en Brown Eagle",

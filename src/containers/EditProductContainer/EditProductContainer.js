@@ -7,7 +7,8 @@ import * as a from "../../actions/Product/Product_actions";
 
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(a.getCategories()),
-  updateProduct: product => dispatch(d.updateProduct(product)),
+  updateProduct: (product, locale) =>
+    dispatch(d.updateProduct(product, locale)),
   addProductImages: (images, id, locale) =>
     dispatch(a.addProductImages(images, id, locale)),
   deleteProductImage: (productId, imageId) =>
@@ -32,7 +33,16 @@ const mapStateToProps = state => {
   return {
     categories: state.dashboard.categories,
     initialValues: {
-      ...state.dashboard.product,
+      name: state.dashboard.product.name,
+      id: state.dashboard.product.id,
+      productAvailability: state.dashboard.product.productAvailability,
+      category: !_.isEmpty(state.dashboard.product.category)
+        ? state.dashboard.product.category._id
+        : "",
+      productPrice: state.dashboard.product.productPrice,
+      minQuantity: state.dashboard.product.minQuantity,
+      description: state.dashboard.product.description,
+      productPictures: state.dashboard.product.productPictures,
       keywords: newKeywords,
       product_keywords: setKeyword
     }

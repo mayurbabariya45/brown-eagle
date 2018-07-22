@@ -12,24 +12,26 @@ import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
 import { required } from "../../../formValidationRules/FormValidationRules";
 
-export const products = [
-  { value: "test1", label: "Test 1" },
-  { value: "test2", label: "Test 2" },
-  { value: "test3", label: "Test 3" },
-  { value: "test4", label: "Test 4" }
-];
-
 class CompanyInformationForm extends Component {
   constructor(props) {
     super(props);
     const data = props.auth.user;
-    const mainProduct = data.profile;
+    const mainProduct = data;
     this.state = {
       value: mainProduct
-        ? _.map(mainProduct.mainProducts, product => ({
-            value: product,
-            label: product
-          }))
+        ? _.map(mainProduct.mainProducts, product => {
+            const findProduct = _.find(props.products, ["id", product]);
+            if (!_.isEmpty(findProduct)) {
+              return {
+                value: findProduct.id,
+                label: findProduct.name
+              };
+            }
+            return {
+              label: "",
+              value: ""
+            };
+          })
         : [],
       sameAddress: false,
       showMapModal: false,
@@ -142,7 +144,11 @@ class CompanyInformationForm extends Component {
     handleSubmitForm(data);
   }
   render() {
-    const { translate, loading, handleSubmit } = this.props;
+    const { translate, loading, handleSubmit, products } = this.props;
+    const selectProducts = _.map(products, product => ({
+      value: product.id,
+      label: product.name
+    }));
     return (
       <div className="company-information">
         <BlockUi tag="div" blocking={loading}>
@@ -187,7 +193,7 @@ class CompanyInformationForm extends Component {
                       joinValues
                       value={this.state.value}
                       placeholder="Select your main products"
-                      options={products}
+                      options={selectProducts}
                       onChange={this.handleSelectChange}
                     />
                   </FormGroup>

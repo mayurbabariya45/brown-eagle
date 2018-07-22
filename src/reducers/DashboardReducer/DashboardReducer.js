@@ -100,7 +100,7 @@ export default (state = INITIAL_STATE, action) => {
           ...state.product,
           productPictures: _.filter(
             state.product.productPictures,
-            image => image.id !== action.meta.imageId
+            image => image._id !== action.meta.imageId
           )
         }
       };
@@ -184,32 +184,25 @@ export default (state = INITIAL_STATE, action) => {
         ...state
       };
     // GET_PRODUCT_CATEGORY
-    case a.GET_CATEGORY_REQUEST:
-    case a.GET_CATEGORY_SUCCESS:
+    case a.GET_CATEGORIES_REQUEST:
       return {
         ...state,
-        categories: [
-          { name: "Agriculture" },
-          { name: "Apparel" },
-          { name: "Automobile & Motorcycle" },
-          { name: "Beauty & Personal Care" },
-          { name: "Bussiness" },
-          { name: "Chemicals" },
-          { name: "Constructions" },
-          {
-            name: "Consumer",
-            children: [
-              {
-                name: "test",
-                nested: true
-              }
-            ]
-          }
-        ]
+        loading: true,
       };
-    case a.GET_CATEGORY_FAILURE:
+
+    case a.GET_CATEGORIES_SUCCESS:
       return {
-        ...state
+        ...state,
+        loading: false,
+        success: true,
+        categories: action.payload.category
+      };
+
+    case a.GET_CATEGORIES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true
       };
     default:
       return state;

@@ -237,19 +237,19 @@ const Profile = props => {
                           {translate("y_established")}
                         </ControlLabel>
                         <FormControl.Static>
-                          {user.profile ? user.profile.established : "none"}
+                          {user ? user.established : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("o_website")}</ControlLabel>
                         <FormControl.Static>
-                          {user.profile ? user.profile.website : "none"}
+                          {user ? user.website : "none"}
                         </FormControl.Static>
                       </FormGroup>
                       <FormGroup>
                         <ControlLabel>{translate("b_type")}</ControlLabel>
                         <FormControl.Static>
-                          {user.profile ? user.profile.businessType : "none"}
+                          {user ? user.businessType : "none"}
                         </FormControl.Static>
                       </FormGroup>
                     </Col>
@@ -257,8 +257,8 @@ const Profile = props => {
                       <FormGroup>
                         <ControlLabel>{translate("m_products")}</ControlLabel>
                         <FormControl.Static>
-                          {user.profile
-                            ? _.map(user.profile.mainProducts, product => (
+                          {user
+                            ? _.map(user.mainProducts, product => (
                                 <span
                                 key={product}
                                 className="label label-warning"
@@ -284,7 +284,7 @@ const Profile = props => {
                       <FormGroup>
                         <ControlLabel>{translate("t_employees")}</ControlLabel>
                         <FormControl.Static>
-                          {user.profile ? user.profile.employeeCount : "none"}
+                          {user ? user.employeeCount : "none"}
                         </FormControl.Static>
                       </FormGroup>
                     </Col>
@@ -292,7 +292,7 @@ const Profile = props => {
                       <FormGroup>
                         <ControlLabel>{translate("about_us")}</ControlLabel>
                         <FormControl.Static>
-                          {user.profile ? user.profile.aboutUs : "none"}
+                          {user ? user.aboutUs : "none"}
                         </FormControl.Static>
                       </FormGroup>
                     </Col>

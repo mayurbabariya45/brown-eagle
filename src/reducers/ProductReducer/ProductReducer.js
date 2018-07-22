@@ -7,6 +7,7 @@ const initialState = {
   success: false,
   loadProduct: false,
   loading: false,
+  loader: false,
   selectedLang: "",
   activeCategory: {},
   activeSubCategory: {},
@@ -273,6 +274,28 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error: true,
+        success: false
+      };
+    // ADD_PRODUCT_REVIEW
+    case a.ADD_PRODUCT_REVIEW_REQUEST:
+      return {
+        ...state,
+        loader: true,
+        error: false,
+        success: false
+      };
+    case a.ADD_PRODUCT_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loader: false,
+        error: false,
+        success: true
+      };
+    case a.ADD_PRODUCT_REVIEW_FAILURE:
+      return {
+        ...state,
+        loader: false,
         error: true,
         success: false
       };

@@ -30,9 +30,23 @@ export const getProductImage = (id, token) => ({
   }
 });
 
-export const updateProduct = product => ({
+export const getCategories = () => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: "category",
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.GET_CATEGORIES_REQUEST,
+        a.GET_CATEGORIES_SUCCESS,
+        a.GET_CATEGORIES_FAILURE
+      ]
+    }
+  });
+
+export const updateProduct = (product, locale) => ({
   [RSAA]: {
-    endpoint: `product/${product.id}`,
+    endpoint: `product/${product.id}?ln=${locale}`,
     method: "PATCH",
     body: JSON.stringify(product),
     types: [
@@ -88,11 +102,5 @@ export const handleInputMap = types => dispatch => {
   dispatch({
     type: a.SHOW_MAP,
     types
-  });
-};
-
-export const getCategories = () => dispatch => {
-  dispatch({
-    type: a.GET_CATEGORY_SUCCESS
   });
 };

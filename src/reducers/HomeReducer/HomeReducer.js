@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: true,
-        loadProduct: true
+        loadingProduct: true
       };
 
     case a.GET_CATEGORIES_SUCCESS:
@@ -34,7 +34,7 @@ export default (state = INITIAL_STATE, action) => {
     case a.GET_CATEGORIES_FAILURE:
       return {
         ...state,
-        loadProduct: false,
+        loadingProduct: false,
         loading: false,
         error: true
       };
@@ -47,9 +47,6 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case a.GET_CATEGORY_PRODUCTS_SUCCESS:
-      console.log(action);
-      // const products = state.products;
-      // products.push({ ...action.meta });
       return {
         ...state,
         loading: false,

@@ -22,7 +22,7 @@ const mergeProps = (state, actions, ownProps) => ({
       if (response.type === "GET_CATEGORIES_SUCCESS") {
         const categories = response.payload.category;
         if (!_.isEmpty(categories)) {
-          _.map(_.take(categories, 3), category => {
+          _.map(_.take(categories, 4), category => {
             actions.getProducts(category);
           });
         }
