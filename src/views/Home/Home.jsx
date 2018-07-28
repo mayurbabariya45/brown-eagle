@@ -78,8 +78,7 @@ class Home extends Component {
       centerBanners,
       bottomBanners,
       isTopBannersLoading,
-      isCenterBannersLoading,
-      isBottomBannersLoading
+      isCenterBannersLoading
     } = this.props;
     const backgroundBanner = !_.isEmpty(bottomBanners)
       ? bottomBanners.url
