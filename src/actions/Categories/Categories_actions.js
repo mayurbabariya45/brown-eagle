@@ -3,7 +3,7 @@ import { ActionTypes as a } from "../../constants/Categories/Categories_action_t
 
 export const getCategories = () => ({
   [RSAA]: {
-    endpoint: "category",
+    endpoint: "category?status=enabled&perPage=99",
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [

@@ -1,29 +1,31 @@
-import React, { Component } from "react";
-import { Carousel, Grid, Row } from "react-bootstrap";
-// import Img1 from "../../assets/img/carousel/anniversary_banner_d.jpg";
-import Banner1 from "../../assets/img/carousel/banner1.jpg";
-import Banner2 from "../../assets/img/carousel/banner2.jpg";
-import Banner3 from "../../assets/img/carousel/banner3.jpg";
-import Banner4 from "../../assets/img/carousel/banner4.jpg";
+import _ from "lodash";
+import React from "react";
+import { Carousel, Grid, Row, Image } from "react-bootstrap";
+import ContentLoader from "../Loader/Loader";
 
-const Carousels = () => (
-  <Grid fluid>
-    <Row>
-      <Carousel controls={false}>
-        <Carousel.Item>
-          <img alt="900x500" src={Banner1} />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img alt="900x500" src={Banner2} />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img alt="900x500" src={Banner3} />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img alt="900x500" src={Banner4} />
-        </Carousel.Item>
-      </Carousel>
-    </Row>
-  </Grid>
-);
+const Carousels = props => {
+  const { isBannersLoading, banners } = props;
+  if (!isBannersLoading && _.isEmpty(banners)) return null;
+  return (
+    <Grid fluid>
+      <Row>
+        <Carousel controls={false}>
+          {isBannersLoading && (
+            <Carousel.Item>
+              <ContentLoader height={300} inFight />
+            </Carousel.Item>
+          )}
+          {!isBannersLoading &&
+            _.map(props.banners, banner => (
+              <Carousel.Item key={banner.id}>
+                <a href={banner.redirectUrl}>
+                  <Image src={banner.url} />
+                </a>
+              </Carousel.Item>
+            ))}
+        </Carousel>
+      </Row>
+    </Grid>
+  );
+};
 export default Carousels;

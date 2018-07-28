@@ -2312,8 +2312,15 @@ section {
   width: 100%; }
   .home-banners .col-md-6 {
     padding: 0; }
-  .home-banners .image-banner-container img {
-    max-width: 100%; }
+  .home-banners .col-md-12 {
+    padding: 0; }
+  .home-banners .image-banner-container {
+    float: left;
+    width: 100%;
+    height: 250px;
+    overflow: hidden; }
+    .home-banners .image-banner-container img {
+      max-width: 100%; }
 
 .supplier_by_regions .regions ul {
   list-style: none;
@@ -2334,7 +2341,6 @@ section {
         width: 30px; }
 
 .supplier_by_regions .supplier_banner {
-  background: url("../img/banners/suppliers_banner.png");
   color: #FFF;
   margin: 20px 0;
   display: block;
@@ -2363,6 +2369,9 @@ section {
     .supplier_by_regions .supplier_banner .supplier_button .btn-default.btn-border {
       color: #e2c029;
       border-color: #e2c029; }
+
+.carousel .carousel-inner {
+  height: 350px; }
 
 .news-letter {
   background-color: #f8f8f8; }

@@ -695,7 +695,14 @@ section {
   .col-md-6{
     padding: 0;
   }
+  .col-md-12{
+    padding: 0;
+  }
   .image-banner-container{
+    float: left;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
     img{
       max-width: 100%;
     }
@@ -726,7 +733,7 @@ section {
     }
   }
   .supplier_banner{
-    background: url("../img/banners/suppliers_banner.png");
+    // background: url("../img/banners/suppliers_banner.png");
     color: #FFF;
     margin: 20px 0;
     display: block;
@@ -761,5 +768,10 @@ section {
         border-color: #e2c029;
       }
     }
+  }
+}
+.carousel{
+  .carousel-inner{
+    height: 350px;
   }
 }

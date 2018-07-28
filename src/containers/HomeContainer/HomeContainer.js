@@ -7,6 +7,9 @@ import * as c from "../../actions/Cart/Cart_actions";
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(a.getCategories()),
   getProducts: category => dispatch(a.getProducts(category)),
+  getTopBanners: () => dispatch(a.getTopBanners()),
+  getCenterBanners: () => dispatch(a.getCenterBanners()),
+  getBottomBanners: () => dispatch(a.getBottomBanners()),
   addToCart: item => dispatch(c.addToCart(item)),
   addToCartUnsafe: item => dispatch(c.addToCartUnsafe(item))
 });

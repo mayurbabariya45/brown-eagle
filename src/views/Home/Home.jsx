@@ -1,5 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Grid, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Carousels from "../../components/Carousels/Carousels";
@@ -7,11 +8,11 @@ import StatsCard from "../../components/StatsCard/StatsCard";
 import CategorySlider from "../../components/CategorySlider/CategorySlider";
 import SuppliersSlider from "../../components/SuppliersSlider/SuppliersSlider";
 import RequestForQuotation from "./RequestForQuotation";
+import Banners from "./Banners";
+import defaultBottomBanner from "../../assets/img/banners/suppliers_banner.png";
 import product1 from "../../assets/img/products/product1.png";
 import product2 from "../../assets/img/products/product2.png";
 import product3 from "../../assets/img/products/product3.png";
-import banner1 from "../../assets/img/banners/banner_1.jpg";
-import banner2 from "../../assets/img/banners/banner_2.jpg";
 import Uk from "../../assets/img/flages/uk.png";
 import France from "../../assets/img/flages/fr.png";
 import Italian from "../../assets/img/flages/it.png";
@@ -56,11 +57,33 @@ class Home extends Component {
     this.state = {};
   }
   componentWillMount() {
-    const { getCategories } = this.props;
+    const {
+      getCategories,
+      getTopBanners,
+      getCenterBanners,
+      getBottomBanners
+    } = this.props;
+    getTopBanners();
+    getCenterBanners();
+    getBottomBanners();
     getCategories();
   }
   render() {
-    const { translate, products, locale, loadingProduct } = this.props;
+    const {
+      translate,
+      products,
+      locale,
+      loadingProduct,
+      topBanners,
+      centerBanners,
+      bottomBanners,
+      isTopBannersLoading,
+      isCenterBannersLoading,
+      isBottomBannersLoading
+    } = this.props;
+    const backgroundBanner = !_.isEmpty(bottomBanners)
+      ? bottomBanners.url
+      : defaultBottomBanner;
     const firstCategory = !_.isEmpty(products) ? products[0] : [];
     const secondCategory = !_.isEmpty(products) ? products[1] : [];
     const thirdCategory = !_.isEmpty(products) ? products[2] : [];
@@ -91,7 +114,10 @@ class Home extends Component {
       : [];
     return (
       <div className="home">
-        <Carousels />
+        <Carousels
+          banners={topBanners}
+          isBannersLoading={isTopBannersLoading}
+        />
         <section className="services">
           <Grid>
             <div className="service-block">
@@ -185,24 +211,10 @@ class Home extends Component {
             </Col>
           </Row>
         </Grid>
-        <Grid>
-          <Row>
-            <Col md={12}>
-              <div className="home-banners">
-                <Col md={6}>
-                  <div className="image-banner-container">
-                    <img src={banner1} alt="banner" />
-                  </div>
-                </Col>
-                <Col md={6}>
-                  <div className="image-banner-container">
-                    <img src={banner2} alt="banner" />
-                  </div>
-                </Col>
-              </div>
-            </Col>
-          </Row>
-        </Grid>
+        <Banners
+          banners={centerBanners}
+          isBannersLoading={isCenterBannersLoading}
+        />
         <Grid>
           <Row>
             <Col sm={12}>
@@ -392,7 +404,10 @@ class Home extends Component {
             </Row>
             <Row>
               <Col md={12}>
-                <div className="supplier_banner">
+                <div
+                  className="supplier_banner"
+                  style={{ backgroundImage: `url(${backgroundBanner})` }}
+                >
                   <div className="supplier_text">
                     <h3>{translate("are_you_supplier")}</h3>
                     <p>{translate("supplier_text")}</p>
@@ -415,6 +430,11 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {};
+Home.propTypes = {
+  getTopBanners: PropTypes.func.isRequired,
+  getCenterBanners: PropTypes.func.isRequired,
+  getBottomBanners: PropTypes.func.isRequired,
+  getCategories: PropTypes.func.isRequired
+};
 
 export default Home;
