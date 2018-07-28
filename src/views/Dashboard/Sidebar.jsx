@@ -96,10 +96,29 @@ class Sidebar extends Component {
               </div>
             </Collapse>
           </li>
-          <NavItem eventKey="ten">
-            <i className="pe-7s-portfolio" />
-            {translate("request_for_quotation")}
-          </NavItem>
+          <li>
+            <a
+              href="/#/"
+              role="tab"
+              data-toggle="collapse"
+              aria-expanded={this.state.collapse.quotation}
+              onClick={e => this.handleCollpased(e, "quotation")}
+            >
+              <i className="pe-7s-portfolio" />
+              {translate("d_quotations")}
+              <span className="pe-7s-angle-right" />
+            </a>
+            <Collapse in={this.state.collapse.quotation}>
+              <div>
+                <Nav>
+                  <NavItem eventKey="ten">{translate("d_my_quotes")}</NavItem>
+                  <NavItem eventKey="eleven">
+                    {translate("request_for_quotation")}
+                  </NavItem>
+                </Nav>
+              </div>
+            </Collapse>
+          </li>
           <NavItem eventKey="fourth">
             <i className="pe-7s-lock" />
             {translate("d_change_password")}

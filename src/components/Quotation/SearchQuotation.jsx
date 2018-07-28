@@ -24,6 +24,15 @@ class SearchQuotation extends React.Component {
   onChangeInput(event) {
     const { value } = event.target;
     this.setState({ value });
+    if (value.length < 1) {
+      this.props.flushSearchQuery();
+      this.props.getSellerQuotations(
+        this.props.seller,
+        _.lowerCase(this.props.selectedFilter)
+      );
+      return false;
+    }
+    return false;
   }
   handleKeyDown(event) {
     switch (event.key) {
@@ -42,12 +51,25 @@ class SearchQuotation extends React.Component {
     const {
       selectedCategory,
       searchQuotation,
-      clearViewQuotation
+      clearViewQuotation,
+      selectedFilter,
+      flushSearchQuery,
+      getSellerQuotations,
+      seller
     } = this.props;
     const { value } = this.state;
     clearViewQuotation();
-    if (value.length < 1) return false;
-    searchQuotation({ category: selectedCategory.id, search: value, page: 1 });
+    if (value.length < 1) {
+      flushSearchQuery();
+      getSellerQuotations(seller, _.lowerCase(selectedFilter));
+      return false;
+    }
+    searchQuotation({
+      category: selectedCategory.id,
+      search: value,
+      status: _.lowerCase(selectedFilter),
+      page: 1
+    });
     return true;
   }
   render() {
@@ -104,8 +126,12 @@ SearchQuotation.propTypes = {
   onSelectCategory: PropTypes.func,
   searchQuotation: PropTypes.func,
   clearViewQuotation: PropTypes.func.isRequired,
+  flushSearchQuery: PropTypes.func.isRequired,
+  getSellerQuotations: PropTypes.func.isRequired,
+  seller: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(PropTypes.any).isRequired,
-  selectedCategory: PropTypes.objectOf(PropTypes.any)
+  selectedCategory: PropTypes.objectOf(PropTypes.any),
+  selectedFilter: PropTypes.string.isRequired
 };
 
 SearchQuotation.defaultProps = {

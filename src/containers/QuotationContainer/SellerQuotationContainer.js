@@ -1,12 +1,15 @@
 import { connect } from "react-redux";
-import Quotation from "../../views/Dashboard/Quotations";
+import Quotations from "../../views/Dashboard/Quotations";
 import * as c from "../../actions/Categories/Categories_actions";
 import * as a from "../../actions/Quotation/Quotation_actions";
 
 const mapDispatchToProps = dispatch => ({
+  getSellerQuotations: (sellerId, status, page) =>
+    dispatch(a.getSellerQuotations(sellerId, status, page)),
   onSelectCategory: value => dispatch(c.onSelectCategory(value)),
   selectFilters: value => dispatch(a.selectFilters(value)),
-  searchQuotation: values => dispatch(a.searchQuotation(values))
+  searchQuotation: values => dispatch(a.searchQuotation(values)),
+  flushSearchQuery: () => dispatch(a.flushSearchQuery())
 });
 const mapStateToProps = state => ({
   quotation: state.quotation,
@@ -20,5 +23,5 @@ const mergeProps = (state, actions, ownProps) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  Quotation
+  Quotations
 );

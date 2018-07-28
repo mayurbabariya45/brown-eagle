@@ -218,6 +218,8 @@ export const it = {
       d_wholesale_dispute: "Gestisci le controversie all'ingrosso",
       d_coupon: "I miei coupon",
       d_contacts: "Contatti",
+      d_quotations: "Citazioni",
+      d_my_quotes: "Le mie citazioni",
       // Validation Messages
 
       phone_number_validation:

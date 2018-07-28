@@ -4549,14 +4549,16 @@ section {
           border-color: #00cf59;
           padding: 2px 30px;
           text-transform: uppercase;
-          margin-bottom: 5px; }
+          margin-bottom: 5px;
+          cursor: default; }
         .quotation-section .quotations .quotation-item .quotation-container-button .quotation-button .closed,
         .quotation-section .quotations .quotation-item .quotation-container-button .quotation-button .rejected {
           background-color: #d02023;
           border-color: #d02023;
           padding: 2px 25px;
           text-transform: uppercase;
-          margin-bottom: 5px; }
+          margin-bottom: 5px;
+          cursor: default; }
   .quotation-section .quotations .view-quotation-item .quotation-item-details .quotation-product-title {
     margin: 0;
     padding: 15px 15px 5px; }

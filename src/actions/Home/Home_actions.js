@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { actionTypes as a } from "../../constants/Home/Home_action_type";
 

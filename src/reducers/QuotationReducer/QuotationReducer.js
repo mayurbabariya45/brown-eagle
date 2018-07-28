@@ -6,10 +6,7 @@ const initialState = {
   success: false,
   loading: false,
   submitQuoteLoading: false,
-  selectedFilter: {
-    filter: "ALL",
-    date: ""
-  },
+  selectedFilter: "All",
   searchQuery: "",
   categories: [],
   sellerQuotation: {
@@ -145,6 +142,25 @@ export default (state = initialState, action) => {
         error: true,
         success: false
       };
+    case a.GET_SELLER_QUOTATIONS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.GET_SELLER_QUOTATIONS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        sellerQuotation: action.payload
+      };
+    case a.GET_SELLER_QUOTATIONS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        success: false
+      };
     case a.SEARCH_QUOTATIONS_REQUEST:
       return {
         ...state,
@@ -157,6 +173,11 @@ export default (state = initialState, action) => {
         success: true,
         searchQuery: action.meta,
         sellerQuotation: action.payload
+      };
+    case a.FLUSH_SEARCH_QUERY:
+      return {
+        ...state,
+        searchQuery: ""
       };
     case a.SEARCH_QUOTATIONS_FAILURE:
       return {
@@ -183,10 +204,7 @@ export default (state = initialState, action) => {
     case a.SELECT_FILTER:
       return {
         ...state,
-        selectedFilter: {
-          filter: action.value,
-          date: ""
-        }
+        selectedFilter: action.value
       };
     default:
       return state;

@@ -243,6 +243,7 @@
                         padding: 2px 30px;
                         text-transform: uppercase;
                         margin-bottom: 5px;
+                        cursor: default;
                     }
                     .closed,
                     .rejected {
@@ -251,6 +252,7 @@
                         padding: 2px 25px;
                         text-transform: uppercase;
                         margin-bottom: 5px;
+                        cursor: default;
                     }
                 }
             }
@@ -559,7 +561,7 @@
 }
 
 .request_for_quotation {
-    .section-header{
+    .section-header {
         padding-top: 20px;
         margin: 20px auto 0;
     }

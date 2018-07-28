@@ -219,6 +219,8 @@ export const de = {
       d_wholesale_dispute: "Beheer Groot geschil",
       d_coupon: "Mijn coupons",
       d_contacts: "Contacten",
+      d_quotations: "offertes",
+      d_my_quotes: "Mijn offertes",
       // Validation Messages
 
       phone_number_validation:

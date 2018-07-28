@@ -238,6 +238,8 @@ export const en = {
       d_wholesale_dispute: "Manage Wholesale Dispute",
       d_coupon: "My Coupons",
       d_contacts: "Contacts",
+      d_quotations: "Quotations",
+      d_my_quotes: "My Quotes",
 
       // Validation Messages
 

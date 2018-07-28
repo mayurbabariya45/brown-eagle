@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Tab } from "react-bootstrap";
@@ -168,13 +169,16 @@ class Dashboard extends React.Component {
                     <Tab.Pane eventKey="six">
                       <Orders />
                     </Tab.Pane>
-                    <Tab.Pane eventKey="ten">
-                      <QuotationContainer
-                        seller={user && user.id}
-                        translate={translate}
-                        showNotification={showNotification}
-                        locale={locale}
-                      />
+                    <Tab.Pane eventKey="ten">My Quotes</Tab.Pane>
+                    <Tab.Pane eventKey="eleven">
+                      {!_.isEmpty(user) && (
+                        <QuotationContainer
+                          seller={user && user.id}
+                          translate={translate}
+                          showNotification={showNotification}
+                          locale={locale}
+                        />
+                      )}
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>

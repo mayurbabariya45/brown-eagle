@@ -8,7 +8,7 @@ export const onIncrement = item => dispatch => {
   });
   return dispatch({
     [RSAA]: {
-      endpoint: "category",
+      endpoint: "category?status=enabled&perPage=99",
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [
@@ -27,7 +27,7 @@ export const onDecrement = item => dispatch => {
   });
   return dispatch({
     [RSAA]: {
-      endpoint: "category",
+      endpoint: "category?status=enabled&perPage=99",
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [
@@ -48,7 +48,7 @@ export const addToCart = item => dispatch => {
   dispatch(addToCartUnsafe(item));
   return dispatch({
     [RSAA]: {
-      endpoint: "category",
+      endpoint: "category?status=enabled&perPage=99",
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [
@@ -63,7 +63,7 @@ export const addToCart = item => dispatch => {
 export const removeCartItem = item => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: "category",
+      endpoint: "category?status=enabled&perPage=99",
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [
@@ -79,7 +79,7 @@ export const removeCartItem = item => dispatch =>
 export const addToWhishlist = item => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: "category",
+      endpoint: "category?status=enabled&perPage=99",
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [

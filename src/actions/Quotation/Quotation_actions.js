@@ -27,11 +27,23 @@ export const getBuyerQuotations = (buyerId, token) => ({
     ]
   }
 });
+export const getSellerQuotations = (sellerId, status = "all", page = 1) => ({
+  [RSAA]: {
+    endpoint: `rfq?quote/seller/${sellerId}/status/${status}?page=${page}`,
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.GET_SELLER_QUOTATIONS_REQUEST,
+      a.GET_SELLER_QUOTATIONS_SUCCESS,
+      a.GET_SELLER_QUOTATIONS_FAILURE
+    ]
+  }
+});
 
 export const getCategories = () => dispatch => {
   dispatch({
     [RSAA]: {
-      endpoint: "category",
+      endpoint: "category?status=enabled&perPage=99",
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [
@@ -59,6 +71,10 @@ export const flushQuotationImages = () => ({
 
 export const flushCreateQuotation = () => ({
   type: a.FLUSH_ADD_QUOTATION
+});
+
+export const flushSearchQuery = () => ({
+  type: a.FLUSH_SEARCH_QUERY
 });
 
 export const selectFilters = value => ({
@@ -95,21 +111,21 @@ export const addQuotationImages = (file, id, locale) => ({
 });
 
 export const searchQuotation = values => dispatch => {
-  const { search, category, page } = values;
+  const { search, category, status, page } = values;
   let endCategory = "";
   if (!_.isEmpty(category)) {
     endCategory = `&category=${category.id}`;
   }
   dispatch({
     [RSAA]: {
-      endpoint: `rfq/search?search=${search}${endCategory}&page=${page}`,
+      endpoint: `rfq/search?search=${search}${endCategory}&status=${status}&page=${page}`,
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [
         a.SEARCH_QUOTATIONS_REQUEST,
         {
           type: a.SEARCH_QUOTATIONS_SUCCESS,
-          meta: values
+          meta: search
         },
         a.SEARCH_QUOTATIONS_FAILURE
       ]

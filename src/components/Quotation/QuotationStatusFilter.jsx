@@ -19,14 +19,30 @@ class QuotationStatusFilter extends React.Component {
     this.handleDropdown = this.handleDropdown.bind(this);
   }
   handleDropdown(evt) {
-    const { selectFilters } = this.props;
+    const {
+      selectFilters,
+      searchQuotation,
+      getSellerQuotations,
+      seller,
+      searchQuery,
+      selectedCategory
+    } = this.props;
     selectFilters(evt);
+    if (!_.isEmpty(searchQuery)) {
+      searchQuotation({
+        category: selectedCategory.id,
+        search: searchQuery,
+        status: _.lowerCase(evt),
+        page: 1
+      });
+      return false;
+    }
+    getSellerQuotations(seller, _.lowerCase(evt), 1);
+    return false;
   }
   render() {
     const { selectedFilter } = this.props;
-    const selectedStatus = (
-      <span>{!_.isEmpty(selectedFilter) ? selectedFilter.filter : "All"}</span>
-    );
+    const selectedStatus = <span>{selectedFilter}</span>;
     const renderStatus = status.map(data => (
       <MenuItem key={data} eventKey={data}>
         {data}
@@ -55,7 +71,16 @@ class QuotationStatusFilter extends React.Component {
 
 QuotationStatusFilter.propTypes = {
   selectFilters: PropTypes.func.isRequired,
-  selectedFilter: PropTypes.objectOf(PropTypes.any).isRequired
+  getSellerQuotations: PropTypes.func.isRequired,
+  searchQuotation: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string,
+  seller: PropTypes.string,
+  selectedFilter: PropTypes.objectOf(PropTypes.any).isRequired,
+  selectedCategory: PropTypes.objectOf(PropTypes.any)
 };
-
+QuotationStatusFilter.defaultProps = {
+  searchQuery: "",
+  seller: "",
+  selectedCategory: {}
+};
 export default QuotationStatusFilter;

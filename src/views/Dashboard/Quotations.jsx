@@ -1,13 +1,11 @@
 import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
-import BlockUi from "react-block-ui";
 import { Row, Col } from "react-bootstrap";
-import QuotationItems from "../../components/Quotation/QuotationItem";
 import StatusFilter from "../../components/Quotation/QuotationStatusFilter";
 import ViewQuotation from "./ViewQuotation";
 import SearchQuotation from "../../components/Quotation/SearchQuotation";
-import Pagination from "../../components/Pagination/Pagination";
+import QuotationItems from "./QuotationItems";
 import SubmitQuoteContainer from "../../containers/QuotationContainer/SubmitQuoteContainer";
 
 class Quotations extends React.Component {
@@ -25,11 +23,37 @@ class Quotations extends React.Component {
     this.handleViewQuotation = this.handleViewQuotation.bind(this);
     this.clearViewQuotationState = this.clearViewQuotationState.bind(this);
   }
+  componentWillMount() {
+    const { getSellerQuotations, seller } = this.props;
+    if (!_.isEmpty(seller)) {
+      getSellerQuotations(seller);
+    }
+  }
   onPageChanged = data => {
     const { currentPage } = data;
-    const { searchQuotation, quotation } = this.props;
+    const {
+      searchQuotation,
+      quotation,
+      getSellerQuotations,
+      seller,
+      selectedCategory
+    } = this.props;
     this.setState({ currentPage });
-    searchQuotation({ ...quotation.searchQuery, page: currentPage });
+    if (!_.isEmpty(quotation.searchQuery)) {
+      searchQuotation({
+        category: selectedCategory.id,
+        search: quotation.searchQuery,
+        status: _.lowerCase(quotation.selectedFilter),
+        page: currentPage
+      });
+      return false;
+    }
+    getSellerQuotations(
+      seller,
+      _.lowerCase(quotation.selectedFilter),
+      currentPage
+    );
+    return false;
   };
   handleSubmitQuoteModal(quotationId) {
     this.setState({ showModal: true, quotationId });
@@ -54,7 +78,9 @@ class Quotations extends React.Component {
       categories,
       selectedCategory,
       seller,
-      showNotification
+      showNotification,
+      getSellerQuotations,
+      flushSearchQuery
     } = this.props;
     const { currentPage } = this.state;
     const { count, rfqs } = quotation.sellerQuotation;
@@ -71,9 +97,13 @@ class Quotations extends React.Component {
               translate={translate}
               categories={categories}
               clearViewQuotation={this.clearViewQuotationState}
+              selectedFilter={quotation.selectedFilter}
               searchQuotation={searchQuotation}
               selectedCategory={selectedCategory}
               onSelectCategory={onSelectCategory}
+              flushSearchQuery={flushSearchQuery}
+              getSellerQuotations={getSellerQuotations}
+              seller={seller}
             />
           </Col>
         </Row>
@@ -82,6 +112,11 @@ class Quotations extends React.Component {
             <Col md={12} sm={12} xs={12}>
               <div className="quotations-filter">
                 <StatusFilter
+                  seller={seller}
+                  selectedCategory={selectedCategory}
+                  searchQuotation={searchQuotation}
+                  searchQuery={quotation.searchQuery}
+                  getSellerQuotations={getSellerQuotations}
                   selectFilters={selectFilters}
                   selectedFilter={quotation.selectedFilter}
                 />
@@ -117,38 +152,47 @@ class Quotations extends React.Component {
           </Row>
         )}
         {!this.state.viewQuotation && (
-          <Row>
-            <Col md={12}>
-              <BlockUi tag="div" blocking={quotation.loading}>
-                <div className="quotations">
-                  <Row>
-                    <Col md={12}>
-                      {_.map(rfqs, data => (
-                        <QuotationItems
-                          locale={locale}
-                          key={data.id}
-                          quotation={data}
-                          handleViewQuotation={e => {
-                            e.preventDefault();
-                            this.handleViewQuotation(data);
-                          }}
-                          opneSubmitQuoteModal={() =>
-                            this.handleSubmitQuoteModal(data.id)
-                          }
-                        />
-                      ))}
-                    </Col>
-                  </Row>
-                  <Pagination
-                    totalRecords={count || 0}
-                    pageLimit={20}
-                    pageNeighbours={1}
-                    onPageChanged={this.onPageChanged}
-                  />
-                </div>
-              </BlockUi>
-            </Col>
-          </Row>
+          <QuotationItems
+            quotations={rfqs}
+            loading={quotation.loading}
+            locale={locale}
+            totalItems={count}
+            handleViewQuotation={this.handleViewQuotation}
+            handleSubmitQuoteModal={this.handleSubmitQuoteModal}
+            onPageChanged={this.onPageChanged}
+          />
+          // <Row>
+          //   <Col md={12}>
+          //     <BlockUi tag="div" blocking={quotation.loading}>
+          //       <div className="quotations">
+          //         <Row>
+          //           <Col md={12}>
+          //             {_.map(rfqs, data => (
+          //               <QuotationItems
+          //                 locale={locale}
+          //                 key={data.id}
+          //                 quotation={data}
+          //                 handleViewQuotation={e => {
+          //                   e.preventDefault();
+          //                   this.handleViewQuotation(data);
+          //                 }}
+          //                 opneSubmitQuoteModal={() =>
+          //                   this.handleSubmitQuoteModal(data.id)
+          //                 }
+          //               />
+          //             ))}
+          //           </Col>
+          //         </Row>
+          //         <Pagination
+          //           totalRecords={count || 0}
+          //           pageLimit={20}
+          //           pageNeighbours={1}
+          //           onPageChanged={this.onPageChanged}
+          //         />
+          //       </div>
+          //     </BlockUi>
+          //   </Col>
+          // </Row>
         )}
         <SubmitQuoteContainer
           translate={translate}
@@ -170,6 +214,8 @@ Quotations.propTypes = {
   selectFilters: PropTypes.func.isRequired,
   searchQuotation: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
+  getSellerQuotations: PropTypes.func.isRequired,
+  flushSearchQuery: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.any).isRequired,
   selectedCategory: PropTypes.objectOf(PropTypes.any),
   quotation: PropTypes.objectOf(PropTypes.any),

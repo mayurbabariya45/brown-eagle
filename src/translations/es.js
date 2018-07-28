@@ -219,6 +219,8 @@ export const es = {
       d_wholesale_dispute: "Administre la disputa al por mayor",
       d_coupon: "Mis cupones",
       d_contacts: "Contactos",
+      d_quotations: "Citas",
+      d_my_quotes: "Mis citas",
       // Validation Messages
 
       phone_number_validation:

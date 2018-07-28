@@ -195,6 +195,8 @@ export const fr = {
       d_wholesale_dispute: "Gérer le différend de gros",
       d_coupon: "Mes coupons",
       d_contacts: "Contacts",
+      d_quotations: "Citations",
+      d_my_quotes: "Mes citations",
       // Footer
       about_us: "à propos de nous",
       sell_on_brown_eagle: "Vendre sur aigle marron",
