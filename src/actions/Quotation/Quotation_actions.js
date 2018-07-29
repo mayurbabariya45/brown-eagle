@@ -15,9 +15,9 @@ export const getQuotations = (id, token) => ({
   }
 });
 
-export const getBuyerQuotations = (buyerId, token) => ({
+export const getBuyerQuotations = (buyerId, page) => ({
   [RSAA]: {
-    endpoint: `rfq?buyer=${buyerId}`,
+    endpoint: `rfq?buyer=${buyerId}&page=${page}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [
@@ -27,6 +27,7 @@ export const getBuyerQuotations = (buyerId, token) => ({
     ]
   }
 });
+
 export const getSellerQuotations = (sellerId, status = "all", page = 1) => ({
   [RSAA]: {
     endpoint: `rfq?quote/seller/${sellerId}/status/${status}?page=${page}`,
@@ -36,6 +37,19 @@ export const getSellerQuotations = (sellerId, status = "all", page = 1) => ({
       a.GET_SELLER_QUOTATIONS_REQUEST,
       a.GET_SELLER_QUOTATIONS_SUCCESS,
       a.GET_SELLER_QUOTATIONS_FAILURE
+    ]
+  }
+});
+
+export const getSellerQuotes = (sellerId, page = 1) => ({
+  [RSAA]: {
+    endpoint: `rfq?quote/seller/${sellerId}?page=${page}`,
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.GET_SELLER_QUOTES_REQUEST,
+      a.GET_SELLER_QUOTES_SUCCESS,
+      a.GET_SELLER_QUOTES_FAILURE
     ]
   }
 });

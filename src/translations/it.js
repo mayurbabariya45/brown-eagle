@@ -238,6 +238,154 @@ export const it = {
       a_billing_address: "Indirizzo Di Fatturazione",
       a_shipping_address: "indirizzo di spedizione",
 
+      // Products
+
+      availability: "Disponibilità:",
+      in_stock: "disponibile",
+      out_of_stock: "Esaurito",
+      popularity: "Popolarità",
+      price_low: "Prezzo: da basso ad alto",
+      price_high: "Prezzo - da alto a basso",
+      rating_low: "Valutazione: da bassa ad alta",
+      rating_high: "Valutazione: da alta a bassa",
+      newest_first: "Prima i più nuovi",
+      product_price: "Prezzo",
+      product_contact_supplier: "Contatta il fornitore",
+      product_start_order: "Inizia ordine",
+      product_leave_messages: "Lascia messaggi",
+      supply_ability: "Capacità di fornitura",
+      port: "Porta",
+      payment_method: "",
+      product_rating: "Valutazioni e recensioni",
+      product_add_rating: "Valuta questo prodotto",
+      product_message_title: "Invia il tuo messaggio a questo fornitore",
+      product_message_to: "A:",
+      product_message: "Messaggio:",
+      product_quantity: "Quantità:",
+      product_overview: "Panoramica",
+      product_quick_details: "Info Veloci",
+      product_description: "Descrizione",
+      product_company_profile: "Profilo Aziendale",
+      product_transaction_overview: "Panoramica delle transazioni",
+      product_basic_information: "Informazioni di base",
+      product_message_label:
+        "Consigliare i fornitori corrispondenti se questo fornitore non mi contatta nel Centro messaggi entro 24 ore. Richiesta di offerta.",
+      product_message_label_1:
+        "Accetto di condividere il mio biglietto da visita con il fornitore.",
+      product_message_send: "Inviare",
+      product_reviews: "Valutazioni e recensioni",
+      product_reviews_title: "Recensioni più rilevanti",
+      product_transaction_level: "Livello di transazione:",
+      product_supplier_assessments: "Valutazioni del fornitore:",
+      product_transactions: "Le transazioni",
+      product_response_time: "Tempo di risposta",
+      product_response_rate: "Tasso di risposta",
+      product_like_title: "Ti potrebbe piacere",
+      // basic information
+      basic_bussiness_type: "Tipo di affari:",
+      basic_main_product: "Prodotti Principali:",
+      basic_revenue: "Totale delle entrate annuali:",
+      basic_market: "I 3 mercati principali:",
+      basic_location: "Posizione:",
+      basic_employees: "Dipendenti totali:",
+      basic_established: "Anno stabilito:",
+      basic_certification: "Certificazioni del prodotto:",
+      product_rating_modal: "Valutazione del prodotto",
+      product_review_modal: "Commento",
+      product_review_placeholder: "Inserisci il tuo commento.",
+      product_rating_label_modal: "Valutazione",
+      product_review_title_label_modal: "titolo della recensione",
+      product_review_title_placeholder: "Titolo",
+      // shopping cart
+      cart_title: "Carrello della spesa",
+      cart_trading: "Trading",
+      cart_premium: "premio",
+      cart_details: "dettagli del prezzo",
+      cart_total_label: "Il tuo risparmio totale su questo ordine ₹ 800",
+      cart_wishlist: "sposta nella lista dei desideri",
+      cart_remove: "rimuovere",
+      cart_continue: "continua a fare acquisti",
+      cart_order: "invia ordine",
+
+      // Request Quotation
+      request_quotation_title: "Richiesta di offerta",
+      request_quotation_form_title: "Dì ai fornitori ciò di cui hai bisogno",
+      request_quotation_form_title_1: "Completa il tuo RFQ",
+      request_quotation_form_description:
+        "Più specifiche sono le tue informazioni, più accuratamente possiamo abbinare la tua richiesta ai fornitori giusti",
+      request_quotation_form_product_name:
+        "Parole chiave del prodotto che stai cercando",
+      request_quotation_form_name_label:
+        "Si prega di inserire il nome del prodotto",
+      request_quotation_form_description_label:
+        "Si prega di comunicare ai fornitori i requisiti dettagliati. È possibile includere: colore, dimensioni, materiale, qualità / standard, ecc",
+      request_quotation_form_description_name:
+        "Gentile Signore / a, sto cercando prodotti con le seguenti specifiche",
+      request_quotation_form_product_categories:
+        "Si prega di selezionare una categoria",
+      request_quotation_form_product_sub_categories: "Seleziona sottocategoria",
+      request_quotation_form_sub_category_placehholder:
+        "Seleziona sottocategoria",
+      request_quotation_form_category_placehholder: "Seleziona categoria",
+      request_quotation_form_quote_condition:
+        "Accetto di condividere il mio biglietto da visita con i fornitori di quote.",
+      request_quotation_form_condition:
+        "Ho letto, compreso e accettato di rispettare i termini e le condizioni che disciplinano la richiesta di offerta",
+      request_quotation_form_submit: "Invia RFQ",
+      request_quotation_form_quote: "Come ottenere preventivi rapidamente?",
+      request_quotation_form_quality: "Qualità d'acquisto",
+      request_quotation_form_quality_label:
+        "Inserisci prima la quantità di ordine all'ingrosso stimata, anche se stai richiedendo campioni",
+      compare_quotes: "Confronta le quotazioni",
+      contact_suppliers: "Contatta il fornitore",
+      // Submit Quote
+      submit_quote_title: "Invia preventivo",
+      quote_form_name: "Titolo",
+      quote_form_quote_price: "Prezzo di quotazione",
+      quote_form_quote_quantity: "Quota Quantità Minima",
+      quote_form_quote_delivery_time: "Tempo di consegna stimato",
+      quote_form_description: "Lettera di presentazione",
+      // Top Supllier
+      top_selected_suppliers: "TOP SELEZIONATI FORNITORI",
+      // Recent View
+
+      my_recent_view: "LE MIE VISIONI RECENTI",
+      // Request Quotation section
+      request_quotation_quotes: "Ottieni quotazioni per il tuo",
+      request_quotation_custom_request: "Richiesta personalizzata",
+      request_quotation_suppliers: "Lascia i giusti fornitori",
+      request_quotation_find_request: "Ti trovo",
+      request_quotation_deals: "Chiudi le offerte con",
+      request_quotation_click: "Una volta clicca",
+      request_quotation_how: "Come funziona",
+      request_quotation_submit: "Invia RFQ",
+      request_quotation_compare: "Confronta le quotazioni",
+      request_quotation_contact: "Contatta il fornitore",
+
+      // empty_message
+      empty_message: "Niente da mostrare",
+      // SUPPLIERS  by regions
+      supplier_by_regions: "TROVA FORNITORI PER REGIONE",
+      are_you_supplier: "Sei un fornitore?",
+      join_now: "Iscriviti adesso",
+      supplier_text:
+        "Unisciti a Brown-Eagle.com come fornitore verificato e connettiti con gli acquirenti",
+      // view quotation
+      q_preferred_price: "preferredUnitPrice",
+      q_quanity_required: "quantità richiesta",
+      q_date_posted: "data di pubblicazione",
+      q_availability: "Disponibilità",
+      q_status_open: "Aperto",
+      q_information: "Informazioni dettagliate",
+      q_back_button: "Torna al risultato",
+      my_quotations: "La mia quotazione",
+      q_request_quotation: "Richiedi preventivo",
+      q_quotation: "Quotazione",
+      q_quotations: "Citazioni",
+      q_chat: "CHIACCHIERARE",
+      q_pieces: "pezzi",
+      q_posted_in: "pubblicato in",
+      q_quote_now: "Citazione ora",
       // Footer
       about_us: "riguardo a noi",
       sell_on_brown_eagle: "Vendi su Brown Eagle",

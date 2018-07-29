@@ -6,6 +6,7 @@ import { scroller, Element } from "react-scroll";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import QuotationContainer from "../../containers/QuotationContainer/SellerQuotationContainer";
+import SellerQuotationContainer from "../../containers/QuotationContainer/SellerQuotesContainer";
 import ContentLoader from "../../components/Loader/Loader";
 import Home from "./Home";
 import Profile from "./Profile";
@@ -147,17 +148,20 @@ class Dashboard extends React.Component {
                       </Element>
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
-                      <Products
-                        translate={translate}
-                        loading={loading}
-                        upldateProductLoading={upldateProductLoading}
-                        id={user.id}
-                        getProducts={getProducts}
-                        getProduct={getProduct}
-                        deleteProduct={deleteProduct}
-                        showNotification={showNotification}
-                        products={products}
-                      />
+                      {!_.isEmpty(user) && (
+                        <Products
+                          translate={translate}
+                          loading={loading}
+                          upldateProductLoading={upldateProductLoading}
+                          id={user.id}
+                          getProducts={getProducts}
+                          getProduct={getProduct}
+                          deleteProduct={deleteProduct}
+                          showNotification={showNotification}
+                          myProducts={products}
+                          locale={locale}
+                        />
+                      )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="fourth">
                       <PasswordContainer
@@ -169,7 +173,15 @@ class Dashboard extends React.Component {
                     <Tab.Pane eventKey="six">
                       <Orders />
                     </Tab.Pane>
-                    <Tab.Pane eventKey="ten">My Quotes</Tab.Pane>
+                    <Tab.Pane eventKey="ten">
+                      {!_.isEmpty(user) && (
+                        <SellerQuotationContainer
+                          seller={user && user.id}
+                          translate={translate}
+                          locale={locale}
+                        />
+                      )}
+                    </Tab.Pane>
                     <Tab.Pane eventKey="eleven">
                       {!_.isEmpty(user) && (
                         <QuotationContainer
@@ -194,7 +206,6 @@ Dashboard.propTypes = {
   translate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  products: PropTypes.arrayOf(PropTypes.any).isRequired,
   upldateProductLoading: PropTypes.bool.isRequired,
   updateProfile: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,

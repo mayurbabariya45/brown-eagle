@@ -140,6 +140,7 @@ class Quotations extends React.Component {
             <Col md={12} sm={12} xs={12}>
               <div className="quotations">
                 <ViewQuotation
+                  translate={translate}
                   quotation={this.state.quotation}
                   locale={locale}
                   handleBackButton={this.clearViewQuotationState}
@@ -153,6 +154,7 @@ class Quotations extends React.Component {
         )}
         {!this.state.viewQuotation && (
           <QuotationItems
+            translate={translate}
             quotations={rfqs}
             loading={quotation.loading}
             locale={locale}
@@ -161,38 +163,6 @@ class Quotations extends React.Component {
             handleSubmitQuoteModal={this.handleSubmitQuoteModal}
             onPageChanged={this.onPageChanged}
           />
-          // <Row>
-          //   <Col md={12}>
-          //     <BlockUi tag="div" blocking={quotation.loading}>
-          //       <div className="quotations">
-          //         <Row>
-          //           <Col md={12}>
-          //             {_.map(rfqs, data => (
-          //               <QuotationItems
-          //                 locale={locale}
-          //                 key={data.id}
-          //                 quotation={data}
-          //                 handleViewQuotation={e => {
-          //                   e.preventDefault();
-          //                   this.handleViewQuotation(data);
-          //                 }}
-          //                 opneSubmitQuoteModal={() =>
-          //                   this.handleSubmitQuoteModal(data.id)
-          //                 }
-          //               />
-          //             ))}
-          //           </Col>
-          //         </Row>
-          //         <Pagination
-          //           totalRecords={count || 0}
-          //           pageLimit={20}
-          //           pageNeighbours={1}
-          //           onPageChanged={this.onPageChanged}
-          //         />
-          //       </div>
-          //     </BlockUi>
-          //   </Col>
-          // </Row>
         )}
         <SubmitQuoteContainer
           translate={translate}

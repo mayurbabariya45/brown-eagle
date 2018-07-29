@@ -1,9 +1,9 @@
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { ActionTypes as a } from "../../constants/Dashboard/Dashboard_action_type";
 
-export const getProducts = (id, token) => ({
+export const getProducts = (id, page = 1) => ({
   [RSAA]: {
-    endpoint: `product?seller=${id}&status=pending`,
+    endpoint: `product?seller=${id}&status=pending&page=${page}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [

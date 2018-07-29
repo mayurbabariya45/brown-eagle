@@ -17,15 +17,13 @@ const QuotationItems = props => (
                 <QuotationItem
                   translate={props.translate}
                   locale={props.locale}
+                  buyer
                   key={data.id}
                   quotation={data}
                   handleViewQuotation={e => {
                     e.preventDefault();
                     props.handleViewQuotation(data);
                   }}
-                  opneSubmitQuoteModal={() =>
-                    props.handleSubmitQuoteModal(data.id)
-                  }
                 />
               ))}
             </Col>
@@ -43,7 +41,8 @@ const QuotationItems = props => (
 );
 
 QuotationItems.propTypes = {
-  onPageChanged: PropTypes.func.isRequired
+  onPageChanged: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired
 };
 
 export default QuotationItems;

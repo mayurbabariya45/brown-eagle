@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
@@ -18,7 +19,7 @@ class Account extends Component {
     removeAll();
   }
   render() {
-    const { translate, logout, history, showNotification } = this.props;
+    const { translate, logout, history, showNotification, locale } = this.props;
     const { user } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
     return (
@@ -49,7 +50,7 @@ class Account extends Component {
                         </NavItem>
                         <NavItem eventKey="second">
                           <i className="pe-7s-users" />
-                          {translate("my_quotation")}
+                          {translate("my_quotations")}
                         </NavItem>
                         <NavItem eventKey="third">
                           <i className="pe-7s-lock" />
@@ -81,11 +82,14 @@ class Account extends Component {
                       <Profile {...this.props} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
-                      <QuotationContainer
-                        buyerId={user.id}
-                        translate={translate}
-                        showNotification={showNotification}
-                      />
+                      {!_.isEmpty(user) && (
+                        <QuotationContainer
+                          buyerId={user.id}
+                          locale={locale}
+                          translate={translate}
+                          showNotification={showNotification}
+                        />
+                      )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
                       <PasswordContainer

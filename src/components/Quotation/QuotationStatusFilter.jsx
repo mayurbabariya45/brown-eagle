@@ -75,7 +75,7 @@ QuotationStatusFilter.propTypes = {
   searchQuotation: PropTypes.func.isRequired,
   searchQuery: PropTypes.string,
   seller: PropTypes.string,
-  selectedFilter: PropTypes.objectOf(PropTypes.any).isRequired,
+  selectedFilter: PropTypes.string.isRequired,
   selectedCategory: PropTypes.objectOf(PropTypes.any)
 };
 QuotationStatusFilter.defaultProps = {

@@ -94,7 +94,7 @@ const appRoutes = [
     },
     secure: true,
     type: "buyer",
-    path: "/request_quotation",
+    path: "/buyer/request_quotation",
     name: "RequestQuotation",
     component: RequestQuotationContainer
   },

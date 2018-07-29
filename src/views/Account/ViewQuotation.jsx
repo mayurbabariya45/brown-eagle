@@ -11,13 +11,7 @@ class ViewQuotation extends React.Component {
   }
 
   render() {
-    const {
-      quotation,
-      locale,
-      opneSubmitQuoteModal,
-      handleBackButton,
-      translate
-    } = this.props;
+    const { quotation, locale, handleBackButton, translate } = this.props;
     if (_.isEmpty(quotation)) return null;
     return (
       <div>
@@ -35,17 +29,18 @@ class ViewQuotation extends React.Component {
             <div className="quotation-item-detail">
               <div className="quotation-quantity">
                 <p>
-                  {translate("q_quanity_required")} :{" "}
-                  <b>{quotation.purchaseQuantity}</b> {translate("q_pieces")}
+                  {translate("q_preferred_price")} :{" "}
+                  <b>{quotation.preferredUnitPrice}</b>
                 </p>
                 <p>
-                  {translate("q_posted_in")} : <b>12/3/2018</b>
+                  {translate("q_quanity_required")} :{" "}
+                  <b>{quotation.purchaseQuantity}</b>
+                </p>
+                <p>
+                  {translate("q_date_posted")} : <b>12/3/2018</b>
                 </p>
               </div>
               <div className="quotation-posted">
-                <Button fill bsStyle="warning">
-                  <i className="pe-7s-mail" /> {translate("q_chat")}
-                </Button>
                 <p>
                   <span>{translate("q_availability")}</span> 10
                 </p>
@@ -63,16 +58,6 @@ class ViewQuotation extends React.Component {
                 quotation.status === "rejected") && (
                 <Button fill bsStyle="warning" className="closed">
                   {quotation.status}
-                </Button>
-              )}
-              {quotation.status === "open" && (
-                <Button
-                  fill
-                  bsStyle="warning"
-                  className="btn-quote"
-                  onClick={opneSubmitQuoteModal}
-                >
-                  {translate("q_quote_now")}
                 </Button>
               )}
             </div>
@@ -97,9 +82,8 @@ class ViewQuotation extends React.Component {
 }
 
 ViewQuotation.propTypes = {
-  opneSubmitQuoteModal: PropTypes.func.isRequired,
-  translate: PropTypes.func.isRequired,
   handleBackButton: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
   quotation: PropTypes.objectOf(PropTypes.any),
   locale: PropTypes.string
 };

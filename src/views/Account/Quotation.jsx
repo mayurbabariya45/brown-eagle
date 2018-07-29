@@ -3,108 +3,102 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import BlockUi from "react-block-ui";
-import ImageLoader from "../../components/ImageLoader/ImageLoader";
-import ContentLoader from "../../components/Loader/Loader";
-import product1 from "../../assets/img/products/product1.png";
-
-const preloader = () => <ContentLoader height={300} inFight />;
+import QuotationItems from "./QuotationItems";
+import ViewQuotation from "./ViewQuotation";
 
 class Quotation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentPage: 1,
+      quotation: {},
+      viewQuotation: false
+    };
+    this.handleViewQuotation = this.handleViewQuotation.bind(this);
+    this.clearViewQuotationState = this.clearViewQuotationState.bind(this);
   }
-  componentDidMount() {
+  componentWillMount() {
     const { getBuyerQuotations, buyerId } = this.props;
     if (buyerId) {
-      getBuyerQuotations(buyerId);
+      getBuyerQuotations(buyerId, this.state.currentPage);
     }
   }
-  componentWillReceiveProps(nextProps) {
-    const { getBuyerQuotations, buyerId } = nextProps;
-    if (buyerId !== this.props.buyerId) {
-      getBuyerQuotations(buyerId);
-    }
+  onPageChanged = data => {
+    const { currentPage } = data;
+    const { getBuyerQuotations, buyerId } = this.props;
+    this.setState({ currentPage });
+    getBuyerQuotations(buyerId, currentPage);
+    return false;
+  };
+  handleViewQuotation(quotation) {
+    this.setState({ quotation, viewQuotation: true });
+  }
+  clearViewQuotationState() {
+    this.setState({ quotation: {}, viewQuotation: false });
   }
   render() {
-    const { translate, quotation } = this.props;
-    const { loading, buyerQuotation } = quotation;
+    const { translate, quotation, locale } = this.props;
+    const { currentPage } = this.state;
+    const { count, rfqs } = quotation.buyerQuotation;
+    const start = (currentPage - 1) * 20 + 1 || 0;
+    let end = currentPage * 20 || 0;
+    if (end > count) {
+      end = count;
+    }
     return (
       <div className="account-quotation">
         <Row>
           <Col md={12}>
             <div className="section-header">
               <div className="title">
-                <h5>{translate("my_quotation")}</h5>
+                <h5>{translate("my_quotations")}</h5>
+              </div>
+              <div className="request_quotation_button">
+                <Link
+                  to="/buyer/request_quotation"
+                  className="btn btn-fill btn-border btn-warning"
+                >
+                  {translate("q_request_quotation")}
+                </Link>
               </div>
             </div>
           </Col>
+        </Row>
+        <Row>
           <Col md={12}>
-            <BlockUi tag="div" blocking={loading}>
-              <Row>
-                <Col md={12} sm={12} xs={12}>
-                  <div className="quotations">
-                    {_.map(buyerQuotation, data => (
-                      <div key={data.id} className="quotation-item">
-                        <div className="quotation-item-details">
-                          <div className="quotation-product-title">
-                            <h3>{data.title}</h3>
-                          </div>
-                          <div className="image-container">
-                            <div className="product-image-container">
-                              <a
-                                href="#products"
-                                className="product photo product-item-photo"
-                              >
-                                <ImageLoader
-                                  preloader={preloader}
-                                  src={
-                                    !_.isEmpty(data.rfqPictures)
-                                      ? data.rfqPictures[0].url
-                                      : ""
-                                  }
-                                />
-                              </a>
-                            </div>
-                          </div>
-                          <div className="quotation-item-detail">
-                            <div className="desc">
-                              <p>{data.description}</p>
-                            </div>
-                            <div className="quotation-quantity">
-                              <p>
-                                Quanity Required <b>{data.purchaseQuantity}</b>{" "}
-                                pieces
-                              </p>
-                              {/* <p>Posted in maxico</p> */}
-                            </div>
-                            {/* <div className="quotation-posted">
-                              <p>Date Posted: just now</p>
-                            </div> */}
-                          </div>
-                        </div>
-                        <div className="quotation-container-button">
-                          <div className="quotation-button">
-                            <Link
-                              to="/"
-                              className="btn-fill btn-radius btn btn-warning"
-                            >
-                              Quote Now
-                            </Link>
-                            <div className="quote-count">
-                              <h5>Quote left 10</h5>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </Col>
-              </Row>
-            </BlockUi>
+            <div className="result-showing">
+              <p>
+                Showing {start} – {end} Quotation of {count} Quotations
+              </p>
+            </div>
           </Col>
         </Row>
+        {this.state.viewQuotation && (
+          <Col md={12} sm={12} xs={12}>
+            <div className="quotations">
+              <ViewQuotation
+                translate={translate}
+                quotation={this.state.quotation}
+                locale={locale}
+                handleBackButton={this.clearViewQuotationState}
+                opneSubmitQuoteModal={() =>
+                  this.handleSubmitQuoteModal(this.state.quotation.id)
+                }
+              />
+            </div>
+          </Col>
+        )}
+        {!this.state.viewQuotation && (
+          <QuotationItems
+            translate={translate}
+            quotations={rfqs}
+            loading={quotation.loading}
+            locale={locale}
+            totalItems={count}
+            handleViewQuotation={this.handleViewQuotation}
+            onPageChanged={this.onPageChanged}
+          />
+        )}
       </div>
     );
   }

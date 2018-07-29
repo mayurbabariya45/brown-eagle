@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateProfile: (value, profileId, profileRole) =>
     dispatch(a.updateProfile(value, profileId, profileRole)),
-  getProducts: (id, token) => dispatch(d.getProducts(id, token)),
+  getProducts: (id, page) => dispatch(d.getProducts(id, page)),
   getProduct: product => dispatch(d.getProduct(product)),
   getProductImage: (id, token) => dispatch(d.getProductImage(id, token)),
   deleteProduct: id => dispatch(d.deleteProduct(id))

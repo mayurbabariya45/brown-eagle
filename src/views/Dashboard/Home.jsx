@@ -4,19 +4,38 @@ import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { Card } from "../../components/Card/Card";
 import ContentLoader from "../../components/Loader/Loader";
-import ProductSlider from "../../components/ProductSlider/ProductSlider";
-import product1 from "../../assets/img/products/product1.png";
+import BuyerSlider from "../../components/BuyerSlider/BuyerSlider";
 import avatar from "../../assets/img/avatar.png";
+import noAvatar from "../../assets/img/no-avatar.png";
 
-const staticProducts = [
+const buyers = [
   {
-    id: "1",
-    name: "Safescan 2210 Banknote Counter",
-    productPictures: [product1],
-    productPrice: 10,
-    totalRatingsCount: 1
+    name: "test user",
+    id: 1,
+    profile: noAvatar
+  },
+  {
+    name: "test user",
+    id: 2,
+    profile: noAvatar
+  },
+  {
+    name: "test user",
+    id: 3,
+    profile: noAvatar
+  },
+  {
+    name: "test user",
+    id: 4,
+    profile: noAvatar
+  },
+  {
+    name: "test user",
+    id: 5,
+    profile: noAvatar
   }
 ];
+
 const Home = props => {
   const { translate } = props;
   const { user, loader } = props.auth;
@@ -227,25 +246,22 @@ const Home = props => {
               <div className="section-header section-tabs">
                 <h5>{translate("recommended_products")}</h5>
               </div>
-              <ProductSlider
-                products={staticProducts}
-                buttons={false}
-                arrows={false}
-                multiple
-                productChunk={3}
-                banner={false}
-                translate={translate}
-                SliderSettings={{
-                  dots: false,
-                  infinite: false,
-                  arrows: true,
-                  speed: 500,
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
-                  className:
-                    "products items produsts-list-vertical products-list-box product-items"
-                }}
-              />
+              <div className="recommended-buyer">
+                <BuyerSlider
+                  buyers={buyers}
+                  arrows={false}
+                  buyerChunk={3}
+                  SliderSettings={{
+                    dots: false,
+                    infinite: false,
+                    arrows: true,
+                    speed: 500,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    className: "produsts-list-vertical products-list-box"
+                  }}
+                />
+              </div>
             </Row>
           </Col>
         </Row>

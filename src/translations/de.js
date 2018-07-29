@@ -239,6 +239,153 @@ export const de = {
       a_billing_address: "Facturatie adres",
       a_shipping_address: "Verzendingsadres",
 
+      // Products
+
+      availability: "Beschikbaarheid:",
+      in_stock: "Op voorraad",
+      out_of_stock: "Niet op voorraad",
+      popularity: "populariteit",
+      price_low: "Prijs laag naar hoog",
+      price_high: "Prijs - van hoog naar laag",
+      rating_low: "Beoordeling - Laag naar Hoog",
+      rating_high: "Beoordeling - Hoog naar Laag",
+      newest_first: "Nieuwste eerst",
+      product_price: "Prijs",
+      product_contact_supplier: "Neem contact op met leverancier",
+      product_start_order: "Start bestelling",
+      product_leave_messages: "Laat berichten achter",
+      supply_ability: "Capaciteit van de levering",
+      port: "Haven",
+      payment_method: "",
+      product_rating: "Beoordelingen en recensies",
+      product_add_rating: "Beoordeel dit product",
+      product_message_title: "Stuur je bericht naar deze leverancier",
+      product_message_to: "Naar:",
+      product_message: "Bericht:",
+      product_quantity: "Aantal stuks:",
+      product_overview: "Overzicht",
+      product_quick_details: "snelle details",
+      product_description: "Beschrijving",
+      product_company_profile: "Bedrijfsprofiel",
+      product_transaction_overview: "Overzicht van transacties",
+      product_basic_information: "Basis informatie",
+      product_message_label:
+        "Beveel bijpassende leveranciers aan als deze leverancier binnen 24 uur geen contact met mij opneemt in Message Center. Verzoek om offerte.",
+      product_message_label_1:
+        "Ik ga ermee akkoord mijn Business Card met de leverancier te delen.",
+      product_message_send: "Sturen",
+      product_reviews: "Beoordelingen en recensies",
+      product_reviews_title: "Meest relevante beoordelingen",
+      product_transaction_level: "Transactieniveau:",
+      product_supplier_assessments: "Leveranciersbeoordelingen:",
+      product_transactions: "transacties",
+      product_response_time: "Reactietijd",
+      product_response_rate: "Responspercentage",
+      product_like_title: "Je mag het leuk vinden",
+      // basic information
+      basic_bussiness_type: "Soort bedrijf:",
+      basic_main_product: "Hoofd producten:",
+      basic_revenue: "Totale jaaromzet:",
+      basic_market: "Top 3 markten:",
+      basic_location: "Plaats:",
+      basic_employees: "Totaal werknemers:",
+      basic_established: "Opgericht in het jaar:",
+      basic_certification: "Productcertificeringen:",
+      product_rating_modal: "Productbeoordeling",
+      product_review_modal: "Commentaar",
+      product_review_placeholder: "Voer je reactie in.",
+      product_rating_label_modal: "Beoordeling",
+      product_review_title_label_modal: "Titel bekijken",
+      product_review_title_placeholder: "Titel",
+      // shopping cart
+      cart_title: "Winkelmand",
+      cart_trading: "Handel",
+      cart_premium: "Premie",
+      cart_details: "prijs details",
+      cart_total_label: "Uw totale besparing op deze bestelling ₹ 800",
+      cart_wishlist: "verplaats naar wens lijst",
+      cart_remove: "verwijderen",
+      cart_continue: "cdoorgaan met winkelen",
+      cart_order: "plaats bestelling",
+
+      // Request Quotation
+      request_quotation_title: "Verzoek om offerte",
+      request_quotation_form_title: "Vertel leveranciers wat u nodig hebt",
+      request_quotation_form_title_1: "Vul uw offerteaanvraag in",
+      request_quotation_form_description:
+        "Hoe specifieker uw informatie, hoe beter we uw verzoek kunnen afstemmen op de juiste leveranciers",
+      request_quotation_form_product_name:
+        "Sleutelwoorden van product waarnaar u op zoek bent",
+      request_quotation_form_name_label: "Voer de productnaam in",
+      request_quotation_form_description_label:
+        "Laat leveranciers weten wat uw gedetailleerde eisen zijn. U kunt opnemen: kleur, maat, materiaal, cijfer / standaard, enz",
+      request_quotation_form_description_name:
+        "Geachte heer / mevrouw, ik ben op zoek naar producten met de volgende specificaties",
+      request_quotation_form_product_categories: "Selecteer een categorie",
+      request_quotation_form_product_sub_categories: "Selecteer subcategorie",
+      request_quotation_form_sub_category_placehholder:
+        "Selecteer subcategorie",
+      request_quotation_form_category_placehholder: "selecteer categorie",
+      request_quotation_form_quote_condition:
+        "Ik ga akkoord om mijn visitekaartje te delen met citaatleveranciers.",
+      request_quotation_form_condition:
+        "Ik heb de Algemene voorwaarden Govering RFQ gelezen, begrepen en ermee ingestemd",
+      request_quotation_form_submit: "Verzend RFQ",
+      request_quotation_form_quote: "Hoe kunt u snel offertes ontvangen?",
+      request_quotation_form_quality: "Aankoopkwaliteit",
+      request_quotation_form_quality_label:
+        "Voer eerst de geschatte bulkbestelling in, zelfs als u om monsters vraagt",
+      compare_quotes: "Vergelijk Quotes",
+      contact_suppliers: "Neem contact op met leverancier",
+      // Submit Quote
+      submit_quote_title: "Offerte indienen",
+      quote_form_name: "Titel",
+      quote_form_quote_price: "Prijs citeren",
+      quote_form_quote_quantity: "Citaat Minimale hoeveelheid",
+      quote_form_quote_delivery_time: "Geschatte Leveringstijd",
+      quote_form_description: "Voorblad",
+      // Top Supllier
+      top_selected_suppliers: "TOP GESELECTEERDE LEVERANCIERS",
+      // Recent View
+
+      my_recent_view: "MIJN RECENTE UITZICHTEN",
+      // Request Quotation section
+      request_quotation_quotes: "Ontvang offertes voor uw",
+      request_quotation_custom_request: "Aangepast verzoek",
+      request_quotation_suppliers: "Laat de juiste leveranciers",
+      request_quotation_find_request: "Je vinden",
+      request_quotation_deals: "Sluiten met deals",
+      request_quotation_click: "Eenmaal klikken",
+      request_quotation_how: "Hoe het werkt",
+      request_quotation_submit: "Verzend RFQ",
+      request_quotation_compare: "Vergelijk Quotes",
+      request_quotation_contact: "Neem contact op met leverancier",
+
+      // empty_message
+      empty_message: "Niets te tonen",
+      // SUPPLIERS  by regions
+      supplier_by_regions: "VIND LEVERANCIERS PER REGIO",
+      are_you_supplier: "Bent u een leverancier?",
+      join_now: "Doe nu mee",
+      supplier_text:
+        "Word lid van Brown-Eagle.com als geverifieerde leverancier en maak contact met kopers",
+
+      // view quotation
+      q_preferred_price: "preferredUnitPrice",
+      q_quanity_required: "Hoeveelheid Vereist",
+      q_date_posted: "Datum geplaatst",
+      q_availability: "Beschikbaarheid",
+      q_status_open: "Open",
+      q_information: "Gedetailleerde informatie",
+      q_back_button: "Ga terug naar het resultaat",
+      my_quotations: "Mijn offerte",
+      q_request_quotation: "Offerte aanvragen",
+      q_quotation: "Citaat",
+      q_quotations: "offertes",
+      q_chat: "CHAT",
+      q_pieces: "stukken",
+      q_posted_in: "Geplaatst in",
+      q_quote_now: "Quote nu",
       // Footer
       about_us: "over ons",
       sell_on_brown_eagle: "Verkopen op Brown Eagle",

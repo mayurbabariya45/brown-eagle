@@ -16,7 +16,6 @@ export const en = {
       close: "Close",
       home: "Home",
       profile: "My Profile",
-      my_quotation: "My Quotation",
       email: "Email",
       fax: "Fax",
       a_email: "Alternative Email",
@@ -109,7 +108,7 @@ export const en = {
       light_equipment_tools: "Light Equipment Tools",
       food_retail_products: "Similar Products",
       latest_products: "Latest Products",
-      recommended_products: "Recommended Products",
+      recommended_products: "Recommended Buyer",
       top_rated_products: "Top Rated Products",
 
       // Add product
@@ -386,6 +385,24 @@ export const en = {
       join_now: "Join Now",
       supplier_text:
         "Join Brown-Eagle.com as a verified supplier and connect with buyers",
+
+      // view quotation
+      q_preferred_price: "preferredUnitPrice",
+      q_quanity_required: "Quanity Required",
+      q_date_posted: "Date Posted",
+      q_availability: "Availability",
+      q_status_open: "Open",
+      q_information: "Deateled Information",
+      q_back_button: "Go Back To Result",
+      my_quotations: "My Quotation",
+      q_request_quotation: "Request Quotation",
+      q_quotation: "Quotation",
+      q_quotations: "Quotations",
+      q_chat: "CHAT",
+      q_pieces: "pieces",
+      q_posted_in: "Posted in",
+      q_quote_now: "Quote Now",
+      add_product_label: "add product",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

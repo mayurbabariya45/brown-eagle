@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getBuyerQuotations: (buyerId, token) =>
-    dispatch(a.getBuyerQuotations(buyerId, token))
+  getBuyerQuotations: (buyerId, page) =>
+    dispatch(a.getBuyerQuotations(buyerId, page))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

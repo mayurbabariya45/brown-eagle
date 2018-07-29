@@ -7,7 +7,11 @@ const INITIAL_STATE = {
   success: false,
   upldateProductLoading: false,
   location: "",
-  products: [],
+  products: {
+    count: 0,
+    page: 0,
+    products: []
+  },
   categories: [],
   product: {},
   activeMap: "registeredAddress"
@@ -31,13 +35,14 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         success: true,
-        products: [
-          ..._.map(action.payload.products, product =>
+        products: {
+          ...action.payload,
+          products: _.map(action.payload.products, product =>
             Object.assign({}, product, {
               isLoading: true
             })
           )
-        ]
+        }
       };
     case a.GET_PRODUCTS_FAILURE:
       return {
@@ -57,13 +62,14 @@ export default (state = INITIAL_STATE, action) => {
     case a.GET_PRODUCT_IMAGE_REQUEST:
       return {
         ...state,
-        products: [
-          ..._.map(state.products, product =>
+        products: {
+          ...state.products,
+          products: _.map(state.products.products, product =>
             Object.assign({}, product, {
               isLoading: true
             })
           )
-        ]
+        }
       };
 
     // UPDATE_PRODUCT
@@ -114,28 +120,31 @@ export default (state = INITIAL_STATE, action) => {
     case a.GET_PRODUCT_IMAGE_SUCCESS:
       return {
         ...state,
-        products: [
-          ..._.map(state.products, product => {
-            const productImages = action.payload;
-            const productKey = _.indexOf(
-              _.map(productImages, "productId"),
-              product.id
-            );
-            if (productKey !== -1) {
-              return Object.assign({}, product, {
-                productPictures: _.map(productImages, image => ({
-                  url: image.url,
-                  id: image._id
-                })),
+        products: {
+          ...state.products,
+          products: [
+            ..._.map(state.products.products, product => {
+              const productImages = action.payload;
+              const productKey = _.indexOf(
+                _.map(productImages, "productId"),
+                product.id
+              );
+              if (productKey !== -1) {
+                return Object.assign({}, product, {
+                  productPictures: _.map(productImages, image => ({
+                    url: image.url,
+                    id: image._id
+                  })),
+                  isLoading: false
+                });
+              }
+              return {
+                ...product,
                 isLoading: false
-              });
-            }
-            return {
-              ...product,
-              isLoading: false
-            };
-          })
-        ]
+              };
+            })
+          ]
+        }
       };
     case a.GET_PRODUCT_IMAGE_FAILURE:
       return {
@@ -155,9 +164,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         success: true,
-        products: state.products.filter(
-          product => product.id !== action.meta.id
-        )
+        products: {
+          ...state.products,
+          products: state.products.products.filter(
+            product => product.id !== action.meta.id
+          )
+        }
       };
     case a.DELETE_PRODUCT_FAILURE:
       return {
@@ -187,7 +199,7 @@ export default (state = INITIAL_STATE, action) => {
     case a.GET_CATEGORIES_REQUEST:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
 
     case a.GET_CATEGORIES_SUCCESS:

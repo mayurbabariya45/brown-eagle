@@ -25,10 +25,14 @@ class EditProduct extends Component {
     this.state = {
       productImages: [],
       existingImages: [],
-      category: []
+      selectedCategory: {},
+      selectedSubCategory: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleSelectSubCategoryValue = this.handleSelectSubCategoryValue.bind(
+      this
+    );
     this.onProductImages = this.onProductImages.bind(this);
     this.removeProductImage = this.removeProductImage.bind(this);
   }
@@ -38,7 +42,7 @@ class EditProduct extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const { initialValues, categories } = nextProps;
-    const { productPictures, category } = initialValues;
+    const { productPictures, category, subCategory } = initialValues;
     const images = [];
     _.each(productPictures, value => {
       images.push(value);
@@ -47,7 +51,23 @@ class EditProduct extends Component {
     const categoryValue = !_.isEmpty(findCategory)
       ? { value: findCategory.id, label: findCategory.name }
       : {};
-    this.setState({ existingImages: images, category: categoryValue });
+    let subCategoryValue = {};
+    if (_.has(findCategory, "subCategoryList")) {
+      if (!_.isEmpty(subCategory)) {
+        const findSubCategory = _.find(findCategory.subCategoryList, [
+          "_id",
+          subCategory
+        ]);
+        subCategoryValue = !_.isEmpty(findSubCategory)
+          ? { value: findSubCategory._id, label: findSubCategory.name }
+          : {};
+      }
+    }
+    this.setState({
+      existingImages: images,
+      selectedCategory: categoryValue,
+      selectedSubCategory: subCategoryValue
+    });
   }
   onProductImages(files) {
     const { productImages, existingImages } = this.state;
@@ -125,9 +145,13 @@ class EditProduct extends Component {
   }
 
   handleSelectChange(value) {
-    this.setState({ category: value });
+    this.setState({ selectedCategory: value, selectedSubCategory: {} });
   }
-
+  handleSelectSubCategoryValue(values) {
+    this.setState({
+      selectedSubCategory: values
+    });
+  }
   handleSubmit(values) {
     const {
       updateProduct,
@@ -138,7 +162,8 @@ class EditProduct extends Component {
     } = this.props;
     const product = Object.assign({}, values, {
       seller: id,
-      category: this.state.category.value
+      category: this.state.selectedCategory.value,
+      subCategory: this.state.selectedSubCategory.value
     });
     updateProduct(product, "en").then(payload => {
       if (payload.type === "UPDATE_PRODUCT_SUCCESS") {
@@ -167,12 +192,31 @@ class EditProduct extends Component {
       translate,
       handleSubmit,
       loading,
-      categories
+      categories,
+      locale
     } = this.props;
     const categoriesValue = _.map(categories, category => ({
       value: category.id,
-      label: category.name
+      label: category.nameTranslations[locale]
     }));
+    let subCategoriesOption = [];
+    if (!_.isEmpty(this.state.selectedCategory)) {
+      const findCategory = _.find(categories, [
+        "id",
+        this.state.selectedCategory.value
+      ]);
+      if (!_.isEmpty(findCategory)) {
+        if (_.has(findCategory, "subCategoryList")) {
+          subCategoriesOption = _.map(
+            findCategory.subCategoryList,
+            subCategory => ({
+              label: subCategory.nameTranslations[locale],
+              value: subCategory._id
+            })
+          );
+        }
+      }
+    }
     const countProductImage =
       this.state.existingImages.length + this.state.productImages.length;
     const blankImg = [];
@@ -239,7 +283,8 @@ class EditProduct extends Component {
                     <FormGroup>
                       <ControlLabel> {translate("a_selected")}</ControlLabel>
                       <Select
-                        value={this.state.category}
+                        value={this.state.selectedCategory}
+                        searchable
                         placeholder="Select categories"
                         options={categoriesValue}
                         onChange={this.handleSelectChange}
@@ -247,6 +292,22 @@ class EditProduct extends Component {
                     </FormGroup>
                   </Col>
                 </Row>
+                {!_.isEmpty(subCategoriesOption) && (
+                  <Row>
+                    <Col md={12}>
+                      <FormGroup>
+                        <ControlLabel> {translate("a_selected")}</ControlLabel>
+                        <Select
+                          value={this.state.selectedSubCategory}
+                          searchable
+                          placeholder="Select Sub categories"
+                          options={subCategoriesOption}
+                          onChange={this.handleSelectSubCategoryValue}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                )}
                 <FormInputs
                   ncols={["col-md-12"]}
                   proprieties={[

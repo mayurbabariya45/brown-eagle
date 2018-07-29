@@ -39,6 +39,9 @@ const mapStateToProps = state => {
       category: !_.isEmpty(state.dashboard.product.category)
         ? state.dashboard.product.category._id
         : "",
+      subCategory: !_.isEmpty(state.dashboard.product.subCategory)
+        ? state.dashboard.product.subCategory._id
+        : "",
       productPrice: state.dashboard.product.productPrice,
       minQuantity: state.dashboard.product.minQuantity,
       description: state.dashboard.product.description,

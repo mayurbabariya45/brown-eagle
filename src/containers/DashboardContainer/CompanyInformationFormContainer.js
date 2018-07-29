@@ -33,7 +33,7 @@ const mapStateToProps = state => {
   };
   return {
     auth: state.auth,
-    products: state.dashboard.products,
+    products: state.dashboard.products.products,
     companyInformationForm,
     initialValues
   };

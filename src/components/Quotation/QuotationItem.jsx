@@ -8,8 +8,50 @@ import noImage from "../../assets/img/no-product.png";
 
 const preloader = () => <ContentLoader height={300} inFight />;
 
+const SellerQuotationStatus = props => (
+  <div className="quotation-container-button">
+    <div className="quotation-button">
+      {props.status === "open" && (
+        <Button fill bsStyle="warning" className="open">
+          {props.translate("q_status_open")}
+        </Button>
+      )}
+      {(props.status === "close" || props.status === "rejected") && (
+        <Button fill bsStyle="warning" className="closed">
+          {props.status}
+        </Button>
+      )}
+      {props.status === "open" && (
+        <Button
+          fill
+          bsStyle="warning"
+          className="btn-quote"
+          onClick={props.opneSubmitQuoteModal}
+        >
+          {props.translate("q_quote_now")}
+        </Button>
+      )}
+    </div>
+  </div>
+);
+const BuyerQuotationStatus = props => (
+  <div className="quotation-container-button">
+    <div className="quotation-button">
+      {props.status === "open" && (
+        <Button fill bsStyle="warning" className="open">
+          {props.translate("q_status_open")}
+        </Button>
+      )}
+      {(props.status === "close" || props.status === "rejected") && (
+        <Button fill bsStyle="warning" className="closed">
+          {props.status}
+        </Button>
+      )}
+    </div>
+  </div>
+);
 const QuotationItem = props => {
-  const { quotation, locale, handleViewQuotation } = props;
+  const { quotation, locale, handleViewQuotation, buyer, translate } = props;
   let productImages;
   if (!_.isEmpty(quotation)) {
     const { rfqPictures } = quotation;
@@ -42,48 +84,40 @@ const QuotationItem = props => {
           </div>
           <div className="quotation-quantity">
             <p>
-              Quanity Required <b>{quotation.purchaseQuantity}</b> pieces
+              {translate("q_quanity_required")}{" "}
+              <b>{quotation.purchaseQuantity}</b> {translate("q_pieces")}
             </p>
-            <p>Posted in {_.capitalize(quotation.buyer.location)}</p>
+            <p>
+              {translate("q_posted_in")}{" "}
+              {_.capitalize(quotation.buyer.location)}
+            </p>
           </div>
-          <div className="quotation-posted">
-            <Button fill bsStyle="warning">
-              <i className="pe-7s-mail" /> CHAT
-            </Button>
-          </div>
-        </div>
-      </div>
-      <div className="quotation-container-button">
-        <div className="quotation-button">
-          {quotation.status === "open" && (
-            <Button fill bsStyle="warning" className="open">
-              Open
-            </Button>
-          )}
-          {(quotation.status === "close" ||
-            quotation.status === "rejected") && (
-            <Button fill bsStyle="warning" className="closed">
-              {quotation.status}
-            </Button>
-          )}
-          {quotation.status === "open" && (
-            <Button
-              fill
-              bsStyle="warning"
-              className="btn-quote"
-              onClick={props.opneSubmitQuoteModal}
-            >
-              Quote Now
-            </Button>
+          {!buyer && (
+            <div className="quotation-posted">
+              <Button fill bsStyle="warning">
+                <i className="pe-7s-mail" /> {translate("q_chat")}
+              </Button>
+            </div>
           )}
         </div>
       </div>
+      {!buyer && (
+        <SellerQuotationStatus
+          status={quotation.status}
+          opneSubmitQuoteModal={props.opneSubmitQuoteModal}
+          translate={translate}
+        />
+      )}
+      {buyer && (
+        <BuyerQuotationStatus status={quotation.status} translate={translate} />
+      )}
     </div>
   );
 };
 
 QuotationItem.propTypes = {
   opneSubmitQuoteModal: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
   handleViewQuotation: PropTypes.func.isRequired,
   locale: PropTypes.string
 };

@@ -13,6 +13,7 @@ const preloader = () => <ContentLoader height={300} inFight />;
 
 const Products = props => {
   const {
+    locale,
     src,
     bAction,
     buttons,
@@ -84,7 +85,8 @@ const Products = props => {
             <div className="left-product-text">
               <h2 className="product name product-item-name product-name">
                 <Link to={productUrl} className="product-item-link">
-                  {product.name}
+                  {product.nameTranslations[locale]}
+                  <span className="label label-success">{product.status}</span>
                 </Link>
               </h2>
               <div className="price-box price-final_price">
@@ -96,19 +98,24 @@ const Products = props => {
               </div>
               <div className="product-reviews-summary short">
                 <div className="rating-summary">
-                  <div className="rating-result" title="80%">
+                  <div
+                    className="rating-result"
+                    title={`${product.totalRatingsCount / 5 * 100}%`}
+                  >
                     <span
                       style={{
-                        width: "92%"
+                        width: `${product.totalRatingsCount / 5 * 100}%`
                       }}
                     >
-                      <span>80%</span>
+                      <span>{product.totalRatingsCount / 5 * 100}</span>
                     </span>
                   </div>
                 </div>
                 <div className="reviews-actions">
                   <a href="#products" className="action view">
-                    1&nbsp;<span>{translate("review")}</span>
+                    {product.totalRatingsCount}&nbsp;<span>
+                      {translate("review")}
+                    </span>
                   </a>
                 </div>
               </div>
@@ -142,14 +149,7 @@ const Products = props => {
         )}
         {lists && (
           <div className="product description product-item-description">
-            <p>
-              Lorem ipsum dolor sit amet, an munere tibique consequat mel,
-              congue albucius no qui, at everti meliore erroribus sea. Vero
-              graeco cotidieque ea duo, in eirmod insolens interpretaris nam.
-              Pro at nostrud percipit definitiones, eu tale porro cum. Sea ne
-              accusata voluptatibus. Ne cum falli dolor voluptua, duo ei sonet
-              choro facilisis, labores officiis torquatos cum ei.
-            </p>
+            <p>{product.descriptionTranslations[locale].substr(0, 200)}</p>
           </div>
         )}
         {!lists && (
@@ -170,21 +170,24 @@ const Products = props => {
             </div>
             <div className="product-reviews-summary short">
               <div className="rating-summary">
-                <div className="rating-result" title="80%">
+                <div
+                  className="rating-result"
+                  title={`${product.totalRatingsCount / 5 * 100}%`}
+                >
                   <span
                     style={{
-                      width: "92%"
+                      width: `${product.totalRatingsCount / 5 * 100}%`
                     }}
                   >
-                    <span>80%</span>
+                    <span>{product.totalRatingsCount / 5 * 100}%</span>
                   </span>
                 </div>
               </div>
               <div className="reviews-actions">
                 <a href="#products" className="action view">
-                {!_.isEmpty(product)
-                  ? product.totalRatingsCount
-                  : 1}&nbsp;<span>{translate("review")}</span>
+                  {!_.isEmpty(product) ? product.totalRatingsCount : 1}&nbsp;<span >
+                    {translate("review")}
+                                                                             </span>
                 </a>
               </div>
             </div>

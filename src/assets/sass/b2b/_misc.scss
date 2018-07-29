@@ -620,6 +620,29 @@ section {
       }
     }
   }
+  .result-showing{
+    margin-top: 10px;
+  }
+}
+.account-quotation {
+  .section-header {
+    float: left;
+    width: 100%;
+    .title {
+      float: left;
+      padding-top: 10px;
+    }
+    .request_quotation_button {
+      float: right;
+      a {
+        color: $white-color;
+        text-transform: capitalize;
+        &:hover {
+          color: $warning-color;
+        }
+      }
+    }
+  }
 }
 
 .page-header {

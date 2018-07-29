@@ -14,7 +14,16 @@ const initialState = {
     page: 0,
     rfqs: []
   },
-  buyerQuotation: [],
+  sellerQuotes: {
+    count: 0,
+    page: 0,
+    quotes: []
+  },
+  buyerQuotation: {
+    count: 0,
+    page: 0,
+    rfqs: []
+  },
   quotationImages: []
 };
 
@@ -31,16 +40,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         success: true,
-        buyerQuotation: [
-          ..._.map(action.payload.rfqs, quotation => ({
-            title: quotation.title,
-            id: quotation.id,
-            description: quotation.description,
-            preferredUnitPrice: quotation.preferredUnitPrice,
-            purchaseQuantity: quotation.purchaseQuantity,
-            rfqPictures: quotation.rfqPictures
-          }))
-        ]
+        buyerQuotation: action.payload
       };
     case a.GET_BUYER_QUOTATIONS_FAILURE:
       return {
@@ -155,6 +155,25 @@ export default (state = initialState, action) => {
         sellerQuotation: action.payload
       };
     case a.GET_SELLER_QUOTATIONS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        success: false
+      };
+    case a.GET_SELLER_QUOTES_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.GET_SELLER_QUOTES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        sellerQuotes: action.payload
+      };
+    case a.GET_SELLER_QUOTES_FAILURE:
       return {
         ...state,
         loading: false,

@@ -5,12 +5,14 @@ import { Row, Col } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import Product from "../../components/ProductSlider/Products";
 import EditProductContainer from "../../containers/EditProductContainer/EditProductContainer";
+import Pagination from "../../components/Pagination/Pagination";
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      currentPage: 1
     };
     this.editProduct = this.editProduct.bind(this);
     this.editProductModalHide = this.editProductModalHide.bind(this);
@@ -21,12 +23,21 @@ class Products extends Component {
       getProducts(id);
     }
   }
-  componentWillReceiveProps(nextProps) {
-    const { getProducts, id } = nextProps;
-    if (id !== this.props.id) {
-      getProducts(id);
+  // componentWillReceiveProps(nextProps) {
+  //   const { getProducts, id } = nextProps;
+  //   if (id !== this.props.id) {
+  //     getProducts(id);
+  //   }
+  // }
+  onPageChanged = data => {
+    const { currentPage } = data;
+    const { getProducts, id } = this.props;
+    this.setState({ currentPage });
+    if (id) {
+      getProducts(id, currentPage);
     }
-  }
+    return false;
+  };
   editProduct(product) {
     const { getProduct } = this.props;
     this.setState({ showModal: true });
@@ -38,13 +49,21 @@ class Products extends Component {
   render() {
     const {
       translate,
-      products,
+      myProducts,
       deleteProduct,
       loading,
       showNotification,
       upldateProductLoading,
-      id
+      id,
+      locale
     } = this.props;
+    const { currentPage } = this.state;
+    const { count, products } = myProducts;
+    const start = (currentPage - 1) * 20 + 1 || 0;
+    let end = currentPage * 20 || 0;
+    if (end > count) {
+      end = count;
+    }
     return (
       <div className="dashboard-products">
         <BlockUi tag="div" blocking={loading}>
@@ -59,9 +78,16 @@ class Products extends Component {
                     to="/seller/product/new"
                     className="btn btn-fill btn-border btn-warning"
                   >
-                    add product
+                    {translate("add_product_label")}
                   </Link>
                 </div>
+              </div>
+            </Col>
+            <Col md={12} sm={12} xs={12}>
+              <div className="result-showing">
+                <p>
+                  Showing {start} – {end} product of {count} products
+                </p>
               </div>
             </Col>
             <Col md={12}>
@@ -71,6 +97,7 @@ class Products extends Component {
                     <Col sm={12} key={product.id}>
                       <div className="item product product-item">
                         <Product
+                          locale={locale}
                           product={product}
                           deleteProduct={() => deleteProduct(product.id)}
                           editProduct={() => this.editProduct(product)}
@@ -84,6 +111,12 @@ class Products extends Component {
               </div>
             </Col>
           </Row>
+          <Pagination
+            totalRecords={count || 0}
+            pageLimit={20}
+            pageNeighbours={1}
+            onPageChanged={this.onPageChanged}
+          />
         </BlockUi>
         <EditProductContainer
           id={id}
@@ -91,6 +124,7 @@ class Products extends Component {
           loading={upldateProductLoading}
           showNotification={showNotification}
           showModal={this.state.showModal}
+          locale={locale}
           onHide={this.editProductModalHide}
         />
       </div>
@@ -105,12 +139,10 @@ Products.propTypes = {
   deleteProduct: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   upldateProductLoading: PropTypes.bool.isRequired,
-  products: PropTypes.arrayOf(PropTypes.any),
   id: PropTypes.string
 };
 
 Products.defaultProps = {
-  id: "",
-  products: []
+  id: ""
 };
 export default Products;
