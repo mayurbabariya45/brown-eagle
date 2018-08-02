@@ -21,6 +21,7 @@ class RequestQuotation extends Component {
   }
   componentWillMount() {
     const { getCategories } = this.props;
+    window.scrollTo(0, 0);
     getCategories();
   }
   handleSelectCategoryValue(values) {

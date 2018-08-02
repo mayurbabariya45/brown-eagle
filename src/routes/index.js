@@ -12,6 +12,30 @@ import AccountContainer from "../containers/AccountContainer/AccountContainer";
 import CartContainer from "../containers/CartContainer/CartContainer";
 import QuotationContainer from "../containers/QuotationContainer/QuotationContainer";
 import RequestQuotationContainer from "../containers/QuotationContainer/RequestQuotationContainer";
+import ServicesMembership from "../views/static/ServicesMembership";
+import PurchaseRegion from "../views/static/PurchaseRegion";
+import HelpCommunity from "../views/static/HelpCommunity";
+import AboutUs from "../views/static/AboutUs";
+import InvestorDesk from "../views/static/InvestorDesk";
+import Advantage from "../views/static/Advantage";
+import SellerMembership from "../views/static/SellerMembership";
+import TrainingCenter from "../views/static/TrainingCenter";
+import Wholesale from "../views/static/Wholesale";
+import Verified from "../views/static/Verified";
+import RequestQuotation from "../views/static/RequestQuotation";
+import MarketTrends from "../views/static/MarketTrends";
+import VerifiedBuyers from "../views/static/VerifiedBuyers";
+import HelpCenter from "../views/static/HelpCenter";
+import ReportAbuse from "../views/static/ReportAbuse";
+import Adispute from "../views/static/Adispute";
+import PoliciesRules from "../views/static/PoliciesRules";
+import AdvertiseWithUs from "../views/static/AdvertiseWithUs";
+import TradeAssurance from "../views/static/TradeAssurance";
+import BusinessIdentity from "../views/static/BusinessIdentity";
+import ThirdServices from "../views/static/ThirdServices";
+import LogisticServices from "../views/static/LogisticServices";
+import SecurePayment from "../views/static/SecurePayment";
+import InspectionService from "../views/static/InspectionService";
 
 const appRoutes = [
   { path: "/", exact: true, name: "Home", component: HomeContainer },
@@ -108,7 +132,132 @@ const appRoutes = [
     name: "Products",
     component: ProductsContainer
   },
-  { path: "/cart", name: "Cart", component: CartContainer }
+  { path: "/cart", name: "Cart", component: CartContainer },
+  {
+    path: "/services_membership",
+    name: "ServicesMembership",
+    component: ServicesMembership
+  },
+  {
+    path: "/purchase_region",
+    name: "PurchaseRegion",
+    component: PurchaseRegion
+  },
+  {
+    path: "/help_community",
+    name: "ServicesMembership",
+    component: HelpCommunity
+  },
+  {
+    path: "/about-us",
+    name: "AboutUs",
+    component: AboutUs
+  },
+  {
+    path: "/investor-desk",
+    name: "investor-desk",
+    component: InvestorDesk
+  },
+  {
+    path: "/advantage",
+    name: "Advantage",
+    component: Advantage
+  },
+  {
+    path: "/seller-membership",
+    name: "SellerMembership",
+    component: SellerMembership
+  },
+  {
+    path: "/training-center",
+    name: "SellerMembership",
+    component: SellerMembership
+  },
+  {
+    path: "/training-center",
+    name: "TrainingCenter",
+    component: TrainingCenter
+  },
+  {
+    path: "/wholesale",
+    name: "Wholesale",
+    component: Wholesale
+  },
+  {
+    path: "/verified",
+    name: "Verified",
+    component: Verified
+  },
+  {
+    path: "/request_quotation",
+    name: "RequestQuotation",
+    component: RequestQuotation
+  },
+  {
+    path: "/market_trends",
+    name: "MarketTrends",
+    component: MarketTrends
+  },
+  {
+    path: "/verified_buyers",
+    name: "VerifiedBuyers",
+    component: VerifiedBuyers
+  },
+  {
+    path: "/help_center",
+    name: "HelpCenter",
+    component: HelpCenter
+  },
+  {
+    path: "/report_abuse",
+    name: "ReportAbuse",
+    component: ReportAbuse
+  },
+  {
+    path: "/a_dispute",
+    name: "Adispute",
+    component: Adispute
+  },
+  {
+    path: "/policies_rules",
+    name: "PoliciesRules",
+    component: PoliciesRules
+  },
+  {
+    path: "/advertise_with_us",
+    name: "AdvertiseWithUs",
+    component: AdvertiseWithUs
+  },
+  {
+    path: "/trade_assurance",
+    name: "trade_assurance",
+    component: TradeAssurance
+  },
+  {
+    path: "/business_identity",
+    name: "business_identity",
+    component: BusinessIdentity
+  },
+  {
+    path: "/third_services",
+    name: "third_services",
+    component: ThirdServices
+  },
+  {
+    path: "/logistic_services",
+    name: "logistic_services",
+    component: LogisticServices
+  },
+  {
+    path: "/secure_payment",
+    name: "secure_payment",
+    component: SecurePayment
+  },
+  {
+    path: "/inspection_service",
+    name: "inspection_service",
+    component: InspectionService
+  }
 ];
 
 export default appRoutes;

@@ -45,7 +45,7 @@ class Categories extends Component {
                       {subCategory.name}
                     </Link>
                   </div>
-                ))})}
+                ))}
             </div>
           </div>
         </div>

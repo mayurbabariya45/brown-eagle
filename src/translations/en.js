@@ -132,7 +132,11 @@ export const en = {
       a_image_text:
         "Image/Video file size should be less then 5MB. Support formats .jpeg .jpg .png .avi .wmv .mkv .mp4.",
       a_box_title: "Please complete the following form in English",
-
+      a_term_condition: "Term and Conditions",
+      a_commission: "Commission :",
+      a_approved_text: "Waiting for approval",
+      a_approved_product_text: "Your product is now under review.",
+      a_dashboard: "Dashboard",
       // Product Information form labels
       a_product_name: "* Product Name",
       a_product_keyword: "* Product Keyword",
@@ -403,6 +407,10 @@ export const en = {
       q_posted_in: "Posted in",
       q_quote_now: "Quote Now",
       add_product_label: "add product",
+
+      // bussiness type
+      d_manufacturer: "Manufacturer",
+      d_key_supplier: "Supplier",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

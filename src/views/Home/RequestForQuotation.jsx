@@ -6,14 +6,20 @@ import customRequest from "../../assets/img/icon/custom_request.png";
 import findYou from "../../assets/img/icon/find_you.png";
 import onceClick from "../../assets/img/icon/once_click.png";
 
-class ComponentName extends React.Component {
+class RequestForQuotation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
+  handleRequestForQuote() {}
   render() {
-    const { translate } = this.props;
+    const { translate, isLogging } = this.props;
+    const linkUrl = isLogging
+      ? "/buyer/request_quotation"
+      : {
+          pathname: "/login",
+          search: "?redirect-url=/buyer/request_quotation"
+        };
     return (
       <Grid>
         <div className="request_for_quotation">
@@ -77,7 +83,7 @@ class ComponentName extends React.Component {
             </Col>
             <Col sm={5} className="request_quotation_right">
               <h3>{translate("request_for_quotation")}</h3>
-              <QuotationContainer {...this.props} />
+              <QuotationContainer translate={translate} linkUrl={linkUrl} />
             </Col>
           </div>
         </div>
@@ -86,6 +92,6 @@ class ComponentName extends React.Component {
   }
 }
 
-ComponentName.propTypes = {};
+RequestForQuotation.propTypes = {};
 
-export default ComponentName;
+export default RequestForQuotation;

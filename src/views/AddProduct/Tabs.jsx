@@ -124,13 +124,13 @@ const Tabs = props => {
             <div className="box">
               <div className="box-content">
                 <div className="approval">
-                  <h3>Waiting for approval</h3>
-                  <p>Your product is now under review.</p>
+                  <h3>{translate("a_approved_text")}</h3>
+                  <p>{translate("a_approved_product_text")}</p>
                   <Link
                     to="/dashboard"
                     className="btn btn-warning btn-fill btn-radius"
                   >
-                    Dashboard
+                    {translate("a_dashboard")}
                   </Link>
                 </div>
               </div>
@@ -201,11 +201,7 @@ Tabs.propTypes = {
   activeTabs: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
   selectLanguage: PropTypes.func.isRequired,
-  selectedLang: PropTypes.string.isRequired,
-  selectedCategory: PropTypes.string
+  selectedLang: PropTypes.string.isRequired
 };
 
-Tabs.defaultProps = {
-  selectedCategory: ""
-};
 export default Tabs;

@@ -226,8 +226,13 @@
             text-align: left;
             padding-left: 0;
             color: $warning-color;
-            & + collapse{
+            &:hover{
+              text-decoration: none;
+              cursor: default;
+            }
+            & + .collapse{
               padding: 11px 10px 10px 4px;
+              display: block;
             }
           }
         }

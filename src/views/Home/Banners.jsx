@@ -4,8 +4,15 @@ import PropTypes from "prop-types";
 import { Grid, Row, Col, Image } from "react-bootstrap";
 import ContentLoader from "../../components/Loader/Loader";
 
+function ValidURL(link) {
+  const regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+  if (!regex.test(link)) {
+    return `http://${link}`;
+  }
+  return link;
+}
 const Banners = props => {
-  const { banners, isBannersLoading } = props;
+  const { isBannersLoading } = props;
   return (
     <Grid>
       <Row>
@@ -19,15 +26,18 @@ const Banners = props => {
               </Col>
             )}
             {!isBannersLoading &&
-              _.map(props.banners, banner => (
-                <Col md={6} key={banner.id}>
-                  <div className="image-banner-container">
-                    <a href={banner.redirectUrl}>
-                      <Image src={banner.url} />
-                    </a>
-                  </div>
-                </Col>
-              ))}
+              _.map(props.banners, banner => {
+                const bannerLink = ValidURL(banner.redirectUrl);
+                return (
+                  <Col md={6} key={banner.id}>
+                    <div className="image-banner-container">
+                      <a href={bannerLink}>
+                        <Image src={banner.url} />
+                      </a>
+                    </div>
+                  </Col>
+                );
+              })}
           </div>
         </Col>
       </Row>

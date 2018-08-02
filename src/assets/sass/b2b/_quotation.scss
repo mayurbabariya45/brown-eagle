@@ -881,6 +881,11 @@
             margin: 0;
             text-transform: uppercase;
             font-weight: bold;
+            + .row{
+                display: flex;
+                align-items: center;
+                height: 330px;
+            }
         }
         .btn-toolbar {
             .btn-group {

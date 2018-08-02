@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -27,7 +28,7 @@ class Login extends Component {
     flushState();
   }
   hanldeSubmitForm(value) {
-    const { login, locale, showNotification, history } = this.props;
+    const { login, locale, showNotification, history, location } = this.props;
     login(value, locale).then(response => {
       if (response.type === "LOGIN_FAILURE") {
         showNotification(
@@ -46,6 +47,11 @@ class Login extends Component {
           if (data.role === "seller") {
             setTimeout(() => history.push("/dashboard"), 2000);
           } else if (data.role === "buyer") {
+            if (!_.isEmpty(location.search)) {
+              const redirectUrl = location.search.split("?redirect-url=").pop();
+              setTimeout(() => history.push(redirectUrl), 2000);
+              return false;
+            }
             setTimeout(() => history.push("/"), 2000);
           }
         }

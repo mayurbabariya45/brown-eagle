@@ -129,21 +129,21 @@ class SearchProductCategories extends Component {
                 )}
                 <div className="selected-category">
                   <div className="title">Commission : </div>
-                  <div className="category">{selectedCategory.commission}</div>
+                  <div className="category">{selectedCategory.commission}%</div>
                 </div>
                 <Button
                   bsStyle="link"
                   onClick={() => this.setState({ open: !this.state.open })}
                 >
-                  Term and Conditions
+                  *Term and Conditions
                 </Button>
-                <Collapse in={this.state.open}>
-                  <div>
-                    <div className="selected-category-terms">
-                      {selectedCategory.termsAndConditionsTranslations[locale]}
-                    </div>
+                {/* <Collapse in={this.state.open}> */}
+                <div className="collapse">
+                  <div className="selected-category-terms">
+                    {selectedCategory.termsAndConditionsTranslations[locale]}
                   </div>
-                </Collapse>
+                </div>
+                {/* </Collapse> */}
               </div>
             )}
           </div>

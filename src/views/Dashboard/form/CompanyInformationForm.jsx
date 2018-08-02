@@ -230,9 +230,10 @@ class CompanyInformationForm extends Component {
                 ]}
               >
                 <option>Select Bussiness Type</option>
-                <option>Type 1</option>
-                <option>Type 2</option>
-                <option>Type 3</option>
+                <option value="manufacturer">
+                  {translate("d_manufacturer")}
+                </option>
+                <option value="supplier">{translate("d_key_supplier")}</option>
               </FormInputs>
               <FormInputs
                 ncols={["col-md-12"]}

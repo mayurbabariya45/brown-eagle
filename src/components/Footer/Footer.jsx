@@ -16,19 +16,19 @@ const Footer = props => {
               <nav>
                 <ul>
                   <li>
-                    <a href="#about-us">{translate("about")}</a>
+                    <a href="/#/about-us">{translate("about")}</a>
                   </li>
                   <li>
-                    <a href="#contact-us">{translate("investor_desk")}</a>
+                    <a href="/#/investor-desk">{translate("investor_desk")}</a>
                   </li>
                   <li>
-                    <a href="#all-collection">{translate("advantage")}</a>
+                    <a href="/#/advantage">{translate("advantage")}</a>
                   </li>
                   <li>
-                    <a href="#privacy-policy">{translate("contact_us")}</a>
+                    <a href="/#/privacy-policy">{translate("contact_us")}</a>
                   </li>
                   <li>
-                    <a href="#term">{translate("sitemap")}</a>
+                    <a href="/#/term">{translate("sitemap")}</a>
                   </li>
                 </ul>
               </nav>
@@ -38,16 +38,20 @@ const Footer = props => {
               <nav>
                 <ul>
                   <li>
-                    <a href="#phone">{translate("seller_membership")}</a>
+                    <a href="/#/seller-membership">
+                      {translate("seller_membership")}
+                    </a>
                   </li>
                   <li>
-                    <a href="#home">{translate("training_center")}</a>
+                    <a href="/#/training-center">
+                      {translate("training_center")}
+                    </a>
                   </li>
                   <li>
-                    <a href="#video">{translate("wholesale")}</a>
+                    <a href="/#/wholesale">{translate("wholesale")}</a>
                   </li>
                   <li>
-                    <a href="#cameras">{translate("verified")}</a>
+                    <a href="/#/verified">{translate("verified")}</a>
                   </li>
                 </ul>
               </nav>
@@ -57,16 +61,17 @@ const Footer = props => {
               <nav>
                 <ul>
                   <li>
-                    <a href="#orders">{translate("categories")}</a>
+                    <a href="/#/request_quotation">
+                      {translate("request_for_quotation")}
+                    </a>
                   </li>
                   <li>
-                    <a href="#credit">{translate("request_for_quotation")}</a>
+                    <a href="/#/market_trends">{translate("market_trends")}</a>
                   </li>
                   <li>
-                    <a href="#addresses">{translate("market_trends")}</a>
-                  </li>
-                  <li>
-                    <a href="#personal">{translate("verified_buyers")}</a>
+                    <a href="/#/verified_buyers">
+                      {translate("verified_buyers")}
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -76,19 +81,23 @@ const Footer = props => {
               <nav>
                 <ul>
                   <li>
-                    <a href="/#/">{translate("help_center")}</a>
+                    <a href="/#/help_center">{translate("help_center")}</a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("report_abuse")}</a>
+                    <a href="/#/report_abuse">{translate("report_abuse")}</a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("a_dispute")}</a>
+                    <a href="/#/a_dispute">{translate("a_dispute")}</a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("policies_rules")}</a>
+                    <a href="/#/policies_rules">
+                      {translate("policies_rules")}
+                    </a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("advertise_with_us")}</a>
+                    <a href="/#/advertise_with_us">
+                      {translate("advertise_with_us")}
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -98,22 +107,34 @@ const Footer = props => {
               <nav>
                 <ul>
                   <li>
-                    <a href="/#/">{translate("trade_assurance")}</a>
+                    <a href="/#/trade_assurance">
+                      {translate("trade_assurance")}
+                    </a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("business_identity")}</a>
+                    <a href="/#/business_identity">
+                      {translate("business_identity")}
+                    </a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("third_services")}</a>
+                    <a href="/#/third_services">
+                      {translate("third_services")}
+                    </a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("logistic_services")}</a>
+                    <a href="/#/logistic_services">
+                      {translate("logistic_services")}
+                    </a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("secure_payment")}</a>
+                    <a href="/#/secure_payment">
+                      {translate("secure_payment")}
+                    </a>
                   </li>
                   <li>
-                    <a href="/#/">{translate("inspection_service")}</a>
+                    <a href="/#/inspection_service">
+                      {translate("inspection_service")}
+                    </a>
                   </li>
                 </ul>
               </nav>

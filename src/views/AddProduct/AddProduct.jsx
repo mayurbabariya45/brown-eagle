@@ -88,14 +88,10 @@ class AddProduct extends React.Component {
 AddProduct.propTypes = {
   translate: PropTypes.func.isRequired,
   getCategories: PropTypes.func.isRequired,
-  selectedCategory: PropTypes.string,
   showNotification: PropTypes.func.isRequired,
   addProduct: PropTypes.func.isRequired,
   locale: PropTypes.string.isRequired,
   flushAddProduct: PropTypes.func.isRequired
 };
 
-AddProduct.defaultProps = {
-  selectedCategory: ""
-};
 export default AddProduct;

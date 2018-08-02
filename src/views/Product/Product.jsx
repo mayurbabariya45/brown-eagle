@@ -26,6 +26,7 @@ class Product extends Component {
   componentWillMount() {
     const { getProduct, match, history, locale } = this.props;
     const { productName, productId } = match.params;
+    window.scrollTo(0, 0);
     if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
       getProduct(productId, locale);
       // getSimilarProduct(productId, locale);
@@ -66,6 +67,25 @@ class Product extends Component {
       }
     });
     return false;
+  }
+  addToCart(item) {
+    const { addToCart, showNotification } = this.props;
+    const objectProduct = Object.assign({}, item, { quantity: 1 });
+    addToCart(objectProduct).then(response => {
+      if (response.type === "ADD_TO_CART_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{`${item.name} has been added successfully in cart.`}</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>Profile has been changed successfully.</div>,
+          true
+        );
+      }
+    });
   }
   render() {
     const { translate, product, loader, auth } = this.props;
@@ -110,12 +130,12 @@ class Product extends Component {
                         </p>
                       </div>
                     </div>
-                    <div className="product attribute overview">
+                    {/* <div className="product attribute overview">
                       <p>
                         Supply Ability: 30 Set/Sets per Month <br />
                       </p>
                       <p>Port: SHANGHAI </p>
-                    </div>
+                    </div> */}
                     <div className="product-add-cart">
                       <div className="box-tocart">
                         <div className="actions add-to-cart">
@@ -132,7 +152,7 @@ class Product extends Component {
                             radius
                             bsStyle="info"
                             className="action tocart"
-                            onClick={() => this.addToCart()}
+                            onClick={() => this.addToCart(product)}
                           >
                             <span>{translate("product_start_order")}</span>
                           </Button>

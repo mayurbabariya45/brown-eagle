@@ -78,8 +78,10 @@ class Home extends Component {
       centerBanners,
       bottomBanners,
       isTopBannersLoading,
-      isCenterBannersLoading
+      isCenterBannersLoading,
+      auth
     } = this.props;
+    const { user } = auth;
     const backgroundBanner = !_.isEmpty(bottomBanners)
       ? bottomBanners.url
       : defaultBottomBanner;
@@ -286,7 +288,10 @@ class Home extends Component {
             </Col>
           </Row>
         </Grid>
-        <RequestForQuotation translate={translate} />
+        <RequestForQuotation
+          translate={translate}
+          isLogging={!_.isEmpty(user) || false}
+        />
         <Grid>
           <Row>
             <Col sm={12}>

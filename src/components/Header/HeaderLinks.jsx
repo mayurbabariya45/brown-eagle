@@ -156,13 +156,13 @@ const HeaderLinks = props => {
                   <CategoriesContainer />
                 </li>
               </LinkContainer>
-              <NavItem eventKey={2} href="#">
+              <NavItem eventKey={2} href="/#/services_membership">
                 {translate("services_membership")}
               </NavItem>
-              <NavItem eventKey={2} href="#">
+              <NavItem eventKey={2} href="/#/purchase_region">
                 {translate("purchase_region")}
               </NavItem>
-              <NavItem eventKey={2} href="#">
+              <NavItem eventKey={2} href="/#/help_community">
                 {translate("help_community")}
               </NavItem>
             </Nav>

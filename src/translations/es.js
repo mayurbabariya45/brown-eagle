@@ -117,7 +117,11 @@ export const es = {
       a_image_text:
         "El tamaño del archivo de imagen debe ser inferior a 5 MB. Formatos admitidos .jpeg .jpg .png.",
       a_box_title: "Por favor complete el siguiente formulario en inglés",
-
+      a_term_condition: "Términos y Condiciones",
+      a_commission: "Comisión:",
+      a_approved_text: "A la espera de la aprobación",
+      a_approved_product_text: "Su producto está ahora bajo revisión.",
+      a_dashboard: "Tablero",
       // Product Information form labels
       a_product_name: "* Nombre del producto",
       a_product_keyword: "* Palabra clave del producto",
@@ -384,6 +388,10 @@ export const es = {
       q_pieces: "piezas",
       q_posted_in: "Publicado en",
       q_quote_now: "Presupuesto ahora",
+
+      // bussiness type
+      d_manufacturer: "Fabricante",
+      d_key_supplier: "Proveedor",
       // Footer
       about_us: "sobre nosotros",
       sell_on_brown_eagle: "Vender en Brown Eagle",

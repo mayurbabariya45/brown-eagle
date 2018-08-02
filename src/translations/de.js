@@ -116,7 +116,11 @@ export const de = {
       a_image_text:
         "Afbeeldingsbestand moet kleiner zijn dan 5 MB. Ondersteunde formaten .jpeg .jpg .png.",
       a_box_title: "Vul het volgende formulier in het Engels in",
-
+      a_term_condition: "Algemene voorwaarden",
+      a_commission: "Commissie:",
+      a_approved_text: "Wachten op goedkeuring",
+      a_approved_product_text: "Uw product wordt nu beoordeeld.",
+      a_dashboard: "Dashboard",
       // Product Information form labels
       a_product_name: "* Productnaam",
       a_product_keyword: "* Product sleutelwoord",
@@ -386,6 +390,15 @@ export const de = {
       q_pieces: "stukken",
       q_posted_in: "Geplaatst in",
       q_quote_now: "Quote nu",
+
+
+
+
+
+
+      // bussiness type
+      d_manufacturer: "Fabrikant",
+      d_key_supplier: "Leverancier",
       // Footer
       about_us: "over ons",
       sell_on_brown_eagle: "Verkopen op Brown Eagle",

@@ -87,7 +87,11 @@ export default (state = INITIAL_STATE, action) => {
         loader: false
       };
     case a.LOGOUT_REQUEST:
+      localStorage.removeItem("webAuthToken");
+      localStorage.removeItem("webAuthId");
+      localStorage.removeItem("webAuthRole");
       return {
+        ...state,
         loginForm: false,
         loading: false,
         success: false,

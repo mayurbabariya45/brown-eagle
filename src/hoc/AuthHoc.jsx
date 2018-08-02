@@ -20,13 +20,7 @@ export default function AuthHoc(WrappedComponent, passedProps) {
       this.state = {};
     }
     componentWillMount() {
-      const {
-        checkAuthStatus,
-        getUserProfile,
-        auth,
-        history,
-        removeAll
-      } = this.props;
+      const { checkAuthStatus, getUserProfile, auth, history } = this.props;
       const { locale, type } = passedProps;
       const webAuthToken = localStorage.getItem("webAuthToken");
       const webAuthId = localStorage.getItem("webAuthId");
