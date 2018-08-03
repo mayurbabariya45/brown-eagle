@@ -132,6 +132,20 @@ export const getProduct = (productId, locale) => dispatch => {
     }
   });
 };
+export const getProductReview = (productId, locale) => dispatch => {
+  dispatch({
+    [RSAA]: {
+      endpoint: `product/${productId}/review`,
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      types: [
+        a.GET_PRODUCT_REVIEW_REQUEST,
+        a.GET_PRODUCT_REVIEW_SUCCESS,
+        a.GET_PRODUCT_REVIEW_FAILURE
+      ]
+    }
+  });
+};
 
 export const getSimilarProduct = (productId, locale) => dispatch => {
   dispatch({
@@ -157,7 +171,7 @@ export const searchProducts = (values, page) => dispatch => {
   const maxPrice = `&maxPrice=${values.price.maxPrice}`;
   const minRating = `&minRating=${values.rating.minRating}`;
   const maxRating = `&maxRating=${values.rating.maxRating}`;
-
+  console.log(values)
   if (_.has(values.sort, "type")) {
     if (values.sort.type !== "popularity") {
       sort = `&sort=${values.sort.type}`;
@@ -169,11 +183,11 @@ export const searchProducts = (values, page) => dispatch => {
     }
   }
   if (!_.isEmpty(values.category)) {
-    if (values.category.categoryId) {
-      category = `&category=${values.category.categoryId}`;
+    if (values.category.category.length > 0) {
+      category = `&category=${values.category.category}`;
     }
-    if (values.category.subCategoryId) {
-      subCategory = `&subCategory=${values.category.subCategoryId}`;
+    if (values.category.subCategory.length > 0) {
+      subCategory = `&subCategory=${values.category.subCategory}`;
     }
   }
 

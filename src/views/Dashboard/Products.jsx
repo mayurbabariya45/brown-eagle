@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -23,12 +24,7 @@ class Products extends Component {
       getProducts(id);
     }
   }
-  // componentWillReceiveProps(nextProps) {
-  //   const { getProducts, id } = nextProps;
-  //   if (id !== this.props.id) {
-  //     getProducts(id);
-  //   }
-  // }
+
   onPageChanged = data => {
     const { currentPage } = data;
     const { getProducts, id } = this.props;
@@ -55,7 +51,8 @@ class Products extends Component {
       showNotification,
       upldateProductLoading,
       id,
-      locale
+      locale,
+      product
     } = this.props;
     const { currentPage } = this.state;
     const { count, products } = myProducts;
@@ -118,15 +115,17 @@ class Products extends Component {
             onPageChanged={this.onPageChanged}
           />
         </BlockUi>
-        <EditProductContainer
-          id={id}
-          translate={translate}
-          loading={upldateProductLoading}
-          showNotification={showNotification}
-          showModal={this.state.showModal}
-          locale={locale}
-          onHide={this.editProductModalHide}
-        />
+        {!_.isEmpty(product) && (
+          <EditProductContainer
+            id={id}
+            translate={translate}
+            loading={upldateProductLoading}
+            showNotification={showNotification}
+            showModal={this.state.showModal}
+            locale={locale}
+            onHide={this.editProductModalHide}
+          />
+        )}
       </div>
     );
   }

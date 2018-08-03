@@ -44,6 +44,19 @@ export const getTopBanners = () => dispatch =>
       ]
     }
   });
+export const getTopSuppliers = () => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: "seller?isProfileVerified=true",
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      types: [
+        a.GET_TOP_SUPPLIERS_REQUEST,
+        a.GET_TOP_SUPPLIERS_SUCCESS,
+        a.GET_TOP_SUPPLIERS_FAILURE
+      ]
+    }
+  });
 export const getCenterBanners = () => dispatch =>
   dispatch({
     [RSAA]: {

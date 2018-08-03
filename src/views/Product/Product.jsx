@@ -24,11 +24,12 @@ class Product extends Component {
     this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
   }
   componentWillMount() {
-    const { getProduct, match, history, locale } = this.props;
+    const { getProduct, getProductReview, match, history, locale } = this.props;
     const { productName, productId } = match.params;
     window.scrollTo(0, 0);
     if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
       getProduct(productId, locale);
+      getProductReview(productId, locale);
       // getSimilarProduct(productId, locale);
     } else {
       history.goBack();
@@ -88,16 +89,19 @@ class Product extends Component {
     });
   }
   render() {
-    const { translate, product, loader, auth } = this.props;
+    const { translate, product, loader, auth, reviews, locale } = this.props;
+    const objectProduct = product ? product : {};
     const authRole = auth.user.role;
     const {
-      name,
-      description,
+      nameTranslations,
+      descriptionTranslations,
       productPrice,
       productPictures,
       totalRatingsCount,
+      rating,
       seller
-    } = product;
+    } = objectProduct;
+    const { productReview } = reviews;
     return (
       <section className="product-view">
         <Grid>
@@ -116,7 +120,7 @@ class Product extends Component {
                   <div className="product-shop-content">
                     <div className="product-info-title">
                       <div className="page-title-wrapper">
-                        <h1 className="page-title">{name}</h1>
+                        <h1 className="page-title">{!_.isEmpty(product) ? nameTranslations[locale ]: "Loading...."}</h1>
                       </div>
                     </div>
                     <div className="product-info-price">
@@ -200,6 +204,7 @@ class Product extends Component {
                       showRating={this.handleProdutRatingModal}
                       showButton={authRole === "buyer" || false}
                       totalRatingsCount={totalRatingsCount}
+                      rating={rating}
                     />
                   </div>
                 </Col>
@@ -231,7 +236,7 @@ class Product extends Component {
                             <h5>Product Description</h5>
                           </div>
                           <div className="description">
-                            <p>{description}</p>
+                            <p>{!_.isEmpty(product) ? descriptionTranslations[locale]: ""}</p>
                           </div>
                         </div>
                       </Tab>
@@ -274,12 +279,16 @@ class Product extends Component {
                   <div className="title">
                     <h2>{translate("product_reviews")}</h2>
                   </div>
-                  <ProductReviews translate={translate} />
+                  <ProductReviews
+                    translate={translate}
+                    productReview={productReview}
+                    locale={locale}
+                  />
                 </div>
               </Row>
             </Col>
             <Col sm={3}>
-              <TradeAssurance translate={translate} />
+              <TradeAssurance translate={translate} seller={seller}/>
               <ProductLikes translate={translate} />
             </Col>
           </Row>

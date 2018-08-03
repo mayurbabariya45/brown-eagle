@@ -29,6 +29,7 @@ class Dashboard extends React.Component {
     const { removeAll } = this.props;
     removeAll();
   }
+  componentWillUnmount(){}
   handleEditForm(activeForm) {
     if (activeForm === 1) {
       this.setState({
@@ -96,6 +97,7 @@ class Dashboard extends React.Component {
       getProduct,
       deleteProduct,
       products,
+      product,
       upldateProductLoading
     } = this.props;
     const { user, loader } = this.props.auth;
@@ -160,6 +162,7 @@ class Dashboard extends React.Component {
                           showNotification={showNotification}
                           myProducts={products}
                           locale={locale}
+                          product={product}
                         />
                       )}
                     </Tab.Pane>

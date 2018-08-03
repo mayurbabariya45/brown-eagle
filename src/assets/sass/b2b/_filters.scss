@@ -39,3 +39,24 @@
        width: 100%;
    }
 }
+.filter-categories{
+    .title{
+        width: 100%;
+    }
+    .filter-category{
+        float: left;
+        width: 100%;
+        padding: 10px 0;
+        & .category{
+            ul{
+                padding: 0;
+                margin:0;
+                list-style: none;
+                li{
+                    padding: 5px 0;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

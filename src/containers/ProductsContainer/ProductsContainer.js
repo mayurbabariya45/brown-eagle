@@ -45,8 +45,12 @@ const mergeProps = (state, actions, ownProps) => ({
               subCategoryId = findSubCategory._id;
             }
             actions.selectedCategory(findCategory);
-            actions.searchProducts(
-                { ...state.filter, category: { categoryId, subCategoryId } },
+            actions
+              .searchProducts(
+                {
+                  ...state.filter,
+                  category: { category: categoryId, subCategory: subCategoryId ? subCategoryId : "" }
+                },
                 1
               )
               .then(data => {

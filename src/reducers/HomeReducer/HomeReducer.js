@@ -13,9 +13,13 @@ const INITIAL_STATE = {
   isCenterBannersLoading: false,
   isTopBannersLoading: false,
   isBottomBannersLoading: false,
+  isTopSupplierLoading: false,
   topBanners: [],
   centerBanners: [],
-  bottomBanners: {}
+  bottomBanners: {},
+  topSupplier: {
+    sellers: []
+  }
 };
 
 /**
@@ -137,6 +141,27 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isBottomBannersLoading: false,
+        hasError: true,
+        hasSuccess: false
+      };
+    // TOP_SUPPILER
+    case a.GET_TOP_SUPPLIERS_REQUEST:
+      return {
+        ...state,
+        isTopSupplierLoading: true
+      };
+    case a.GET_TOP_SUPPLIERS_SUCCESS:
+      return {
+        ...state,
+        hasError: false,
+        hasSuccess: true,
+        isTopSupplierLoading: false,
+        topSupplier: action.payload
+      };
+    case a.GET_TOP_SUPPLIERS_FAILURE:
+      return {
+        ...state,
+        isTopSupplierLoading: false,
         hasError: true,
         hasSuccess: false
       };

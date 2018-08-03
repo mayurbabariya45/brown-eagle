@@ -2,7 +2,6 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import Home from "../../views/Home/Home";
 import * as a from "../../actions/Home/Home_actions";
-import * as c from "../../actions/Cart/Cart_actions";
 
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(a.getCategories()),
@@ -10,8 +9,7 @@ const mapDispatchToProps = dispatch => ({
   getTopBanners: () => dispatch(a.getTopBanners()),
   getCenterBanners: () => dispatch(a.getCenterBanners()),
   getBottomBanners: () => dispatch(a.getBottomBanners()),
-  addToCart: item => dispatch(c.addToCart(item)),
-  addToCartUnsafe: item => dispatch(c.addToCartUnsafe(item))
+  getTopSuppliers: () => dispatch(a.getTopSuppliers())
 });
 const mapStateToProps = state => ({
   ...state.home

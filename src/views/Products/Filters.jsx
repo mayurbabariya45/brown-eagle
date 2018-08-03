@@ -1,6 +1,9 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import BlockUi from "react-block-ui";
 import Nouislider from "react-nouislider";
+import CheckBox from "../../elements/CustomCheckbox/CustomCheckbox";
 
 class Filters extends Component {
   constructor(props) {
@@ -18,7 +21,15 @@ class Filters extends Component {
     handleRatingFilter(value);
   }
   render() {
-    const { price,rating } = this.props;
+    const {
+      price,
+      rating,
+      categories,
+      locale,
+      loadProduct,
+      handleCategoryFilter,
+      handleSubCategoryFilter
+    } = this.props;
     return (
       <div>
         <div className="section-header filter-header">
@@ -34,7 +45,40 @@ class Filters extends Component {
             <h6>CATEGORIES</h6>
           </div>
           <div className="filter-category">
-            <div className="category" />
+            <BlockUi tag="div" blocking={loadProduct}>
+              <div className="category">
+                <ul>
+                  {_.map(categories, category => (
+                    <li key={category.id}>
+                      <div>
+                        <CheckBox
+                          name={category.name}
+                          number={category.id}
+                          label={category.nameTranslations[locale]}
+                          onClick={handleCategoryFilter}
+                          value={category.id}
+                        />
+                        {!_.isEmpty(category.subCategoryList) && (
+                          <ul>
+                            {_.map(category.subCategoryList, subCategory => (
+                              <li key={subCategory._id}>
+                                <CheckBox
+                                  name={subCategory.name}
+                                  number={subCategory._id}
+                                  value={subCategory._id}
+                                  label={subCategory.nameTranslations[locale]}
+                                  onClick={handleSubCategoryFilter}
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </BlockUi>
           </div>
         </div>
         <div className="section-header filter-products-price">
@@ -80,7 +124,9 @@ class Filters extends Component {
 
 Filters.propTypes = {
   handlePriceFilter: PropTypes.func.isRequired,
-  handleRatingFilter: PropTypes.func.isRequired
+  handleRatingFilter: PropTypes.func.isRequired,
+  handleCategoryFilter: PropTypes.func.isRequired,
+  handleSubCategoryFilter: PropTypes.func.isRequired
 };
 
 export default Filters;

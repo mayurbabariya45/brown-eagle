@@ -13,12 +13,16 @@ class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1
+      currentPage: 1,
+      categoryFilter: [],
+      subCategoryFilter: []
     };
     this.addToCart = this.addToCart.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.handlePriceFilter = this.handlePriceFilter.bind(this);
     this.handleRatingFilter = this.handleRatingFilter.bind(this);
+    this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
+    this.handleSubCategoryFilter = this.handleSubCategoryFilter.bind(this);
   }
   componentWillMount() {
     const {
@@ -33,7 +37,10 @@ class Products extends Component {
         this.setState({ ...response });
         handleCategoryFilter({
           ...this.props.filter,
-          category: { ...response }
+          category: {
+            category: response.categoryId,
+            subCategory: response.subCategoryId ? response.subCategoryId : ""
+          }
         });
       });
     } else {
@@ -49,12 +56,15 @@ class Products extends Component {
   handleSort(type) {
     const { handleSortFilter, searchProducts } = this.props;
     handleSortFilter(type);
-    searchProducts({
-      ...this.props.filter,
-      sort: {
-        ...type
-      }
-    });
+    searchProducts(
+      {
+        ...this.props.filter,
+        sort: {
+          ...type
+        }
+      },
+      1
+    );
   }
   handlePriceFilter(value) {
     const { handlePriceFilter, searchProducts } = this.props;
@@ -62,13 +72,62 @@ class Products extends Component {
       minPrice: value[0],
       maxPrice: value[1]
     });
-    searchProducts({
-      ...this.props.filter,
-      price: {
-        minPrice: value[0],
-        maxPrice: value[1]
-      }
+    searchProducts(
+      {
+        ...this.props.filter,
+        price: {
+          minPrice: value[0],
+          maxPrice: value[1]
+        }
+      },
+      1
+    );
+  }
+  handleCategoryFilter(isChecked, value) {
+    const { categoryFilter } = this.state;
+    const { handleCategoryFilter, searchProducts } = this.props;
+    if (!isChecked) {
+      categoryFilter.push(value);
+    } else if (categoryFilter.includes(value)) {
+      categoryFilter.splice(categoryFilter.indexOf(value), 1);
+    }
+    handleCategoryFilter({
+      category: categoryFilter.join(","),
+      subCategory: this.state.subCategoryFilter.join(",")
     });
+    searchProducts(
+      {
+        ...this.props.filter,
+        category: {
+          category: categoryFilter.join(","),
+          subCategory: this.state.subCategoryFilter.join(",")
+        }
+      },
+      1
+    );
+  }
+  handleSubCategoryFilter(isChecked, value) {
+    const { subCategoryFilter } = this.state;
+    const { handleCategoryFilter, searchProducts } = this.props;
+    if (!isChecked) {
+      subCategoryFilter.push(value);
+    } else if (subCategoryFilter.includes(value)) {
+      subCategoryFilter.splice(subCategoryFilter.indexOf(value), 1);
+    }
+    handleCategoryFilter({
+      category: this.state.categoryFilter.join(","),
+      subCategory: subCategoryFilter.join(",")
+    });
+    searchProducts(
+      {
+        ...this.props.filter,
+        category: {
+          category: this.state.categoryFilter.join(","),
+          subCategory: subCategoryFilter.join(",")
+        }
+      },
+      1
+    );
   }
   handleRatingFilter(value) {
     const { handleRatingFilter, searchProducts } = this.props;
@@ -76,13 +135,16 @@ class Products extends Component {
       minRating: value[0],
       maxRating: value[1]
     });
-    searchProducts({
-      ...this.props.filter,
-      rating: {
-        minRating: value[0],
-        maxRating: value[1]
-      }
-    });
+    searchProducts(
+      {
+        ...this.props.filter,
+        rating: {
+          minRating: value[0],
+          maxRating: value[1]
+        }
+      },
+      1
+    );
   }
   addToCart(item) {
     const { addToCart, showNotification } = this.props;
@@ -110,7 +172,9 @@ class Products extends Component {
       filter,
       selectedProductCategory,
       loadProduct,
-      match
+      match,
+      categories,
+      locale
     } = this.props;
     const { sort } = filter;
     const { currentPage } = this.state;
@@ -159,8 +223,13 @@ class Products extends Component {
                 <Filters
                   price={filter.price}
                   rating={filter.rating}
+                  categories={categories}
+                  locale={locale}
+                  loadProduct={loadProduct}
                   handlePriceFilter={this.handlePriceFilter}
                   handleRatingFilter={this.handleRatingFilter}
+                  handleCategoryFilter={this.handleCategoryFilter}
+                  handleSubCategoryFilter={this.handleSubCategoryFilter}
                 />
               </div>
             </Col>

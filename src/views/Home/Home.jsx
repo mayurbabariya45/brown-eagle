@@ -61,12 +61,14 @@ class Home extends Component {
       getCategories,
       getTopBanners,
       getCenterBanners,
-      getBottomBanners
+      getBottomBanners,
+      getTopSuppliers
     } = this.props;
     getTopBanners();
     getCenterBanners();
     getBottomBanners();
     getCategories();
+    getTopSuppliers();
   }
   render() {
     const {
@@ -79,7 +81,9 @@ class Home extends Component {
       bottomBanners,
       isTopBannersLoading,
       isCenterBannersLoading,
-      auth
+      isTopSupplierLoading,
+      auth,
+      topSupplier
     } = this.props;
     const { user } = auth;
     const backgroundBanner = !_.isEmpty(bottomBanners)
@@ -298,8 +302,8 @@ class Home extends Component {
               <SuppliersSlider
                 translate={translate}
                 title={translate("top_selected_suppliers")}
-                suppliers={staticSupplier}
-                loading={false}
+                suppliers={topSupplier}
+                loading={isTopSupplierLoading}
                 SliderSettings={{
                   dots: false,
                   lazyLoad: true,
@@ -438,7 +442,8 @@ Home.propTypes = {
   getTopBanners: PropTypes.func.isRequired,
   getCenterBanners: PropTypes.func.isRequired,
   getBottomBanners: PropTypes.func.isRequired,
-  getCategories: PropTypes.func.isRequired
+  getCategories: PropTypes.func.isRequired,
+  getTopSuppliers: PropTypes.func.isRequired
 };
 
 export default Home;

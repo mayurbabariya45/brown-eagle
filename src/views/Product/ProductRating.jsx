@@ -24,14 +24,14 @@ const ProductRating = props => (
         <div className="product-rating-stars">
           <div
             className="rating-result"
-            title={`${props.totalRatingsCount / 5 * 100}%`}
+            title={`${props.rating / 5 * 100}%`}
           >
             <span
               style={{
-                width: `${props.totalRatingsCount / 5 * 100}%`
+                width: `${props.rating / 5 * 100}%`
               }}
             >
-              <span>{`${props.totalRatingsCount / 5 * 100}%`}</span>
+              <span>{`${props.rating / 5 * 100}%`}</span>
             </span>
           </div>
           <div className="review-count">

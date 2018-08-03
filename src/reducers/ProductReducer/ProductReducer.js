@@ -20,8 +20,12 @@ const initialState = {
   selectedCategory: {},
   selectedSubCategory: {},
   product: {},
+  reviews: [],
   filter: {
-    category: {},
+    category: {
+      category: "",
+      subCategory: ""
+    },
     sort: {
       type: "popularity",
       order: ""
@@ -298,6 +302,20 @@ export default (state = initialState, action) => {
         loader: false,
         error: true,
         success: false
+      };
+    // GET_REVIEW
+    case a.GET_PRODUCT_REVIEW_REQUEST:
+      return {
+        ...state
+      };
+    case a.GET_PRODUCT_REVIEW_SUCCESS:
+      return {
+        ...state,
+        reviews: action.payload
+      };
+    case a.GET_PRODUCT_REVIEW_FAILURE:
+      return {
+        ...state,
       };
     // SELECT_FILTER
     case a.SELECT_SORT_FILTER:

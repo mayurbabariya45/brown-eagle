@@ -28,12 +28,16 @@ class SuppliersSlider extends Component {
     const sliderSettings = {
       ...SliderSettings
     };
-    const showEmpty = !loading && suppliers.length < 1;
+    const { sellers } = suppliers;
+    const showEmpty = !loading && sellers.length < 1;
     const renderLoader = [];
     if (loading) {
       for (let i = 1; i <= 4; i++) {
         const contentLoader = (
-          <div key={i} className="item product product-item product-item-loading">
+          <div
+            key={i}
+            className="item product product-item product-item-loading"
+          >
             <div className="product-item-info">
               <Loader />
             </div>
@@ -42,20 +46,20 @@ class SuppliersSlider extends Component {
         renderLoader.push(contentLoader);
       }
     }
-    const renderSuppliers = _.map(suppliers, value => (
+    const renderSuppliers = _.map(sellers, value => (
       <div key={value.id} className="item product product-item">
         <div className="product-item-info">
           <div className="product-header">
             <span className="yrs">
-              <i className="icon-static icon-yrs" />6 Yrs
+              <i className="icon-static icon-yrs" />0 Yrs
             </span>
-            <h3>DTS UK Machine Tools</h3>
+            <h3>{_.upperCase(`${value.firstName} ${value.lastName}`)}</h3>
             <div className="product-row">
               <div className="product-rating">
-                <div className="rating-result" title="80%">
+                <div className="rating-result" title="0%">
                   <span
                     style={{
-                      width: "62%"
+                      width: "0%"
                     }}
                   >
                     <span>80%</span>
@@ -65,9 +69,9 @@ class SuppliersSlider extends Component {
               <div className="product-transaction">
                 <p>
                   {translate("product_transaction_level")}{" "}
+                  {/* <i className="icon-static icon-diamond" />
                   <i className="icon-static icon-diamond" />
-                  <i className="icon-static icon-diamond" />
-                  <i className="icon-static icon-diamond" />
+                  <i className="icon-static icon-diamond" /> */}
                 </p>
               </div>
             </div>

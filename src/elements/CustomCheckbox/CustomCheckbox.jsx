@@ -8,10 +8,10 @@ class CustomCheckbox extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
+  handleClick(event) {
     const { onClick } = this.props;
     this.setState({ is_checked: !this.state.is_checked });
-    onClick && onClick(this.state.is_checked);
+    onClick && onClick(this.state.is_checked, event.target.value);
   }
   render() {
     const { isChecked, number, label, inline, ...rest } = this.props;
@@ -23,7 +23,7 @@ class CustomCheckbox extends Component {
           id={number}
           type="checkbox"
           onChange={this.handleClick}
-          checked={this.state.is_checked}
+          checked={isChecked || this.state.is_checked}
           {...rest}
         />
         <label htmlFor={number}>{label}</label>

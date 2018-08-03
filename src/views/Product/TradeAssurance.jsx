@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -10,17 +11,22 @@ const TradeAssurance = props => (
       <div className="trade-assurance-inner-row">
         <div className="trade-row">
           <span className="yrs">
-            <i className="icon-static icon-yrs" />6 Yrs
+            <i className="icon-static icon-yrs" />0 Yrs
           </span>
-          <h3>DTS UK Machine Tools</h3>
-          <p className="trade-txt">UK | Trading Company</p>
+          <h3>
+            {!_.isEmpty(props.seller) &&
+              _.capitalize(
+                `${props.seller.firstName} ${props.seller.lastName}`
+              )}
+          </h3>
+          <p className="trade-txt">India | Trading Company</p>
         </div>
         <div className="trade-row">
           <p>
             {props.translate("product_transaction_level")}{" "}
+            {/* <i className="icon-static icon-diamond" />
             <i className="icon-static icon-diamond" />
-            <i className="icon-static icon-diamond" />
-            <i className="icon-static icon-diamond" />
+            <i className="icon-static icon-diamond" /> */}
           </p>
           <p>
             {props.translate("product_supplier_assessments")}
@@ -29,17 +35,17 @@ const TradeAssurance = props => (
         </div>
         <div className="trade-row">
           <p>
-            19 {props.translate("product_transactions")} £ <b>80,000+</b>
+            0 {props.translate("product_transactions")} £ <b>0</b>
           </p>
         </div>
         <div className="trade-row border-bottom-row">
           <p>
-            {props.translate("product_response_time")}
-            <i className="fa fa-clock-o" /> <b> &lt;24h </b>
+            {props.translate("product_response_time")}{" "}
+            <i className="fa fa-clock-o" /> <b> &lt; 24h </b>
           </p>
           <p>
-            {props.translate("product_response_rate")}
-            <i className="fa fa-share" /> <b> 92.4% </b>
+            {props.translate("product_response_rate")}{" "}
+            <i className="fa fa-share" /> {" "}<b> 0.4% </b>
           </p>
         </div>
       </div>
