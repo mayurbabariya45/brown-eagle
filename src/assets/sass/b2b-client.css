@@ -5192,6 +5192,170 @@ section {
             font-size: 18px;
             line-height: 0; }
 
+.section-plans .section-page-header {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  background: #7d1516;
+  padding: 15px; }
+  .section-plans .section-page-header h5 {
+    font-size: 22px;
+    color: #ffffff;
+    margin: 0; }
+
+.section-plans .nav-container {
+  margin-top: 3em; }
+
+.section-plans .plans-view {
+  float: left;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0; }
+  .section-plans .plans-view .plans-info {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: #e8eef6;
+    border-radius: 3px; }
+    .section-plans .plans-view .plans-info h1 {
+      font-size: 22px;
+      margin: 0;
+      font-weight: 700; }
+  .section-plans .plans-view .plans-options {
+    float: left;
+    width: 100%;
+    margin: 10px 0;
+    margin-top: 3em; }
+    .section-plans .plans-view .plans-options .plans-text-options {
+      font-size: 14px;
+      color: #8b8b8c;
+      float: left;
+      width: 100%; }
+    .section-plans .plans-view .plans-options .plans-option {
+      float: left;
+      width: 100%;
+      margin: 0;
+      padding: 0 10em;
+      color: #8b8b8c; }
+      .section-plans .plans-view .plans-options .plans-option .membership-label {
+        float: left;
+        margin-right: 15px;
+        margin-top: 7px; }
+      .section-plans .plans-view .plans-options .plans-option .membership-options {
+        float: left; }
+  .section-plans .plans-view .plans-table {
+    float: left;
+    width: 100%;
+    margin: 20px 0 3em;
+    padding: 0; }
+    .section-plans .plans-view .plans-table table.structured {
+      width: 100%;
+      background: #fff;
+      margin: 1em 0;
+      border: 1px solid rgba(34, 36, 38, 0.15);
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border-radius: .28571429rem;
+      text-align: left;
+      color: rgba(0, 0, 0, 0.87);
+      border-collapse: separate;
+      border-spacing: 0;
+      border-collapse: collapse; }
+      .section-plans .plans-view .plans-table table.structured thead {
+        box-shadow: none; }
+      .section-plans .plans-view .plans-table table.structured tr th {
+        cursor: auto;
+        background: #e8eef6;
+        color: rgba(0, 0, 0, 0.87);
+        padding: .92857143em .78571429em;
+        vertical-align: inherit;
+        font-style: none;
+        font-weight: 700;
+        text-transform: none;
+        border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+        border-left: none; }
+      .section-plans .plans-view .plans-table table.structured tr th,
+      .section-plans .plans-view .plans-table table.structured tr td {
+        border-left: 1px solid rgba(34, 36, 38, 0.1);
+        border-right: 1px solid rgba(34, 36, 38, 0.1); }
+      .section-plans .plans-view .plans-table table.structured tr:first-child > th:first-child {
+        border-radius: .28571429rem 0 0 0; }
+      .section-plans .plans-view .plans-table table.structured tr th:first-child {
+        border-left: none; }
+      .section-plans .plans-view .plans-table table.structured tr td {
+        color: #808080;
+        text-align: center; }
+        .section-plans .plans-view .plans-table table.structured tr td .service-table {
+          display: table;
+          width: auto; }
+          .section-plans .plans-view .plans-table table.structured tr td .service-table .cell {
+            display: table-row;
+            width: auto;
+            clear: both; }
+            .section-plans .plans-view .plans-table table.structured tr td .service-table .cell .table-row {
+              display: table-cell;
+              width: 200px;
+              border-left: 1px solid rgba(34, 36, 38, 0.1);
+              padding: 5px;
+              text-transform: capitalize; }
+            .section-plans .plans-view .plans-table table.structured tr td .service-table .cell .table-row:first-child {
+              border: none; }
+      .section-plans .plans-view .plans-table table.structured tr td:first-child {
+        text-align: right;
+        padding-right: 2em; }
+      .section-plans .plans-view .plans-table table.structured tr.table-membership-plans th {
+        color: #808080;
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: capitalize;
+        text-align: center;
+        width: 17%; }
+      .section-plans .plans-view .plans-table table.structured tr.services-cell td {
+        text-align: center;
+        font-weight: bold;
+        color: #000; }
+  .section-plans .plans-view .plans-info-agreement-section {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 20px 13em;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    background: #e8eef6;
+    border-radius: 3px;
+    color: #8b8b8c; }
+    .section-plans .plans-view .plans-info-agreement-section .payment-buttons {
+      float: left;
+      width: 100%;
+      margin: 10px 0;
+      text-align: center; }
+  .section-plans .plans-view .plans-term-condition {
+    float: left;
+    width: 100%;
+    margin-top: 2em; }
+    .section-plans .plans-view .plans-term-condition .plans-term-content {
+      float: left;
+      width: 100%;
+      padding: 30px; }
+      .section-plans .plans-view .plans-term-condition .plans-term-content .terms-content {
+        border: 1px solid #f2f2f2;
+        padding: 10px;
+        width: 100%;
+        overflow: auto;
+        height: 200px;
+        float: left;
+        color: #afafaf; }
+        .section-plans .plans-view .plans-term-condition .plans-term-content .terms-content p {
+          margin: 0; }
+    .section-plans .plans-view .plans-term-condition .term-accept-button {
+      float: left;
+      width: 100%;
+      text-align: center; }
+      .section-plans .plans-view .plans-term-condition .term-accept-button .radio {
+        margin: 0;
+        padding-right: 25px; }
+
 .breadcrumb {
   background: none; }
   .breadcrumb > li + li::before {

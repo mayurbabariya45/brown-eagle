@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Row, Col, ButtonGroup } from "react-bootstrap";
 import BlockUi from "react-block-ui";
-import "react-block-ui/style.css";
 import Button from "../../elements/CustomButton/CustomButton";
 // import Languages from "../../components/Languages/Languages";
 import SearchProductCategories from "./SearchProductCategories";

@@ -294,7 +294,7 @@ export const style = {
       border: "0",
       fontSize: "14px",
       WebkitFontSmoothing: "antialiased",
-      fontFamily: '"Roboto","Helvetica Neue",Arial,sans-serif',
+      fontFamily: "\"Roboto\",\"Helvetica Neue\",Arial,sans-serif",
       fontWeight: "400",
       color: "#FFFFFF"
     },
@@ -513,7 +513,29 @@ export const style = {
     }
   }
 };
-
+const currencySymbols = {
+  USD: "$",
+  EUR: "€",
+  CRC: "₡",
+  GBP: "£",
+  ILS: "₪",
+  INR: "₹",
+  JPY: "¥",
+  KRW: "₩",
+  NGN: "₦",
+  PHP: "₱",
+  PLN: "zł",
+  PYG: "₲",
+  THB: "฿",
+  UAH: "₴",
+  VND: "₫"
+};
+export const getCurrency = currencyName => {
+  if (currencySymbols.hasOwnProperty(currencyName)) {
+    return currencySymbols[currencyName];
+  }
+  return false;
+};
 export default {
   languages,
   countries,

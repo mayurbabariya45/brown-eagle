@@ -12,6 +12,7 @@ import AccountContainer from "../containers/AccountContainer/AccountContainer";
 import CartContainer from "../containers/CartContainer/CartContainer";
 import QuotationContainer from "../containers/QuotationContainer/QuotationContainer";
 import RequestQuotationContainer from "../containers/QuotationContainer/RequestQuotationContainer";
+import PlansContainer from "../containers/PlansContainer/PlansContainer";
 import ServicesMembership from "../views/static/ServicesMembership";
 import PurchaseRegion from "../views/static/PurchaseRegion";
 import HelpCommunity from "../views/static/HelpCommunity";
@@ -133,6 +134,7 @@ const appRoutes = [
     component: ProductsContainer
   },
   { path: "/cart", name: "Cart", component: CartContainer },
+  { path: "/plans", name: "Plans", component: PlansContainer },
   {
     path: "/services_membership",
     name: "ServicesMembership",

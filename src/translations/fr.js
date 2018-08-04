@@ -389,6 +389,33 @@ export const fr = {
       // bussiness type
       d_manufacturer: "Fabricant",
       d_key_supplier: "Fournisseur",
+       // plans
+       p_title_text: "Demande de services payants BROWN EAGLE",
+       p_tab_link_apply: "Appliquer",
+       p_tab_link_payment: "Effectuer le paiement",
+       p_tab_apply_title_text: "Les fournisseurs reçoivent en moyenne 22 fois plus de demandes",
+       p_tab_services_agreement: "Contrat de service fournisseur",
+       p_tab_plans_option_text:
+         "Démarrez votre activité en ligne avec Brown Supplier Eagle's Supplier Membership.",
+       p_tab_plans_option_label: "Options d'adhésion:",
+       p_tab_plans_agreement_label:
+         "En procédant au paiement pour passer au fournisseur, je reconnais et accepte ce qui suit:",
+       p_tab_services_agreement_checkbox:
+         "- le contrat de services fournisseur browneagle.com",
+       p_tab_privacy_checkbox: "- la politique de confidentialité",
+       p_tab_marketing_label:
+         "- recevoir les communications marketing, services et membres de browneagle.com",
+       p_continue_button: "Continuer",
+       p_table_head_text: "Adhésion fournisseurs",
+       p_table_head_free: "Adhésion gratuite",
+       table_td_ranking: "Classement Prioritaire",
+       table_td_description: "Description du plan",
+       table_td_product: "Liste de produits",
+       table_td_storage: "Espace de rangement",
+       table_td_cost: "Plan Prix",
+       table_td_plan_services: "Services de plan",
+       table_td_price_services: "Services Prix",
+       table_td_plan_services_description: "Services Description",
       // Footer
       about_us: "à propos de nous",
       sell_on_brown_eagle: "Vendre sur aigle marron",

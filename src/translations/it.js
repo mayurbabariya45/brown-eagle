@@ -393,6 +393,34 @@ export const it = {
       // bussiness type
       d_manufacturer: "fabbricante",
       d_key_supplier: "Fornitore",
+      // plans
+      p_title_text: "Richiedi i servizi a pagamento BROWN EAGLE",
+      p_tab_link_apply: "Applicare",
+      p_tab_link_payment: "Fare un pagamento",
+      p_tab_apply_title_text:
+        "I fornitori ricevono in media 22 volte più richieste",
+      p_tab_services_agreement: "Accordo di servizio fornitore",
+      p_tab_plans_option_text:
+        "Avvia il tuo business online con l'abbonamento Supplier di brown eagle.com.",
+      p_tab_plans_option_label: "Opzioni di abbonamento:",
+      p_tab_plans_agreement_label:
+        "Procedendo con il pagamento per l'aggiornamento al Fornitore, riconosco e accetto quanto segue:",
+      p_tab_services_agreement_checkbox:
+        "- il contratto di servizi al fornitore di browneagle.com",
+      p_tab_privacy_checkbox: "- l'informativa sulla privacy",
+      p_tab_marketing_label:
+        "- ricevere da marketing browneagle.com qualsiasi tipo di marketing, servizi e comunicazioni relative all'affiliazione",
+      p_continue_button: "Continua",
+      p_table_head_text: "Iscrizione dei fornitori",
+      p_table_head_free: "Iscrizione gratuita",
+      table_td_ranking: "Classifica prioritaria",
+      table_td_description: "Descrizione del piano",
+      table_td_product: "Elenco dei prodotti",
+      table_td_storage: "Conservazione",
+      table_td_cost: "Piano Prezzo",
+      table_td_plan_services: "Pianificare i servizi",
+      table_td_price_services: "Prezzo dei servizi",
+      table_td_plan_services_description: "Descrizione dei servizi",
       // Footer
       about_us: "riguardo a noi",
       sell_on_brown_eagle: "Vendi su Brown Eagle",

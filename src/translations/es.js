@@ -392,6 +392,35 @@ export const es = {
       // bussiness type
       d_manufacturer: "Fabricante",
       d_key_supplier: "Proveedor",
+
+       // plans
+       p_title_text: "Solicite los servicios pagados de EAGLE MARRÓN",
+       p_tab_link_apply: "Aplicar",
+       p_tab_link_payment: "Hacer el pago",
+       p_tab_apply_title_text:
+         "Los proveedores en promedio reciben 22 veces más consultas",
+       p_tab_services_agreement: "Acuerdo de servicio del proveedor",
+       p_tab_plans_option_text:
+         "Arranque su negocio en línea con la membresía de proveedores de brown eagle.com.",
+       p_tab_plans_option_label: "Opciones de membresía:",
+       p_tab_plans_agreement_label:
+         "Al continuar con el pago para actualizar al proveedor, reconozco y acepto lo siguiente:",
+       p_tab_services_agreement_checkbox:
+         "- el acuerdo de servicios del proveedor de browneagle.com",
+       p_tab_privacy_checkbox: "- la política de privacidad",
+       p_tab_marketing_label:
+         "- para recibir comunicaciones de marketing, servicios y membresía relacionadas con browneagle.com",
+       p_continue_button: "Continuar",
+       p_table_head_text: "Membresía de proveedores",
+       p_table_head_free: "Membresía gratis",
+       table_td_ranking: "Ranking prioritario",
+       table_td_description: "Descripción del plan",
+       table_td_product: "Listado de productos",
+       table_td_storage: "Almacenamiento",
+       table_td_cost: "Precio plan",
+       table_td_plan_services: "Servicios del plan",
+       table_td_price_services: "Servicios Precio",
+       table_td_plan_services_description: "Descripción de servicios",
       // Footer
       about_us: "sobre nosotros",
       sell_on_brown_eagle: "Vender en Brown Eagle",

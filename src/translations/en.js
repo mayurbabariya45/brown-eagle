@@ -411,6 +411,34 @@ export const en = {
       // bussiness type
       d_manufacturer: "Manufacturer",
       d_key_supplier: "Supplier",
+
+      // plans
+      p_title_text: "Apply for BROWN EAGLE Paid Services",
+      p_tab_link_apply: "Apply",
+      p_tab_link_payment: "Make Payment",
+      p_tab_apply_title_text: "Suppliers on average receive 22x more inquiries",
+      p_tab_services_agreement: "Supplier Service Agreement",
+      p_tab_plans_option_text:
+        "Boot your online bussiness with browneagle.com's Supplier Membership.",
+      p_tab_plans_option_label: "Membership Options:",
+      p_tab_plans_agreement_label:
+        "By Proceeding with payment to upgrade to Supplier, i acknowledge and agree to the following:",
+      p_tab_services_agreement_checkbox:
+        "- the browneagle.com Supplier Services Agreement",
+      p_tab_privacy_checkbox: "- the Privacy Policy",
+      p_tab_marketing_label:
+        "- to receive any marketing, services and membership related communications from browneagle.com",
+      p_continue_button: "Continue",
+      p_table_head_text: "Suppliers Membership",
+      p_table_head_free: "Free Membership",
+      table_td_ranking: "Priority Raking",
+      table_td_description: "Plan Description",
+      table_td_product: "Product Listing",
+      table_td_storage: "Storage",
+      table_td_cost: "Plan Price",
+      table_td_plan_services: "Plan Services",
+      table_td_price_services: "Services Price",
+      table_td_plan_services_description: "Services Description",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

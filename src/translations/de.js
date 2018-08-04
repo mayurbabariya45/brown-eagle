@@ -391,14 +391,37 @@ export const de = {
       q_posted_in: "Geplaatst in",
       q_quote_now: "Quote nu",
 
-
-
-
-
-
       // bussiness type
       d_manufacturer: "Fabrikant",
       d_key_supplier: "Leverancier",
+      // plans
+      p_title_text: "BROWN EAGLE Paid Services aanvragen",
+      p_tab_link_apply: "Van toepassing zijn",
+      p_tab_link_payment: "Betaling maken",
+      p_tab_apply_title_text:
+        "Leveranciers krijgen gemiddeld 22x meer informatie",
+      p_tab_services_agreement: "Supplier Service Agreement",
+      p_tab_plans_option_text:
+        "Start uw online bedrijf met het leverancierslidmaatschap van brown eagle.com.",
+      p_tab_plans_option_label: "Lidmaatschap Opties:",
+      p_tab_plans_agreement_label:
+        "Door door te gaan met betalen om te upgraden naar leverancier, bevestig ik en ga ik akkoord met het volgende:",
+      p_tab_services_agreement_checkbox:
+        "- de overeenkomst met Browneagle.com Supplier Services",
+      p_tab_privacy_checkbox: "- het privacybeleid",
+      p_tab_marketing_label:
+        "- om marketing, services en lidmaatschapgerelateerde communicatie van browneagle.com te ontvangen",
+      p_continue_button: "Doorgaan met",
+      p_table_head_text: "Leveranciers lidmaatschap",
+      p_table_head_free: "Gratis lidmaatschap",
+      table_td_ranking: "Priority Ranking",
+      table_td_description: "Beschrijving van het plan",
+      table_td_product: "Product Listing",
+      table_td_storage: "opslagruimte",
+      table_td_cost: "Planprijs",
+      table_td_plan_services: "Plan Services",
+      table_td_price_services: "Diensten Prijs",
+      table_td_plan_services_description: "Beschrijving van de services",
       // Footer
       about_us: "over ons",
       sell_on_brown_eagle: "Verkopen op Brown Eagle",
