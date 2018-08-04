@@ -96,9 +96,12 @@ class Dashboard extends React.Component {
       getProducts,
       getProduct,
       deleteProduct,
+      getProductReview,
       products,
       product,
-      upldateProductLoading
+      upldateProductLoading,
+      productReviews,
+      editProductReview
     } = this.props;
     const { user, loader } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
@@ -163,6 +166,9 @@ class Dashboard extends React.Component {
                           myProducts={products}
                           locale={locale}
                           product={product}
+                          productReviews={productReviews}
+                          getProductReview={getProductReview}
+                          editProductReview={editProductReview}
                         />
                       )}
                     </Tab.Pane>

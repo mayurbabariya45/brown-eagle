@@ -104,3 +104,31 @@ export const handleInputMap = types => dispatch => {
     types
   });
 };
+
+export const getProductReview = (productId, page, locale) => dispatch => {
+  dispatch({
+    [RSAA]: {
+      endpoint: `product/${productId}/review?page=${page}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      types: [
+        a.GET_PRODUCT_REVIEW_REQUEST,
+        a.GET_PRODUCT_REVIEW_SUCCESS,
+        a.GET_PRODUCT_REVIEW_FAILURE
+      ]
+    }
+  });
+};
+
+export const editProductReview = (values, productId, reviewId, locale) => ({
+  [RSAA]: {
+    endpoint: `product/${productId}/review/${reviewId}?ln=${locale}`,
+    method: "PATCH",
+    body: JSON.stringify(values),
+    types: [
+      a.EDIT_PRODUCT_REVIEW_REQUEST,
+      a.EDIT_PRODUCT_REVIEW_SUCCESS,
+      a.EDIT_PRODUCT_REVIEW_FAILURE
+    ]
+  }
+});

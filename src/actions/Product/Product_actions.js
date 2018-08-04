@@ -171,7 +171,6 @@ export const searchProducts = (values, page) => dispatch => {
   const maxPrice = `&maxPrice=${values.price.maxPrice}`;
   const minRating = `&minRating=${values.rating.minRating}`;
   const maxRating = `&maxRating=${values.rating.maxRating}`;
-  console.log(values)
   if (_.has(values.sort, "type")) {
     if (values.sort.type !== "popularity") {
       sort = `&sort=${values.sort.type}`;

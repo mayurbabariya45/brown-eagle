@@ -7,16 +7,21 @@ import BlockUi from "react-block-ui";
 import Product from "../../components/ProductSlider/Products";
 import EditProductContainer from "../../containers/EditProductContainer/EditProductContainer";
 import Pagination from "../../components/Pagination/Pagination";
+import ProductReviews from "./ProductReviews";
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
-      currentPage: 1
+      currentPage: 1,
+      showReviews: false,
+      showProductReviewId: ""
     };
     this.editProduct = this.editProduct.bind(this);
     this.editProductModalHide = this.editProductModalHide.bind(this);
+    this.handleShowProductReview = this.handleShowProductReview.bind(this);
+    this.handleShowProducts = this.handleShowProducts.bind(this);
   }
   componentWillMount() {
     const { getProducts, id } = this.props;
@@ -42,6 +47,12 @@ class Products extends Component {
   editProductModalHide() {
     this.setState({ showModal: false });
   }
+  handleShowProductReview(productId) {
+    this.setState({ showReviews: true, showProductReviewId: productId });
+  }
+  handleShowProducts() {
+    this.setState({ showReviews: false, showProductReviewId: "" });
+  }
   render() {
     const {
       translate,
@@ -52,7 +63,10 @@ class Products extends Component {
       upldateProductLoading,
       id,
       locale,
-      product
+      product,
+      productReviews,
+      getProductReview,
+      editProductReview
     } = this.props;
     const { currentPage } = this.state;
     const { count, products } = myProducts;
@@ -62,69 +76,89 @@ class Products extends Component {
       end = count;
     }
     return (
-      <div className="dashboard-products">
-        <BlockUi tag="div" blocking={loading}>
-          <Row>
-            <Col md={12}>
-              <div className="section-header">
-                <div className="title">
-                  <h5>{translate("d_products")}</h5>
-                </div>
-                <div className="product-add-button">
-                  <Link
-                    to="/seller/product/new"
-                    className="btn btn-fill btn-border btn-warning"
-                  >
-                    {translate("add_product_label")}
-                  </Link>
-                </div>
-              </div>
-            </Col>
-            <Col md={12} sm={12} xs={12}>
-              <div className="result-showing">
-                <p>
-                  Showing {start} – {end} product of {count} products
-                </p>
-              </div>
-            </Col>
-            <Col md={12}>
-              <div className="products list items product-items product-lists">
-                <Row>
-                  {products.map(product => (
-                    <Col sm={12} key={product.id}>
-                      <div className="item product product-item">
-                        <Product
-                          locale={locale}
-                          product={product}
-                          deleteProduct={() => deleteProduct(product.id)}
-                          editProduct={() => this.editProduct(product)}
-                          translate={translate}
-                          lists
-                        />
-                      </div>
-                    </Col>
-                  ))}
-                </Row>
-              </div>
-            </Col>
-          </Row>
-          <Pagination
-            totalRecords={count || 0}
-            pageLimit={20}
-            pageNeighbours={1}
-            onPageChanged={this.onPageChanged}
-          />
-        </BlockUi>
-        {!_.isEmpty(product) && (
-          <EditProductContainer
-            id={id}
+      <div>
+        {this.state.showReviews && (
+          <ProductReviews
+            id={this.state.showProductReviewId}
+            loading={loading}
             translate={translate}
-            loading={upldateProductLoading}
+            reviews={productReviews}
+            getProductReview={getProductReview}
+            handleBackButton={this.handleShowProducts}
             showNotification={showNotification}
-            showModal={this.state.showModal}
+            editProductReview={editProductReview}
             locale={locale}
-            onHide={this.editProductModalHide}
           />
+        )}
+        {!this.state.showReviews && (
+          <div className="dashboard-products">
+            <BlockUi tag="div" blocking={loading}>
+              <Row>
+                <Col md={12}>
+                  <div className="section-header">
+                    <div className="title">
+                      <h5>{translate("d_products")}</h5>
+                    </div>
+                    <div className="product-add-button">
+                      <Link
+                        to="/seller/product/new"
+                        className="btn btn-fill btn-border btn-warning"
+                      >
+                        {translate("add_product_label")}
+                      </Link>
+                    </div>
+                  </div>
+                </Col>
+                <Col md={12} sm={12} xs={12}>
+                  <div className="result-showing">
+                    <p>
+                      Showing {start} – {end} product of {count} products
+                    </p>
+                  </div>
+                </Col>
+                <Col md={12}>
+                  <div className="products list items product-items product-lists">
+                    <Row>
+                      {products.map(product => (
+                        <Col sm={12} key={product.id}>
+                          <div className="item product product-item">
+                            <Product
+                              locale={locale}
+                              product={product}
+                              deleteProduct={() => deleteProduct(product.id)}
+                              editProduct={() => this.editProduct(product)}
+                              showReviews={() =>
+                                this.handleShowProductReview(product.id)
+                              }
+                              translate={translate}
+                              lists
+                            />
+                          </div>
+                        </Col>
+                      ))}
+                    </Row>
+                  </div>
+                </Col>
+              </Row>
+              <Pagination
+                totalRecords={count || 0}
+                pageLimit={20}
+                pageNeighbours={1}
+                onPageChanged={this.onPageChanged}
+              />
+            </BlockUi>
+            {!_.isEmpty(product) && (
+              <EditProductContainer
+                id={id}
+                translate={translate}
+                loading={upldateProductLoading}
+                showNotification={showNotification}
+                showModal={this.state.showModal}
+                locale={locale}
+                onHide={this.editProductModalHide}
+              />
+            )}
+          </div>
         )}
       </div>
     );

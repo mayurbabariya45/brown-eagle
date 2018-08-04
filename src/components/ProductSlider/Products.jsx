@@ -22,6 +22,7 @@ const Products = props => {
     product,
     deleteProduct,
     editProduct,
+    showReviews,
     addToCart,
     classNames
   } = props;
@@ -100,14 +101,14 @@ const Products = props => {
                 <div className="rating-summary">
                   <div
                     className="rating-result"
-                    title={`${product.totalRatingsCount / 5 * 100}%`}
+                    title={`${product.rating / 5 * 100}%`}
                   >
                     <span
                       style={{
-                        width: `${product.totalRatingsCount / 5 * 100}%`
+                        width: `${product.rating / 5 * 100}%`
                       }}
                     >
-                      <span>{product.totalRatingsCount / 5 * 100}</span>
+                      <span>{product.rating / 5 * 100}</span>
                     </span>
                   </div>
                 </div>
@@ -129,6 +130,9 @@ const Products = props => {
               </div>
             </div>
             <div className="product-item-inner">
+              <div className="action action-comments" onClick={showReviews}>
+                <i className="fa fa-comments" />
+              </div>
               <div className="action action-edit" onClick={editProduct}>
                 <i className="fa fa-pencil-square-o" />
               </div>
@@ -172,14 +176,14 @@ const Products = props => {
               <div className="rating-summary">
                 <div
                   className="rating-result"
-                  title={`${product.totalRatingsCount / 5 * 100}%`}
+                  title={`${product.rating / 5 * 100}%`}
                 >
                   <span
                     style={{
-                      width: `${product.totalRatingsCount / 5 * 100}%`
+                      width: `${product.rating / 5 * 100}%`
                     }}
                   >
-                    <span>{product.totalRatingsCount / 5 * 100}%</span>
+                    <span>{product.rating / 5 * 100}%</span>
                   </span>
                 </div>
               </div>

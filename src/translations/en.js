@@ -439,6 +439,8 @@ export const en = {
       table_td_plan_services: "Plan Services",
       table_td_price_services: "Services Price",
       table_td_plan_services_description: "Services Description",
+      // dashboard product review
+      d_products_review: "Reviews",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

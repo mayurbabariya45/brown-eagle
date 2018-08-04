@@ -13,7 +13,11 @@ const mapDispatchToProps = dispatch => ({
   getProducts: (id, page) => dispatch(d.getProducts(id, page)),
   getProduct: product => dispatch(d.getProduct(product)),
   getProductImage: (id, token) => dispatch(d.getProductImage(id, token)),
-  deleteProduct: id => dispatch(d.deleteProduct(id))
+  deleteProduct: id => dispatch(d.deleteProduct(id)),
+  getProductReview: (id, page, locale) =>
+    dispatch(d.getProductReview(id, page, locale)),
+  editProductReview: (values, productId, reviewId, locale) =>
+    dispatch(d.editProductReview(values, productId, reviewId, locale))
 });
 
 const mergeProps = (state, actions, ownProps) => ({

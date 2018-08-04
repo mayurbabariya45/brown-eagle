@@ -1314,6 +1314,14 @@
         color: #fff;
         border-radius: 3px;
       }
+      .action-comments {
+        border: 1px solid $warning-color;
+        line-height: 5px;
+        padding: 5px;
+        background: $warning-states-color;
+        color: #fff;
+        border-radius: 3px;
+      }
       .action-delete {
         border: 1px solid $danger-color;
         line-height: 5px;

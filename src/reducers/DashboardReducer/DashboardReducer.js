@@ -14,7 +14,12 @@ const INITIAL_STATE = {
   },
   categories: [],
   product: {},
-  activeMap: "registeredAddress"
+  activeMap: "registeredAddress",
+  productReviews: {
+    count: 0,
+    page: 0,
+    productReview: []
+  }
 };
 
 /**
@@ -215,6 +220,48 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: true
+      };
+
+    // PRODUCT_REVIEWS
+    case a.GET_PRODUCT_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        productReviews: {
+          count: 0,
+          page: 0,
+          productReview: []
+        }
+      };
+    case a.GET_PRODUCT_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        productReviews: action.payload
+      };
+    case a.GET_PRODUCT_REVIEW_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true
+      };
+    case a.EDIT_PRODUCT_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.EDIT_PRODUCT_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true
+      };
+    case a.EDIT_PRODUCT_REVIEW_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        success: false
       };
     default:
       return state;

@@ -43,7 +43,14 @@ class Product extends Component {
     this.setState({ showRatingModal: !this.state.showRatingModal });
   }
   handleRatingSubmit(values) {
-    const { addReview, showNotification, match, locale, auth } = this.props;
+    const {
+      addReview,
+      showNotification,
+      match,
+      locale,
+      auth,
+      getProductReview
+    } = this.props;
     const { productId } = match.params;
     const buyer = auth.user.id;
     const authRole = auth.user.role;
@@ -60,6 +67,8 @@ class Product extends Component {
           true
         );
       } else if (response.type === "ADD_PRODUCT_REVIEW_SUCCESS") {
+        this.setState({ showRatingModal: false });
+        getProductReview(productId, locale);
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
           <div>Review has been added successfully</div>,
@@ -90,7 +99,7 @@ class Product extends Component {
   }
   render() {
     const { translate, product, loader, auth, reviews, locale } = this.props;
-    const objectProduct = product ? product : {};
+    const objectProduct = product || {};
     const authRole = auth.user.role;
     const {
       nameTranslations,
@@ -120,7 +129,11 @@ class Product extends Component {
                   <div className="product-shop-content">
                     <div className="product-info-title">
                       <div className="page-title-wrapper">
-                        <h1 className="page-title">{!_.isEmpty(product) ? nameTranslations[locale ]: "Loading...."}</h1>
+                        <h1 className="page-title">
+                          {!_.isEmpty(product)
+                            ? nameTranslations[locale]
+                            : "Loading...."}
+                        </h1>
                       </div>
                     </div>
                     <div className="product-info-price">
@@ -236,7 +249,11 @@ class Product extends Component {
                             <h5>Product Description</h5>
                           </div>
                           <div className="description">
-                            <p>{!_.isEmpty(product) ? descriptionTranslations[locale]: ""}</p>
+                            <p>
+                              {!_.isEmpty(product)
+                                ? descriptionTranslations[locale]
+                                : ""}
+                            </p>
                           </div>
                         </div>
                       </Tab>
@@ -288,7 +305,7 @@ class Product extends Component {
               </Row>
             </Col>
             <Col sm={3}>
-              <TradeAssurance translate={translate} seller={seller}/>
+              <TradeAssurance translate={translate} seller={seller} />
               <ProductLikes translate={translate} />
             </Col>
           </Row>
