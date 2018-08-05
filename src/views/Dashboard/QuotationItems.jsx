@@ -19,6 +19,7 @@ const QuotationItems = props => (
                   locale={props.locale}
                   key={data.id}
                   quotation={data}
+                  quoteRemianing={props.quoteRemianing}
                   handleViewQuotation={e => {
                     e.preventDefault();
                     props.handleViewQuotation(data);

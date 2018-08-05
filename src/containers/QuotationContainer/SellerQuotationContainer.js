@@ -4,8 +4,8 @@ import * as c from "../../actions/Categories/Categories_actions";
 import * as a from "../../actions/Quotation/Quotation_actions";
 
 const mapDispatchToProps = dispatch => ({
-  getSellerQuotations: (sellerId, status, page) =>
-    dispatch(a.getSellerQuotations(sellerId, status, page)),
+  getSellerQuotations: (sellerId, page) =>
+    dispatch(a.getSellerQuotations(sellerId, page)),
   onSelectCategory: value => dispatch(c.onSelectCategory(value)),
   selectFilters: value => dispatch(a.selectFilters(value)),
   searchQuotation: values => dispatch(a.searchQuotation(values)),

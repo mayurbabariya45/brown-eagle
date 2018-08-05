@@ -28,9 +28,9 @@ export const getBuyerQuotations = (buyerId, page) => ({
   }
 });
 
-export const getSellerQuotations = (sellerId, status = "all", page = 1) => ({
+export const getSellerQuotations = (sellerId, page = 1) => ({
   [RSAA]: {
-    endpoint: `rfq?quote/seller/${sellerId}/status/${status}?page=${page}`,
+    endpoint: `rfq/suggestions/seller/${sellerId}?page=${page}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
+    "dns": "^0.2.2",
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
     "firebase": "^4.12.0",

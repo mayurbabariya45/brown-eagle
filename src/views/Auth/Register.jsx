@@ -6,8 +6,14 @@ import Tabs from "./Tabs";
 class Register extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      location: ""
+    };
     this.hanldeSubmitForm = this.hanldeSubmitForm.bind(this);
+    this.handleLocation = this.handleLocation.bind(this);
+  }
+  handleLocation(values) {
+    this.setState({ location: values.value });
   }
   hanldeSubmitForm(value) {
     const {
@@ -36,7 +42,10 @@ class Register extends Component {
         }
       });
     } else if (activeTabs === 2) {
-      registerUser({ ...value, ...formData }, locale).then(response => {
+      registerUser(
+        { ...value, ...formData, location: this.state.location },
+        locale
+      ).then(response => {
         const token = response.payload.id;
         if (response.type === "REGISTER_FAILURE") {
           showNotification(
@@ -50,13 +59,14 @@ class Register extends Component {
             <div>{response.payload.message}</div>,
             false
           );
-          verifyEmail({ id: token }).then(data => {
+          this.setState({ location: "" });
+          verifyEmail({ id: token }, locale).then(data => {
             if (data.type === "VERIFY_EMAIL_FAILURE") {
-              showNotification(
-                <span data-notify="icon" className="pe-7s-shield" />,
-                <div>{data.payload.response.message}</div>,
-                true
-              );
+              // showNotification(
+              //   <span data-notify="icon" className="pe-7s-shield" />,
+              //   <div>{data.payload.response.message}</div>,
+              //   true
+              // );
             } else if (response.type === "VERIFY_EMAIL_SUCCESS") {
               showNotification(
                 <span data-notify="icon" className="pe-7s-check" />,
@@ -78,6 +88,7 @@ class Register extends Component {
               <Col sm={12}>
                 <Tabs
                   {...this.props}
+                  handleLocation={this.handleLocation}
                   hanldeSubmitForm={this.hanldeSubmitForm}
                 />
               </Col>
@@ -100,6 +111,6 @@ Register.propTypes = {
 
 Register.defaultProps = {
   locale: ""
-}
+};
 
 export default Register;

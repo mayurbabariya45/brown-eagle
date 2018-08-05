@@ -43,16 +43,11 @@ class Quotations extends React.Component {
       searchQuotation({
         category: selectedCategory.id,
         search: quotation.searchQuery,
-        status: _.lowerCase(quotation.selectedFilter),
         page: currentPage
       });
       return false;
     }
-    getSellerQuotations(
-      seller,
-      _.lowerCase(quotation.selectedFilter),
-      currentPage
-    );
+    getSellerQuotations(seller, currentPage);
     return false;
   };
   handleSubmitQuoteModal(quotationId) {
@@ -71,8 +66,8 @@ class Quotations extends React.Component {
     const {
       translate,
       locale,
+      activePlan,
       onSelectCategory,
-      selectFilters,
       searchQuotation,
       quotation,
       categories,
@@ -80,7 +75,8 @@ class Quotations extends React.Component {
       seller,
       showNotification,
       getSellerQuotations,
-      flushSearchQuery
+      flushSearchQuery,
+      getSellerActivePlans
     } = this.props;
     const { currentPage } = this.state;
     const { count, rfqs } = quotation.sellerQuotation;
@@ -107,7 +103,7 @@ class Quotations extends React.Component {
             />
           </Col>
         </Row>
-        {!this.state.viewQuotation && (
+        {/* {!this.state.viewQuotation && (
           <Row>
             <Col md={12} sm={12} xs={12}>
               <div className="quotations-filter">
@@ -123,7 +119,7 @@ class Quotations extends React.Component {
               </div>
             </Col>
           </Row>
-        )}
+        )} */}
         {!this.state.viewQuotation && (
           <Row>
             <Col md={12} sm={12} xs={12}>
@@ -144,6 +140,9 @@ class Quotations extends React.Component {
                   quotation={this.state.quotation}
                   locale={locale}
                   handleBackButton={this.clearViewQuotationState}
+                  quoteRemianing={
+                    !_.isEmpty(activePlan) ? activePlan.rfq.remaining : 0
+                  }
                   opneSubmitQuoteModal={() =>
                     this.handleSubmitQuoteModal(this.state.quotation.id)
                   }
@@ -162,6 +161,9 @@ class Quotations extends React.Component {
             handleViewQuotation={this.handleViewQuotation}
             handleSubmitQuoteModal={this.handleSubmitQuoteModal}
             onPageChanged={this.onPageChanged}
+            quoteRemianing={
+              !_.isEmpty(activePlan) ? activePlan.rfq.remaining : 0
+            }
           />
         )}
         <SubmitQuoteContainer
@@ -171,7 +173,11 @@ class Quotations extends React.Component {
           quotationId={this.state.quotationId}
           showNotification={showNotification}
           showModal={this.state.showModal}
+          getSellerActivePlans={getSellerActivePlans}
+          getSellerQuotations={getSellerQuotations}
+          currentPage={this.state.currentPage}
           onHide={this.hideSubmitQuoteModal}
+          quoteRemianing={!_.isEmpty(activePlan) ? activePlan.rfq.remaining : 0}
         />
       </div>
     );

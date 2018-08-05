@@ -1,5 +1,7 @@
+import _ from "lodash";
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { actionTypes as a } from "../../constants/Home/Home_action_type";
+import { getCurrentIp } from "../../variables/Variables";
 
 export const getCategories = () => dispatch =>
   dispatch({
@@ -83,3 +85,26 @@ export const getBottomBanners = () => dispatch =>
       ]
     }
   });
+
+export const getRecentViewProducts = () => dispatch => {
+  const webAuthId = localStorage.getItem("webAuthId");
+  const webAuthRole = localStorage.getItem("webAuthRole");
+  let endpoint;
+  if (!_.isEmpty(webAuthId) && webAuthRole === "buyer") {
+    endpoint = `?buyer=${webAuthId}`;
+  } else {
+    endpoint = "?ip=192.168.11.11";
+  }
+  return dispatch({
+    [RSAA]: {
+      endpoint: `product/recents${endpoint}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      types: [
+        a.GET_RECENT_VIEW_PRODUCT_REQUEST,
+        a.GET_RECENT_VIEW_PRODUCT_SUCCESS,
+        a.GET_RECENT_VIEW_PRODUCT_FAILURE
+      ]
+    }
+  });
+};

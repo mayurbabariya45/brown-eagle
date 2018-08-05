@@ -3,20 +3,92 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
 import { Confirm } from "../../components/Confirm/Confirm";
+import { scroller, Element } from "react-scroll";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import QuotationContainer from "../../containers/AccountContainer/QuotationContainer";
+import ProductFavouritesContainer from "../../containers/AccountContainer/ProductFavouritesContainer";
 import Profile from "./Profile";
 import noAvatar from "../../assets/img/no-avatar.png";
 
 class Account extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      companyForm: false,
+      contactForm: false
+    };
+    this.handleEditForm = this.handleEditForm.bind(this);
+    this.handleSubmitForm = this.handleSubmitForm.bind(this);
   }
   componentWillMount() {
     const { removeAll } = this.props;
     removeAll();
+  }
+  handleEditForm(activeForm) {
+    if (activeForm === 1) {
+      this.setState({
+        companyForm: !this.state.companyForm,
+        contactForm: false
+      });
+      if (!this.state.companyForm) {
+        scroller.scrollTo("myScrollToElement", { offset: 300, smooth: true });
+      } else {
+        scroller.scrollTo("myScrollToElement", { offset: -100, smooth: true });
+      }
+    } else {
+      this.setState({
+        companyForm: false,
+        contactForm: !this.state.contactForm
+      });
+      if (!this.state.contactForm) {
+        scroller.scrollTo("myScrollToElement", { offset: 120, smooth: true });
+      } else {
+        scroller.scrollTo("myScrollToElement", { offset: -100, smooth: true });
+      }
+    }
+  }
+  handleSubmitForm(values) {
+    const { updateProfile, showNotification, auth } = this.props;
+    const { user } = auth;
+    const authId = user.id;
+    const authRole = user.role;
+    const mergedValues = Object.assign({}, values, {
+      contactPerson: {
+        name: values.name,
+        email: values.email,
+        phone: values.phone
+      }
+    });
+    delete values.name;
+    delete values.email;
+    delete values.phone;
+    updateProfile(mergedValues, authId, authRole).then(payload => {
+      if (payload.type === "UPDATE_PROFILE_SUCCESS") {
+        window.scrollTo(0, 0);
+        if (this.state.companyForm) {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-check" />,
+            <div>Company information has been saved.</div>,
+            false
+          );
+          this.setState({ companyForm: false });
+        } else {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-check" />,
+            <div>Contact information has been saved.</div>,
+            false
+          );
+          this.setState({ contactForm: false });
+        }
+      } else if (payload.type === "UPDATE_PROFILE_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{payload.payload.response.message}</div>,
+          true
+        );
+      }
+    });
   }
   render() {
     const { translate, logout, history, showNotification, locale } = this.props;
@@ -53,6 +125,10 @@ class Account extends Component {
                           {translate("my_quotations")}
                         </NavItem>
                         <NavItem eventKey="third">
+                          <i className="pe-7s-like" />
+                          {translate("my_favourites")}
+                        </NavItem>
+                        <NavItem eventKey="fourth">
                           <i className="pe-7s-lock" />
                           {translate("d_change_password")}
                         </NavItem>
@@ -79,7 +155,13 @@ class Account extends Component {
                 <Col sm={9}>
                   <Tab.Content animation>
                     <Tab.Pane eventKey="first">
-                      <Profile {...this.props} />
+                      <Profile
+                        {...this.props}
+                        contactForm={this.state.contactForm}
+                        companyForm={this.state.companyForm}
+                        handleEditForm={this.handleEditForm}
+                        handleSubmitForm={this.handleSubmitForm}
+                      />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       {!_.isEmpty(user) && (
@@ -92,6 +174,16 @@ class Account extends Component {
                       )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
+                      {!_.isEmpty(user) && (
+                        <ProductFavouritesContainer
+                          buyerId={user.id}
+                          locale={locale}
+                          translate={translate}
+                          showNotification={showNotification}
+                        />
+                      )}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="fourth">
                       <PasswordContainer
                         translate={translate}
                         showNotification={showNotification}

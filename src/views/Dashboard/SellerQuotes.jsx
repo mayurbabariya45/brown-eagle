@@ -11,6 +11,10 @@ class SellerQuotes extends React.Component {
     };
     this.onPageChanged = this.onPageChanged.bind(this);
   }
+  componentWillMount() {
+    const { seller, getSellerQuotes } = this.props;
+    getSellerQuotes(seller, this.state.currentPage);
+  }
   onPageChanged = data => {
     const { currentPage } = data;
     this.setState({ currentPage });

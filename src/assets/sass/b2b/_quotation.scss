@@ -206,6 +206,8 @@
                         color: #7f7f7f;
                     }
                     .quotation-posted {
+                        display: flex;
+                        align-items: baseline;
                         padding-top: 10px;
                         .btn-warning.btn-fill {
                             padding: 2px 5px;
@@ -215,6 +217,10 @@
                                 font-size: 18px;
                                 line-height: 0;
                             }
+                        }
+                        p{
+                            margin-left: 10px;
+                            margin-bottom: 0;
                         }
                     }
                 }
@@ -233,6 +239,7 @@
                     height: 145px;
                     .quote-count {
                         color: #808080;
+                        margin-top: 10px;
                     }
                     .btn-quote {
                         padding: 5px 15px;

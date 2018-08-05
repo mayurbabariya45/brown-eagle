@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
     const { removeAll } = this.props;
     removeAll();
   }
-  componentWillUnmount(){}
   handleEditForm(activeForm) {
     if (activeForm === 1) {
       this.setState({
@@ -58,7 +57,17 @@ class Dashboard extends React.Component {
     const { user } = auth;
     const authId = user.id;
     const authRole = user.role;
-    updateProfile(values, authId, authRole).then(payload => {
+    const mergedValues = Object.assign({}, values, {
+      contactPerson: {
+        name: values.name,
+        email: values.email,
+        phone: values.phone
+      }
+    });
+    delete values.name;
+    delete values.email;
+    delete values.phone;
+    updateProfile(mergedValues, authId, authRole).then(payload => {
       if (payload.type === "UPDATE_PROFILE_SUCCESS") {
         window.scrollTo(0, 0);
         if (this.state.companyForm) {
@@ -101,9 +110,12 @@ class Dashboard extends React.Component {
       product,
       upldateProductLoading,
       productReviews,
-      editProductReview
+      editProductReview,
+      changeProductReviewStatus,
+      getSellerActivePlans,
+      error
     } = this.props;
-    const { user, loader } = this.props.auth;
+    const { user, loader, activePlan } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
     return (
       <section className="section-dashboard">
@@ -149,6 +161,7 @@ class Dashboard extends React.Component {
                           companyForm={this.state.companyForm}
                           handleEditForm={this.handleEditForm}
                           handleSubmitForm={this.handleSubmitForm}
+                          showNotification={error}
                         />
                       </Element>
                     </Tab.Pane>
@@ -169,6 +182,7 @@ class Dashboard extends React.Component {
                           productReviews={productReviews}
                           getProductReview={getProductReview}
                           editProductReview={editProductReview}
+                          changeProductReviewStatus={changeProductReviewStatus}
                         />
                       )}
                     </Tab.Pane>
@@ -195,8 +209,10 @@ class Dashboard extends React.Component {
                       {!_.isEmpty(user) && (
                         <QuotationContainer
                           seller={user && user.id}
+                          activePlan={activePlan}
                           translate={translate}
                           showNotification={showNotification}
+                          getSellerActivePlans={getSellerActivePlans}
                           locale={locale}
                         />
                       )}

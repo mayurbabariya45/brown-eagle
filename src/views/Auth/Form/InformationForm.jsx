@@ -52,6 +52,7 @@ class InformationForm extends Component {
     const {
       handleSubmit,
       hanldeSubmitForm,
+      handleLocation,
       formData,
       errors,
       message,
@@ -114,7 +115,11 @@ class InformationForm extends Component {
                       {translate("r_location")}
                     </Col>
                     <Col sm={9}>
-                      <Select searchable options={countries} />
+                      <Select
+                        searchable
+                        options={countries}
+                        handleCountry={handleLocation}
+                      />
                     </Col>
                   </FormGroup>
                 </Col>

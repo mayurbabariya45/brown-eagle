@@ -20,7 +20,13 @@ export default function AuthHoc(WrappedComponent, passedProps) {
       this.state = {};
     }
     componentWillMount() {
-      const { checkAuthStatus, getUserProfile, auth, history } = this.props;
+      const {
+        checkAuthStatus,
+        getUserProfile,
+        getSellerActivePlans,
+        auth,
+        history
+      } = this.props;
       const { locale, type } = passedProps;
       const webAuthToken = localStorage.getItem("webAuthToken");
       const webAuthId = localStorage.getItem("webAuthId");
@@ -31,6 +37,9 @@ export default function AuthHoc(WrappedComponent, passedProps) {
           checkAuthStatus(webAuthToken, webAuthId, locale).then(() => {
             getUserProfile(webAuthToken, webAuthId, webAuthRole).then(
               profile => {
+                if (profile.payload.role === "seller") {
+                  getSellerActivePlans(profile.payload.id);
+                }
                 if (profile.payload.role === type) {
                   return true;
                 }
@@ -45,6 +54,9 @@ export default function AuthHoc(WrappedComponent, passedProps) {
       } else {
         if (user.role === type) {
           getUserProfile(webAuthToken, user.id, user.role).then(profile => {
+            if (profile.payload.role === "seller") {
+              getSellerActivePlans(profile.payload.id);
+            }
             if (profile.payload.role === type) {
               return true;
             }
@@ -90,6 +102,7 @@ export default function AuthHoc(WrappedComponent, passedProps) {
       dispatch(a.checkAuthStatus(token, id, locale)),
     getUserProfile: (token, id, role) =>
       dispatch(a.getUserProfile(token, id, role)),
+    getSellerActivePlans: seller => dispatch(a.getSellerActivePlans(seller)),
     showNotification: (title, message, fail) =>
       dispatch(a.showNotification(title, message, fail)),
     removeAll: () => dispatch(Notifications.removeAll()),

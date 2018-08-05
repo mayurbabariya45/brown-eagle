@@ -8,6 +8,7 @@ import ContentLoader from "../Loader/Loader";
 import Button from "../../elements/CustomButton/CustomButton";
 import { Confirm } from "../../components/Confirm/Confirm";
 import noProduct from "../../assets/img/no-product.png";
+import { getCurrency } from "../../variables/Variables";
 
 const preloader = () => <ContentLoader height={300} inFight />;
 

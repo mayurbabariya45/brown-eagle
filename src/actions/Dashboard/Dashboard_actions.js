@@ -120,6 +120,24 @@ export const getProductReview = (productId, page, locale) => dispatch => {
   });
 };
 
+export const changeProductReviewStatus = (
+  productId,
+  reviewId,
+  status,
+  locale
+) => ({
+  [RSAA]: {
+    endpoint: `product/${productId}/review/${reviewId}/status/${status}`,
+    method: "GET",
+    headers: { "Content-Type": "application/json; charset=UTF-8" },
+    types: [
+      a.CHANGE_PRODUCT_STATUS_REVIEW_REQUEST,
+      a.CHANGE_PRODUCT_STATUS_REVIEW_SUCCESS,
+      a.CHANGE_PRODUCT_STATUS_REVIEW_FAILURE
+    ]
+  }
+});
+
 export const editProductReview = (values, productId, reviewId, locale) => ({
   [RSAA]: {
     endpoint: `product/${productId}/review/${reviewId}?ln=${locale}`,

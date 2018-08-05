@@ -118,10 +118,11 @@ export const getProducts = (categoryId, subCategoryId, page) => dispatch => {
   });
 };
 
-export const getProduct = (productId, locale) => dispatch => {
+export const getProduct = (productId, locale, authId) => dispatch => {
+  const buyer = !_.isEmpty(authId) ? `&buyer=${authId}` : "";
   dispatch({
     [RSAA]: {
-      endpoint: `product/${productId}?lang=${locale}`,
+      endpoint: `product/${productId}?lang=${locale}${buyer}`,
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [
@@ -135,7 +136,7 @@ export const getProduct = (productId, locale) => dispatch => {
 export const getProductReview = (productId, locale) => dispatch => {
   dispatch({
     [RSAA]: {
-      endpoint: `product/${productId}/review`,
+      endpoint: `product/${productId}/review?status=enabled`,
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [
@@ -258,3 +259,15 @@ export const addProductReview = (value, productId, locale) => dispatch =>
       ]
     }
   });
+
+export const addToWishlistProduct = (productId, authId) => ({
+  [RSAA]: {
+    endpoint: `product/${productId}/buyer/${authId}/favorite`,
+    method: "POST",
+    types: [
+      a.ADD_TO_WISHLIST_REQUEST,
+      a.ADD_TO_WISHLIST_SUCCESS,
+      a.ADD_TO_WISHLIST_FAILURE
+    ]
+  }
+});

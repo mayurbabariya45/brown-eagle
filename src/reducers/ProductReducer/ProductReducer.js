@@ -315,7 +315,7 @@ export default (state = initialState, action) => {
       };
     case a.GET_PRODUCT_REVIEW_FAILURE:
       return {
-        ...state,
+        ...state
       };
     // SELECT_FILTER
     case a.SELECT_SORT_FILTER:
@@ -357,6 +357,23 @@ export default (state = initialState, action) => {
             ...action.value
           }
         }
+      };
+    case a.ADD_TO_WISHLIST_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.ADD_TO_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true
+      };
+    case a.ADD_TO_WISHLIST_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: false
       };
     default:
       return state;

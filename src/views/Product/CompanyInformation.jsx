@@ -24,13 +24,13 @@ const CompanyInfromation = props => {
               </FormControl.Static>
             </FormGroup>
           )}
-          <FormGroup>
+          {/* <FormGroup>
             <ControlLabel>{props.translate("basic_main_product")}</ControlLabel>
             <FormControl.Static>
               CANDY MACHINE,CANDY PACKING MACHINE,CHOCOLATE PACKING
               MACHINE,FONDANT MACHINE,LOLLIPOP MACHINE
             </FormControl.Static>
-          </FormGroup>
+          </FormGroup> */}
           {/* <FormGroup>
             <ControlLabel>{props.translate("basic_revenue")}</ControlLabel>
             <FormControl.Static>
@@ -65,12 +65,12 @@ const CompanyInfromation = props => {
               <FormControl.Static>{information.established}</FormControl.Static>
             </FormGroup>
           )}
-          <FormGroup>
+          {/* <FormGroup>
             <ControlLabel>
               {props.translate("basic_certification")}
             </ControlLabel>
             <FormControl.Static>CE,CE</FormControl.Static>
-          </FormGroup>
+          </FormGroup> */}
         </Col>
       </Row>
     </div>

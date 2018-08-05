@@ -29,7 +29,10 @@ const mapStateToProps = state => {
     o_country: state.auth.user.operationalAddress.country,
     o_city: state.auth.user.operationalAddress.city,
     o_area_code: state.auth.user.operationalAddress.areaCode,
-    aboutUs: state.auth.user.aboutUs
+    aboutUs: state.auth.user.aboutUs,
+    name: state.auth.user.contactPerson.name,
+    phone: state.auth.user.contactPerson.phone,
+    email: state.auth.user.contactPerson.email
   };
   return {
     auth: state.auth,
@@ -53,6 +56,10 @@ const mergeProps = (state, actions, ownProps) => ({
   getLocation: (lat, lng, type) => {
     actions.getLocation(lat, lng).then(response => {
       if (response.type === "GET_LOCATION_SUCCESS") {
+        if (response.payload.status === "OVER_QUERY_LIMIT") {
+          ownProps.showNotification(response.payload.error_message);
+          return false;
+        }
         const location = response.payload.results[0].formatted_address.split(
           ","
         );
@@ -71,6 +78,7 @@ const mergeProps = (state, actions, ownProps) => ({
           actions.changeFieldValue("o_country", country);
         }
       }
+      return false;
     });
   }
 });

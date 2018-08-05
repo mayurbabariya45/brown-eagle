@@ -12,26 +12,10 @@ const Tabs = props => {
     activeTabs,
     translate,
     hanldeSubmitForm,
+    handleLocation,
     formData,
     emailSent
   } = props;
-  // const popoverClickRootClose = (
-  //   <Popover id="resend-confirmation-email">
-  //     <ul className="email-sent-terms">
-  //       <li>Please check your spam folder</li>
-  //       <li>
-  //         <span>If you have not received the email,</span>
-  //         <Button border bsStyle="warning">
-  //           Click here to resend the email
-  //         </Button>
-  //       </li>
-  //       <li>
-  //         <span>Have not received? </span>
-  //         <Link to="/register">Try using another email address.</Link>
-  //       </li>
-  //     </ul>
-  //   </Popover>
-  // );
   let tabsContent;
   switch (activeTabs) {
     case 1:
@@ -57,7 +41,11 @@ const Tabs = props => {
           })}
         >
           <div className="form register-information-form">
-            <InformationForm {...props} hanldeSubmitForm={hanldeSubmitForm} />
+            <InformationForm
+              {...props}
+              hanldeSubmitForm={hanldeSubmitForm}
+              handleLocation={handleLocation}
+            />
           </div>
         </div>
       );
@@ -77,18 +65,6 @@ const Tabs = props => {
               <em>{formData.username}</em>
             </h4>
             <h5> {emailSent}</h5>
-            {/* <div className="email-sent-op">
-                <OverlayTrigger
-                  trigger="click"
-                  rootClose
-                  placement="bottom"
-                  overlay={popoverClickRootClose}
-                >
-                  <Button border bsStyle="warning">
-                    {translate("r_resend_mail")}
-                  </Button>
-                </OverlayTrigger>
-              </div> */}
           </div>
         </div>
       );

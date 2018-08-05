@@ -6,7 +6,8 @@ import * as c from "../../actions/Cart/Cart_actions";
 const mapDispatchToProps = dispatch => ({
   onIncrement: () => dispatch(a.onIncrement()),
   onDecrement: () => dispatch(a.onDecrement()),
-  getProduct: (productId, locale) => dispatch(a.getProduct(productId, locale)),
+  getProduct: (productId, locale, authId) =>
+    dispatch(a.getProduct(productId, locale, authId)),
   getProductReview: (productId, locale) =>
     dispatch(a.getProductReview(productId, locale)),
   getSimilarProduct: (productId, locale) =>
@@ -15,7 +16,9 @@ const mapDispatchToProps = dispatch => ({
   addToCart: item => dispatch(c.addToCart(item)),
   addToCartUnsafe: item => dispatch(c.addToCartUnsafe(item)),
   addReview: (value, id, locale) =>
-    dispatch(a.addProductReview(value, id, locale))
+    dispatch(a.addProductReview(value, id, locale)),
+  addToWishlistProduct: (product, authId, locale) =>
+    dispatch(a.addToWishlistProduct(product, authId, locale))
 });
 const mapStateToProps = state => ({
   ...state.product,

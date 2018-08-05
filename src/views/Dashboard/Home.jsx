@@ -239,7 +239,7 @@ const Home = props => {
           </Col>
         </Row>
       </ContentLoader>
-      <ContentLoader height={100} inFight={loader}>
+      {/* <ContentLoader height={100} inFight={loader}>
         <Row>
           <Col md={12}>
             <Row>
@@ -265,7 +265,7 @@ const Home = props => {
             </Row>
           </Col>
         </Row>
-      </ContentLoader>
+      </ContentLoader> */}
     </div>
   );
 };

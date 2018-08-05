@@ -10,7 +10,11 @@ import Modal from "../../../components/Modal/Modal";
 import GoogleMap from "../../../components/Map/Map";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
-import { required } from "../../../formValidationRules/FormValidationRules";
+import {
+  required,
+  normalizePhone,
+  phoneNumber
+} from "../../../formValidationRules/FormValidationRules";
 
 class CompanyInformationForm extends Component {
   constructor(props) {
@@ -377,6 +381,44 @@ class CompanyInformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     name: "employeeCount",
                     validate: [required, numericality({ int: true })]
+                  }
+                ]}
+              />
+              <FormInputs
+                ncols={["col-md-12"]}
+                proprieties={[
+                  {
+                    label: translate("c_person"),
+                    type: "text",
+                    bsClass: "form-control form-control-simple",
+                    name: "name",
+                    placeholder: "Name",
+                    validate: [required]
+                  }
+                ]}
+              />
+              <FormInputs
+                ncols={["col-md-12"]}
+                proprieties={[
+                  {
+                    type: "email",
+                    bsClass: "form-control form-control-simple",
+                    placeholder: "Email Address",
+                    name: "email",
+                    validate: [required]
+                  }
+                ]}
+              />
+              <FormInputs
+                ncols={["col-md-12"]}
+                proprieties={[
+                  {
+                    type: "text",
+                    bsClass: "form-control form-control-simple",
+                    name: "phone",
+                    placeholder: "Phone Number",
+                    validate: [required, phoneNumber],
+                    normalize: normalizePhone
                   }
                 ]}
               />

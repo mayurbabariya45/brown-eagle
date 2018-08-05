@@ -17,22 +17,15 @@ const mapDispatchToProps = dispatch => ({
   getProductReview: (id, page, locale) =>
     dispatch(d.getProductReview(id, page, locale)),
   editProductReview: (values, productId, reviewId, locale) =>
-    dispatch(d.editProductReview(values, productId, reviewId, locale))
+    dispatch(d.editProductReview(values, productId, reviewId, locale)),
+  changeProductReviewStatus: (productId, reviewId, status, locale) =>
+    dispatch(d.changeProductReviewStatus(productId, reviewId, status, locale))
 });
 
 const mergeProps = (state, actions, ownProps) => ({
   ...state,
   ...actions,
   ...ownProps,
-  getProducts: (id, token) => {
-    actions.getProducts(id, token).then(response => {
-      if (response.type === "GET_PRODUCTS_SUCCESS") {
-        const { products } = response.payload;
-        _.forEach(products, product => actions.getProductImage(product.id));
-      }
-    });
-  },
-
   deleteProduct: id => {
     actions.deleteProduct(id).then(response => {
       if (response.type === "DELETE_PRODUCT_SUCCESS") {

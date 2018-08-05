@@ -10,7 +10,8 @@ const INITIAL_STATE = {
   formData: {},
   registerSuccess: false,
   emailSent: "",
-  user: []
+  user: [],
+  activePlan: {}
 };
 
 /**
@@ -291,6 +292,24 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         error: true,
         loading: false
+      };
+    case a.GET_SELLER_ACTIVE_PLAN_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.GET_SELLER_ACTIVE_PLAN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        activePlan: action.payload.plan
+      };
+    case a.GET_SELLER_ACTIVE_PLAN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true
       };
     default:
       return state;

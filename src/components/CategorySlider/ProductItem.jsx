@@ -1,11 +1,11 @@
 import _ from "lodash";
 import className from "classnames";
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ContentLoader from "../Loader/Loader";
 import noProduct from "../../assets/img/no-product.png";
+import { getCurrency } from "../../variables/Variables";
 
 const Loader = () => <ContentLoader height={300} inFight />;
 
@@ -37,7 +37,7 @@ const ProductItem = props => {
         </div>
         <div className="product-price">
           <h5>
-            <i className="fa fa-euro" />
+            {getCurrency(product.currency)}
             {product.productPrice.toFixed(2)}
           </h5>
         </div>

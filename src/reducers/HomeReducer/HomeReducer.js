@@ -14,12 +14,14 @@ const INITIAL_STATE = {
   isTopBannersLoading: false,
   isBottomBannersLoading: false,
   isTopSupplierLoading: false,
+  isRecentProductLoading: false,
   topBanners: [],
   centerBanners: [],
   bottomBanners: {},
   topSupplier: {
     sellers: []
-  }
+  },
+  recentProducts: []
 };
 
 /**
@@ -162,6 +164,27 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isTopSupplierLoading: false,
+        hasError: true,
+        hasSuccess: false
+      };
+    // TOP_SUPPILER
+    case a.GET_RECENT_VIEW_PRODUCT_REQUEST:
+      return {
+        ...state,
+        isRecentProductLoading: true
+      };
+    case a.GET_RECENT_VIEW_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        hasError: false,
+        hasSuccess: true,
+        isRecentProductLoading: false,
+        recentProducts: _.map(action.payload.products, "product")
+      };
+    case a.GET_RECENT_VIEW_PRODUCT_FAILURE:
+      return {
+        ...state,
+        isRecentProductLoading: false,
         hasError: true,
         hasSuccess: false
       };

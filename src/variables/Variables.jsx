@@ -294,7 +294,7 @@ export const style = {
       border: "0",
       fontSize: "14px",
       WebkitFontSmoothing: "antialiased",
-      fontFamily: "\"Roboto\",\"Helvetica Neue\",Arial,sans-serif",
+      fontFamily: '"Roboto","Helvetica Neue",Arial,sans-serif',
       fontWeight: "400",
       color: "#FFFFFF"
     },
@@ -536,6 +536,11 @@ export const getCurrency = currencyName => {
   }
   return false;
 };
+export const getCurrentIp = () => {
+  fetch("https://jsonip.com?callback=?").then(response => {
+    console.log(response);
+  });
+}
 export default {
   languages,
   countries,

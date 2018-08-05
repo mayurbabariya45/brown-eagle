@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Modal, Form, Row, Col } from "react-bootstrap";
 import { numericality } from "redux-form-validators";
 import BlockUi from "react-block-ui";
@@ -18,6 +19,9 @@ class SubmitQuote extends React.Component {
     const {
       submitQuote,
       showNotification,
+      getSellerActivePlans,
+      getSellerQuotations,
+      currentPage,
       onHide,
       locale,
       seller,
@@ -35,6 +39,8 @@ class SubmitQuote extends React.Component {
       ).then(payload => {
         if (payload.type === "SUBMIT_QUOTE_SUCCESS") {
           onHide();
+          getSellerActivePlans(seller);
+          getSellerQuotations(seller, currentPage);
           showNotification(
             <span data-notify="icon" className="pe-7s-check" />,
             <div>Quote has been sent successfully.</div>,
@@ -55,6 +61,7 @@ class SubmitQuote extends React.Component {
       translate,
       showModal,
       onHide,
+      quoteRemianing,
       handleSubmit,
       submitQuoteLoading
     } = this.props;
@@ -73,83 +80,99 @@ class SubmitQuote extends React.Component {
             </Modal.Header>
             <BlockUi tag="div" blocking={submitQuoteLoading}>
               <Modal.Body>
-                <div className="submit-quote-form">
-                  <FormInputs
-                    ncols={["col-md-12"]}
-                    proprieties={[
-                      {
-                        label: translate("quote_form_name"),
-                        type: "text",
-                        bsClass: "form-control form-control-simple",
-                        name: "title",
-                        validate: [required]
-                      }
-                    ]}
-                  />
-                  <FormInputs
-                    ncols={["col-md-12"]}
-                    proprieties={[
-                      {
-                        label: translate("quote_form_quote_price"),
-                        type: "text",
-                        bsClass: "form-control form-control-simple",
-                        name: "quotedPrice",
-                        validate: [required, numericality({ ">": 0 })]
-                      }
-                    ]}
-                  />
-                  <FormInputs
-                    ncols={["col-md-12"]}
-                    proprieties={[
-                      {
-                        label: translate("quote_form_quote_quantity"),
-                        type: "number",
-                        bsClass: "form-control form-control-simple",
-                        name: "minQuantity",
-                        validate: [required, numericality({ ">": 0 })]
-                      }
-                    ]}
-                  />
-                  <FormInputs
-                    ncols={["col-md-12"]}
-                    proprieties={[
-                      {
-                        label: translate("quote_form_quote_delivery_time"),
-                        type: "number",
-                        bsClass: "form-control form-control-simple",
-                        name: "estimatedDeliveryTime",
-                        validate: [required, numericality({ ">": 0 })]
-                      }
-                    ]}
-                  />
-                  <FormInputs
-                    ncols={["col-md-12"]}
-                    proprieties={[
-                      {
-                        label: translate("quote_form_description"),
-                        type: "text",
-                        componentClass: "textarea",
-                        style: { height: 100 },
-                        bsClass: "form-control form-control-simple",
-                        name: "coverLetter",
-                        validate: [required]
-                      }
-                    ]}
-                  />
-                </div>
+                {quoteRemianing < 1 && (
+                  <div className="upgrade-plans text-center">
+                    <p>Please upgrade your plans to submit a quotation</p>
+                  </div>
+                )}
+                {quoteRemianing > 0 && (
+                  <div className="submit-quote-form">
+                    <FormInputs
+                      ncols={["col-md-12"]}
+                      proprieties={[
+                        {
+                          label: translate("quote_form_name"),
+                          type: "text",
+                          bsClass: "form-control form-control-simple",
+                          name: "title",
+                          validate: [required]
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-12"]}
+                      proprieties={[
+                        {
+                          label: translate("quote_form_quote_price"),
+                          type: "text",
+                          bsClass: "form-control form-control-simple",
+                          name: "quotedPrice",
+                          validate: [required, numericality({ ">": 0 })]
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-12"]}
+                      proprieties={[
+                        {
+                          label: translate("quote_form_quote_quantity"),
+                          type: "number",
+                          bsClass: "form-control form-control-simple",
+                          name: "minQuantity",
+                          validate: [required, numericality({ ">": 0 })]
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-12"]}
+                      proprieties={[
+                        {
+                          label: translate("quote_form_quote_delivery_time"),
+                          type: "number",
+                          bsClass: "form-control form-control-simple",
+                          name: "estimatedDeliveryTime",
+                          validate: [required, numericality({ ">": 0 })]
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-12"]}
+                      proprieties={[
+                        {
+                          label: translate("quote_form_description"),
+                          type: "text",
+                          componentClass: "textarea",
+                          style: { height: 100 },
+                          bsClass: "form-control form-control-simple",
+                          name: "coverLetter",
+                          validate: [required]
+                        }
+                      ]}
+                    />
+                  </div>
+                )}
               </Modal.Body>
               <Modal.Footer>
                 <Row>
                   <Col lg={12} md={12} sm={12} xs={12}>
-                    <Button
-                      radius
-                      fill
-                      bsStyle="warning"
-                      className="text-capitalize"
-                      type="submit"
-                    >
-                      {translate("d_submit")}
-                    </Button>
+                    {quoteRemianing > 0 && (
+                      <Button
+                        radius
+                        fill
+                        bsStyle="warning"
+                        className="text-capitalize"
+                        type="submit"
+                      >
+                        {translate("d_submit")}
+                      </Button>
+                    )}
+                    {quoteRemianing < 1 && (
+                      <Link to="/plans"
+                        className="text-capitalize btn btn-warning btn-fill btn-radius"
+                      >
+                        Upgrade Plan
+                      </Link>
+                    )}
                   </Col>
                 </Row>
               </Modal.Footer>

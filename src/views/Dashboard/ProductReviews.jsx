@@ -1,4 +1,5 @@
 import _ from "lodash";
+import className from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
@@ -14,6 +15,12 @@ const ProductReviewItems = props => (
         <h3>{_.capitalize(props.titleTranslations[props.locale])}</h3>
       </div>
       <div className="box-item-inner">
+        <div
+          className="action action-status"
+          onClick={props.handleProductReviewStatus}
+        >
+          <i className={className("fa", {"fa-toggle-on": props.status === "enabled", "fa-toggle-off": props.status === "disabled"})} />
+        </div>
         <div
           className="action action-edit"
           onClick={props.handleShowRatingModal}
@@ -54,6 +61,7 @@ class ProductReviews extends React.Component {
     };
     this.handleProdutRatingModal = this.handleProdutRatingModal.bind(this);
     this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
+    this.handleProductReviewStatus = this.handleProductReviewStatus.bind(this);
   }
   componentWillMount() {
     const { getProductReview, id } = this.props;
@@ -87,8 +95,42 @@ class ProductReviews extends React.Component {
       return false;
     });
   }
+  handleProductReviewStatus(review) {
+    const {
+      changeProductReviewStatus,
+      showNotification,
+      getProductReview,
+      locale,
+      id
+    } = this.props;
+    if (_.isEmpty(id)) return false;
+    const status = review.status === "enabled" ? "disabled" : "enabled";
+    changeProductReviewStatus(id, review.id, status, locale).then(response => {
+      if (response.type === "CHANGE_PRODUCT_STATUS_REVIEW_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{response.payload.response.message}</div>,
+          true
+        );
+      } else if (response.type === "CHANGE_PRODUCT_STATUS_REVIEW_SUCCESS") {
+        getProductReview(id, this.state.currentPage, locale);
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{`Review has been ${status} successfully`}</div>,
+          false
+        );
+      }
+    });
+    return false;
+  }
   handleRatingSubmit(values) {
-    const { editProductReview, getProductReview,  showNotification, id, locale } = this.props;
+    const {
+      editProductReview,
+      getProductReview,
+      showNotification,
+      id,
+      locale
+    } = this.props;
     if (_.isEmpty(id)) return false;
     editProductReview(values, id, values.id, locale).then(response => {
       if (response.type === "EDIT_PRODUCT_REVIEW_FAILURE") {
@@ -161,6 +203,9 @@ class ProductReviews extends React.Component {
                     locale={locale}
                     handleShowRatingModal={() =>
                       this.handleProdutRatingModal(review)
+                    }
+                    handleProductReviewStatus={() =>
+                      this.handleProductReviewStatus(review)
                     }
                   />
                 ))}

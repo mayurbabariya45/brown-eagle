@@ -107,7 +107,7 @@ class Quotation extends React.Component {
 Quotation.propTypes = {
   translate: PropTypes.func.isRequired,
   buyerId: PropTypes.string.isRequired,
-  quotation: PropTypes.arrayOf(PropTypes.any),
+  quotation: PropTypes.objectOf(PropTypes.any),
   getBuyerQuotations: PropTypes.func.isRequired
 };
 

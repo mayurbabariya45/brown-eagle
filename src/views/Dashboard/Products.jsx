@@ -66,7 +66,8 @@ class Products extends Component {
       product,
       productReviews,
       getProductReview,
-      editProductReview
+      editProductReview,
+      changeProductReviewStatus
     } = this.props;
     const { currentPage } = this.state;
     const { count, products } = myProducts;
@@ -87,6 +88,7 @@ class Products extends Component {
             handleBackButton={this.handleShowProducts}
             showNotification={showNotification}
             editProductReview={editProductReview}
+            changeProductReviewStatus={changeProductReviewStatus}
             locale={locale}
           />
         )}

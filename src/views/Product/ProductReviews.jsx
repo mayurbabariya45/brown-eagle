@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React from "react";
-import PropTypes from "prop-types";
 
 const ProductReviews = props => (
   <div className="review-lists">
@@ -9,7 +8,7 @@ const ProductReviews = props => (
     </div>
     <div className="reviews">
       {_.map(props.productReview, review => (
-        <div className="review-item">
+        <div className="review-item" key={review.id}>
           <h5>{review.titleTranslations[props.locale]}</h5>
           <div className="rating-result" title={`${review.rating / 5 * 100}%`}>
             <span

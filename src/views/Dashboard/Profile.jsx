@@ -18,7 +18,8 @@ const Profile = props => {
     handleEditForm,
     contactForm,
     companyForm,
-    handleSubmitForm
+    handleSubmitForm,
+    showNotification
   } = props;
   const { user, loading } = props.auth;
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
@@ -220,6 +221,7 @@ const Profile = props => {
                     <CompanyInformationFormContainer
                       translate={translate}
                       loading={loading}
+                      showNotification={showNotification}
                       handleSubmitForm={handleSubmitForm}
                     />
                   </Row>

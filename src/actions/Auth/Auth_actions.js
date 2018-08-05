@@ -275,3 +275,15 @@ export const userAvatar = (value, profileId, role) => dispatch => {
     }
   });
 };
+export const getSellerActivePlans = authId => ({
+  [RSAA]: {
+    endpoint: `seller/${authId}/plan`,
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.GET_SELLER_ACTIVE_PLAN_REQUEST,
+      a.GET_SELLER_ACTIVE_PLAN_SUCCESS,
+      a.GET_SELLER_ACTIVE_PLAN_FAILURE
+    ]
+  }
+});

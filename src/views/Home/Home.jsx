@@ -10,9 +10,9 @@ import SuppliersSlider from "../../components/SuppliersSlider/SuppliersSlider";
 import RequestForQuotation from "./RequestForQuotation";
 import Banners from "./Banners";
 import defaultBottomBanner from "../../assets/img/banners/suppliers_banner.png";
-import product1 from "../../assets/img/products/product1.png";
-import product2 from "../../assets/img/products/product2.png";
-import product3 from "../../assets/img/products/product3.png";
+// import product1 from "../../assets/img/products/product1.png";
+// import product2 from "../../assets/img/products/product2.png";
+// import product3 from "../../assets/img/products/product3.png";
 import Uk from "../../assets/img/flages/uk.png";
 import France from "../../assets/img/flages/fr.png";
 import Italian from "../../assets/img/flages/it.png";
@@ -21,36 +21,36 @@ import Switzerland from "../../assets/img/flages/switzerland.jpg";
 import Netherlands from "../../assets/img/flages/netherlands.jpg";
 import Greece from "../../assets/img/flages/greece.jpg";
 
-const staticSupplier = [
-  {
-    id: "1",
-    name: "Safescan 2210 Banknote Counter",
-    productPictures: [product1, product2, product3],
-    productPrice: 10,
-    totalRatingsCount: 1
-  },
-  {
-    id: "2",
-    name: "Safescan 2210 Banknote Counter",
-    productPictures: [product1, product2, product3],
-    productPrice: 10,
-    totalRatingsCount: 1
-  },
-  {
-    id: "3",
-    name: "Safescan 2210 Banknote Counter",
-    productPictures: [product1, product2, product3],
-    productPrice: 10,
-    totalRatingsCount: 1
-  },
-  {
-    id: "4",
-    name: "Safescan 2210 Banknote Counter",
-    productPictures: [product1, product2, product3],
-    productPrice: 10,
-    totalRatingsCount: 1
-  }
-];
+// const staticSupplier = [
+//   {
+//     id: "1",
+//     name: "Safescan 2210 Banknote Counter",
+//     productPictures: [product1, product2, product3],
+//     productPrice: 10,
+//     totalRatingsCount: 1
+//   },
+//   {
+//     id: "2",
+//     name: "Safescan 2210 Banknote Counter",
+//     productPictures: [product1, product2, product3],
+//     productPrice: 10,
+//     totalRatingsCount: 1
+//   },
+//   {
+//     id: "3",
+//     name: "Safescan 2210 Banknote Counter",
+//     productPictures: [product1, product2, product3],
+//     productPrice: 10,
+//     totalRatingsCount: 1
+//   },
+//   {
+//     id: "4",
+//     name: "Safescan 2210 Banknote Counter",
+//     productPictures: [product1, product2, product3],
+//     productPrice: 10,
+//     totalRatingsCount: 1
+//   }
+// ];
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -62,13 +62,15 @@ class Home extends Component {
       getTopBanners,
       getCenterBanners,
       getBottomBanners,
-      getTopSuppliers
+      getTopSuppliers,
+      getRecentViewProducts
     } = this.props;
     getTopBanners();
     getCenterBanners();
     getBottomBanners();
     getCategories();
     getTopSuppliers();
+    getRecentViewProducts();
   }
   render() {
     const {
@@ -82,8 +84,10 @@ class Home extends Component {
       isTopBannersLoading,
       isCenterBannersLoading,
       isTopSupplierLoading,
+      isRecentProductLoading,
       auth,
-      topSupplier
+      topSupplier,
+      recentProducts
     } = this.props;
     const { user } = auth;
     const backgroundBanner = !_.isEmpty(bottomBanners)
@@ -326,8 +330,8 @@ class Home extends Component {
               <CategorySlider
                 translate={translate}
                 title={translate("my_recent_view")}
-                products={[]}
-                loading={loadingProduct}
+                products={recentProducts}
+                loading={isRecentProductLoading}
                 SliderSettings={{
                   dots: false,
                   lazyLoad: true,
@@ -357,7 +361,7 @@ class Home extends Component {
                 </div>
               </Col>
             </Row>
-            <Row>
+            {/* <Row>
               <Col md={12}>
                 <div className="regions">
                   <ul>
@@ -409,7 +413,7 @@ class Home extends Component {
                   </ul>
                 </div>
               </Col>
-            </Row>
+            </Row> */}
             <Row>
               <Col md={12}>
                 <div
@@ -443,6 +447,7 @@ Home.propTypes = {
   getCenterBanners: PropTypes.func.isRequired,
   getBottomBanners: PropTypes.func.isRequired,
   getCategories: PropTypes.func.isRequired,
+  getRecentViewProducts: PropTypes.func.isRequired,
   getTopSuppliers: PropTypes.func.isRequired
 };
 

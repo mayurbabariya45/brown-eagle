@@ -21,16 +21,20 @@ const SellerQuotationStatus = props => (
           {props.status}
         </Button>
       )}
-      {props.status === "open" && (
-        <Button
-          fill
-          bsStyle="warning"
-          className="btn-quote"
-          onClick={props.opneSubmitQuoteModal}
-        >
-          {props.translate("q_quote_now")}
-        </Button>
-      )}
+      {props.status === "open" &&
+        !props.isQuoted && (
+          <Button
+            fill
+            bsStyle="warning"
+            className="btn-quote"
+            onClick={props.opneSubmitQuoteModal}
+          >
+            {props.translate("q_quote_now")}
+          </Button>
+        )}
+      <div className="quote-count">
+        <p>Quotes Left {props.quoteRemianing}</p>
+      </div>
     </div>
   </div>
 );
@@ -97,6 +101,12 @@ const QuotationItem = props => {
               <Button fill bsStyle="warning">
                 <i className="pe-7s-mail" /> {translate("q_chat")}
               </Button>
+              {quotation.buyer.companyName && (
+                <p>
+                  <span>CompanyName:</span>
+                  {quotation.buyer.companyName}
+                </p>
+              )}
             </div>
           )}
         </div>
@@ -104,8 +114,10 @@ const QuotationItem = props => {
       {!buyer && (
         <SellerQuotationStatus
           status={quotation.status}
+          isQuoted={quotation.isQuoted}
           opneSubmitQuoteModal={props.opneSubmitQuoteModal}
           translate={translate}
+          quoteRemianing={props.quoteRemianing}
         />
       )}
       {buyer && (

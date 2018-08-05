@@ -9,7 +9,8 @@ const mapDispatchToProps = dispatch => ({
   getTopBanners: () => dispatch(a.getTopBanners()),
   getCenterBanners: () => dispatch(a.getCenterBanners()),
   getBottomBanners: () => dispatch(a.getBottomBanners()),
-  getTopSuppliers: () => dispatch(a.getTopSuppliers())
+  getTopSuppliers: () => dispatch(a.getTopSuppliers()),
+  getRecentViewProducts: () => dispatch(a.getRecentViewProducts())
 });
 const mapStateToProps = state => ({
   ...state.home

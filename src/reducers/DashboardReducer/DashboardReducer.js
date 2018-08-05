@@ -194,7 +194,9 @@ export default (state = INITIAL_STATE, action) => {
     case a.GET_LOCATION_SUCCESS:
       return {
         ...state,
-        location: action.payload.results[0].formatted_address
+        location: !_.isEmpty(action.payload.results)
+          ? action.payload.results[0].formatted_address
+          : {}
       };
     case a.GET_LOCATION_FAILURE:
       return {
@@ -262,6 +264,24 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         success: false
+      };
+    case a.CHANGE_PRODUCT_STATUS_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.CHANGE_PRODUCT_STATUS_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true
+      };
+    case a.CHANGE_PRODUCT_STATUS_REVIEW_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: true
       };
     default:
       return state;

@@ -16,7 +16,8 @@ class ViewQuotation extends React.Component {
       locale,
       opneSubmitQuoteModal,
       handleBackButton,
-      translate
+      translate,
+      quoteRemianing
     } = this.props;
     if (_.isEmpty(quotation)) return null;
     return (
@@ -65,16 +66,20 @@ class ViewQuotation extends React.Component {
                   {quotation.status}
                 </Button>
               )}
-              {quotation.status === "open" && (
-                <Button
-                  fill
-                  bsStyle="warning"
-                  className="btn-quote"
-                  onClick={opneSubmitQuoteModal}
-                >
-                  {translate("q_quote_now")}
-                </Button>
-              )}
+              {quotation.status === "open" &&
+                !quotation.isQuoted && (
+                  <Button
+                    fill
+                    bsStyle="warning"
+                    className="btn-quote"
+                    onClick={opneSubmitQuoteModal}
+                  >
+                    {translate("q_quote_now")}
+                  </Button>
+                )}
+              <div className="quote-count">
+                <p>Quotes Left {quoteRemianing}</p>
+              </div>
             </div>
           </div>
         </div>

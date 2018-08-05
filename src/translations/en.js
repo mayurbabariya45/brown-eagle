@@ -396,7 +396,7 @@ export const en = {
       q_date_posted: "Date Posted",
       q_availability: "Availability",
       q_status_open: "Open",
-      q_information: "Deateled Information",
+      q_information: "Details Information",
       q_back_button: "Go Back To Result",
       my_quotations: "My Quotation",
       q_request_quotation: "Request Quotation",
@@ -441,6 +441,10 @@ export const en = {
       table_td_plan_services_description: "Services Description",
       // dashboard product review
       d_products_review: "Reviews",
+
+      // favourites
+      my_favourites: "Product Favourites",
+      c_person: "Contact Person",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

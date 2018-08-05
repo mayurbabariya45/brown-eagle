@@ -1,4 +1,6 @@
+import _ from "lodash";
 import React from "react";
+import className from "classnames";
 import PropTypes from "prop-types";
 import Button from "../../elements/CustomButton/CustomButton";
 
@@ -41,91 +43,30 @@ const ProductRating = props => (
       </div>
       <div className="rating-show">
         <ul>
-          <li>
-            <div className="rate-list rate-count">
-              <span className="number">5</span>
-              <span className="star">★</span>
-            </div>
-            <div className="rate-list rating-progress">
-              <div className="rate-progress">
-                <span
-                  style={{ width: "100%" }}
-                  className="rate-progress-bar progress-success"
-                />
-              </div>
-            </div>
-            <div className="rate-list rating-counts">
-              <div className="numbers"> 11,870</div>
-            </div>
-          </li>
-          <li>
-            <div className="rate-list rate-count">
-              <span className="number">4</span>
-              <span className="star">★</span>
-            </div>
-            <div className="rate-list rating-progress">
-              <div className="rate-progress">
-                <span
-                  style={{ width: "50.9056093319045%" }}
-                  className="rate-progress-bar progress-success"
-                />
-              </div>
-            </div>
-            <div className="rate-list rating-counts">
-              <div className="numbers"> 11,870</div>
-            </div>
-          </li>
-          <li>
-            <div className="rate-list rate-count">
-              <span className="number">3</span>
-              <span className="star">★</span>
-            </div>
-            <div className="rate-list rating-progress">
-              <div className="rate-progress">
-                <span
-                  style={{ width: "20.85273088206876%" }}
-                  className="rate-progress-bar progress-success"
-                />
-              </div>
-            </div>
-            <div className="rate-list rating-counts">
-              <div className="numbers"> 11,870</div>
-            </div>
-          </li>
-          <li>
-            <div className="rate-list rate-count">
-              <span className="number">2</span>
-              <span className="star">★</span>
-            </div>
-            <div className="rate-list rating-progress">
-              <div className="rate-progress">
-                <span
-                  style={{ width: "7.135955589129174%" }}
-                  className="rate-progress-bar progress-warning"
-                />
-              </div>
-            </div>
-            <div className="rate-list rating-counts">
-              <div className="numbers"> 11,870</div>
-            </div>
-          </li>
-          <li>
-            <div className="rate-list rate-count">
-              <span className="number">1</span>
-              <span className="star">★</span>
-            </div>
-            <div className="rate-list rating-progress">
-              <div className="rate-progress">
-                <span
-                  style={{ width: "14.082181192136748%" }}
-                  className="rate-progress-bar progress-danger"
-                />
-              </div>
-            </div>
-            <div className="rate-list rating-counts">
-              <div className="numbers"> 11,870</div>
-            </div>
-          </li>
+          {_.map(props.ratingAggregate, (value) => {
+            const { rating, count } = value;
+            return(
+              <li>
+                <div className="rate-list rate-count">
+                  <span className="number">{rating}</span>
+                  <span className="star">★</span>
+                </div>
+                <div className="rate-list rating-progress">
+                  <div className="rate-progress">
+                    <span
+                      style={{ width: `${count / props.totalRatingsCount * 100}%` }}
+                      className={className("rate-progress-bar",{
+                        "progress-success": (rating === 5 || rating === 4 || rating === 3),
+                        "progress-warning": rating === 2,
+                        "progress-danger": rating === 1
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="rate-list rating-counts">
+                  <div className="numbers"> {count}</div>
+                </div>
+              </li>)})}
         </ul>
       </div>
     </div>
