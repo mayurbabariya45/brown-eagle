@@ -6,7 +6,7 @@ const mapDispatchToProps = dispatch => ({
   checkUsername: (username, locale) =>
     dispatch(a.checkUsername(username, locale)),
   registerUser: (value, locale) => dispatch(a.register(value, locale)),
-  verifyEmail: token => dispatch(a.verifyEmail(token))
+  verifyEmail: (token, locale) => dispatch(a.verifyEmail(token, locale))
 });
 const mapStateToProps = state => ({
   ...state.auth

@@ -2697,6 +2697,16 @@ section {
       color: #7d1516;
       cursor: pointer; }
 
+.product-share-buttons ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around; }
+  .product-share-buttons ul li {
+    padding: 5px; }
+
 .news-letter {
   background-color: #f8f8f8; }
   .news-letter .card.card-stats .content {

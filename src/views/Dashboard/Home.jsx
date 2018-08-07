@@ -1,46 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Alert } from "react-bootstrap";
+import Button from "../../elements/CustomButton/CustomButton";
 import { Card } from "../../components/Card/Card";
 import ContentLoader from "../../components/Loader/Loader";
-import BuyerSlider from "../../components/BuyerSlider/BuyerSlider";
 import avatar from "../../assets/img/avatar.png";
-import noAvatar from "../../assets/img/no-avatar.png";
-
-const buyers = [
-  {
-    name: "test user",
-    id: 1,
-    profile: noAvatar
-  },
-  {
-    name: "test user",
-    id: 2,
-    profile: noAvatar
-  },
-  {
-    name: "test user",
-    id: 3,
-    profile: noAvatar
-  },
-  {
-    name: "test user",
-    id: 4,
-    profile: noAvatar
-  },
-  {
-    name: "test user",
-    id: 5,
-    profile: noAvatar
-  }
-];
 
 const Home = props => {
-  const { translate } = props;
+  const { translate, hideVerification, handleProfileVerification } = props;
   const { user, loader } = props.auth;
   return (
     <div className="dashboard">
+      {!hideVerification &&
+        !user.isProfileVerified && (
+          <ContentLoader height={50} inFight={loader}>
+            <Row>
+              <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
+                <p>
+                  {translate("v_alert_text")}{" "}
+                  <Button
+                    bsStyle="danger"
+                    bsSize="small"
+                    onClick={handleProfileVerification}
+                  >
+                    {translate("v_alert_title")}
+                  </Button>
+                </p>
+              </Alert>
+            </Row>
+          </ContentLoader>
+        )}
       <ContentLoader height={100} inFight={loader}>
         <Row>
           <Col md={12}>
@@ -75,10 +65,10 @@ const Home = props => {
                         <li>
                           {translate("d_first_year")}
                           <span>
-                            <a href="#profile">
+                            <Link to="/plans">
                               <i className="fa fa-refresh" />{" "}
                               {translate("d_upgrade")}
-                            </a>
+                            </Link>
                           </span>
                         </li>
                       </ul>

@@ -2,7 +2,23 @@ import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import BlockUi from "react-block-ui";
-import { Grid, Row, Col, Tabs, Tab } from "react-bootstrap";
+import {
+  Grid,
+  Row,
+  Col,
+  Tabs,
+  Tab,
+  Popover,
+  OverlayTrigger
+} from "react-bootstrap";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  GooglePlusShareButton,
+  GooglePlusIcon,
+  TwitterShareButton,
+  TwitterIcon
+} from "react-share";
 import Breadcrumbs from "../../components/Breadcrumb/Breadcrumb";
 import Button from "../../elements/CustomButton/CustomButton";
 import ProductImageSlider from "../../components/ProductImageSlider/ProductImageSlider";
@@ -20,8 +36,7 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showRatingModal: false,
-      isFavourite: false
+      showRatingModal: false
     };
     this.handleProdutRatingModal = this.handleProdutRatingModal.bind(this);
     this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
@@ -69,7 +84,22 @@ class Product extends Component {
     const buyer = auth.user.id;
     const authRole = auth.user.role;
     if (_.isEmpty(productId)) return false;
-    if (authRole !== "buyer") return false;
+    if (_.isEmpty(buyer)) {
+      showNotification(
+        <span data-notify="icon" className="pe-7s-shield" />,
+        <div>Please Login to buyer account</div>,
+        true
+      );
+      return false;
+    }
+    if (authRole !== "buyer") {
+      showNotification(
+        <span data-notify="icon" className="pe-7s-shield" />,
+        <div>Seller not avible to add to favourite</div>,
+        true
+      );
+      return false;
+    }
     addToWishlistProduct(productId, buyer, locale).then(response => {
       if (response.type === "ADD_TO_WISHLIST_FAILURE") {
         showNotification(
@@ -148,6 +178,7 @@ class Product extends Component {
     const {
       translate,
       product,
+      location,
       loader,
       auth,
       reviews,
@@ -157,6 +188,7 @@ class Product extends Component {
     } = this.props;
     const objectProduct = product || {};
     const authRole = auth.user.role;
+    const sharingUrl = `${window.location.origin}${location.pathname}`;
     const {
       nameTranslations,
       descriptionTranslations,
@@ -268,13 +300,63 @@ class Product extends Component {
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <i
-                                className="fa fa-share-square-o"
-                                aria-hidden="true"
-                              />{" "}
-                              Share
-                            </a>
+                            <OverlayTrigger
+                              trigger="click"
+                              placement="top"
+                              overlay={
+                                <Popover
+                                  id="social-icons"
+                                  className="product-share-buttons"
+                                >
+                                  <ul>
+                                    <li>
+                                      <FacebookShareButton
+                                        title={
+                                          !_.isEmpty(product)
+                                            ? nameTranslations[locale]
+                                            : ""
+                                        }
+                                        url={sharingUrl}
+                                      >
+                                        <FacebookIcon size={32} round />
+                                      </FacebookShareButton>
+                                    </li>
+                                    <li>
+                                      <GooglePlusShareButton
+                                        title={
+                                          !_.isEmpty(product)
+                                            ? nameTranslations[locale]
+                                            : ""
+                                        }
+                                        url={sharingUrl}
+                                      >
+                                        <GooglePlusIcon size={32} round />
+                                      </GooglePlusShareButton>
+                                    </li>
+                                    <li>
+                                      <TwitterShareButton
+                                        title={
+                                          !_.isEmpty(product)
+                                            ? nameTranslations[locale]
+                                            : ""
+                                        }
+                                        url={sharingUrl}
+                                      >
+                                        <TwitterIcon size={32} round />
+                                      </TwitterShareButton>
+                                    </li>
+                                  </ul>
+                                </Popover>
+                              }
+                            >
+                              <a href="javascript:void(0);">
+                                <i
+                                  className="fa fa-share-square-o"
+                                  aria-hidden="true"
+                                />{" "}
+                                Share
+                              </a>
+                            </OverlayTrigger>
                           </li>
                         </ul>
                       </div>

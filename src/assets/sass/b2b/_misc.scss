@@ -1174,3 +1174,16 @@ $product-main-color: #7d1516;
     }
   }
 }
+.product-share-buttons{
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    li{
+      padding: 5px;
+    }
+  }
+}

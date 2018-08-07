@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import ImageGallery from "react-image-gallery";
 import ReactImageMagnify from "react-image-magnify";
 import ReactSlick from "react-slick";
 
@@ -14,18 +13,14 @@ class ProductImageSlider extends Component {
     const { images } = this.props;
     const sliderImages = _.map(images, image => ({
       srcSet: [
-        `${image.url} 355w`,
-        `${image.url} 481w`,
-        `${image.url} 584w`,
-        `${image.url} 687w`,
-        `${image.url} 770w`,
-        `${image.url} 861w`,
-        `${image.url} 955w`,
-        `${image.url} 1033w`,
-        `${image.url} 1112w`,
-        `${image.url} 1192w`,
-        `${image.url} 1200w`
-      ],
+        { src: image.url, setting: "500w" },
+        { src: image.url, setting: "779w" },
+        { src: image.url, setting: "1020w" },
+        { src: image.url, setting: "1200w" },
+        { src: image.url, setting: "1426w" }
+      ]
+        .map(item => `${item.src} ${item.setting}`)
+        .join(", "),
       small: image.url,
       large: image.url
     }));
@@ -41,31 +36,44 @@ class ProductImageSlider extends Component {
               slidesToScroll: 1
             }}
           >
-            {sliderImages.map((src, index) => (
-              <div key={index}>
-                <ReactImageMagnify
-                  isHintEnabled
-                  shouldHideHintAfterFirstActivation={false}
-                  enlargedImagePosition="over"
-                  {...{
-                    smallImage: {
-                      alt: "Wristwatch by Versace",
-                      isFluidWidth: true,
-                      src: src.small,
-                      srcSet: src.srcSet,
-                      sizes:
-                        "(max-width: 480px) 50vw, (max-width: 1200px) 30vw, 360px"
-                    },
-                    largeImage: {
-                      src: src.large,
-                      width: 350,
-                      height: 1000
-                    },
-                    lensStyle: { backgroundColor: "rgba(0,0,0,.6)" }
-                  }}
-                />
-              </div>
-            ))}
+            {sliderImages.map((src, index) => {
+              const fileExtension = !src.small.match(/.(jpg|jpeg|png|gif)$/i);
+              if (fileExtension) {
+                return (
+                  <div key={index}>
+                    <video width="320" height="240" controls>
+                      <source src={src.small} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                );
+              }
+              return (
+                <div key={index}>
+                  <ReactImageMagnify
+                    isHintEnabled
+                    shouldHideHintAfterFirstActivation={false}
+                    enlargedImagePosition="over"
+                    {...{
+                      smallImage: {
+                        alt: "Wristwatch by Versace",
+                        isFluidWidth: true,
+                        src: src.small,
+                        srcSet: src.srcSet,
+                        sizes:
+                          "(max-width: 480px) 50vw, (max-width: 1200px) 30vw, 360px"
+                      },
+                      largeImage: {
+                        src: src.large,
+                        width: 350,
+                        height: 1000
+                      },
+                      lensStyle: { backgroundColor: "rgba(0,0,0,.6)" }
+                    }}
+                  />
+                </div>
+              );
+            })}
           </ReactSlick>
           {/* <ImageGallery
             showPlayButton={false}

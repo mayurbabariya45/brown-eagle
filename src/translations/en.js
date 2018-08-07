@@ -445,6 +445,10 @@ export const en = {
       // favourites
       my_favourites: "Product Favourites",
       c_person: "Contact Person",
+
+      // verification profile
+      v_alert_title: "Send a mail",
+      v_alert_text: "Please verified your profile",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

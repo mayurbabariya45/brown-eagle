@@ -46,7 +46,7 @@ const ProductRating = props => (
           {_.map(props.ratingAggregate, (value) => {
             const { rating, count } = value;
             return(
-              <li>
+              <li key={rating}>
                 <div className="rate-list rate-count">
                   <span className="number">{rating}</span>
                   <span className="star">★</span>

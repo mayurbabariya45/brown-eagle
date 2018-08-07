@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { connect } from "react-redux";
 import Dashboard from "../../views/Dashboard/Dashboard";
 import * as a from "../../actions/Auth/Auth_actions";
@@ -19,7 +18,8 @@ const mapDispatchToProps = dispatch => ({
   editProductReview: (values, productId, reviewId, locale) =>
     dispatch(d.editProductReview(values, productId, reviewId, locale)),
   changeProductReviewStatus: (productId, reviewId, status, locale) =>
-    dispatch(d.changeProductReviewStatus(productId, reviewId, status, locale))
+    dispatch(d.changeProductReviewStatus(productId, reviewId, status, locale)),
+  verifyEmail: (token, locale) => dispatch(a.verifyEmail(token, locale))
 });
 
 const mergeProps = (state, actions, ownProps) => ({
