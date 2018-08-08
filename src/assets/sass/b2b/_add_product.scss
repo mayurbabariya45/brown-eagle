@@ -375,21 +375,22 @@
       border-bottom: 0.5px solid #c0c0c0;
       margin-bottom: 30px;
       padding-bottom: 15px;
-      .mutiple-form-group {
-        position: relative;
-        > .custom-form-group {
-          + span {
-            > .btn {
-              position: absolute;
-              top: 0;
-              right: 25.2em;
-            }
-            .btn-default {
-              background: transparent;
-              border: none;
-              color: #7491fb;
-              padding-left: 0px;
-            }
+      
+    }
+    .mutiple-form-group {
+      position: relative;
+      > .custom-form-group {
+        + span {
+          > .btn {
+            position: absolute;
+            top: 0;
+            right: 25.2em;
+          }
+          .btn-default {
+            background: transparent;
+            border: none;
+            color: #7491fb;
+            padding-left: 0px;
           }
         }
       }

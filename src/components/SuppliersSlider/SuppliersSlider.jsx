@@ -53,7 +53,10 @@ class SuppliersSlider extends Component {
             <span className="yrs">
               <i className="icon-static icon-yrs" />0 Yrs
             </span>
-            <h3>{_.upperCase(`${value.firstName} ${value.lastName}`)}</h3>
+            <h3>
+              <i className="icon-static icon-checked " />
+              {_.upperCase(value.companyName)}
+            </h3>
             <div className="product-row">
               <div className="product-rating">
                 <div className="rating-result" title="0%">

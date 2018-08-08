@@ -199,7 +199,8 @@ class Product extends Component {
       seller,
       currency,
       isReviewed,
-      ratingAggregate
+      ratingAggregate,
+      quickDetails
     } = objectProduct;
     const { productReview } = reviews;
     return (
@@ -388,10 +389,10 @@ class Product extends Component {
                             <div className="title">
                               <h3>{translate("product_overview")}</h3>
                             </div>
-                            <h5>{translate("product_quick_details")}</h5>
+                            {/* <h5>{translate("product_quick_details")}</h5> */}
                             <div className="quick_overview-details">
                               <div className="overview-list">
-                                <ProductOverview translate={translate} />
+                                <ProductOverview quickDetails={quickDetails} />
                               </div>
                             </div>
                           </div>

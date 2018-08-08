@@ -21,7 +21,7 @@ const Profile = props => {
     handleSubmitForm,
     showNotification
   } = props;
-  const { user, loading } = props.auth;
+  const { user, loading, activePlan } = props.auth;
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
   const twitter = _.find(user.socialLinks, ["platform", "twitter"]);
   const google = _.find(user.socialLinks, ["platform", "google"]);
@@ -37,6 +37,9 @@ const Profile = props => {
          ${user.operationalAddress.country}
         `
     : "none";
+  const activePlanProducts = activePlan.product;
+  const activePlanRfq = activePlan.rfq;
+  const activePlanStorage = activePlan.storage;
   return (
     <div className="profile">
       <Row>
@@ -49,10 +52,17 @@ const Profile = props => {
               header={
                 <div className="header card-header-action">
                   <h4 className="title">
-                    {user && `${user.firstName} ${user.lastName}`}
+                    {user && `${user.firstName} ${user.lastName}`}{" "}
+                    {user.isProfileVerified === "pending" ? (
+                      <span className="label label-warning">pending</span>
+                    ) : (
+                      <span className="label label-info">
+                        {user.isProfileVerified}
+                      </span>
+                    )}
                   </h4>
                   {/* <div className="actions-label">
-                    <div className="action">IN</div>
+                   
                   </div> */}
                 </div>
               }
@@ -84,6 +94,118 @@ const Profile = props => {
                       <FormControl.Static>2018</FormControl.Static>
                     </FormGroup>
                   </Col>
+                </Row>
+              }
+            />
+          </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Row>
+            <Card
+              className="card-profile-task"
+              plain
+              footer
+              header={
+                <div className="header card-header-action">
+                  <h4 className="title">
+                    My Plan <small>{activePlan.name || ""}</small>
+                  </h4>
+                  <div className="actions-label">
+                    <div className="action text-bold">
+                      {_.upperFirst(activePlan.status) || ""}
+                    </div>
+                  </div>
+                </div>
+              }
+              content={
+                <Row>
+                  <div className="task-lists">
+                    <div className="task-list">
+                      <div className="card-stats card-numbers">
+                        <div className="icon-text">
+                          <div className="numbers">
+                            {(activePlanProducts && activePlanProducts.total) ||
+                              0}
+                          </div>
+                          <div className="icon-big text-right icon-warning">
+                            <i className="pe-7s-note2" />
+                          </div>
+                        </div>
+                        <div className="small-content">
+                          <p>Products</p>
+                          <div>
+                            <span>
+                              Remaining{" "}
+                              {(activePlanProducts &&
+                                activePlanProducts.remaining) ||
+                                0}
+                            </span>{" "}
+                            <span>
+                              Used{" "}
+                              {(activePlanProducts &&
+                                activePlanProducts.used) ||
+                                0}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="task-list">
+                      <div className="card-stats card-numbers">
+                        <div className="icon-text">
+                          <div className="numbers">
+                            {(activePlanRfq && activePlanRfq.total) || 0}
+                          </div>
+                          <div className="icon-big text-right icon-warning">
+                            <i className="pe-7s-news-paper" />
+                          </div>
+                        </div>
+                        <div className="small-content">
+                          <p>Request For Quotation</p>
+                          <div>
+                            <span>
+                              Remaining{" "}
+                              {(activePlanRfq && activePlanRfq.remaining) || 0}
+                            </span>{" "}
+                            <span>
+                              Used {(activePlanRfq && activePlanRfq.used) || 0}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="task-list">
+                      <div className="card-stats card-numbers">
+                        <div className="icon-text">
+                          <div className="numbers">
+                            {(activePlanStorage && activePlanStorage.total) ||
+                              0}
+                          </div>
+                          <div className="icon-big text-right icon-warning">
+                            <i className="pe-7s-refresh-cloud" />
+                          </div>
+                        </div>
+                        <div className="small-content">
+                          <p>Storage</p>
+                          <div>
+                            <span>
+                              Remaining{" "}
+                              {(activePlanStorage &&
+                                activePlanStorage.remaining) ||
+                                0}
+                            </span>{" "}
+                            <span>
+                              Used{" "}
+                              {(activePlanStorage && activePlanStorage.used) ||
+                                0}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </Row>
               }
             />
@@ -262,11 +384,11 @@ const Profile = props => {
                           {user
                             ? _.map(user.mainProducts, product => (
                                 <span
-                                key={product}
-                                className="label label-warning"
+                                  key={product}
+                                  className="label label-warning"
                               >
                                 {product}
-                              </span>
+                                </span>
                               ))
                             : "none"}
                         </FormControl.Static>

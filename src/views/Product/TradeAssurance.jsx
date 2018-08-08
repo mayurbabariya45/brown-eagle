@@ -13,12 +13,12 @@ const TradeAssurance = props => (
           <span className="yrs">
             <i className="icon-static icon-yrs" />0 Yrs
           </span>
-          <h3>
+          {/* <h3>
             {!_.isEmpty(props.seller) &&
               _.capitalize(
                 `${props.seller.firstName} ${props.seller.lastName}`
               )}
-          </h3>
+          </h3> */}
           <p className="trade-txt">India | Trading Company</p>
         </div>
         <div className="trade-row">

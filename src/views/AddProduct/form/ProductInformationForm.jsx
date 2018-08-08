@@ -1,159 +1,80 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { reduxForm } from "redux-form";
-import { Form, Row, Col, FormGroup, ControlLabel } from "react-bootstrap";
+import { reduxForm, Field, FieldArray } from "redux-form";
+import {
+  Form,
+  Row,
+  Col,
+  FormGroup,
+  ControlLabel,
+  FormControl
+} from "react-bootstrap";
 import { numericality } from "redux-form-validators";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
-import Select from "../../../elements/CustomSelect/CustomSelect";
 import ProductImageForm from "./ProductImageForm";
 import { required } from "../../../formValidationRules/FormValidationRules";
 import Button from "../../../elements/CustomButton/CustomButton";
 import formValidationScroller from "../../../variables/FormValidationScroller";
 
+const renderField = ({ input, size }) => (
+  <Col sm={size || 2}>
+    <FormControl {...input} bsClass="form-control form-control-simple" />
+  </Col>
+);
+const renderMutipleField = ({ input, size }) => (
+  <Col sm={size || 2}>
+    <FormControl {...input} bsClass="form-control form-control-simple" />
+  </Col>
+);
+const renderInputs = ({ fields, meta: { error } }) => (
+  <Row>
+    <Col md={12}>
+      <div className="mutiple-form-group">
+        <FormGroup className="custom-form-group ">
+          <Col componentClass={ControlLabel} sm={2}>
+            Product Details
+          </Col>
+          <Field name="label" type="text" component={renderField} />
+          <Field name="value" size={3} type="text" component={renderField} />
+        </FormGroup>
+        <span>
+          <Button fill onClick={() => fields.push()}>
+            Add More
+          </Button>
+        </span>
+        {fields.map((name, index) => (
+          <FormGroup className="custom-form-group" key={index}>
+            <Col componentClass={ControlLabel} sm={2} />
+            <Field name={name} type="text" component={renderMutipleField} />
+            <Field
+              name={`value_${name}`}
+              size={3}
+              type="text"
+              component={renderMutipleField}
+            />
+            <Col sm={2}>
+              <Button
+                bsStyle="danger"
+                fill
+                simple
+                onClick={() => fields.remove(index)}
+              >
+                <i className="pe-7s-trash" />
+              </Button>
+            </Col>
+          </FormGroup>
+        ))}
+      </div>
+    </Col>
+  </Row>
+);
+
 class ProductInformationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.renderExtraForm = this.renderExtraForm.bind(this);
   }
-  renderExtraForm({ fields, meta: { error, submitFailed } }) {
-    const { translate } = this.props;
-    return (
-      <Row>
-        {fields.map((form, index) => (
-          <Col md={12} key={index}>
-            <Row>
-              <Col md={12}>
-                <FormGroup>
-                  <Col sm={8}>
-                    <Button
-                      bsStyle="danger"
-                      fill
-                      simple
-                      pullRight
-                      className="custom-remove-btn"
-                      onClick={() => fields.remove(index)}
-                    >
-                      <i className="pe-7s-trash" />
-                    </Button>
-                  </Col>
-                </FormGroup>
-              </Col>
-            </Row>
-            <div className="form-horizontal-box">
-              <FormInputs
-                ncols={["col-md-12"]}
-                proprieties={[
-                  {
-                    inputGroup: "horizontal",
-                    xsLabel: 2,
-                    xsInput: 5,
-                    label: translate("a_product_name"),
-                    type: "text",
-                    bsClass: "form-control form-control-simple",
-                    name: `${form}.product_name`,
-                    validate: [required]
-                  }
-                ]}
-              />
-              <FormInputs
-                ncols={["col-md-12"]}
-                proprieties={[
-                  {
-                    inputGroup: "horizontal",
-                    xsLabel: 2,
-                    xsInput: 5,
-                    label: translate("a_product_keyword"),
-                    type: "text",
-                    bsClass: "form-control form-control-simple",
-                    name: `${form}.product_keyword`,
-                    className: "custom-form-group",
-                    mutipleFields: true,
-                    validate: [required]
-                  }
-                ]}
-              />
-              <Row>
-                <Col md={12}>
-                  <FormGroup>
-                    <Col componentClass={ControlLabel} sm={2}>
-                      {translate("a_product_group")}
-                    </Col>
-                    <Col sm={5}>
-                      <Select productGroup searchable={false} />
-                    </Col>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </div>
-            <FormInputs
-              ncols={["col-md-12"]}
-              proprieties={[
-                {
-                  inputGroup: "horizontal",
-                  xsLabel: 2,
-                  xsInput: 5,
-                  label: translate("a_brake"),
-                  type: "text",
-                  bsClass: "form-control form-control-simple",
-                  name: `${form}.product_brake`,
-                  validate: [required]
-                }
-              ]}
-            />
-            <FormInputs
-              ncols={["col-md-12"]}
-              proprieties={[
-                {
-                  inputGroup: "horizontal",
-                  xsLabel: 2,
-                  xsInput: 5,
-                  label: translate("a_model_number"),
-                  type: "text",
-                  bsClass: "form-control form-control-simple",
-                  name: `${form}.product_model_number`,
-                  validate: [required]
-                }
-              ]}
-            />
-            <Row>
-              <Col md={12}>
-                <FormGroup>
-                  <Col componentClass={ControlLabel} sm={2}>
-                    {translate("a_origin")}
-                  </Col>
-                  <Col sm={5}>
-                    <Select productGroup searchable={false} />
-                  </Col>
-                </FormGroup>
-              </Col>
-            </Row>
-            <FormInputs
-              ncols={["col-md-12"]}
-              proprieties={[
-                {
-                  inputGroup: "horizontal",
-                  xsLabel: 2,
-                  xsInput: 5,
-                  label: translate("a_brand_name"),
-                  type: "text",
-                  bsClass: "form-control form-control-simple",
-                  name: `${form}.product_brand_name`,
-                  validate: [required]
-                }
-              ]}
-            />
-          </Col>
-        ))}
-        <Col md={10} sm={10} xs={10} mdOffset={2} smOffset={2} xsOffset={2}>
-          <Button bsStyle="warning" radius fill onClick={() => fields.push({})}>
-            {translate("a_add_more")}
-          </Button>
-          {submitFailed && error && <span>{error}</span>}
-        </Col>
-      </Row>
-    );
-  }
+
   render() {
     const { translate, handleSubmit, hanldeSubmitForm } = this.props;
     return (
@@ -261,6 +182,7 @@ class ProductInformationForm extends Component {
                     </Col>
                   </Row>
                 </div>
+                <FieldArray name="product_label" component={renderInputs} />
                 <FormInputs
                   ncols={["col-md-12"]}
                   proprieties={[
@@ -278,64 +200,6 @@ class ProductInformationForm extends Component {
                     }
                   ]}
                 />
-                {/* <FormInputs
-                ncols={["col-md-12"]}
-                proprieties={[
-                  {
-                    inputGroup: "horizontal",
-                    xsLabel: 2,
-                    xsInput: 5,
-                    label: translate("a_brake"),
-                    type: "text",
-                    bsClass: "form-control form-control-simple",
-                    name: "product_brake",
-                    validate: [required]
-                  }
-                ]}
-              />
-              <FormInputs
-                ncols={["col-md-12"]}
-                proprieties={[
-                  {
-                    inputGroup: "horizontal",
-                    xsLabel: 2,
-                    xsInput: 5,
-                    label: translate("a_model_number"),
-                    type: "text",
-                    bsClass: "form-control form-control-simple",
-                    name: "product_model_number",
-                    validate: [required]
-                  }
-                ]}
-              />
-              <Row>
-                <Col md={12}>
-                  <FormGroup>
-                    <Col componentClass={ControlLabel} sm={2}>
-                      {translate("a_origin")}
-                    </Col>
-                    <Col sm={5}>
-                      <Select productGroup searchable={false} />
-                    </Col>
-                  </FormGroup>
-                </Col>
-              </Row>
-              <FormInputs
-                ncols={["col-md-12"]}
-                proprieties={[
-                  {
-                    inputGroup: "horizontal",
-                    xsLabel: 2,
-                    xsInput: 5,
-                    label: translate("a_brand_name"),
-                    type: "text",
-                    bsClass: "form-control form-control-simple",
-                    name: "product_brand_name",
-                    validate: [required]
-                  }
-                ]}
-              />
-              <FieldArray name="members" component={this.renderExtraForm} /> */}
               </div>
             </div>
           </div>

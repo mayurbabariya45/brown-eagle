@@ -3,7 +3,7 @@ import { ActionTypes as a } from "../../constants/Dashboard/Dashboard_action_typ
 
 export const getProducts = (id, page = 1) => ({
   [RSAA]: {
-    endpoint: `product?seller=${id}&status=pending&page=${page}`,
+    endpoint: `product?seller=${id}&page=${page}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [

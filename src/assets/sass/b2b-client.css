@@ -4543,17 +4543,17 @@ section {
     border-bottom: 0.5px solid #c0c0c0;
     margin-bottom: 30px;
     padding-bottom: 15px; }
-    .product-information .product-information-form .form-horizontal-box .mutiple-form-group {
-      position: relative; }
-      .product-information .product-information-form .form-horizontal-box .mutiple-form-group > .custom-form-group + span > .btn {
-        position: absolute;
-        top: 0;
-        right: 25.2em; }
-      .product-information .product-information-form .form-horizontal-box .mutiple-form-group > .custom-form-group + span .btn-default {
-        background: transparent;
-        border: none;
-        color: #7491fb;
-        padding-left: 0px; }
+  .product-information .product-information-form .mutiple-form-group {
+    position: relative; }
+    .product-information .product-information-form .mutiple-form-group > .custom-form-group + span > .btn {
+      position: absolute;
+      top: 0;
+      right: 25.2em; }
+    .product-information .product-information-form .mutiple-form-group > .custom-form-group + span .btn-default {
+      background: transparent;
+      border: none;
+      color: #7491fb;
+      padding-left: 0px; }
 
 .static-content .form-group {
   margin-left: 15px;
@@ -6080,31 +6080,38 @@ section {
     .card-profile .content form .form-group {
       margin-bottom: 15px; }
 
-.card-tasks {
+.card-tasks, .card-profile-task {
   float: left;
   width: 100%; }
-  .card-tasks .content {
+  .card-tasks .content, .card-profile-task .content {
     float: left;
     width: 100%; }
-    .card-tasks .content .task-lists {
+    .card-tasks .content .task-lists, .card-profile-task .content .task-lists {
       float: left;
       width: 100%;
       padding: 0 25px; }
-      .card-tasks .content .task-lists .task-list:first-child::before {
+      .card-tasks .content .task-lists .task-list:first-child::before, .card-profile-task .content .task-lists .task-list:first-child::before {
         content: "";
         border: none; }
-      .card-tasks .content .task-lists .task-list {
+      .card-tasks .content .task-lists .task-list, .card-profile-task .content .task-lists .task-list {
         float: left;
         width: 24.9%;
         text-align: center;
         position: relative; }
-        .card-tasks .content .task-lists .task-list::before {
+        .card-tasks .content .task-lists .task-list::before, .card-profile-task .content .task-lists .task-list::before {
           content: "";
           border-left: 0.5px solid #ff6a00;
           position: absolute;
           height: 50px;
           left: 0;
           top: 30px; }
+
+.card-profile-task {
+  padding: 0 15px; }
+  .card-profile-task .content .task-lists {
+    padding: 0; }
+    .card-profile-task .content .task-lists .task-list {
+      width: 33%; }
 
 .card-stats.border-l:after {
   content: "";

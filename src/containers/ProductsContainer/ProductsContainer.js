@@ -45,6 +45,10 @@ const mergeProps = (state, actions, ownProps) => ({
               subCategoryId = findSubCategory._id;
             }
             actions.selectedCategory(findCategory);
+            actions.handleCategoryFilter({
+              category: categoryId,
+              subCategory: subCategoryId || ""
+            });
             actions
               .searchProducts(
                 {

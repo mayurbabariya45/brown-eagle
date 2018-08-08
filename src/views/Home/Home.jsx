@@ -416,23 +416,25 @@ class Home extends Component {
             </Row> */}
             <Row>
               <Col md={12}>
-                <div
-                  className="supplier_banner"
-                  style={{ backgroundImage: `url(${backgroundBanner})` }}
-                >
-                  <div className="supplier_text">
+                <Link to="/login">
+                  <div
+                    className="supplier_banner"
+                    style={{ backgroundImage: `url(${backgroundBanner})` }}
+                  >
+                    {/* <div className="supplier_text">
                     <h3>{translate("are_you_supplier")}</h3>
                     <p>{translate("supplier_text")}</p>
-                  </div>
-                  <div className="supplier_button">
+                  </div> */}
+                    {/* <div className="supplier_button">
                     <Link
                       to="/login"
                       className="btn-fill btn-border btn-radius btn btn-default"
                     >
                       {translate("join_now")}
-                    </Link>
+                      </Link>
+                  </div> */}
                   </div>
-                </div>
+                </Link>
               </Col>
             </Row>
           </div>

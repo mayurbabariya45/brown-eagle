@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Field, FieldArray } from "redux-form";
 import { numericality } from "redux-form-validators";
 import {
   Modal,
@@ -8,16 +9,91 @@ import {
   Row,
   Col,
   FormGroup,
-  ControlLabel
+  ControlLabel,
+  FormControl
 } from "react-bootstrap";
 import Select from "react-select";
 import Dropzone from "react-dropzone";
 import BlockUi from "react-block-ui";
-import "react-block-ui/style.css";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import { required } from "../../formValidationRules/FormValidationRules";
 import Button from "../../elements/CustomButton/CustomButton";
 import BlankImg from "../../assets/img/load-image.png";
+
+const renderField = ({ input, placeholder }) => (
+  <FormControl
+    {...input}
+    placeholder={placeholder}
+    bsClass="form-control form-control-simple"
+  />
+);
+
+const renderInputs = ({ fields, meta: { error } }) => (
+  <Row>
+    <Col md={12}>
+      <div className="mutiple-form-group">
+        <FormGroup className="custom-form-group ">
+          <ControlLabel>Product Quick Details</ControlLabel>
+          <Row>
+            <Col sm={5}>
+              <Field
+                name="label"
+                placeholder="Label"
+                type="text"
+                component={renderField}
+              />
+            </Col>
+            <Col sm={5}>
+              <Field
+                name="value"
+                placeholder="Value"
+                type="text"
+                component={renderField}
+              />
+            </Col>
+          </Row>
+        </FormGroup>
+        <span>
+          <Button fill onClick={() => fields.push()}>
+            Add More
+          </Button>
+        </span>
+        {fields.map((name, index) => (
+          <FormGroup className="custom-form-group" key={index}>
+            <Row>
+              <Col sm={5}>
+                <Field
+                  name={name}
+                  type="text"
+                  placeholder="Label"
+                  component={renderField}
+                />
+              </Col>
+              <Col sm={5}>
+                <Field
+                  name={`value_${name}`}
+                  type="text"
+                  placeholder="Value"
+                  component={renderField}
+                />
+              </Col>
+              <Col sm={2}>
+                <Button
+                  bsStyle="danger"
+                  fill
+                  simple
+                  onClick={() => fields.remove(index)}
+                >
+                  <i className="pe-7s-trash" />
+                </Button>
+              </Col>
+            </Row>
+          </FormGroup>
+        ))}
+      </div>
+    </Col>
+  </Row>
+);
 
 class EditProduct extends Component {
   constructor(props) {
@@ -160,10 +236,20 @@ class EditProduct extends Component {
       onHide,
       addProductImages
     } = this.props;
+    const quickDetails = _.map(values.product_label, (label, index) => ({
+      [label]: values.value_product_label[index]
+    }));
+    quickDetails.push({ [values.label]: values.value });
+    const keywords = values.keywords
+      ? values.keywords.concat(values.product_keywords)
+      : [values.product_keywords];
+    delete values.product_keywords;
+    delete values.productPictures;
     const product = Object.assign({}, values, {
       seller: id,
       category: this.state.selectedCategory.value,
-      subCategory: this.state.selectedSubCategory.value
+      subCategory: this.state.selectedSubCategory.value,
+      keywords
     });
     updateProduct(product, "en").then(payload => {
       if (payload.type === "UPDATE_PRODUCT_SUCCESS") {
@@ -363,6 +449,7 @@ class EditProduct extends Component {
                     }
                   ]}
                 />
+                <FieldArray name="product_label" component={renderInputs} />
                 <FormInputs
                   ncols={["col-md-12"]}
                   proprieties={[

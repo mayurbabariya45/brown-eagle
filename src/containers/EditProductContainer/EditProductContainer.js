@@ -18,6 +18,9 @@ const mapStateToProps = state => {
   const productKeywords = !_.isEmpty(state.dashboard.product)
     ? state.dashboard.product.keywords
     : [];
+  const quickDetails = !_.isEmpty(state.dashboard.product)
+    ? state.dashboard.product.quickDetails
+    : [];
   const newKeywords = [];
   let setKeyword = "";
   if (!_.isEmpty(productKeywords)) {
@@ -29,6 +32,21 @@ const mapStateToProps = state => {
         }
       });
     }
+  }
+  const productLabels = [];
+  const productValues = [];
+  let setProductLabel = "";
+  let setProductValue = "";
+  if (!_.isEmpty(quickDetails)) {
+    _.map(quickDetails, (value, index) => {
+      if(index === 0){
+        setProductLabel = _.keys(value)[0];
+        setProductValue = value[_.keys(value)[0]];
+        return false;
+      }
+      productLabels.push(_.keys(value)[0]);
+      productValues.push(value[_.keys(value)[0]]);
+    });
   }
   return {
     categories: state.dashboard.categories,
@@ -47,7 +65,9 @@ const mapStateToProps = state => {
       description: state.dashboard.product.description,
       productPictures: state.dashboard.product.productPictures,
       keywords: newKeywords,
-      product_keywords: setKeyword
+      product_keywords: setKeyword,
+      value: setProductValue,
+      label: setProductLabel
     }
   };
 };

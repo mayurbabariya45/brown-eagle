@@ -396,7 +396,8 @@
     }
   }
 }
-.card-tasks {
+
+.card-tasks, .card-profile-task {
   float: left;
   width: 100%;
   .content {
@@ -425,6 +426,17 @@
           left: 0;
           top: 30px;
         }
+      }
+    }
+  }
+}
+.card-profile-task{
+  padding: 0 15px;
+  .content {
+    .task-lists{
+      padding: 0;
+      .task-list{
+        width: 33%
       }
     }
   }

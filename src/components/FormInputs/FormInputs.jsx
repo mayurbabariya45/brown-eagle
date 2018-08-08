@@ -110,11 +110,9 @@ const FieldGroup = ({
         case "horizontal":
           return (
             <FormGroup validationState={validationState} className={className}>
-              {label && (
-                <Col componentClass={ControlLabel} sm={xsLabel || 3}>
-                  {label}
-                </Col>
-              )}
+              <Col componentClass={ControlLabel} sm={xsLabel || 3}>
+                {label}
+              </Col>
               <Col sm={xsInput || 9}>
                 <FormControl {...props} />
                 {errorText !== "Required" &&

@@ -26,6 +26,10 @@ class AddProduct extends React.Component {
       addProduct,
       locale
     } = this.props;
+    const quickDetails = _.map(value.product_label, (label, index) => ({
+      [label]: value.value_product_label[index]
+    }));
+    quickDetails.push({ [value.label]: value.value });
     const { user } = this.props.auth;
     if (_.isEmpty(user)) return false;
     const category = selectedCategory.id;
@@ -43,7 +47,7 @@ class AddProduct extends React.Component {
     }
     let object = Object.assign(
       {},
-      { ...value, category, keywords, seller, productAvailability }
+      { ...value, category, keywords, seller, productAvailability, quickDetails }
     );
     if (!_.isEmpty(subCategory)) {
       object = Object.assign(

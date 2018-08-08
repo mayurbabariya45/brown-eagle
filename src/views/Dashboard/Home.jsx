@@ -1,36 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Row, Col, Alert } from "react-bootstrap";
-import Button from "../../elements/CustomButton/CustomButton";
+import { Row, Col } from "react-bootstrap";
 import { Card } from "../../components/Card/Card";
 import ContentLoader from "../../components/Loader/Loader";
 import avatar from "../../assets/img/avatar.png";
 
 const Home = props => {
-  const { translate, hideVerification, handleProfileVerification } = props;
+  const { translate } = props;
   const { user, loader } = props.auth;
   return (
     <div className="dashboard">
-      {!hideVerification &&
-        !user.isProfileVerified && (
-          <ContentLoader height={50} inFight={loader}>
-            <Row>
-              <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
-                <p>
-                  {translate("v_alert_text")}{" "}
-                  <Button
-                    bsStyle="danger"
-                    bsSize="small"
-                    onClick={handleProfileVerification}
-                  >
-                    {translate("v_alert_title")}
-                  </Button>
-                </p>
-              </Alert>
-            </Row>
-          </ContentLoader>
-        )}
       <ContentLoader height={100} inFight={loader}>
         <Row>
           <Col md={12}>
@@ -50,16 +30,16 @@ const Home = props => {
                     <div className="profile-links">
                       <ul>
                         <li>
-                          {user.isProfileVerified ? (
-                            <div>
-                              <i className="icon-static icon-checked" />
-                              <span>{translate("d_approved")}</span>
-                            </div>
-                          ) : (
+                          {user.isProfileApproved === "pending" ? (
                             <span className="profile-pending">
                               <i className="fa fa-clock-o" />
                               {translate("d_verify")}
                             </span>
+                          ) : (
+                            <div>
+                              <i className="icon-static icon-checked" />
+                              <span>{translate("d_approved")}</span>
+                            </div>
                           )}
                         </li>
                         <li>
@@ -79,9 +59,9 @@ const Home = props => {
                         <li>
                           <a href="#profile">{translate("d_favorites")}</a>
                         </li>
-                        <li>
+                        {/* <li>
                           <a href="#profile">{translate("d_business_card")}</a>
-                        </li>
+                        </li> */}
                       </ul>
                       <ul>
                         <li>

@@ -20,12 +20,10 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       companyForm: false,
-      contactForm: false,
-      hideVerification: false
+      contactForm: false
     };
     this.handleEditForm = this.handleEditForm.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
-    this.handleProfileVerification = this.handleProfileVerification.bind(this);
   }
   componentWillMount() {
     const { removeAll } = this.props;
@@ -53,26 +51,6 @@ class Dashboard extends React.Component {
         scroller.scrollTo("myScrollToElement", { offset: -100, smooth: true });
       }
     }
-  }
-  handleProfileVerification() {
-    const { verifyEmail, showNotification, auth, locale } = this.props;
-    const authId = auth.user.id;
-    verifyEmail({ id: authId }, locale).then(response => {
-      if (response.type === "VERIFY_EMAIL_FAILURE") {
-        showNotification(
-          <span data-notify="icon" className="pe-7s-shield" />,
-          <div>{response.payload.response.message}</div>,
-          true
-        );
-      } else if (response.type === "VERIFY_EMAIL_SUCCESS") {
-        this.setState({ hideVerification: true });
-        showNotification(
-          <span data-notify="icon" className="pe-7s-check" />,
-          <div>confirmation email has been sent your email address</div>,
-          false
-        );
-      }
-    });
   }
   handleSubmitForm(values) {
     const { updateProfile, showNotification, auth } = this.props;
@@ -172,13 +150,7 @@ class Dashboard extends React.Component {
                 <Col sm={9}>
                   <Tab.Content animation>
                     <Tab.Pane eventKey="first">
-                      <Home
-                        {...this.props}
-                        handleProfileVerification={
-                          this.handleProfileVerification
-                        }
-                        hideVerification={this.state.hideVerification}
-                      />
+                      <Home {...this.props} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       <Element name="myScrollToElement">
