@@ -1,4 +1,4 @@
-// import _ from "lodash";
+import _ from "lodash";
 import { connect } from "react-redux";
 import { reduxForm, change, formValueSelector } from "redux-form";
 import formValidationScroller from "../../variables/FormValidationScroller";
@@ -56,7 +56,7 @@ const mergeProps = (state, actions, ownProps) => ({
   getLocation: (lat, lng, type) => {
     actions.getLocation(lat, lng).then(response => {
       if (response.type === "GET_LOCATION_SUCCESS") {
-        if (response.payload.status === "OVER_QUERY_LIMIT") {
+        if (_.isEmpty(response.payload.results)) {
           ownProps.showNotification(response.payload.error_message);
           return false;
         }

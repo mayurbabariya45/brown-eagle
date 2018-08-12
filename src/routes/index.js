@@ -137,7 +137,7 @@ const appRoutes = [
   { path: "/cart", name: "Cart", component: CartContainer },
   { path: "/plans", name: "Plans", component: PlansContainer },
   {
-    path: "/compare_product",
+    path: "/compare",
     name: "Compare Product",
     component: CompareProductContainer
   },

@@ -3,7 +3,7 @@ import Cart from "../../views/Cart/Cart";
 import * as a from "../../actions/Cart/Cart_actions";
 
 const mapDispatchToProps = dispatch => ({
-  getCartProduct: () => {},
+  getCartProducts: authId => dispatch(a.getCartProducts(authId)),
   getCartTotal: () => {},
   addToWhishlist: item => dispatch(a.addToWhishlist(item)),
   removeCartItem: item => dispatch(a.removeCartItem(item)),
@@ -11,7 +11,8 @@ const mapDispatchToProps = dispatch => ({
   onDecrement: item => dispatch(a.onDecrement(item))
 });
 const mapStateToProps = state => ({
-  ...state.cart
+  ...state.cart,
+  auth: state.auth
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,

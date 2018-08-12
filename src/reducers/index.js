@@ -6,6 +6,7 @@ import homeReducer from "./HomeReducer/HomeReducer";
 import newsLetterReducer from "./NewsLetterReducer/NewsLetterReducer";
 import quotationReducer from "./QuotationReducer/QuotationReducer";
 import productReducer from "./ProductReducer/ProductReducer";
+import compareReducer from "./ProductReducer/CompareReducer";
 import authReducer from "./AuthReducer/AuthReducer";
 import verificationReducer from "./AuthReducer/VerificationReducer";
 import dashboardReducer from "./DashboardReducer/DashboardReducer";
@@ -29,6 +30,7 @@ const rootReducers = combineReducers({
   cart: cartReducer,
   plans: plansReducer,
   account: accountReducer,
+  compare: compareReducer,
   Intl,
   notifications
 });

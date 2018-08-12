@@ -41,6 +41,7 @@ class Product extends Component {
     this.handleProdutRatingModal = this.handleProdutRatingModal.bind(this);
     this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
     this.handleAddToWishlist = this.handleAddToWishlist.bind(this);
+    this.handleAddToCompare = this.handleAddToCompare.bind(this);
   }
   componentWillMount() {
     const {
@@ -174,6 +175,16 @@ class Product extends Component {
       }
     });
   }
+  handleAddToCompare(e) {
+    e.preventDefault();
+    const { addToCompare, showNotification, product} = this.props;
+    addToCompare(product);
+    showNotification(
+      <span data-notify="icon" className="pe-7s-check" />,
+      <div>{`${product.name} has been added successfully in compare.`}</div>,
+      false
+    );
+  }
   render() {
     const {
       translate,
@@ -286,7 +297,7 @@ class Product extends Component {
                       <div className="product-nav">
                         <ul className="product-nav-items">
                           <li>
-                            <a href="#">
+                            <a href="#" onClick={this.handleAddToCompare}>
                               <i
                                 className="fa fa-square-o"
                                 aria-hidden="true"

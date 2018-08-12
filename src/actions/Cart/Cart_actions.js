@@ -1,6 +1,19 @@
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { ActionTypes as a } from "../../constants/Cart/Cart_action_type";
 
+export const getCartProducts = authId => ({
+  [RSAA]: {
+    endpoint: `cart/${authId}`,
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.GET_CART_PRODUCTS_REQUEST,
+      a.GET_CART_PRODUCTS_SUCCESS,
+      a.GET_CART_PRODUCTS_FAILURE
+    ]
+  }
+});
+
 export const onIncrement = item => dispatch => {
   dispatch({
     type: a.CART_QUANTITY_INCREMENT,

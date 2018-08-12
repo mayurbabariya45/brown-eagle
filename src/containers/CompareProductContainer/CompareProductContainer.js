@@ -1,8 +1,15 @@
 import { connect } from "react-redux";
 import CompareProduct from "../../views/CompareProduct/CompareProduct";
+import * as a from "../../actions/Product/Compare_actions";
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  ...state.compare
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => ({
+  selectFilterProduct: item => dispatch(a.selectFilterProduct(item)),
+  setFilterProduct: item => dispatch(a.setFilterProduct(item)),
+  resetFilterProduct: item => dispatch(a.resetFilterProduct(item))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareProduct);

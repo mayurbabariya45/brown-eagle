@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import Product from "../../views/Product/Product";
 import * as a from "../../actions/Product/Product_actions";
 import * as c from "../../actions/Cart/Cart_actions";
+import * as d from "../../actions/Product/Compare_actions";
 
 const mapDispatchToProps = dispatch => ({
   onIncrement: () => dispatch(a.onIncrement()),
@@ -15,6 +16,7 @@ const mapDispatchToProps = dispatch => ({
   flushProduct: () => dispatch(a.flushProduct()),
   addToCart: item => dispatch(c.addToCart(item)),
   addToCartUnsafe: item => dispatch(c.addToCartUnsafe(item)),
+  addToCompare: item => dispatch(d.addToCompare(item)),
   addReview: (value, id, locale) =>
     dispatch(a.addProductReview(value, id, locale)),
   addToWishlistProduct: (product, authId, locale) =>

@@ -44,18 +44,7 @@ export const getCategories = () => dispatch =>
     }
   });
 
-export const updateProduct = (product, locale) => ({
-  [RSAA]: {
-    endpoint: `product/${product.id}?ln=${locale}`,
-    method: "PATCH",
-    body: JSON.stringify(product),
-    types: [
-      a.UPDATE_PRODUCT_REQUEST,
-      a.UPDATE_PRODUCT_SUCCESS,
-      a.UPDATE_PRODUCT_FAILURE
-    ]
-  }
-});
+
 
 export const deleteProductImage = (productId, imageId) => ({
   [RSAA]: {
@@ -88,7 +77,7 @@ export const deleteProduct = id => ({
 });
 export const getLocation = (lat, lng) => ({
   [RSAA]: {
-    endpoint: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAqnSEwwuF8EaWNFEWi4v5q5mGjTJBOW5Q`,
+    endpoint: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyASyYRBZmULmrmw_P9kgr7_266OhFNinPA`,
     method: "GET",
     types: [
       a.GET_LOCATION_REQUEST,
@@ -105,7 +94,7 @@ export const handleInputMap = types => dispatch => {
   });
 };
 
-export const getProductReview = (productId, page, locale) => dispatch => {
+export const getProductReview = (productId, page) => dispatch => {
   dispatch({
     [RSAA]: {
       endpoint: `product/${productId}/review?page=${page}`,
@@ -120,12 +109,7 @@ export const getProductReview = (productId, page, locale) => dispatch => {
   });
 };
 
-export const changeProductReviewStatus = (
-  productId,
-  reviewId,
-  status,
-  locale
-) => ({
+export const changeProductReviewStatus = (productId, reviewId, status) => ({
   [RSAA]: {
     endpoint: `product/${productId}/review/${reviewId}/status/${status}`,
     method: "GET",
@@ -137,11 +121,24 @@ export const changeProductReviewStatus = (
     ]
   }
 });
-
-export const editProductReview = (values, productId, reviewId, locale) => ({
+export const updateProduct = (product, locale) => ({
   [RSAA]: {
-    endpoint: `product/${productId}/review/${reviewId}?ln=${locale}`,
+    endpoint: `product/${product.id}`,
     method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product),
+    types: [
+      a.UPDATE_PRODUCT_REQUEST,
+      a.UPDATE_PRODUCT_SUCCESS,
+      a.UPDATE_PRODUCT_FAILURE
+    ]
+  }
+});
+export const editProductReview = (values, productId, reviewId) => ({
+  [RSAA]: {
+    endpoint: `product/${productId}/review/${reviewId}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(values),
     types: [
       a.EDIT_PRODUCT_REVIEW_REQUEST,

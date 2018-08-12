@@ -449,6 +449,21 @@ export const en = {
       // verification profile
       v_alert_title: "Send a mail",
       v_alert_text: "Please verified your profile",
+
+      // compare products
+      cm_page_title: "Compare Products",
+      cm_reset: "Reset",
+      cm_filter: "Filter",
+      cm_models: "Models",
+      cm_name: "Name",
+      cm_keywords: "Keywords",
+      cm_min_quanity: "Min Quanity",
+      cm_price: "Price",
+      cm_available: "Available",
+      cm_ratings: "Rating",
+      cm_reviews: "Reviews",
+      cm_description: "Description",
+
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

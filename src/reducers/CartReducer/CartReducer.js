@@ -43,7 +43,8 @@ export default (state = INITIAL_STATE, action) => {
     case a.GET_CART_PRODUCTS_TOTALS_SUCCESS:
       return {
         ...state,
-        loading: false
+        loading: false,
+        products: state.products.concat(action.payload.products)
       };
     case a.GET_CART_PRODUCTS_TOTALS_FAILURE:
       return {
