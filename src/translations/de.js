@@ -214,6 +214,7 @@ export const de = {
       d_rejected_requests: "Geweigerde koopverzoeken",
       p_contact_information: "Contactgegevens",
       p_company_information: "bedrijfsinformatie",
+      p_seller_certificate: "Mijn certificaat",
       d_change_password: "Verander wachtwoord",
       d_products: "Mijn producten",
       d_messages: "Berichten centrum",

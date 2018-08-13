@@ -77,7 +77,7 @@ export const deleteProduct = id => ({
 });
 export const getLocation = (lat, lng) => ({
   [RSAA]: {
-    endpoint: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyASyYRBZmULmrmw_P9kgr7_266OhFNinPA`,
+    endpoint: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBWPufkpoBVSbyfwu-xVuXPea5YZQJj3OY`,
     method: "GET",
     types: [
       a.GET_LOCATION_REQUEST,

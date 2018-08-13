@@ -8,9 +8,12 @@ import {
   FormControl,
   FormGroup
 } from "react-bootstrap";
+import BlockUi from "react-block-ui";
 import { Card } from "../../components/Card/Card";
 import CompanyInformationFormContainer from "../../containers/DashboardContainer/CompanyInformationFormContainer";
 import ContactInformationFormContainer from "../../containers/DashboardContainer/ContactInformationFormContainer";
+import SellerCertificateFormContainer from "../../containers/DashboardContainer/SellerCertificateFormContainer";
+import SellerVideoForm from "./form/SellerVideoForm";
 
 const Profile = props => {
   const {
@@ -18,8 +21,13 @@ const Profile = props => {
     handleEditForm,
     contactForm,
     companyForm,
+    certificateForm,
     handleSubmitForm,
-    showNotification
+    showNotification,
+    handleEditCertificateForm,
+    handleUploadCertificateForm,
+    handleRemoveCertificate,
+    handleUploadVideo
   } = props;
   const { user, loading, activePlan } = props.auth;
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
@@ -40,6 +48,7 @@ const Profile = props => {
   const activePlanProducts = activePlan.product;
   const activePlanRfq = activePlan.rfq;
   const activePlanStorage = activePlan.storage;
+  const certificates = !_.isEmpty(user) ? user.certificates : [];
   return (
     <div className="profile">
       <Row>
@@ -383,11 +392,11 @@ const Profile = props => {
                         <FormControl.Static>
                           {user
                             ? _.map(user.mainProducts, product => (
-                                <span
+                              <span
                                   key={product}
                                   className="label label-warning"
-                              >
-                                {product}
+                                >
+                                    {product}
                                 </span>
                               ))
                             : "none"}
@@ -422,6 +431,92 @@ const Profile = props => {
                     </Col>
                   </Row>
                 )
+              }
+            />
+          </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Row>
+            <Card
+              className="card-profile"
+              plain
+              footer
+              header={
+                <div className="header card-header-action">
+                  <h4 className="title">{translate("p_seller_certificate")}</h4>
+                  <div className="actions-label">
+                    <div
+                      className="action action-link"
+                      onClick={handleEditCertificateForm}
+                    >
+                      {certificateForm ? translate("close") : translate("edit")}
+                    </div>
+                  </div>
+                </div>
+              }
+              content={
+                certificateForm ? (
+                  <SellerCertificateFormContainer
+                    translate={translate}
+                    loading={loading}
+                    handleUploadCertificateForm={handleUploadCertificateForm}
+                    showNotification={showNotification}
+                  />
+                ) : (
+                  <BlockUi tag="div" blocking={loading}>
+                    <Row>
+                      <div className="seller-certificate-show">
+                        <div className="images-preview">
+                          <div className="preview">
+                            {_.map(certificates, (file, i) => (
+                              <div key={i} className="preview-box">
+                                <img
+                                  src={file.url}
+                                  className="img-blank"
+                                  alt="product-images"
+                                />
+                                <span
+                                  className="remove-image"
+                                  role="presentation"
+                                  onClick={() => {
+                                    handleRemoveCertificate(file._id);
+                                  }}
+                                >
+                                  <i className="pe-7s-trash" />
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </Row>
+                  </BlockUi>
+                )
+              }
+            />
+          </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Row>
+            <Card
+              className="card-profile"
+              plain
+              footer
+              header={
+                <div className="header card-header-action">
+                  <h4 className="title">My Video</h4>
+                </div>
+              }
+              content={
+                <SellerVideoForm
+                  handleUploadVideo={handleUploadVideo}
+                  user={!_.isEmpty(user) ? user : []}
+                  loading={loading}
+                />
               }
             />
           </Row>

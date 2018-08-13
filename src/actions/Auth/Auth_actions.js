@@ -287,3 +287,64 @@ export const getSellerActivePlans = authId => ({
     ]
   }
 });
+
+export const uploadCertificate = (value, profileId) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `seller/${profileId}/certificate`,
+      method: "POST",
+      body: value,
+      types: [
+        a.UPLOAD_CERTIFICATE_REQUEST,
+        a.UPLOAD_CERTIFICATE_SUCCESS,
+        a.UPLOAD_CERTIFICATE_FAILURE
+      ]
+    }
+  });
+export const updateCertificate = (
+  value,
+  profileId,
+  certificateId
+) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `seller/${profileId}/certificate/${certificateId}`,
+      method: "POST",
+      body: JSON.stringify(value),
+      types: [
+        a.UPDATE_CERTIFICATE_REQUEST,
+        a.UPDATE_CERTIFICATE_SUCCESS,
+        a.UPDATE_CERTIFICATE_FAILURE
+      ]
+    }
+  });
+
+export const uploadVideo = (value, profileId) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `seller/${profileId}/video`,
+      method: "POST",
+      body: value,
+      types: [
+        a.UPLOAD_VIDEO_REQUEST,
+        a.UPLOAD_VIDEO_SUCCESS,
+        a.UPLOAD_VIDEO_FAILURE
+      ]
+    }
+  });
+
+export const deleteCertificate = (profileId, certificateId) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `seller/${profileId}/certificate/${certificateId}`,
+      method: "DELETE",
+      types: [
+        a.DELETE_CERTIFICATE_REQUEST,
+        {
+          type: a.DELETE_CERTIFICATE_SUCCESS,
+          meta: certificateId
+        },
+        a.DELETE_CERTIFICATE_FAILURE
+      ]
+    }
+  });

@@ -213,6 +213,7 @@ export const it = {
       d_rejected_requests: "Richieste di acquisto rifiutate",
       p_contact_information: "Informazioni sui contatti",
       p_company_information: "Informazioni sull'azienda",
+      p_seller_certificate: "Il mio certificato",
       d_change_password: "Cambia la password",
       d_products: "I miei prodotti",
       d_messages: "Centro messaggi",

@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { reset } from "redux-form";
 import Dashboard from "../../views/Dashboard/Dashboard";
 import * as a from "../../actions/Auth/Auth_actions";
 import * as d from "../../actions/Dashboard/Dashboard_actions";
@@ -9,6 +10,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateProfile: (value, profileId, profileRole) =>
     dispatch(a.updateProfile(value, profileId, profileRole)),
+  uploadCertificate: (value, profileId) =>
+    dispatch(a.uploadCertificate(value, profileId)),
+  updateCertificate: (value, profileId, certificateId) =>
+    dispatch(a.updateCertificate(value, profileId, certificateId)),
+  uploadVideo: (value, profileId) => dispatch(a.uploadVideo(value, profileId)),
+  deleteCertificate: (profileId, certificateId) =>
+    dispatch(a.deleteCertificate(profileId, certificateId)),
   getProducts: (id, page) => dispatch(d.getProducts(id, page)),
   getProduct: product => dispatch(d.getProduct(product)),
   getProductImage: (id, token) => dispatch(d.getProductImage(id, token)),
@@ -19,7 +27,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(d.editProductReview(values, productId, reviewId, locale)),
   changeProductReviewStatus: (productId, reviewId, status, locale) =>
     dispatch(d.changeProductReviewStatus(productId, reviewId, status, locale)),
-  verifyEmail: (token, locale) => dispatch(a.verifyEmail(token, locale))
+  verifyEmail: (token, locale) => dispatch(a.verifyEmail(token, locale)),
+  resetForm: formName => dispatch(reset(formName))
 });
 
 const mergeProps = (state, actions, ownProps) => ({

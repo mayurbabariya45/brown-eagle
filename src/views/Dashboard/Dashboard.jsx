@@ -20,10 +20,17 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       companyForm: false,
-      contactForm: false
+      contactForm: false,
+      certificateForm: false
     };
     this.handleEditForm = this.handleEditForm.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
+    this.handleRemoveCertificate = this.handleRemoveCertificate.bind(this);
+    this.handleUploadCertificateForm = this.handleUploadCertificateForm.bind(
+      this
+    );
+    this.handleEditCertificateForm = this.handleEditCertificateForm.bind(this);
+    this.handleUploadVideo = this.handleUploadVideo.bind(this);
   }
   componentWillMount() {
     const { removeAll } = this.props;
@@ -51,6 +58,90 @@ class Dashboard extends React.Component {
         scroller.scrollTo("myScrollToElement", { offset: -100, smooth: true });
       }
     }
+  }
+  handleEditCertificateForm() {
+    this.setState({
+      certificateForm: !this.state.certificateForm
+    });
+  }
+  handleUploadCertificateForm(values) {
+    const {
+      uploadCertificate,
+      updateCertificate,
+      auth,
+      resetForm,
+      showNotification
+    } = this.props;
+    const authId = auth.user.id;
+    const { file, title } = values;
+    uploadCertificate(file, authId).then(payload => {
+      if (payload.type === "UPLOAD_CERTIFICATE_SUCCESS") {
+        const { id } = payload.payload;
+        updateCertificate({ title }, authId, id).then(response => {
+          if (response.type === "UPDATE_CERTIFICATE_SUCCESS") {
+            this.setState({ certificateForm: false });
+            resetForm("sellerCertificateForm");
+            showNotification(
+              <span data-notify="icon" className="pe-7s-check" />,
+              <div>Certificate has been added successfully.</div>,
+              false
+            );
+          } else {
+            showNotification(
+              <span data-notify="icon" className="pe-7s-shield" />,
+              <div>{response.payload.response.message}</div>,
+              true
+            );
+          }
+        });
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{payload.payload.response.message}</div>,
+          true
+        );
+      }
+    });
+  }
+  handleRemoveCertificate(id) {
+    const { deleteCertificate, auth, showNotification } = this.props;
+    const { user } = auth;
+    const authId = user.id;
+    deleteCertificate(authId, id).then(payload => {
+      if (payload.type === "DELETE_CERTIFICATE_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Certificate has been deleted successfully.</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{payload.payload.response.message}</div>,
+          true
+        );
+      }
+    });
+  }
+  handleUploadVideo(value) {
+    const { uploadVideo, auth, showNotification } = this.props;
+    const { user } = auth;
+    const authId = user.id;
+    uploadVideo(value, authId).then(payload => {
+      if (payload.type === "UPLOAD_VIDEO_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Video has been uploaded successfully.</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{payload.payload.response.message}</div>,
+          true
+        );
+      }
+    });
   }
   handleSubmitForm(values) {
     const { updateProfile, showNotification, auth } = this.props;
@@ -159,8 +250,17 @@ class Dashboard extends React.Component {
                           loading={loading}
                           contactForm={this.state.contactForm}
                           companyForm={this.state.companyForm}
+                          certificateForm={this.state.certificateForm}
                           handleEditForm={this.handleEditForm}
+                          handleRemoveCertificate={this.handleRemoveCertificate}
+                          handleEditCertificateForm={
+                            this.handleEditCertificateForm
+                          }
                           handleSubmitForm={this.handleSubmitForm}
+                          handleUploadCertificateForm={
+                            this.handleUploadCertificateForm
+                          }
+                          handleUploadVideo={this.handleUploadVideo}
                           showNotification={error}
                         />
                       </Element>

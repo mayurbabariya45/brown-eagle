@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { ActionTypes as a } from "../../constants/Auth/Auth_action_type";
 
 const INITIAL_STATE = {
@@ -310,6 +311,86 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: true
+      };
+    case a.UPLOAD_CERTIFICATE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.UPLOAD_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        loading: false
+      };
+    case a.UPLOAD_CERTIFICATE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false
+      };
+    case a.UPDATE_CERTIFICATE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.UPDATE_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        loading: false,
+        user: {
+          ...state.user,
+          certificates: state.user.certificates.concat(action.payload)
+        }
+      };
+    case a.UPDATE_CERTIFICATE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false
+      };
+    case a.DELETE_CERTIFICATE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.DELETE_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        loading: false,
+        user: {
+          ...state.user,
+          certificates: _.filter(
+            state.user.certificates,
+            certificate => certificate._id !== action.meta
+          )
+        }
+      };
+    case a.DELETE_CERTIFICATE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false
+      };
+    case a.UPLOAD_VIDEO_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.UPLOAD_VIDEO_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        loading: false,
+        user: action.payload
+      };
+    case a.UPLOAD_VIDEO_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false
       };
     default:
       return state;

@@ -50,7 +50,6 @@ class ProductImageForm extends Component {
         for (let i = 0; i < allowed; i++) {
           const formData = new FormData();
           formData.append("image", files[i]);
-          console.log(files[i])
           filesToPush.push({
             ...files[i],
             name: files[i].name,

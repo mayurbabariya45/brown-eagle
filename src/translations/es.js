@@ -214,6 +214,7 @@ export const es = {
       d_rejected_requests: "Solicitudes de compra rechazadas",
       p_contact_information: "Información del contacto",
       p_company_information: "Información de la compañía",
+      p_seller_certificate: "Mi certificado",
       d_change_password: "Cambia la contraseña",
       d_products: "Mis productos",
       d_messages: "Centro de mensajes",

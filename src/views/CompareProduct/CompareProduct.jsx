@@ -28,6 +28,7 @@ class CompareProduct extends React.Component {
     window.removeEventListener("scroll", this.updateTopScrolling, false);
   }
   updateTopScrolling() {
+    if (_.isEmpty(this.props.products)) return false;
     const offsetTop = this.table.getBoundingClientRect().top;
     const tableHeight = this.table.getBoundingClientRect().height;
     const topInfoHeight = document
@@ -81,7 +82,6 @@ class CompareProduct extends React.Component {
   render() {
     const { products, translate } = this.props;
     const selectedProducts = _.filter(products, product => product.selected);
-    console.log(products);
     return (
       <section
         className={classname("cd-products-comparison-table", {
@@ -95,63 +95,74 @@ class CompareProduct extends React.Component {
             <Col md={12}>
               <div className="compare-title">
                 <h3>{translate("cm_page_title")}</h3>
-                <div className="actions">
-                  <a
-                    href="#0"
-                    className="reset"
-                    onClick={this.handleResetFilter}
-                  >
-                    {translate("cm_reset")}
-                  </a>
-                  <a
-                    href="#0"
-                    className={classname("filter", {
-                      active: selectedProducts.length >= 2
-                    })}
-                    onClick={this.handleFilterProduct}
-                  >
-                    {translate("cm_filter")}
-                  </a>
-                </div>
+                {!_.isEmpty(products) && (
+                  <div className="actions">
+                    <a
+                      href="#0"
+                      className="reset"
+                      onClick={this.handleResetFilter}
+                    >
+                      {translate("cm_reset")}
+                    </a>
+                    <a
+                      href="#0"
+                      className={classname("filter", {
+                        active: selectedProducts.length >= 2
+                      })}
+                      onClick={this.handleFilterProduct}
+                    >
+                      {translate("cm_filter")}
+                    </a>
+                  </div>
+                )}
               </div>
             </Col>
           </Row>
-          <Row>
-            <Col md={12}>
-              <div
-                className={classname("cd-products-table", {
-                  "top-fixed": this.state.productsTopInfo
-                })}
-                ref={ref => {
-                  this.table = ref;
-                }}
-              >
-                <div className="features">
-                  <div className="top-info">{translate("cm_models")}</div>
-                  <ul className="cd-features-list">
-                    <li>{translate("cm_price")}</li>
-                    <li>{translate("cm_ratings")}</li>
-                    <li>{translate("cm_reviews")}</li>
-                    <li>{translate("cm_keywords")}</li>
-                    <li>{translate("cm_min_quanity")}</li>
-                    <li>{translate("cm_available")}</li>
-                  </ul>
-                </div>
+          {!_.isEmpty(products) && (
+            <Row>
+              <Col md={12}>
                 <div
-                  className="cd-products-wrapper"
+                  className={classname("cd-products-table", {
+                    "top-fixed": this.state.productsTopInfo
+                  })}
                   ref={ref => {
-                    this.productsWrapper = ref;
+                    this.table = ref;
                   }}
                 >
-                  <CompareItems
-                    products={products}
-                    handleSelectProduct={this.handleSelectProduct}
-                    width={this.state.width}
-                  />
+                  <div className="features">
+                    <div className="top-info">{translate("cm_models")}</div>
+                    <ul className="cd-features-list">
+                      <li>{translate("cm_price")}</li>
+                      <li>{translate("cm_ratings")}</li>
+                      <li>{translate("cm_reviews")}</li>
+                      <li>{translate("cm_keywords")}</li>
+                      <li>{translate("cm_min_quanity")}</li>
+                      <li>{translate("cm_available")}</li>
+                    </ul>
+                  </div>
+                  <div
+                    className="cd-products-wrapper"
+                    ref={ref => {
+                      this.productsWrapper = ref;
+                    }}
+                  >
+                    <CompareItems
+                      products={products}
+                      handleSelectProduct={this.handleSelectProduct}
+                      width={this.state.width}
+                    />
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
+              </Col>
+            </Row>
+          )}
+          {_.isEmpty(products) && (
+            <Row>
+              <Col md={12}>
+                <div className="empty-text">nothing to show in compare</div>
+              </Col>
+            </Row>
+          )}
         </Grid>
       </section>
     );

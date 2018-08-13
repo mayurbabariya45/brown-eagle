@@ -232,6 +232,7 @@ export const en = {
       d_rejected_requests: "Rejected Buying Requests",
       p_contact_information: "Contact Information",
       p_company_information: "Company Information",
+      p_seller_certificate: "My Certificate",
       d_change_password: "Change Password",
       d_products: "My Products",
       d_messages: "Message Center",

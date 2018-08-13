@@ -184,6 +184,7 @@ export const fr = {
       d_rejected_requests: "Rejet des demandes d'achat",
       p_contact_information: "Informations de contact",
       p_company_information: "Informations sur la société",
+      p_seller_certificate: "Mon certificat",
       d_approved: "Approuvé",
       d_submit: "Soumettre",
       d_change_password: "Changer le mot de passe",

@@ -2707,6 +2707,40 @@ section {
   .product-share-buttons ul li {
     padding: 5px; }
 
+.seller-certificate .dropzone-certificate {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #d3d3d3;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.seller-certificate .images-preview .preview {
+  text-align: left; }
+  .seller-certificate .images-preview .preview .preview-box {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+
+.seller-video .dropzone-video {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #d3d3d3;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.seller-video .video-preview {
+  display: flex;
+  height: 250px;
+  align-items: center;
+  justify-content: center; }
+
+.seller-certificate-show .preview-box {
+  margin-bottom: 10px !important; }
+
 .news-letter {
   background-color: #f8f8f8; }
   .news-letter .card.card-stats .content {
