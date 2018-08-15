@@ -67,6 +67,8 @@ const mapStateToProps = state => {
       keywords: newKeywords,
       product_keywords: setKeyword,
       value: setProductValue,
+      product_label: productLabels,
+      value_product_label: productValues,
       label: setProductLabel
     }
   };
