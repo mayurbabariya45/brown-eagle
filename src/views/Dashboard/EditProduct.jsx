@@ -249,7 +249,8 @@ class EditProduct extends Component {
       seller: id,
       category: this.state.selectedCategory.value,
       subCategory: this.state.selectedSubCategory.value,
-      keywords
+      keywords,
+      quickDetails
     });
     updateProduct(product, "en").then(payload => {
       if (payload.type === "UPDATE_PRODUCT_SUCCESS") {
