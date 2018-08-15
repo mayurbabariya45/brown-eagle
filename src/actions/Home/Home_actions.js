@@ -20,7 +20,7 @@ export const getCategories = () => dispatch =>
 export const getProducts = category => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: `product?page=1&category=${category.id}`,
+      endpoint: `product?page=1&status=approved&category=${category.id}`,
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [

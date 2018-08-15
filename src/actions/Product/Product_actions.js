@@ -193,7 +193,7 @@ export const searchProducts = (values, page) => dispatch => {
 
   return dispatch({
     [RSAA]: {
-      endpoint: `product/search?lang=en&status=pending${category}${subCategory}${sort}${order}${minPrice}${maxPrice}${minRating}${maxRating}&page=${page}`,
+      endpoint: `product/search?lang=en&status=approved${category}${subCategory}${sort}${order}${minPrice}${maxPrice}${minRating}${maxRating}&page=${page}`,
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [
