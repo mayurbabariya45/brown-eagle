@@ -3,10 +3,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col, Nav, NavItem, Tab } from "react-bootstrap";
 import { Confirm } from "../../components/Confirm/Confirm";
-import { scroller, Element } from "react-scroll";
+import { scroller } from "react-scroll";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import QuotationContainer from "../../containers/AccountContainer/QuotationContainer";
+import OrdersContainer from "../../containers/AccountContainer/OrdersContainer";
 import ProductFavouritesContainer from "../../containers/AccountContainer/ProductFavouritesContainer";
 import Profile from "./Profile";
 import noAvatar from "../../assets/img/no-avatar.png";
@@ -122,13 +123,17 @@ class Account extends Component {
                         </NavItem>
                         <NavItem eventKey="second">
                           <i className="pe-7s-users" />
-                          {translate("my_quotations")}
+                          Orders
                         </NavItem>
                         <NavItem eventKey="third">
+                          <i className="pe-7s-users" />
+                          {translate("my_quotations")}
+                        </NavItem>
+                        <NavItem eventKey="fourth">
                           <i className="pe-7s-like" />
                           {translate("my_favourites")}
                         </NavItem>
-                        <NavItem eventKey="fourth">
+                        <NavItem eventKey="fifth">
                           <i className="pe-7s-lock" />
                           {translate("d_change_password")}
                         </NavItem>
@@ -165,7 +170,7 @@ class Account extends Component {
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       {!_.isEmpty(user) && (
-                        <QuotationContainer
+                        <OrdersContainer
                           buyerId={user.id}
                           locale={locale}
                           translate={translate}
@@ -175,7 +180,7 @@ class Account extends Component {
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
                       {!_.isEmpty(user) && (
-                        <ProductFavouritesContainer
+                        <QuotationContainer
                           buyerId={user.id}
                           locale={locale}
                           translate={translate}
@@ -184,6 +189,16 @@ class Account extends Component {
                       )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="fourth">
+                      {!_.isEmpty(user) && (
+                        <ProductFavouritesContainer
+                          buyerId={user.id}
+                          locale={locale}
+                          translate={translate}
+                          showNotification={showNotification}
+                        />
+                      )}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="fifth">
                       <PasswordContainer
                         translate={translate}
                         showNotification={showNotification}

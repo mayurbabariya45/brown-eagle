@@ -2604,6 +2604,55 @@ section {
     -ms-transform: translateX(0);
     transform: translateX(0); }
 
+.account-orders .result-showing {
+  margin-top: 10px; }
+
+.account-orders .box-listings .box-list-items .box-list-item-details {
+  float: left;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0; }
+  .account-orders .box-listings .box-list-items .box-list-item-details .image-container {
+    padding: 0 15px;
+    margin-top: 5px;
+    width: 25%; }
+  .account-orders .box-listings .box-list-items .box-list-item-details .box-list-item-detail {
+    float: left;
+    width: 50%;
+    padding: 10px; }
+    .account-orders .box-listings .box-list-items .box-list-item-details .box-list-item-detail .box-list-item-desc p {
+      margin: 0; }
+  .account-orders .box-listings .box-list-items .box-list-item-details .box-list-title {
+    width: 100%; }
+
+.account-orders .box-listings .box-list-items .box-container-button {
+  float: left;
+  width: 20%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center; }
+  .account-orders .box-listings .box-list-items .box-container-button .box-button {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 145px; }
+    .account-orders .box-listings .box-list-items .box-container-button .box-button .open {
+      background-color: #00cf59;
+      border-color: #00cf59;
+      padding: 2px 30px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      cursor: default; }
+    .account-orders .box-listings .box-list-items .box-container-button .box-button .closed,
+    .account-orders .box-listings .box-list-items .box-container-button .box-button .rejected {
+      background-color: #d02023;
+      border-color: #d02023;
+      padding: 2px 25px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      cursor: default; }
+
 .compare-product-section .compare-title h1 {
   margin: 10px 0;
   font-size: 25px; }

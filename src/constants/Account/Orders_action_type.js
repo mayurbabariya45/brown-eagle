@@ -1,0 +1,7 @@
+export const ActionTypes = {
+  GET_ORDERS_REQUEST: "GET_ORDERS_REQUEST",
+  GET_ORDERS_SUCCESS: "GET_ORDERS_SUCCESS",
+  GET_ORDERS_FAILURE: "GET_ORDERS_FAILURE"
+};
+
+export default ActionTypes;

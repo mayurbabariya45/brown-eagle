@@ -1047,7 +1047,70 @@ section {
     }
   }
 }
-
+.account-orders{
+  .result-showing {
+    margin-top: 10px;
+  }
+  .box-listings {
+    .box-list-items {
+      .box-list-item-details {
+        float: left;
+        width: 80%;
+        margin: 0 auto;
+        padding: 0;
+        .image-container{
+          padding: 0 15px;
+          margin-top: 5px;
+          width: 25%;
+        }
+        .box-list-item-detail{
+          float: left;
+          width: 50%;
+          padding: 10px;
+          .box-list-item-desc{
+            p{
+              margin: 0;
+            }
+          }
+        }
+        .box-list-title{
+          width: 100%;
+        }
+      }
+      .box-container-button {
+        float: left;
+        width: 20%;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+        .box-button {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            height: 145px;
+            .open {
+                background-color: #00cf59;
+                border-color: #00cf59;
+                padding: 2px 30px;
+                text-transform: uppercase;
+                margin-bottom: 5px;
+                cursor: default;
+            }
+            .closed,
+            .rejected {
+                background-color: #d02023;
+                border-color: #d02023;
+                padding: 2px 25px;
+                text-transform: uppercase;
+                margin-bottom: 5px;
+                cursor: default;
+            }
+        }
+    }
+    }
+  }
+}
 .compare-product-section{
   .compare-title{
     h1{

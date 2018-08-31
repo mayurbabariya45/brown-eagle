@@ -19,7 +19,12 @@ const ProductReviewItems = props => (
           className="action action-status"
           onClick={props.handleProductReviewStatus}
         >
-          <i className={className("fa", {"fa-toggle-on": props.status === "enabled", "fa-toggle-off": props.status === "disabled"})} />
+          <i
+            className={className("fa", {
+              "fa-toggle-on": props.status === "enabled",
+              "fa-toggle-off": props.status === "disabled"
+            })}
+          />
         </div>
         <div
           className="action action-edit"

@@ -15,6 +15,7 @@ import categoriesReducer from "./CategoriesReducer/CategoriesReducer";
 import cartReducer from "./CartReducer/CartReducer";
 import plansReducer from "./PlansReducer/PlansReducer";
 import accountReducer from "./AccountReducer/AccountReducer";
+import buyerOrderReducer from "./OrdersReducer/OrdersReducer";
 
 const rootReducers = combineReducers({
   home: homeReducer,
@@ -31,6 +32,7 @@ const rootReducers = combineReducers({
   plans: plansReducer,
   account: accountReducer,
   compare: compareReducer,
+  buyerOrders: buyerOrderReducer,
   Intl,
   notifications
 });
