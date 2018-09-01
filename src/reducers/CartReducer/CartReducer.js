@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
     case a.GET_CART_PRODUCTS_SUCCESS:
       return {
         ...state,
-        loading: false
+        loading: false,
       };
 
     case a.GET_CART_PRODUCTS_FAILURE:

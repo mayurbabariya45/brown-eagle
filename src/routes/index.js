@@ -14,6 +14,7 @@ import QuotationContainer from "../containers/QuotationContainer/QuotationContai
 import RequestQuotationContainer from "../containers/QuotationContainer/RequestQuotationContainer";
 import PlansContainer from "../containers/PlansContainer/PlansContainer";
 import CompareProductContainer from "../containers/CompareProductContainer/CompareProductContainer";
+import CheckoutContainer from "../containers/CheckoutContainer/CheckoutContainer";
 import ServicesMembership from "../views/static/ServicesMembership";
 import PurchaseRegion from "../views/static/PurchaseRegion";
 import HelpCommunity from "../views/static/HelpCommunity";
@@ -140,6 +141,11 @@ const appRoutes = [
     path: "/compare",
     name: "Compare Product",
     component: CompareProductContainer
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: CheckoutContainer
   },
   {
     path: "/services_membership",

@@ -19,6 +19,7 @@ const ProductItem = props => {
     removeCartItem,
     addToWhishlist,
     handleContinueButton,
+    handleCheckoutButton,
     buttons
   } = props;
   let productImages;
@@ -85,7 +86,7 @@ const ProductItem = props => {
             >
               <span>{translate("cart_continue")}</span>
             </Button>
-            <Button fill radius bsStyle="warning">
+            <Button fill radius bsStyle="warning" onClick={handleCheckoutButton}>
               <span>{translate("cart_order")}</span>
             </Button>
           </div>

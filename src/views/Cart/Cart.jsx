@@ -29,6 +29,7 @@ class Cart extends Component {
     this.onIncrement = this.onIncrement.bind(this);
     this.onDecrement = this.onDecrement.bind(this);
     this.handleContinueButton = this.handleContinueButton.bind(this);
+    this.handleCheckoutButton = this.handleCheckoutButton.bind(this);
   }
   onIncrement(item) {
     const { onIncrement, showNotification } = this.props;
@@ -110,6 +111,10 @@ class Cart extends Component {
     const { history } = this.props;
     history.push("/products");
   }
+  handleCheckoutButton() {
+    const { history } = this.props;
+    history.push("/checkout");
+  }
   render() {
     const { translate, products, loading, cartProductTotal } = this.props;
     let cartTotalPrice = 0;
@@ -126,6 +131,7 @@ class Cart extends Component {
           removeCartItem={() => this.removeCartItem(product)}
           addToWhishlist={() => this.addToWhishlist(product)}
           handleContinueButton={this.handleContinueButton}
+          handleCheckoutButton={this.handleCheckoutButton}
         />
       );
     });
