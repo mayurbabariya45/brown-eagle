@@ -6,11 +6,12 @@ import ImageLoader from "../../components/ImageLoader/ImageLoader";
 import ContentLoader from "../../components/Loader/Loader";
 import Quantity from "../../components/Quantity/Quantity";
 import noProduct from "../../assets/img/no-product.png";
+import { getCurrency } from "../../variables/Variables";
 
 const preloader = () => <ContentLoader height={300} inFight />;
 
 const ProductItem = props => {
-  const { translate, product } = props;
+  const { product, locale } = props;
   let productImages;
   let productUrl;
   if (!_.isEmpty(product)) {
@@ -40,16 +41,19 @@ const ProductItem = props => {
       </div>
       <div className="cart-item-details">
         <div className="product-title">
-          <p>{product.name}</p>
+          <p>{product.nameTranslations[locale]}</p>
         </div>
         <div className="product-price">
           <p>
             <span className="text-warning">Price -</span>
-            <span>${product ? product.productPrice.toFixed(2) : "0.00"}/-</span>
+            <span>
+              {getCurrency(product.currency)}
+              {product ? product.productPrice.toFixed(2) : "0.00"}/-
+            </span>
           </p>
         </div>
         <div className="product-description">
-          <p>Test</p>
+          <p>{product.descriptionTranslations[locale].substring(0, 600)}</p>
         </div>
       </div>
     </div>

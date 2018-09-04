@@ -5,6 +5,8 @@ const INITIAL_STATE = {
   error: false,
   success: false,
   addAddress: false,
+  orderLoading: false,
+  orderSuccess: false,
   address: {}
 };
 
@@ -18,17 +20,21 @@ export default (state = INITIAL_STATE, action) => {
     case a.ADD_ORDER_REQUEST:
       return {
         ...state,
+        orderLoading: true,
         loading: true
       };
     case a.ADD_ORDER_SUCCESS:
       return {
         ...state,
+        orderLoading: false,
         loading: false,
-        success: true
+        success: true,
+        orderSuccess: true
       };
     case a.ADD_ORDER_FAILURE:
       return {
         ...state,
+        orderLoading: false,
         error: true,
         loading: false
       };

@@ -7,6 +7,7 @@ import ContentLoader from "../../components/Loader/Loader";
 import Quantity from "../../components/Quantity/Quantity";
 import Button from "../../elements/CustomButton/CustomButton";
 import noProduct from "../../assets/img/no-product.png";
+import { getCurrency } from "../../variables/Variables";
 
 const preloader = () => <ContentLoader height={300} inFight />;
 
@@ -64,8 +65,11 @@ const ProductItem = props => {
         <div className="product-price">
           <p>
             <span className="text-warning">Price -</span>
-            <span>${product ? product.productPrice.toFixed(2) : "0.00"}/-</span>
-            <span>₹2,997 40% Off 1 Offer Available</span>
+            <span>
+              {getCurrency(product.currency)}
+              {product ? product.productPrice.toFixed(2) : "0.00"}/-
+            </span>
+            {/* <span>₹2,997 40% Off 1 Offer Available</span> */}
           </p>
           <div className="actions product-action">
             <Button className="btn-radius btn-fill" onClick={addToWhishlist}>
@@ -86,7 +90,12 @@ const ProductItem = props => {
             >
               <span>{translate("cart_continue")}</span>
             </Button>
-            <Button fill radius bsStyle="warning" onClick={handleCheckoutButton}>
+            <Button
+              fill
+              radius
+              bsStyle="warning"
+              onClick={handleCheckoutButton}
+            >
               <span>{translate("cart_order")}</span>
             </Button>
           </div>

@@ -9,6 +9,7 @@ import Button from "../../elements/CustomButton/CustomButton";
 import product1 from "../../assets/img/products/product1.png";
 import adsBanner from "../../assets/img/ads/banner.jpg";
 import ProductItems from "./ProductItem";
+import { getCurrency } from "../../variables/Variables";
 
 const staticProducts = [
   {
@@ -30,6 +31,10 @@ class Cart extends Component {
     this.onDecrement = this.onDecrement.bind(this);
     this.handleContinueButton = this.handleContinueButton.bind(this);
     this.handleCheckoutButton = this.handleCheckoutButton.bind(this);
+  }
+  componentWillMount() {
+    const { getCartProducts } = this.props;
+    getCartProducts();
   }
   onIncrement(item) {
     const { onIncrement, showNotification } = this.props;
@@ -101,7 +106,7 @@ class Cart extends Component {
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
-          <div>{`${item.name} not deleted. Please try again later.`}</div>,
+          <div>{`${item.name} not added. Please try again later.`}</div>,
           true
         );
       }
@@ -116,13 +121,14 @@ class Cart extends Component {
     history.push("/checkout");
   }
   render() {
-    const { translate, products, loading, cartProductTotal } = this.props;
+    const { translate, products, loading, cartProductTotal, cart } = this.props;
+    const { price } = cart;
     let cartTotalPrice = 0;
     const cartItems = _.map(products, (product, index) => {
       cartTotalPrice += product.productPrice * product.quantity;
       return (
         <ProductItems
-          key={product.id}
+          key={product._id}
           translate={translate}
           buttons={products.length - 1 === index}
           product={product}
@@ -191,7 +197,10 @@ class Cart extends Component {
                                 <ul>
                                   <li>
                                     <span>Price ({cartProductTotal} item)</span>
-                                    <span>₹ {cartTotalPrice.toFixed(2)}</span>
+                                    <span>
+                                      {getCurrency(price.currency)}{" "}
+                                      {cartTotalPrice.toFixed(2)}
+                                    </span>
                                   </li>
                                   <li>
                                     <span>Delivery Charges</span>
@@ -199,12 +208,15 @@ class Cart extends Component {
                                   </li>
                                   <li>
                                     <span>Amount Payable</span>
-                                    <span>₹ {cartTotalPrice.toFixed(2)}</span>
+                                    <span>
+                                      {getCurrency(price.currency)}{" "}
+                                      {cartTotalPrice.toFixed(2)}
+                                    </span>
                                   </li>
                                 </ul>
                               </div>
                               <div className="cart-details-footer">
-                                <p>{translate("cart_total_label")}</p>
+                                {/* <p>{translate("cart_total_label")}</p> */}
                               </div>
                             </div>
                           </Col>
@@ -292,6 +304,7 @@ Cart.propTypes = {
   removeCartItem: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
   addToWhishlist: PropTypes.func.isRequired,
+  getCartProducts: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired
 };
 Cart.defaultProps = {};

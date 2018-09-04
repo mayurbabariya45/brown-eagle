@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   error: false,
   success: false,
   cartProductTotal: 0,
+  cart: {},
   products: []
 };
 
@@ -28,6 +29,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+        cart: action.payload,
+        cartProductTotal: 1,
+        products: [
+          {
+            ...action.payload.product,
+            quantity: action.payload.quantity
+          }
+        ]
       };
 
     case a.GET_CART_PRODUCTS_FAILURE:

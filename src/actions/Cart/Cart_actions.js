@@ -57,13 +57,25 @@ export const addToCartUnsafe = item => ({
   item
 });
 
-export const addToCart = item => dispatch => {
+export const addToCart = (item, authId) => dispatch => {
   dispatch(addToCartUnsafe(item));
+  const product = Object.assign(
+    {},
+    {
+      product: item.id,
+      quantity: item.quantity,
+      price: {
+        value: item.productPrice,
+        currency: item.currency
+      }
+    }
+  );
   return dispatch({
     [RSAA]: {
-      endpoint: "category?status=enabled&perPage=99",
-      method: "GET",
+      endpoint: `cart/${authId}`,
+      method: "POST",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product),
       types: [
         a.ADD_TO_CART_REQUEST,
         a.ADD_TO_CART_SUCCESS,

@@ -4850,6 +4850,12 @@ section {
   border: none;
   height: 70px; }
 
+.order-success {
+  margin: 25px 0 0;
+  padding: 0; }
+  .order-success .order-success-content {
+    text-align: center; }
+
 .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:hover, .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:focus, .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:active {
   background-color: transparent; }
 

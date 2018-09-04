@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Col, FormGroup, FormControl } from "react-bootstrap";
+import { Row, Col, FormControl } from "react-bootstrap";
 import { Card } from "../../components/Card/Card";
 
-const OrderRemark = () => (
+const OrderRemark = props => (
   <div className="order-remarks">
     <Row>
       <Col md={12}>
@@ -19,6 +19,8 @@ const OrderRemark = () => (
           content={
             <div>
               <FormControl
+                onChange={props.handleOrderRemark}
+                value={props.value}
                 type="text"
                 placeholder="Please add additional detailed product information to make it easier for the supplier to understand your exact requirements…"
               />
@@ -30,6 +32,13 @@ const OrderRemark = () => (
   </div>
 );
 
-OrderRemark.propTypes = {};
+OrderRemark.propTypes = {
+  handleOrderRemark: PropTypes.func.isRequired,
+  value: PropTypes.string
+};
+
+OrderRemark.defaultProps = {
+  value: ""
+};
 
 export default OrderRemark;

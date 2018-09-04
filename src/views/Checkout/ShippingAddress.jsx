@@ -83,7 +83,8 @@ class ShippingAddress extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showForm: false
+      showForm: _.isEmpty(props.address) || false,
+      remarks: ""
     };
     this.handleFormShow = this.handleFormShow.bind(this);
   }
@@ -92,6 +93,7 @@ class ShippingAddress extends React.Component {
       showForm: !this.state.showForm
     });
   }
+ 
   render() {
     const { translate, handleSubmit, saveAddress, address } = this.props;
     return (
@@ -119,16 +121,19 @@ class ShippingAddress extends React.Component {
               }
               content={
                 <div>
-                  {(this.state.showForm || _.isEmpty(address)) && (
+                  {((this.state.showForm && _.isEmpty(address)) ||
+                    (this.state.showForm && !_.isEmpty(address))) && (
                     <ShippingAddressForm
                       translate={translate}
                       handleSubmit={handleSubmit}
                       saveAddress={saveAddress}
+                      handleFormShow={this.handleFormShow}
                     />
                   )}
-                  {!_.isEmpty(address) && (
-                    <ShippingAddressValues {...address} />
-                  )}
+                  {!this.state.showForm &&
+                    !_.isEmpty(address) && (
+                      <ShippingAddressValues {...address} />
+                    )}
                 </div>
               }
             />
@@ -139,6 +144,8 @@ class ShippingAddress extends React.Component {
   }
 }
 
-ShippingAddress.propTypes = {};
+ShippingAddress.propTypes = {
+  translate: PropTypes.func.isRequired
+};
 
 export default ShippingAddress;

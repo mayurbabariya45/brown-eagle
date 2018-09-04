@@ -157,9 +157,12 @@ class Product extends Component {
     return false;
   }
   addToCart(item) {
-    const { addToCart, showNotification } = this.props;
+    const { addToCart, showNotification, auth } = this.props;
     const objectProduct = Object.assign({}, item, { quantity: 1 });
-    addToCart(objectProduct).then(response => {
+    const buyer = auth.user.id;
+    const authRole = auth.user.role;
+    if (authRole !== "buyer") return false;
+    addToCart(objectProduct, buyer).then(response => {
       if (response.type === "ADD_TO_CART_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
@@ -169,7 +172,7 @@ class Product extends Component {
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
-          <div>Profile has been changed successfully.</div>,
+          <div>{response.payload.response.message}</div>,
           true
         );
       }

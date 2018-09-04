@@ -19,17 +19,19 @@ class ShippingAddressForm extends React.Component {
     this.state = {
       country: ""
     };
+
     this.handleLocation = this.handleLocation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(values) {
-    const { saveAddress } = this.props;
+    const { saveAddress, handleFormShow } = this.props;
     if (!_.isEmpty(values)) {
       saveAddress(
         Object.assign({}, values, {
           country: this.state.country
         })
       );
+      handleFormShow();
     }
   }
   handleLocation(values) {
@@ -38,7 +40,7 @@ class ShippingAddressForm extends React.Component {
     });
   }
   render() {
-    const { loading, handleSubmit, translate } = this.props;
+    const { loading, handleSubmit, translate, initialValues } = this.props;
     return (
       <div className="shipping-address-form">
         <BlockUi tag="div" blocking={loading}>
@@ -114,6 +116,12 @@ class ShippingAddressForm extends React.Component {
                     <FormGroup>
                       <ControlLabel>Country</ControlLabel>
                       <Select
+                        selectedValue={
+                          !_.isEmpty(initialValues) && {
+                            value: initialValues.country || "",
+                            label: initialValues.country || ""
+                          }
+                        }
                         searchable
                         options={countries}
                         handleCountry={this.handleLocation}
@@ -166,7 +174,8 @@ class ShippingAddressForm extends React.Component {
 ShippingAddressForm.propTypes = {
   saveAddress: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  handleFormShow: PropTypes.func.isRequired
 };
 
 export default ShippingAddressForm;

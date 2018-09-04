@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   getSimilarProduct: (productId, locale) =>
     dispatch(a.getSimilarProduct(productId, locale)),
   flushProduct: () => dispatch(a.flushProduct()),
-  addToCart: item => dispatch(c.addToCart(item)),
+  addToCart: (item, buyer) => dispatch(c.addToCart(item, buyer)),
   addToCartUnsafe: item => dispatch(c.addToCartUnsafe(item)),
   addToCompare: item => dispatch(d.addToCompare(item)),
   addReview: (value, id, locale) =>
