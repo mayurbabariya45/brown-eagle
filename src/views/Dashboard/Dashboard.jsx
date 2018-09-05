@@ -12,7 +12,7 @@ import Home from "./Home";
 import Profile from "./Profile";
 import Products from "./Products";
 import Sidebar from "./Sidebar";
-import Orders from "./Orders";
+import OrdersContainer from "../../containers/DashboardContainer/OrderContainer";
 import noAvatar from "../../assets/img/no-avatar.png";
 
 class Dashboard extends React.Component {
@@ -294,7 +294,14 @@ class Dashboard extends React.Component {
                       />
                     </Tab.Pane>
                     <Tab.Pane eventKey="six">
-                      <Orders />
+                      {!_.isEmpty(user) && (
+                        <OrdersContainer
+                          seller={user && user.id}
+                          translate={translate}
+                          locale={locale}
+                          showNotification={showNotification}
+                        />
+                      )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="ten">
                       {!_.isEmpty(user) && (

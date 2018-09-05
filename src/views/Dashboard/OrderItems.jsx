@@ -1,28 +1,41 @@
 import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Col } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  FormGroup,
+  ControlLabel,
+  FormControl
+} from "react-bootstrap";
 import BlockUi from "react-block-ui";
-import Pagination from "../../../components/Pagination/Pagination";
-import ImageLoader from "../../../components/ImageLoader/ImageLoader";
-import ContentLoader from "../../../components/Loader/Loader";
-import Button from "../../../elements/CustomButton/CustomButton";
-import noImage from "../../../assets/img/no-product.png";
-import { getCurrency } from "../../../variables/Variables";
+import Pagination from "../../components/Pagination/Pagination";
+import ImageLoader from "../../components/ImageLoader/ImageLoader";
+import ContentLoader from "../../components/Loader/Loader";
+import Button from "../../elements/CustomButton/CustomButton";
+import noImage from "../../assets/img/no-product.png";
+import { getCurrency } from "../../variables/Variables";
+import Modal from "../../components/Modal/Modal";
 
 const preloader = () => <ContentLoader height={300} inFight />;
-
+const status = [
+  "pending",
+  "confirmed",
+  "payment_pending",
+  "shipped",
+  "delivered",
+  "rejected",
+  "cancelled"
+];
 const OrderStatus = props => (
   <div className="box-container-button">
     <div className="box-button">
       <Button fill bsStyle="warning" className="open">
         {props.status}
       </Button>
-      {props.status === "confirmed" && (
-        <Button fill bsStyle="warning" onClick={props.showPaymentModal}>
-          Pay Now
-        </Button>
-      )}
+      <Button fill bsStyle="warning" onClick={props.showOrderStatusModal}>
+        Change Status
+      </Button>
     </div>
   </div>
 );
@@ -43,20 +56,6 @@ const OrderItem = props => {
         <div className="box-list-title">
           <h3>{_.capitalize(props.product.nameTranslations[props.locale])}</h3>
         </div>
-        {/* <div className="box-list-rating-summary">
-          <div
-            className="box-list-rating-result"
-            title={`${props.rating / 5 * 100}%`}
-          >
-            <span
-              style={{
-                width: `${props.rating / 5 * 100}%`
-              }}
-            >
-              <span>{`${props.rating / 5 * 100}%`}</span>
-            </span>
-          </div>
-        </div> */}
         <div className="image-container">
           <div className="product-image-container">
             <a href="#products" className="product photo product-item-photo">
@@ -67,7 +66,8 @@ const OrderItem = props => {
         <div className="box-list-item-detail">
           <div className="box-list-item-desc">
             <p>
-              <span>Seller</span>: {props.seller.companyName}
+              {!_.isEmpty(props.buyer.companyName) &&
+                `Buyer: ${props.buyer.companyName}`}
             </p>
             <p>
               <span>Total</span>: {getCurrency(props.price.currency)}
@@ -77,12 +77,16 @@ const OrderItem = props => {
               <span>Quantity</span>:
               {props.quantity}
             </p>
+            <p>
+              <span>Order remarks</span>:
+              {props.remarks}
+            </p>
           </div>
         </div>
       </div>
       <OrderStatus
         status={props.status}
-        showPaymentModal={props.showPaymentModal}
+        showOrderStatusModal={props.showOrderStatusModal}
       />
     </div>
   );
@@ -99,7 +103,9 @@ const OrderItems = props => (
                 key={order.id}
                 {...order}
                 locale={props.locale}
-                showPaymentModal={() => props.showPaymentModal(order.id)}
+                showOrderStatusModal={() =>
+                  props.showOrderStatusModal(order.id)
+                }
               />
             ))}
           </div>
@@ -111,6 +117,32 @@ const OrderItems = props => (
       pageLimit={20}
       pageNeighbours={1}
       onPageChanged={props.onPageChanged}
+    />
+    <Modal
+      show={props.showModal}
+      onHide={props.showOrderStatusModal}
+      bHeader="Order Status"
+      bContent={
+        <BlockUi tag="div" blocking={props.loading}>
+          <div className="change-order-status">
+            <FormGroup controlId="formControlsSelect">
+              <ControlLabel>Order Status</ControlLabel>
+              <FormControl
+                componentClass="select"
+                placeholder="select"
+                onChange={props.handleChangeOrderStatus}
+              >
+                <option value="select">Change Status</option>
+                {_.map(status, value => (
+                  <option key={value} value={value}>
+                    {_.capitalize(value)}
+                  </option>
+                ))}
+              </FormControl>
+            </FormGroup>
+          </div>
+        </BlockUi>
+      }
     />
   </div>
 );

@@ -16,6 +16,7 @@ import cartReducer from "./CartReducer/CartReducer";
 import plansReducer from "./PlansReducer/PlansReducer";
 import accountReducer from "./AccountReducer/AccountReducer";
 import buyerOrderReducer from "./OrdersReducer/OrdersReducer";
+import sellerOrderReducer from "./OrdersReducer/SellerOrdersReducer";
 import checkoutReducer from "./CheckoutReducer/CheckoutReducer";
 
 const rootReducers = combineReducers({
@@ -34,6 +35,7 @@ const rootReducers = combineReducers({
   account: accountReducer,
   compare: compareReducer,
   buyerOrders: buyerOrderReducer,
+  sellerOrders: sellerOrderReducer,
   checkout: checkoutReducer,
   Intl,
   notifications

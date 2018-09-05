@@ -1,4 +1,4 @@
-import { ActionTypes as a } from "../../constants/Account/Orders_action_type";
+import { ActionTypes as a } from "../../constants/Dashboard/Orders_action_type";
 
 const INITIAL_STATE = {
   loading: false,
@@ -12,42 +12,42 @@ const INITIAL_STATE = {
  * @param {Object} action - Action from action creator
  * @returns {Object} New state
  */
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case a.GET_ORDERS_REQUEST:
+    case a.GET_SELLER_ORDERS_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case a.GET_ORDERS_SUCCESS:
+    case a.GET_SELLER_ORDERS_SUCCESS:
       return {
         ...state,
         loading: false,
         orders: action.payload
       };
-    case a.GET_ORDERS_FAILURE:
+    case a.GET_SELLER_ORDERS_FAILURE:
       return {
         ...state,
         loading: false,
         error: true
       };
-    case a.ADD_PAYMENT_REQUEST:
+    case a.CHANGE_ORDERS_STATUS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.CHANGE_ORDERS_STATUS_SUCCESS:
       return {
         ...state,
         loading: false
       };
-    case a.ADD_PAYMENT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        success: true
-      };
-    case a.ADD_PAYMENT_FAILURE:
+    case a.CHANGE_ORDERS_STATUS_FAILURE:
       return {
         ...state,
         loading: false,
         error: true
-      }  
+      };
     default:
       return state;
   }

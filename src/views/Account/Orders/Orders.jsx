@@ -2,13 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import OrderItems from "./OrderItems";
+import Payment from "./Payment";
 
 class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1
+      currentPage: 1,
+      showModal: false,
+      orderId: null
     };
+    this.showPaymentModal = this.showPaymentModal.bind(this);
   }
   componentWillMount() {
     const { getOrders, buyerId } = this.props;
@@ -21,8 +25,14 @@ class Orders extends React.Component {
     getOrders(buyerId, currentPage);
     return false;
   };
+  showPaymentModal(orderId) {
+    this.setState({
+      showModal: !this.state.showModal,
+      orderId
+    });
+  }
   render() {
-    const { translate, orders, loading, locale } = this.props;
+    const { translate, orders, loading, locale, payment, showNotification } = this.props;
     const { count, order } = orders;
     const { currentPage } = this.state;
     const start = (currentPage - 1) * 20 + 1 || 0;
@@ -59,10 +69,18 @@ class Orders extends React.Component {
                 orders={order}
                 loading={loading}
                 locale={locale}
+                showPaymentModal={this.showPaymentModal}
               />
             </div>
           </Col>
         </Row>
+        <Payment
+          payment={payment}
+          orderId={this.state.orderId}
+          show={this.state.showModal}
+          showNotification={showNotification}
+          showPaymentModal={this.showPaymentModal}
+        />
       </div>
     );
   }

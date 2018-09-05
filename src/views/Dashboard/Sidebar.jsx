@@ -66,9 +66,6 @@ class Sidebar extends Component {
               <div>
                 <Nav>
                   <NavItem eventKey="six">{translate("d_all_orders")}</NavItem>
-                  <NavItem>{translate("d_manage_feedback")}</NavItem>
-                  <NavItem>{translate("d_wholesale_dispute")}</NavItem>
-                  <NavItem>{translate("d_coupon")}</NavItem>
                 </Nav>
               </div>
             </Collapse>
@@ -89,9 +86,6 @@ class Sidebar extends Component {
               <div>
                 <Nav>
                   <NavItem>All Orders</NavItem>
-                  <NavItem>Manage Feedback</NavItem>
-                  <NavItem>Manage Wholesale dispute</NavItem>
-                  <NavItem>My Coupon</NavItem>
                 </Nav>
               </div>
             </Collapse>
