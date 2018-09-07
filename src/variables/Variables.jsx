@@ -491,8 +491,9 @@ export const style = {
     },
 
     error: {
-      backgroundColor: "#fc727a",
-      color: "#ffffff"
+      backgroundColor: "#7d1516",
+      color: "#ffffff",
+      margin: "10px 56px 0px"
     },
 
     warning: {

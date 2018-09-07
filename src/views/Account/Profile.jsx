@@ -234,7 +234,7 @@ const Profile = props => {
                         <FormGroup>
                           <ControlLabel>{translate("c_name")}</ControlLabel>
                           <FormControl.Static>
-                            {user.companyName ? user.companyName : "none"}
+                            {user ? user.companyName : "none"}
                           </FormControl.Static>
                         </FormGroup>
                         <FormGroup>

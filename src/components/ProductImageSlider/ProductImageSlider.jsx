@@ -8,7 +8,12 @@ class ProductImageSlider extends Component {
     super(props);
     this.state = {};
   }
-
+  shouldComponentUpdate(nextProps) {
+    if (!_.isEmpty(nextProps.images)) {
+      return true;
+    }
+    return false;
+  }
   render() {
     const { images } = this.props;
     const sliderImages = _.map(images, image => ({
@@ -75,11 +80,6 @@ class ProductImageSlider extends Component {
               );
             })}
           </ReactSlick>
-          {/* <ImageGallery
-            showPlayButton={false}
-            showFullscreenButton={false}
-            items={sliderImages}
-          /> */}
         </div>
       </div>
     );

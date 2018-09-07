@@ -77,8 +77,9 @@ class Cart extends Component {
     });
   }
   removeCartItem(item) {
-    const { removeCartItem, showNotification } = this.props;
-    removeCartItem(item).then(response => {
+    const { removeCartItem, showNotification, auth } = this.props;
+    const buyer = auth.user.id;
+    removeCartItem(buyer).then(response => {
       if (response.type === "REMOVE_CART_PRODUCT_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
@@ -124,11 +125,13 @@ class Cart extends Component {
     const { translate, products, loading, cartProductTotal, cart } = this.props;
     const { price } = cart;
     let cartTotalPrice = 0;
+    let cartPriceCurrency = "EUR";
     const cartItems = _.map(products, (product, index) => {
       cartTotalPrice += product.productPrice * product.quantity;
+      cartPriceCurrency = !_.isEmpty(price) ? price.currency : product.currency;
       return (
         <ProductItems
-          key={product._id}
+          key={product._id || product.id}
           translate={translate}
           buttons={products.length - 1 === index}
           product={product}
@@ -198,7 +201,7 @@ class Cart extends Component {
                                   <li>
                                     <span>Price ({cartProductTotal} item)</span>
                                     <span>
-                                      {getCurrency(price.currency)}{" "}
+                                      {getCurrency(cartPriceCurrency)}{" "}
                                       {cartTotalPrice.toFixed(2)}
                                     </span>
                                   </li>
@@ -209,7 +212,7 @@ class Cart extends Component {
                                   <li>
                                     <span>Amount Payable</span>
                                     <span>
-                                      {getCurrency(price.currency)}{" "}
+                                      {getCurrency(cartPriceCurrency)}{" "}
                                       {cartTotalPrice.toFixed(2)}
                                     </span>
                                   </li>

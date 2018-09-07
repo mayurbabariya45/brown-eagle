@@ -23,6 +23,8 @@ const ProductItem = props => {
     handleCheckoutButton,
     buttons
   } = props;
+  console.log(product);
+  
   let productImages;
   let productUrl;
   if (!_.isEmpty(product)) {

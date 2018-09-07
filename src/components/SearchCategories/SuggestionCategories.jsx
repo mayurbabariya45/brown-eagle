@@ -16,12 +16,7 @@ class SuggestionCategories extends Component {
     this.props.onMouseMove(event, this.props.index);
   }
   render() {
-    const {
-      className,
-      suggestion,
-      suggestionRenderer,
-      searchTerm
-    } = this.props;
+    const { className, suggestion, suggestionRenderer } = this.props;
     return (
       <li
         className={className}
@@ -30,7 +25,7 @@ class SuggestionCategories extends Component {
         onClick={this.handleClick}
         onMouseMove={this.handleMouseMove}
       >
-        {suggestionRenderer(suggestion, searchTerm)}
+        {suggestionRenderer(suggestion)}
       </li>
     );
   }

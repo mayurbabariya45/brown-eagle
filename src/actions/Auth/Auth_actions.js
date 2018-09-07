@@ -19,13 +19,14 @@ const notificationOpts = {
  *
  * @returns
  */
-export const showNotification = (title, message, fail) => dispatch => {
+export const showNotification = (title, message, fail, action = {}) => dispatch => {
   if (fail) {
     dispatch(
       error({
         ...notificationOpts,
         title: title || "Error",
-        message
+        message,
+        ...action
       })
     );
   } else {

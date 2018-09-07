@@ -173,6 +173,31 @@ class Product extends Component {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
           <div>{response.payload.response.message}</div>,
+          true,
+          {
+            action: {
+              label: "Clear",
+              callback: () => this.removeCartItem()
+            }
+          }
+        );
+      }
+    });
+  }
+  removeCartItem() {
+    const { removeCartItem, showNotification, auth } = this.props;
+    const buyer = auth.user.id;
+    removeCartItem(buyer).then(response => {
+      if (response.type === "REMOVE_CART_PRODUCT_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Product has been deleted successfully.</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>Product not deleted. Please try again later.</div>,
           true
         );
       }
@@ -180,7 +205,7 @@ class Product extends Component {
   }
   handleAddToCompare(e) {
     e.preventDefault();
-    const { addToCompare, showNotification, product} = this.props;
+    const { addToCompare, showNotification, product } = this.props;
     addToCompare(product);
     showNotification(
       <span data-notify="icon" className="pe-7s-check" />,

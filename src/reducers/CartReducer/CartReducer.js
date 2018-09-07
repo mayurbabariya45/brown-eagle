@@ -135,8 +135,8 @@ export default (state = INITIAL_STATE, action) => {
       if (_.isEmpty(_.find(state.products, ["id", action.item.id]))) {
         return {
           ...state,
-          products: [...state.products, action.item],
-          cartProductTotal: state.products.length + 1
+          products: [action.item],
+          cartProductTotal: 1
         };
       }
       return {
@@ -180,10 +180,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         success: true,
-        products: _.filter(
-          state.products,
-          product => product.id !== action.meta.id
-        ),
+        products: [],
         cartProductTotal: state.products.length - 1
       };
     case a.REMOVE_CART_PRODUCT_FAILURE:

@@ -754,10 +754,10 @@ section {
 
   .col-md-6 {
     padding: 0;
-    padding-right: 3px;
+    padding-right: 6px;
     &:last-child{
       padding-right: 0;
-      padding-left: 3px;
+      padding-left: 6px;
     }
   }
   
@@ -840,7 +840,14 @@ section {
 
 .carousel {
   .carousel-inner {
-    height: 330px;
+    height: 380px;
+    .item{
+      > a {
+        > img{
+          height: 380px;
+        }
+      }
+    }
   }
 }
 .static-page{

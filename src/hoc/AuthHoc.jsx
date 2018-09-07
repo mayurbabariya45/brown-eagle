@@ -11,7 +11,8 @@ export const notificationOpts = props => ({
   title: <span data-notify="icon" className={props.title} />,
   message: <div>{props.message}</div>,
   position: "bc",
-  autoDismiss: 5
+  autoDismiss: 5,
+  ...props
 });
 export default function AuthHoc(WrappedComponent, passedProps) {
   class WrapperComponent extends Component {
@@ -103,8 +104,8 @@ export default function AuthHoc(WrappedComponent, passedProps) {
     getUserProfile: (token, id, role) =>
       dispatch(a.getUserProfile(token, id, role)),
     getSellerActivePlans: seller => dispatch(a.getSellerActivePlans(seller)),
-    showNotification: (title, message, fail) =>
-      dispatch(a.showNotification(title, message, fail)),
+    showNotification: (title, message, fail, action) =>
+      dispatch(a.showNotification(title, message, fail, action)),
     removeAll: () => dispatch(Notifications.removeAll()),
     success: message =>
       dispatch(

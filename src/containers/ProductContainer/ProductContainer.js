@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
   addReview: (value, id, locale) =>
     dispatch(a.addProductReview(value, id, locale)),
   addToWishlistProduct: (product, authId, locale) =>
-    dispatch(a.addToWishlistProduct(product, authId, locale))
+    dispatch(a.addToWishlistProduct(product, authId, locale)),
+  removeCartItem: item => dispatch(c.removeCartItem(item))
 });
 const mapStateToProps = state => ({
   ...state.product,

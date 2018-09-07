@@ -2357,10 +2357,10 @@ section {
   width: 100%; }
   .home-banners .col-md-6 {
     padding: 0;
-    padding-right: 3px; }
+    padding-right: 6px; }
     .home-banners .col-md-6:last-child {
       padding-right: 0;
-      padding-left: 3px; }
+      padding-left: 6px; }
   .home-banners .col-md-12 {
     padding: 0; }
   .home-banners .image-banner-container {
@@ -2420,7 +2420,9 @@ section {
       border-color: #e2c029; }
 
 .carousel .carousel-inner {
-  height: 330px; }
+  height: 380px; }
+  .carousel .carousel-inner .item > a > img {
+    height: 380px; }
 
 .static-page {
   float: left;
@@ -3626,7 +3628,8 @@ section {
     .product.info.detailed .items-tabs .tab-content .company_profile {
       float: left;
       padding: 0;
-      margin: 0; }
+      margin: 0;
+      width: 100%; }
       .product.info.detailed .items-tabs .tab-content .company_profile .title h3 {
         font-size: 18px;
         padding-bottom: 20px;

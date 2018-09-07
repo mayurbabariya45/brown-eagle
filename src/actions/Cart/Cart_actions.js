@@ -85,17 +85,17 @@ export const addToCart = (item, authId) => dispatch => {
   });
 };
 
-export const removeCartItem = item => dispatch =>
+export const removeCartItem = authId => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: "category?status=enabled&perPage=99",
-      method: "GET",
+      endpoint: `cart/${authId}`,
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
       types: [
         a.REMOVE_CART_PRODUCT_REQUEST,
         {
           type: a.REMOVE_CART_PRODUCT_SUCCESS,
-          meta: { ...item }
+          meta: { authId }
         },
         a.REMOVE_CART_PRODUCT_FAILURE
       ]

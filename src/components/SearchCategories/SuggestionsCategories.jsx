@@ -27,7 +27,6 @@ class SuggestionCategories extends Component {
     const { focusedSuggestion, list } = this;
     const listRect = list.getBoundingClientRect();
     const suggestionRect = focusedSuggestion.getBoundingClientRect();
-
     if (suggestionRect.bottom > listRect.bottom) {
       list.scrollTop =
         focusedSuggestion.offsetTop +
