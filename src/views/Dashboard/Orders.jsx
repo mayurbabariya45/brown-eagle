@@ -1,18 +1,22 @@
+import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import OrderItems from "./OrderItems";
+import ViewOrder from "./ViewOrder";
 
 class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPage: 1,
-      orderId: null,
-      showModal: false
+      viewOrder: false,
+      order: {}
     };
     this.showOrderStatusModal = this.showOrderStatusModal.bind(this);
     this.handleChangeOrderStatus = this.handleChangeOrderStatus.bind(this);
+    this.handleViewOrder = this.handleViewOrder.bind(this);
+    this.clearViewOrderState = this.clearViewOrderState.bind(this);
   }
   componentWillMount() {
     const { getOrders, seller } = this.props;
@@ -31,15 +35,17 @@ class Orders extends React.Component {
       orderId
     });
   }
-  handleChangeOrderStatus(e) {
+  handleChangeOrderStatus(status, touched, values) {
     const {
       changeOrderStatus,
       showNotification,
+      updateOrder,
       getOrders,
       seller
     } = this.props;
-    const value = e.target.value;
-    changeOrderStatus(this.state.orderId, value).then(payload => {
+    if (_.isEmpty(this.state.order)) return false;
+    const { id } = this.state.order;
+    changeOrderStatus(id, status).then(payload => {
       if (payload.type === "CHANGE_ORDERS_STATUS_FAILURE") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
@@ -47,18 +53,49 @@ class Orders extends React.Component {
           true
         );
       } else {
-        getOrders(seller, this.state.currentPage);
         this.setState({ showModal: false });
+        if (touched) {
+          updateOrder(values).then(() => {
+            this.setState({ order: {}, viewOrder: false });
+            getOrders(seller, this.state.currentPage);
+            showNotification(
+              <span data-notify="icon" className="pe-7s-check" />,
+              <div>Order Status has been changed successfully.</div>,
+              false
+            );
+          });
+          return false;
+        }
+        this.setState({ order: {}, viewOrder: false });
+        getOrders(seller, this.state.currentPage);
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
           <div>Order Status has been changed successfully.</div>,
           false
         );
+        return false;
       }
     });
+    return false;
+  }
+  handleViewOrder(order) {
+    this.setState({ order, viewOrder: true });
+  }
+  clearViewOrderState() {
+    this.setState({ order: {}, viewOrder: false });
   }
   render() {
-    const { translate, orders, loading, locale } = this.props;
+    const {
+      translate,
+      orders,
+      loading,
+      locale,
+      showNotification,
+      getOrderTransactions,
+      transactions,
+      isLoading,
+      seller
+    } = this.props;
     const { count, order } = orders;
     const { currentPage } = this.state;
     const start = (currentPage - 1) * 20 + 1 || 0;
@@ -72,35 +109,59 @@ class Orders extends React.Component {
           <Col md={12}>
             <div className="section-header">
               <div className="title">
-                <h5>All Orders</h5>
+                <h5>{this.state.viewOrder ? "View Order" : "All Orders"}</h5>
               </div>
             </div>
           </Col>
         </Row>
+        {!this.state.viewOrder && (
+          <Row>
+            <Col md={12}>
+              <div className="result-showing">
+                <p>
+                  Showing {start} – {end} Order of {count} Orders
+                </p>
+              </div>
+            </Col>
+          </Row>
+        )}
         <Row>
-          <Col md={12}>
-            <div className="result-showing">
-              <p>
-                Showing {start} – {end} Order of {count} Orders
-              </p>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12}>
-            <div className="orders-lists box-listings">
-              <OrderItems
-                onPageChanged={this.onPageChanged}
-                count={count}
-                orders={order}
-                loading={loading}
-                locale={locale}
-                showModal={this.state.showModal}
-                showOrderStatusModal={this.showOrderStatusModal}
-                handleChangeOrderStatus={this.handleChangeOrderStatus}
-              />
-            </div>
-          </Col>
+          {!this.state.viewOrder && (
+            <Col md={12}>
+              <div className="orders-lists box-listings">
+                <OrderItems
+                  onPageChanged={this.onPageChanged}
+                  count={count}
+                  orders={order}
+                  loading={loading}
+                  locale={locale}
+                  showModal={this.state.showModal}
+                  showOrderStatusModal={this.showOrderStatusModal}
+                  handleChangeOrderStatus={this.handleChangeOrderStatus}
+                  handleViewOrder={this.handleViewOrder}
+                />
+              </div>
+            </Col>
+          )}
+          {this.state.viewOrder && (
+            <Col md={12} sm={12} xs={12}>
+              <div className="view-order">
+                <ViewOrder
+                  seller={seller}
+                  loading={loading}
+                  locale={locale}
+                  translate={translate}
+                  handleBackButton={this.clearViewOrderState}
+                  showNotification={showNotification}
+                  order={this.state.order}
+                  handleOrderStatus={this.handleChangeOrderStatus}
+                  getOrderTransactions={getOrderTransactions}
+                  transactions={transactions}
+                  isLoading={isLoading}
+                />
+              </div>
+            </Col>
+          )}
         </Row>
       </div>
     );

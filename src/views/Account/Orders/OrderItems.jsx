@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import Pagination from "../../../components/Pagination/Pagination";
@@ -18,17 +19,21 @@ const OrderStatus = props => (
       <Button fill bsStyle="warning" className="open">
         {props.status}
       </Button>
-      {props.status === "confirmed" && (
-        <Button fill bsStyle="warning" onClick={props.showPaymentModal}>
-          Pay Now
-        </Button>
-      )}
+      <Button
+        fill
+        bsStyle="warning"
+        className="view-order"
+        onClick={props.handleViewOrder}
+      >
+        View Order
+      </Button>
     </div>
   </div>
 );
 
 const OrderItem = props => {
   let productImages;
+  let productUrl = "/products";
   if (!_.isEmpty(props.product)) {
     const { productPictures } = props.product;
     if (!_.isEmpty(productPictures)) {
@@ -36,6 +41,9 @@ const OrderItem = props => {
     } else {
       productImages = noImage;
     }
+    productUrl = `/product/${_.kebabCase(props.product.name)}/${
+      props.product._id
+    }`;
   }
   return (
     <div className="box-list-items">
@@ -59,9 +67,9 @@ const OrderItem = props => {
         </div> */}
         <div className="image-container">
           <div className="product-image-container">
-            <a href="#products" className="product photo product-item-photo">
+            <Link to={productUrl} className="product photo product-item-photo">
               <ImageLoader preloader={preloader} src={productImages} />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="box-list-item-detail">
@@ -82,7 +90,7 @@ const OrderItem = props => {
       </div>
       <OrderStatus
         status={props.status}
-        showPaymentModal={props.showPaymentModal}
+        handleViewOrder={props.handleViewOrder}
       />
     </div>
   );
@@ -99,7 +107,7 @@ const OrderItems = props => (
                 key={order.id}
                 {...order}
                 locale={props.locale}
-                showPaymentModal={() => props.showPaymentModal(order.id)}
+                handleViewOrder={() => props.handleViewOrder(order)}
               />
             ))}
           </div>

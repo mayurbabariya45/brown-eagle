@@ -43,13 +43,15 @@ class CategorySlider extends Component {
       ));
     return (
       <div className="products-slider">
-        <Col xs={12}>
-          <Row>
-            <div className="section-header">
-              <h5 className="text-uppercase">{title}</h5>
-            </div>
-          </Row>
-        </Col>
+        {title && (
+          <Col xs={12}>
+            <Row>
+              <div className="section-header">
+                <h5 className="text-uppercase">{title}</h5>
+              </div>
+            </Row>
+          </Col>
+        )}
         <Col xs={12}>
           <Row>
             {!showEmpty && (

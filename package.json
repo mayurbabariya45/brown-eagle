@@ -43,6 +43,7 @@
     "react-share": "^2.2.0",
     "react-slick": "^0.19.0",
     "react-stripe-elements": "^2.0.1",
+    "react-time": "^4.3.0",
     "recompose": "^0.27.0",
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",

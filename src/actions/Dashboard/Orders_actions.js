@@ -24,3 +24,29 @@ export const changeOrderStatus = (orderId, status) => ({
     ]
   }
 });
+
+export const updateOrder = values => ({
+  [RSAA]: {
+    endpoint: `order/${values.id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json; charset=UTF-8" },
+    body: JSON.stringify(values),
+    types: [
+      a.UPDATE_ORDER_REQUEST,
+      a.UPDATE_ORDER_SUCCESS,
+      a.UPDATE_ORDER_FAILURE
+    ]
+  }
+});
+
+export const getOrderTransactions = (orderId, seller) => ({
+  [RSAA]: {
+    endpoint: `order/${orderId}/transactions?seller=${seller}&type=order_update`,
+    method: "GET",
+    types: [
+      a.GET_SELLER_ORDER_TRANSACTIONS_REQUEST,
+      a.GET_SELLER_ORDER_TRANSACTIONS_SUCCESS,
+      a.GET_SELLER_ORDER_TRANSACTIONS_FAILURE
+    ]
+  }
+});

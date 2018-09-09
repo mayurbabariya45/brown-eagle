@@ -88,12 +88,13 @@ class ShippingAddress extends React.Component {
     };
     this.handleFormShow = this.handleFormShow.bind(this);
   }
+
   handleFormShow() {
     this.setState({
       showForm: !this.state.showForm
     });
   }
- 
+
   render() {
     const { translate, handleSubmit, saveAddress, address } = this.props;
     return (

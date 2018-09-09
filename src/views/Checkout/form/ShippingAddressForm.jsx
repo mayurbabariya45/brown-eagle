@@ -19,7 +19,6 @@ class ShippingAddressForm extends React.Component {
     this.state = {
       country: ""
     };
-
     this.handleLocation = this.handleLocation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

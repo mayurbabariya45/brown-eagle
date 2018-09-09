@@ -1,0 +1,90 @@
+.company-profile{
+    .supplier-slider{
+        height: 210px;
+        float: left;
+        width: 100%;
+    }
+    .company-profile-video{
+        float: left;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        margin-top: 20px;
+        .video-container{
+            width: 100%;
+            
+            display: block;
+            position: relative;
+            video{
+                width: 100%;
+                height: 100%;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+    }
+    .information-content{
+        float: left;
+        margin-top: 20px;
+        padding: 0;
+        .content-table{
+            th {
+                width: 125px;
+                padding-right: 20px;
+                font-size: 12px;
+            }
+            td{
+                font-size: 12px;
+                line-height: 14px;
+                padding: 6px 0;
+                text-align: left;
+                vertical-align: top;
+            }
+            .col-value {
+                word-break: break-all;
+                min-width: 250px\9;
+                word-wrap: break-word;
+            }
+            .company-verified-icon {
+                display: inline-block;
+                position: relative;
+                z-index: 1;
+                font-size: 14px;
+                line-height: 16px;
+                color: #FFAC75;
+                margin-left: 10px;
+                white-space: nowrap;
+            }
+            .company-description {
+                color: #AAA;
+                position: relative;
+                word-wrap: break-word;
+                word-break: normal;
+                overflow: hidden;
+            }
+        }
+        
+    }
+    .production-products-title {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        font-size: 14px;
+        line-height: 16px;
+        h5{
+            margin: 0px;
+            padding-top: 7px;
+            font-family: "DIN-Regular", sans-serif;
+            font-weight: bold;
+        }
+    }
+    .supplier-production-certification{
+        padding: 0;
+        margin-top: 20px;
+        .production-certification-title {
+            margin-bottom: 13px;
+            font-size: 14px;
+            line-height: 16px;
+        }
+    }
+}

@@ -287,29 +287,31 @@ class Product extends Component {
                       <p>Port: SHANGHAI </p>
                     </div> */}
                       <div className="product-add-cart">
-                        <div className="box-tocart">
-                          <div className="actions add-to-cart">
-                            <Button
-                              fill
-                              radius
-                              bsStyle="warning"
-                              className="action tocart"
-                            >
-                              <span>
-                                {translate("product_contact_supplier")}
-                              </span>
-                            </Button>
-                            <Button
-                              fill
-                              radius
-                              bsStyle="info"
-                              className="action tocart"
-                              onClick={() => this.addToCart(product)}
-                            >
-                              <span>{translate("product_start_order")}</span>
-                            </Button>
-                          </div>
-                        </div>
+                        {authRole === "buyer" && (
+                          <div className="box-tocart">
+                            <div className="actions add-to-cart">
+                              <Button
+                                fill
+                                radius
+                                bsStyle="warning"
+                                className="action tocart"
+                              >
+                                <span>
+                                  {translate("product_contact_supplier")}
+                                </span>
+                              </Button>
+                              <Button
+                                fill
+                                radius
+                                bsStyle="info"
+                                className="action tocart"
+                                onClick={() => this.addToCart(product)}
+                              >
+                                <span>{translate("product_start_order")}</span>
+                              </Button>
+                            </div>
+                                                    </div>
+                        )}
                         <div className="product-messages">
                           <a href="#" className="message-links">
                             <i className="fa fa-envelope-o" />

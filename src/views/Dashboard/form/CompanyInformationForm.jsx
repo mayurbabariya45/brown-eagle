@@ -145,6 +145,7 @@ class CompanyInformationForm extends Component {
     delete data.r_area_code;
     delete data.r_city;
     delete data.r_country;
+    delete data.email;
     handleSubmitForm(data);
   }
   render() {

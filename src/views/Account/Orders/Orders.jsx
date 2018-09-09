@@ -2,17 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import OrderItems from "./OrderItems";
-import Payment from "./Payment";
+import ViewOrder from "./ViewOrder";
 
 class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPage: 1,
-      showModal: false,
-      orderId: null
+      viewOrder: false,
+      order: {}
     };
-    this.showPaymentModal = this.showPaymentModal.bind(this);
+    this.handleViewOrder = this.handleViewOrder.bind(this);
+    this.clearViewOrderState = this.clearViewOrderState.bind(this);
   }
   componentWillMount() {
     const { getOrders, buyerId } = this.props;
@@ -25,14 +26,24 @@ class Orders extends React.Component {
     getOrders(buyerId, currentPage);
     return false;
   };
-  showPaymentModal(orderId) {
-    this.setState({
-      showModal: !this.state.showModal,
-      orderId
-    });
+  handleViewOrder(order) {
+    this.setState({ order, viewOrder: true });
+  }
+  clearViewOrderState() {
+    this.setState({ order: {}, viewOrder: false });
   }
   render() {
-    const { translate, orders, loading, locale, payment, showNotification } = this.props;
+    const {
+      translate,
+      orders,
+      loading,
+      locale,
+      payment,
+      showNotification,
+      getOrderTransactions,
+      transactions,
+      isLoading
+    } = this.props;
     const { count, order } = orders;
     const { currentPage } = this.state;
     const start = (currentPage - 1) * 20 + 1 || 0;
@@ -40,6 +51,8 @@ class Orders extends React.Component {
     if (end > count) {
       end = count;
     }
+    console.log(this.state);
+    
     return (
       <div className="account-orders">
         <Row>
@@ -51,43 +64,57 @@ class Orders extends React.Component {
             </div>
           </Col>
         </Row>
+        {!this.state.viewOrder && (
+          <Row>
+            <Col md={12}>
+              <div className="result-showing">
+                <p>
+                  Showing {start} – {end} Order of {count} Orders
+                </p>
+              </div>
+            </Col>
+          </Row>
+        )}
         <Row>
-          <Col md={12}>
-            <div className="result-showing">
-              <p>
-                Showing {start} – {end} Order of {count} Orders
-              </p>
-            </div>
-          </Col>
+          {!this.state.viewOrder && (
+            <Col md={12}>
+              <div className="orders-lists box-listings">
+                <OrderItems
+                  onPageChanged={this.onPageChanged}
+                  count={count}
+                  orders={order}
+                  loading={loading}
+                  locale={locale}
+                  handleViewOrder={this.handleViewOrder}
+                />
+              </div>
+            </Col>
+          )}
+          {this.state.viewOrder && (
+            <Col md={12} sm={12} xs={12}>
+              <div className="view-order">
+                <ViewOrder
+                  payment={payment}
+                  translate={translate}
+                  handleBackButton={this.clearViewOrderState}
+                  showNotification={showNotification}
+                  getOrderTransactions={getOrderTransactions}
+                  order={this.state.order}
+                  transactions={transactions}
+                  isLoading={isLoading}
+                />
+              </div>
+            </Col>
+          )}
         </Row>
-        <Row>
-          <Col md={12}>
-            <div className="orders-lists box-listings">
-              <OrderItems
-                onPageChanged={this.onPageChanged}
-                count={count}
-                orders={order}
-                loading={loading}
-                locale={locale}
-                showPaymentModal={this.showPaymentModal}
-              />
-            </div>
-          </Col>
-        </Row>
-        <Payment
-          payment={payment}
-          orderId={this.state.orderId}
-          show={this.state.showModal}
-          showNotification={showNotification}
-          showPaymentModal={this.showPaymentModal}
-        />
       </div>
     );
   }
 }
 
 Orders.propTypes = {
-  translate: PropTypes.func.isRequired
+  translate: PropTypes.func.isRequired,
+  getOrderTransactions: PropTypes.func.isRequired
 };
 
 export default Orders;

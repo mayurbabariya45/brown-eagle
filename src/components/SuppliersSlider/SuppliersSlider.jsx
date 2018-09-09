@@ -57,7 +57,9 @@ class SuppliersSlider extends Component {
               {value.isProfileVerified === "verified" && (
                 <i className="icon-static icon-checked " />
               )}
-              {_.upperCase(value.companyName)}
+              <Link to={`/company_profile/${value.id}`}>
+                {_.upperCase(value.companyName)}
+              </Link>
             </h3>
             <div className="product-row">
               <div className="product-rating">

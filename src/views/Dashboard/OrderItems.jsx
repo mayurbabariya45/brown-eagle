@@ -9,6 +9,7 @@ import {
   FormControl
 } from "react-bootstrap";
 import BlockUi from "react-block-ui";
+import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
 import ImageLoader from "../../components/ImageLoader/ImageLoader";
 import ContentLoader from "../../components/Loader/Loader";
@@ -33,8 +34,13 @@ const OrderStatus = props => (
       <Button fill bsStyle="warning" className="open">
         {props.status}
       </Button>
-      <Button fill bsStyle="warning" onClick={props.showOrderStatusModal}>
-        Change Status
+      <Button
+        fill
+        bsStyle="warning"
+        className="view-order"
+        onClick={props.handleViewOrder}
+      >
+        View Order
       </Button>
     </div>
   </div>
@@ -42,6 +48,7 @@ const OrderStatus = props => (
 
 const OrderItem = props => {
   let productImages;
+  let productUrl;
   if (!_.isEmpty(props.product)) {
     const { productPictures } = props.product;
     if (!_.isEmpty(productPictures)) {
@@ -49,6 +56,9 @@ const OrderItem = props => {
     } else {
       productImages = noImage;
     }
+    productUrl = `/product/${_.kebabCase(props.product.name)}/${
+      props.product._id
+    }`;
   }
   return (
     <div className="box-list-items">
@@ -58,9 +68,9 @@ const OrderItem = props => {
         </div>
         <div className="image-container">
           <div className="product-image-container">
-            <a href="#products" className="product photo product-item-photo">
+            <Link to={productUrl} className="product photo product-item-photo">
               <ImageLoader preloader={preloader} src={productImages} />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="box-list-item-detail">
@@ -87,6 +97,7 @@ const OrderItem = props => {
       <OrderStatus
         status={props.status}
         showOrderStatusModal={props.showOrderStatusModal}
+        handleViewOrder={props.handleViewOrder}
       />
     </div>
   );
@@ -106,6 +117,7 @@ const OrderItems = props => (
                 showOrderStatusModal={() =>
                   props.showOrderStatusModal(order.id)
                 }
+                handleViewOrder={() => props.handleViewOrder(order)}
               />
             ))}
           </div>

@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import { FormGroup, ControlLabel, Col, Row } from "react-bootstrap";
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -11,7 +12,7 @@ import {
   injectStripe
 } from "react-stripe-elements";
 import BlockUi from "react-block-ui";
-import Modal from "../../../components/Modal/Modal";
+import Button from "../../../elements/CustomButton/CustomButton";
 
 const createOptions = (fontSize, padding) => ({
   style: {
@@ -30,6 +31,55 @@ const createOptions = (fontSize, padding) => ({
     }
   }
 });
+
+const PaymentForm = props => (
+  <form onSubmit={props.handleSubmit}>
+    <Row>
+      <Col md={6}>
+        <FormGroup>
+          <div>
+            <ControlLabel>{props.translate("payment_card_label")}</ControlLabel>
+            <CardNumberElement {...createOptions(props.fontSize)} />
+          </div>
+        </FormGroup>
+      </Col>
+      <Col md={6}>
+        <FormGroup>
+          <div>
+            <ControlLabel>{props.translate("payment_date_label")}</ControlLabel>
+            <CardExpiryElement {...createOptions(props.fontSize)} />
+          </div>
+        </FormGroup>
+      </Col>
+    </Row>
+    <Row>
+      <Col md={6}>
+        <FormGroup>
+          <div>
+            <ControlLabel>{props.translate("payment_cvc_label")}</ControlLabel>
+            <CardCVCElement {...createOptions(props.fontSize)} />
+          </div>
+        </FormGroup>
+      </Col>
+      <Col md={6}>
+        <FormGroup>
+          <div>
+            <ControlLabel>{props.translate("payment_code_label")}</ControlLabel>
+            <PostalCodeElement {...createOptions(props.fontSize)} />
+          </div>
+        </FormGroup>
+      </Col>
+    </Row>
+    <Row>
+      <Col md={12}>
+        <Button fill bsStyle="warning" type="submit">
+          Pay
+        </Button>
+      </Col>
+    </Row>
+  </form>
+);
+
 class _SplitForm extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +87,6 @@ class _SplitForm extends React.Component {
       loading: false
     };
   }
-
   handleSubmit = ev => {
     ev.preventDefault();
     this.setState({
@@ -46,26 +95,40 @@ class _SplitForm extends React.Component {
     if (this.props.stripe) {
       this.props.stripe.createToken().then(payload => {
         if (!_.isEmpty(payload)) {
-          const { token } = payload;
-          this.props.payment(this.props.orderId, token.id).then(payload => {
-            if (payload.type === "ADD_PAYMENT_FAILURE") {
+          const { token, error } = payload;
+          console.log(error);
+          if (token) {
+            this.props.payment(this.props.orderId, token.id).then(payload => {
+              if (payload.type === "ADD_PAYMENT_FAILURE") {
+                this.props.showNotification(
+                  <span data-notify="icon" className="pe-7s-check" />,
+                  <div>{payload.payload.response.message}</div>,
+                  true
+                );
+              } else {
+                this.props.showNotification(
+                  <span data-notify="icon" className="pe-7s-check" />,
+                  <div>Payment has been done successfully</div>,
+                  false
+                );
+              }
+              this.setState({
+                loading: false
+              });
+            });
+          } else if (error) {
+            const { code, message } = error;
+            if (code) {
               this.props.showNotification(
                 <span data-notify="icon" className="pe-7s-check" />,
-                <div>{payload.payload.response.message}</div>,
+                <div>{message}</div>,
                 true
               );
-            } else {
-              this.props.showNotification(
-                <span data-notify="icon" className="pe-7s-check" />,
-                <div>Payment has been done successfully</div>,
-                false
-              );
-              this.props.showPaymentModal();
+              this.setState({
+                loading: false
+              });
             }
-            this.setState({
-              loading: false
-            });
-          });
+          }
         }
       });
     } else {
@@ -75,26 +138,12 @@ class _SplitForm extends React.Component {
   render() {
     return (
       <BlockUi blocking={this.state.loading}>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Card number
-              <CardNumberElement {...createOptions(this.props.fontSize)} />
-            </label>
-            <label>
-              Expiration date
-              <CardExpiryElement {...createOptions(this.props.fontSize)} />
-            </label>
-            <label>
-              CVC
-              <CardCVCElement {...createOptions(this.props.fontSize)} />
-            </label>
-            <label>
-              Postal code
-              <PostalCodeElement {...createOptions(this.props.fontSize)} />
-            </label>
-            <button>Pay</button>
-          </form>
+        <div className="payment-method">
+          <PaymentForm
+            fontSize={this.props.fontSize}
+            handleSubmit={this.handleSubmit}
+            translate={this.props.translate}
+          />
         </div>
       </BlockUi>
     );
@@ -103,33 +152,23 @@ class _SplitForm extends React.Component {
 const SplitForm = injectStripe(_SplitForm);
 
 const Payment = props => (
-  <Modal
-    show={props.show}
-    onHide={props.showPaymentModal}
-    bHeader="Payment Method"
-    className="payment-method"
-    bContent={
-      <div className="checkout-method">
-        <StripeProvider apiKey="pk_test_I8uSJFLfrxhukhP4knlIzLuj">
-          <Elements>
-            <SplitForm
-              fontSize="18px"
-              payment={props.payment}
-              orderId={props.orderId}
-              showNotification={props.showNotification}
-              showPaymentModal={props.showPaymentModal}
-            />
-          </Elements>
-        </StripeProvider>
-      </div>
-    }
-  />
+  <div className="checkout-method">
+    <StripeProvider apiKey="pk_test_I8uSJFLfrxhukhP4knlIzLuj">
+      <Elements>
+        <SplitForm
+          fontSize="18px"
+          payment={props.payment}
+          orderId={props.orderId}
+          showNotification={props.showNotification}
+          translate={props.translate}
+        />
+      </Elements>
+    </StripeProvider>
+  </div>
 );
 
 Payment.propTypes = {
-  payment: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired,
-  showPaymentModal: PropTypes.func.isRequired
+  payment: PropTypes.func.isRequired
 };
 
 export default Payment;

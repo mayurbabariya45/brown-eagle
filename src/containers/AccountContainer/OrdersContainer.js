@@ -8,7 +8,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getOrders: (authId, page) => dispatch(a.getOrders(authId, page)),
-  payment: (orderId, token) => dispatch(a.payment(orderId, token))
+  payment: (orderId, token) => dispatch(a.payment(orderId, token)),
+  cancelOrder: (orderId, status) => dispatch(a.cancelOrder(orderId, status)),
+  getOrderTransactions: orderId => dispatch(a.getOrderTransactions(orderId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);

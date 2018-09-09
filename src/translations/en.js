@@ -464,7 +464,27 @@ export const en = {
       cm_ratings: "Rating",
       cm_reviews: "Reviews",
       cm_description: "Description",
-
+      // viewOrders
+      o_product_details_label: "Supplier and Product Information",
+      o_seller_product_details_label: "Buyer and Product Information",
+      o_transactions: "Order Transactions",
+      o_payment_title: "Payment terms",
+      o_shipping_address: "Shipping Address",
+      o_order_details: "Order Remark",
+      o_order_status: "Product Status",
+      o_order_number: "Order Number",
+      o_order_submitted: "Order Submitted",
+      // order status
+      o_start_order: "Start Order",
+      o_seller_confirm: "Seller confirm",
+      o_payment: "Payment",
+      o_shipment: "Shipment",
+      o_success: "Success",
+      // Payment Method
+      payment_card_label: "Card number",
+      payment_date_label: "Expiration date",
+      payment_cvc_label: "CVC",
+      payment_code_label: "Postal code",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

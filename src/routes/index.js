@@ -15,6 +15,7 @@ import RequestQuotationContainer from "../containers/QuotationContainer/RequestQ
 import PlansContainer from "../containers/PlansContainer/PlansContainer";
 import CompareProductContainer from "../containers/CompareProductContainer/CompareProductContainer";
 import CheckoutContainer from "../containers/CheckoutContainer/CheckoutContainer";
+import SellerProfileContainer from "../containers/SellerProfileContainer/SellerProfileContainer";
 import ServicesMembership from "../views/static/ServicesMembership";
 import PurchaseRegion from "../views/static/PurchaseRegion";
 import HelpCommunity from "../views/static/HelpCommunity";
@@ -137,6 +138,11 @@ const appRoutes = [
   },
   { path: "/cart", name: "Cart", component: CartContainer },
   { path: "/plans", name: "Plans", component: PlansContainer },
+  {
+    path: "/company_profile/:id",
+    name: "Seller Profile",
+    component: SellerProfileContainer
+  },
   {
     path: "/compare",
     name: "Compare Product",

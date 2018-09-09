@@ -4,7 +4,9 @@ const INITIAL_STATE = {
   loading: false,
   success: false,
   error: false,
-  orders: []
+  isLoading: false,
+  orders: [],
+  transactions: []
 };
 
 /**
@@ -47,7 +49,38 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: true
-      }  
+      };
+    case a.CANCEL_ORDER_REQUEST:
+      return {
+        ...state,
+        loading: false
+      };
+    case a.CANCEL_ORDER_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case a.CANCEL_ORDER_FAILURE:
+      return {
+        ...state,
+        loading: false
+      };
+    case a.GET_ORDER_TRANSACTIONS_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case a.GET_ORDER_TRANSACTIONS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        transactions: action.payload.transactions
+      };
+    case a.GET_ORDER_TRANSACTIONS_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
     default:
       return state;
   }
