@@ -361,48 +361,48 @@ class Home extends Component {
                 </div>
               </Col>
             </Row>
-            {/* <Row>
+            <Row>
               <Col md={12}>
                 <div className="regions">
                   <ul>
                     <li>
-                      <Link to="/">
+                      <Link to="/sellers/germany">
                         <img src={Germany} alt="Germany" />
                         Germany
                       </Link>
                     </li>
                     <li>
-                      <Link to="/">
+                      <Link to="/sellers/germany">
                         <img src={France} alt="France" />
                         France
                       </Link>
                     </li>
                     <li>
-                      <Link to="/">
+                      <Link to="/sellers/germany">
                         <img src={Italian} alt="Italian" />
                         Italian
                       </Link>
                     </li>
                     <li>
-                      <Link to="/">
+                      <Link to="/sellers/germany">
                         <img src={Uk} alt="Uk" />
                         UK
                       </Link>
                     </li>
                     <li>
-                      <Link to="/">
+                      <Link to="/sellers/germany">
                         <img src={Switzerland} alt="Uk" />
                         Switzerland
                       </Link>
                     </li>
                     <li>
-                      <Link to="/">
+                      <Link to="/sellers/germany">
                         <img src={Netherlands} alt="Uk" />
                         Netherlands
                       </Link>
                     </li>
                     <li>
-                      <Link to="/">
+                      <Link to="/sellers/uk">
                         <img src={Greece} alt="Uk" />
                         Greece
                       </Link>
@@ -413,7 +413,7 @@ class Home extends Component {
                   </ul>
                 </div>
               </Col>
-            </Row> */}
+            </Row>
             <Row>
               <Col md={12}>
                 <Link to="/login">

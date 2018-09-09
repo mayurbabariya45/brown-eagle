@@ -3104,6 +3104,9 @@ section {
     position: relative;
     vertical-align: top; }
 
+.location-filter .filter-categories .filter-category .category ul li {
+  padding: 0; }
+
 .news-letter {
   background-color: #f8f8f8; }
   .news-letter .card.card-stats .content {

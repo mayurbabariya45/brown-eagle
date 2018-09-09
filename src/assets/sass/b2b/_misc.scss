@@ -1674,3 +1674,16 @@ $product-main-color: #7d1516;
     vertical-align: top;
   }
 }
+.location-filter{
+  .filter-categories {
+    .filter-category {
+      .category {
+        ul {
+          li{
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -16,6 +16,7 @@ import PlansContainer from "../containers/PlansContainer/PlansContainer";
 import CompareProductContainer from "../containers/CompareProductContainer/CompareProductContainer";
 import CheckoutContainer from "../containers/CheckoutContainer/CheckoutContainer";
 import SellerProfileContainer from "../containers/SellerProfileContainer/SellerProfileContainer";
+import FilterSellersContainer from "../containers/FilterSellerContainer/FilterSellerContainer";
 import ServicesMembership from "../views/static/ServicesMembership";
 import PurchaseRegion from "../views/static/PurchaseRegion";
 import HelpCommunity from "../views/static/HelpCommunity";
@@ -135,6 +136,11 @@ const appRoutes = [
     path: "/products/:category?/:subCategory?",
     name: "Products",
     component: ProductsContainer
+  },
+  {
+    path: "/sellers/:country",
+    name: "Sellers",
+    component: FilterSellersContainer
   },
   { path: "/cart", name: "Cart", component: CartContainer },
   { path: "/plans", name: "Plans", component: PlansContainer },

@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ContentLoader from "../Loader/Loader";
+import noImage from "../../assets/img/no-product.png";
 
 const Loader = () => <ContentLoader height={300} inFight />;
 
@@ -28,8 +29,7 @@ class SuppliersSlider extends Component {
     const sliderSettings = {
       ...SliderSettings
     };
-    const { sellers } = suppliers;
-    const showEmpty = !loading && sellers.length < 1;
+    const showEmpty = !loading && suppliers.length < 1;
     const renderLoader = [];
     if (loading) {
       for (let i = 1; i <= 4; i++) {
@@ -46,7 +46,7 @@ class SuppliersSlider extends Component {
         renderLoader.push(contentLoader);
       }
     }
-    const renderSuppliers = _.map(sellers, value => (
+    const renderSuppliers = _.map(suppliers, value => (
       <div key={value.id} className="item product product-item">
         <div className="product-item-info">
           <div className="product-header">
@@ -85,17 +85,32 @@ class SuppliersSlider extends Component {
           </div>
           <div className="product-footer">
             <div className="product-row">
-              {_.map(value.productPictures, (product, index) => (
-                <Link to="/" className="product-link" key={index}>
-                  <div className="image-container">
-                    <ImageLoader
-                      preloader={Loader}
-                      src={product}
-                      className={className("img-responsive", classNames)}
-                    />
-                  </div>
-                </Link>
-              ))}
+              {_.map(value.mainProducts, (product, index) => {
+                let productImages;
+                let productUrl = "/products";
+                if (!_.isEmpty(product)) {
+                  const { productPictures } = product;
+                  if (!_.isEmpty(productPictures)) {
+                    productImages = productPictures[0].url;
+                  } else {
+                    productImages = noImage;
+                  }
+                  productUrl = `/product/${_.kebabCase(product.name)}/${
+                    product._id
+                  }`;
+                }
+                return (
+                  <Link to={productUrl} className="product-link" key={index}>
+                    <div className="image-container">
+                      <ImageLoader
+                        preloader={Loader}
+                        src={productImages}
+                        className={className("img-responsive", classNames)}
+                      />
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -1,0 +1,7 @@
+export const ActionTypes = {
+  GET_SELLERS_REQUEST: "GET_SELLERS_REQUEST",
+  GET_SELLERS_SUCCESS: "GET_SELLERS_SUCCESS",
+  GET_SELLERS_FAILURE: "GET_SELLERS_FAILURE"
+};
+
+export default ActionTypes;

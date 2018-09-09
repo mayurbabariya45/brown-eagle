@@ -49,7 +49,7 @@ export const getTopBanners = () => dispatch =>
 export const getTopSuppliers = () => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: "seller?isProfileApproved=approved",
+      endpoint: "product/home/seller/verified",
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [

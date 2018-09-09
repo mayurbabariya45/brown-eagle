@@ -1,0 +1,35 @@
+[debug] [2018-09-09T19:14:04.832Z] ----------------------------------------------------------------------
+[debug] [2018-09-09T19:14:04.832Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\baps\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-09-09T19:14:04.832Z] CLI Version:   3.19.1
+[debug] [2018-09-09T19:14:04.832Z] Platform:      win32
+[debug] [2018-09-09T19:14:04.832Z] Node Version:  v8.11.3
+[debug] [2018-09-09T19:14:04.836Z] Time:          Mon Sep 10 2018 00:44:04 GMT+0530 (India Standard Time)
+[debug] [2018-09-09T19:14:04.836Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-09T19:14:04.852Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-09T19:14:04.856Z] > authorizing via signed-in user
+[debug] [2018-09-09T19:14:04.856Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-09-09T19:14:04.856Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/k2xThRuY5WTj2yZpKsZFlChj_oRZ6gaeO3NHmN10-W8',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Mon Sep 10 2018 00:44:04 GMT+0530 (India Standard Time)
+[debug] [2018-09-09T19:14:05.230Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-09T19:14:05.242Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/brown-eagle  
+  
+ Mon Sep 10 2018 00:44:05 GMT+0530 (India Standard Time)
+[debug] [2018-09-09T19:14:06.449Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-09T19:14:06.449Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/brown-eagle/tokens  
+  
+ Mon Sep 10 2018 00:44:06 GMT+0530 (India Standard Time)
+[debug] [2018-09-09T19:14:07.449Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'brown-eagle'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing build directory for upload...
+[debug] [2018-09-09T19:14:10.098Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/brown-eagle/uploads/-LLzkMABw67aleeEQbtP?fileCount=55&message=  
+  
+ Mon Sep 10 2018 00:44:10 GMT+0530 (India Standard Time)
