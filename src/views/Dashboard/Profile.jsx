@@ -48,7 +48,7 @@ const Profile = props => {
   const activePlanProducts = activePlan.product;
   const activePlanRfq = activePlan.rfq;
   const activePlanStorage = activePlan.storage;
-  const certificates = !_.isEmpty(user) ? user.certificates : [];
+  const certificates = !_.isEmpty(user) ? user.certificates : [];  
   return (
     <div className="profile">
       <Row>

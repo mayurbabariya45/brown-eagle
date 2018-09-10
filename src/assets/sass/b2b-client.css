@@ -4935,6 +4935,10 @@ section {
 
 .product-information .product-information-form {
   margin-bottom: 25px; }
+  .product-information .product-information-form .input-group-addon {
+    background-color: #eee;
+    border-color: #ccc;
+    color: #000; }
   .product-information .product-information-form .control-label {
     font-weight: normal;
     padding-top: 10px; }
@@ -5168,10 +5172,16 @@ section {
   border: none;
   height: 70px; }
 
-.order-success {
+.order-success, .plan-actived {
   margin: 25px 0 0;
   padding: 0; }
-  .order-success .order-success-content {
+  .order-success .order-success-content, .plan-actived .order-success-content {
+    text-align: center; }
+
+.plan-actived {
+  margin: 25px 0 0;
+  padding: 0; }
+  .plan-actived .order-success-content {
     text-align: center; }
 
 .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:hover, .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:focus, .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:active {
@@ -9276,3 +9286,28 @@ Main Components
     margin-bottom: 13px;
     font-size: 14px;
     line-height: 16px; }
+
+.seller-video-container {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-top: 15px; }
+  .seller-video-container .video-container {
+    height: 200px;
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0; }
+    .seller-video-container .video-container video {
+      max-width: 100%;
+      width: 100%;
+      height: 200px; }
+
+.map-container {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+  height: 200px; }

@@ -157,7 +157,7 @@ class Product extends Component {
     return false;
   }
   addToCart(item) {
-    const { addToCart, showNotification, auth } = this.props;
+    const { addToCart, showNotification, auth, history } = this.props;
     const objectProduct = Object.assign({}, item, { quantity: 1 });
     const buyer = auth.user.id;
     const authRole = auth.user.role;
@@ -169,6 +169,7 @@ class Product extends Component {
           <div>{`${item.name} has been added successfully in cart.`}</div>,
           false
         );
+        history.push("/cart");
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
@@ -183,6 +184,7 @@ class Product extends Component {
         );
       }
     });
+    return false;
   }
   removeCartItem() {
     const { removeCartItem, showNotification, auth } = this.props;

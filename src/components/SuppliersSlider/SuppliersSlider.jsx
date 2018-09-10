@@ -45,7 +45,7 @@ class SuppliersSlider extends Component {
         );
         renderLoader.push(contentLoader);
       }
-    }
+    }    
     const renderSuppliers = _.map(suppliers, value => (
       <div key={value.id} className="item product product-item">
         <div className="product-item-info">
@@ -57,7 +57,7 @@ class SuppliersSlider extends Component {
               {value.isProfileVerified === "verified" && (
                 <i className="icon-static icon-checked " />
               )}
-              <Link to={`/company_profile/${value.id}`}>
+              <Link to={`/company_profile/${value._id}`}>
                 {_.upperCase(value.companyName)}
               </Link>
             </h3>
@@ -96,7 +96,7 @@ class SuppliersSlider extends Component {
                     productImages = noImage;
                   }
                   productUrl = `/product/${_.kebabCase(product.name)}/${
-                    product._id
+                    product.id
                   }`;
                 }
                 return (

@@ -15,6 +15,7 @@ import ProductImageForm from "./ProductImageForm";
 import { required } from "../../../formValidationRules/FormValidationRules";
 import Button from "../../../elements/CustomButton/CustomButton";
 import formValidationScroller from "../../../variables/FormValidationScroller";
+import { getCurrency } from "../../../variables/Variables";
 
 const renderField = ({ input, size }) => (
   <Col sm={size || 2}>
@@ -106,11 +107,12 @@ class ProductInformationForm extends Component {
                     ncols={["col-md-12"]}
                     proprieties={[
                       {
-                        inputGroup: "horizontal",
+                        inputGroup: "horizontal_icon",
                         xsLabel: 2,
                         xsInput: 5,
                         label: translate("a_product_price"),
                         type: "text",
+                        bsIcon: getCurrency("EUR"),
                         bsClass: "form-control form-control-simple",
                         name: "productPrice",
                         validate: [required]

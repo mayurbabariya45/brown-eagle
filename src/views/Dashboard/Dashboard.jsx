@@ -144,7 +144,7 @@ class Dashboard extends React.Component {
     });
   }
   handleSubmitForm(values) {
-    const { updateProfile, showNotification, auth } = this.props;
+    const { updateProfile, showNotification, auth, coordinates } = this.props;
     const { user } = auth;
     const authId = user.id;
     const authRole = user.role;
@@ -153,7 +153,8 @@ class Dashboard extends React.Component {
         name: values.name,
         email: values.email,
         phone: values.phone
-      }
+      },
+      coordinates
     });
     delete values.name;
     delete values.email;

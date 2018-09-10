@@ -364,6 +364,11 @@
 .product-information {
   .product-information-form {
     margin-bottom: 25px;
+    .input-group-addon{
+      background-color: #eee;
+      border-color: #ccc;
+      color: #000;
+    }
     .control-label {
       font-weight: normal;
       padding-top: 10px;

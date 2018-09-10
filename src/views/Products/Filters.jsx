@@ -94,7 +94,7 @@ class Filters extends Component {
                 mode: "range",
                 density: 3
               }}
-              range={{ min: 100, max: 1000 }}
+              range={{ min: 0, max: 1000 }}
               start={[price.minPrice, price.maxPrice]}
               connect
               onEnd={this.handlePriceSlider}

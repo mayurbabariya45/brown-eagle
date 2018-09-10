@@ -18,10 +18,14 @@ class Plans extends React.Component {
       translate,
       plans,
       plansNames,
-      services,
-      servicesLoading,
-      plansLoading,
-      locale
+      handleSubmit,
+      locale,
+      activeTabs,
+      selectedPlans,
+      selectedPlan,
+      payment,
+      showNotification,
+      auth
     } = this.props;
     return (
       <section className="section-plans">
@@ -32,10 +36,17 @@ class Plans extends React.Component {
                 <h5>{translate("p_title_text")}</h5>
               </div>
               <Tabs
+                activeTabs={activeTabs}
+                handleSubmit={handleSubmit}
                 translate={translate}
                 headers={plansNames}
                 locale={locale}
                 plans={plans}
+                selectedPlans={selectedPlans}
+                selectedPlan={selectedPlan}
+                payment={payment}
+                seller={auth.user ? auth.user.id : ""}
+                showNotification={showNotification}
               />
             </Col>
           </Row>
@@ -49,8 +60,7 @@ Plans.propTypes = {
   translate: PropTypes.func.isRequired,
   getPlans: PropTypes.func.isRequired,
   getServices: PropTypes.func.isRequired,
-  servicesLoading: PropTypes.bool.isRequired,
-  plansLoading: PropTypes.bool.isRequired
+  selectedPlans: PropTypes.func.isRequired
 };
 
 export default Plans;

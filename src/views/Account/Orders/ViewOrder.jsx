@@ -446,7 +446,7 @@ class ViewOrder extends React.Component {
         />
         <ShippingAddress translate={translate} {...shippingAddress} />
         <OrderDetails translate={translate} remark={remark} />
-        {status === "confirmed" && (
+        {status === "payment_pending" && (
           <PaymentMethod
             translate={translate}
             payment={payment}

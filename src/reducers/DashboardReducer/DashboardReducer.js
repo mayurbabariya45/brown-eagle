@@ -19,6 +19,10 @@ const INITIAL_STATE = {
     count: 0,
     page: 0,
     productReview: []
+  },
+  coordinates: {
+    type: "Point",
+    coordinates: []
   }
 };
 
@@ -186,6 +190,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         activeMap: action.types
+      };
+    case a.ADD_LOCATION:
+      return {
+        ...state,
+        coordinates: {
+          ...state.coordinates,
+          coordinates: action.coordinates
+        }
       };
     case a.GET_LOCATION_REQUEST:
       return {

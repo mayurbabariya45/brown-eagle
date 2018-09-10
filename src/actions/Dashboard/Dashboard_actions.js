@@ -93,6 +93,12 @@ export const handleInputMap = types => dispatch => {
     types
   });
 };
+export const location = coordinates => dispatch => {
+  dispatch({
+    type: a.ADD_LOCATION,
+    coordinates
+  });
+};
 
 export const getProductReview = (productId, page) => dispatch => {
   dispatch({

@@ -155,19 +155,14 @@ const RequestQuotationForm = props => {
                   validate: [required, numericality({ ">": 0 })]
                 },
                 {
-                  type: "select",
+                  type: "text",
                   bsClass: "form-control form-control-simple",
+                  placeholder: "Pieces",
                   name: "preferredUnitPrice",
-                  validate: [required]
+                  validate: [required, numericality({ ">": 0 })]
                 }
               ]}
-            >
-              <option value="">Pieces</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-            </FormInputs>
+            />
           </Col>
           <Col md={6} sm={6} xs={12}>
             <FormGroup>

@@ -23,6 +23,9 @@ class Products extends Component {
     this.handleRatingFilter = this.handleRatingFilter.bind(this);
     this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
     this.handleSubCategoryFilter = this.handleSubCategoryFilter.bind(this);
+    this.handleAddToWishlist = this.handleAddToWishlist.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.removeCartItem = this.removeCartItem.bind(this);
   }
   componentWillMount() {
     const {
@@ -146,20 +149,98 @@ class Products extends Component {
       1
     );
   }
+  handleAddToWishlist(event) {
+    event.preventDefault();
+    const {
+      addToWishlistProduct,
+      showNotification,
+      locale,
+      auth,
+      match
+    } = this.props;
+    const { productId } = match.params;
+    const buyer = auth.user.id;
+    const authRole = auth.user.role;
+    if (_.isEmpty(productId)) return false;
+    if (_.isEmpty(buyer)) {
+      showNotification(
+        <span data-notify="icon" className="pe-7s-shield" />,
+        <div>Please Login to buyer account</div>,
+        true
+      );
+      return false;
+    }
+    if (authRole !== "buyer") {
+      showNotification(
+        <span data-notify="icon" className="pe-7s-shield" />,
+        <div>Seller not avible to add to favourite</div>,
+        true
+      );
+      return false;
+    }
+    addToWishlistProduct(productId, buyer, locale).then(response => {
+      if (response.type === "ADD_TO_WISHLIST_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>{response.payload.response.message}</div>,
+          true
+        );
+      } else if (response.type === "ADD_TO_WISHLIST_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>
+            {response.payload.message || "Product has been added favourite"}
+          </div>,
+          false
+        );
+      }
+    });
+    return false;
+  }
   addToCart(item) {
-    const { addToCart, showNotification } = this.props;
+    const { addToCart, showNotification, auth, history } = this.props;
     const objectProduct = Object.assign({}, item, { quantity: 1 });
-    addToCart(objectProduct).then(response => {
+    const buyer = auth.user.id;
+    const authRole = auth.user.role;  
+    if (authRole !== "buyer") return false;
+    addToCart(objectProduct, buyer).then(response => {
       if (response.type === "ADD_TO_CART_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
           <div>{`${item.name} has been added successfully in cart.`}</div>,
           false
         );
+        history.push("/cart");
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
-          <div>Profile has been changed successfully.</div>,
+          <div>{response.payload.response.message}</div>,
+          true,
+          {
+            action: {
+              label: "Clear",
+              callback: () => this.removeCartItem()
+            }
+          }
+        );
+      }
+    });
+    return false;
+  }
+  removeCartItem() {
+    const { removeCartItem, showNotification, auth } = this.props;
+    const buyer = auth.user.id;
+    removeCartItem(buyer).then(response => {
+      if (response.type === "REMOVE_CART_PRODUCT_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Product has been deleted successfully.</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>Product not deleted. Please try again later.</div>,
           true
         );
       }

@@ -61,12 +61,12 @@ const Products = props => {
             buttons && (
               <div className="actions-secondary add-to-links">
                 <ul className="add-to-links">
-                  <li>
+                  {/* <li>
                     <a>
                       <i className="fa fa-heart-o" />
                     </a>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <a>
                       <i className="pe-7s-note2" />
                     </a>
@@ -75,7 +75,7 @@ const Products = props => {
                     <a>
                       <i className="pe-7s-expand1" />
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             )}
@@ -190,9 +190,9 @@ const Products = props => {
               </div>
               <div className="reviews-actions">
                 <a href="#products" className="action view">
-                  {!_.isEmpty(product) ? product.totalRatingsCount : 1}&nbsp;<span >
+                  {!_.isEmpty(product) ? product.totalRatingsCount : 1}&nbsp;<span>
                     {translate("review")}
-                                                                             </span>
+                  </span>
                 </a>
               </div>
             </div>
@@ -212,12 +212,12 @@ const Products = props => {
         buttons && (
           <div className="actions-secondary add-to-links">
             <ul className="add-to-links">
-              <li>
+              {/* <li>
                 <a href="#products">
                   <i className="fa fa-heart-o" />
                 </a>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a href="#products">
                   <i className="pe-7s-note2" />
                 </a>
@@ -226,7 +226,7 @@ const Products = props => {
                 <a href="#products">
                   <i className="pe-7s-expand1" />
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         )}

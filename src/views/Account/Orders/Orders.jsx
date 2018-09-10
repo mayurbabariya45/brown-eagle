@@ -51,8 +51,6 @@ class Orders extends React.Component {
     if (end > count) {
       end = count;
     }
-    console.log(this.state);
-    
     return (
       <div className="account-orders">
         <Row>

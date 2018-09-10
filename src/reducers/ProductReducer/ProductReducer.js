@@ -31,7 +31,7 @@ const initialState = {
       order: ""
     },
     price: {
-      minPrice: 1,
+      minPrice: 0,
       maxPrice: 1000
     },
     rating: {

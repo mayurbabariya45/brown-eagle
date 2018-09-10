@@ -24,3 +24,20 @@ export const getServices = () => dispatch =>
       ]
     }
   });
+
+export const selectedPlans = selectedPlan => dispatch => {
+  dispatch({
+    type: a.SELECT_PLANS,
+    selectedPlan
+  });
+};
+
+export const payment = (seller, values) => ({
+  [RSAA]: {
+    endpoint: `seller/${seller}/plans`,
+    method: "POST",
+    body: JSON.stringify(values),
+    headers: { "Content-Type": "application/json" },
+    types: [a.ADD_PAYMENT_REQUEST, a.ADD_PAYMENT_SUCCESS, a.ADD_PAYMENT_FAILURE]
+  }
+});

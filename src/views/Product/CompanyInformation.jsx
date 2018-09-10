@@ -7,12 +7,50 @@ import {
   FormControl,
   FormGroup
 } from "react-bootstrap";
+import Location from "./Location";
+import SellerVideo from "./SellerVideo";
 
 const CompanyInfromation = props => {
   const { translate, information } = props;
   return (
     <div>
       <Row>
+        <Col md={6} xs={12}>
+          {information.location && (
+            <FormGroup>
+              <ControlLabel>{props.translate("basic_location")}</ControlLabel>
+              <FormControl.Static>{information.location}</FormControl.Static>
+            </FormGroup>
+          )}
+          {information.employeeCount && (
+            <FormGroup>
+              <ControlLabel>{props.translate("basic_employees")}</ControlLabel>
+              <FormControl.Static>
+                {information.employeeCount}
+              </FormControl.Static>
+            </FormGroup>
+          )}
+          {information.established && (
+            <FormGroup>
+              <ControlLabel>
+                {props.translate("basic_established")}
+              </ControlLabel>
+              <FormControl.Static>{information.established}</FormControl.Static>
+            </FormGroup>
+          )}
+          <FormGroup>
+            <ControlLabel>
+              {props.translate("basic_certification")}
+            </ControlLabel>
+            <FormControl.Static>CE,CE</FormControl.Static>
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>{props.translate("contact_person")}</ControlLabel>
+            <FormControl.Static>
+              {information.contactPerson && information.contactPerson.name}
+            </FormControl.Static>
+          </FormGroup>
+        </Col>
         <Col md={6} xs={12}>
           {information.businessType && (
             <FormGroup>
@@ -42,35 +80,13 @@ const CompanyInfromation = props => {
             <FormControl.Static>Europe 30.00% </FormControl.Static>
           </FormGroup> */}
         </Col>
-        <Col md={6} xs={12}>
-          {information.location && (
-            <FormGroup>
-              <ControlLabel>{props.translate("basic_location")}</ControlLabel>
-              <FormControl.Static>{information.location}</FormControl.Static>
-            </FormGroup>
-          )}
-          {information.employeeCount && (
-            <FormGroup>
-              <ControlLabel>{props.translate("basic_employees")}</ControlLabel>
-              <FormControl.Static>
-                {information.employeeCount}
-              </FormControl.Static>
-            </FormGroup>
-          )}
-          {information.established && (
-            <FormGroup>
-              <ControlLabel>
-                {props.translate("basic_established")}
-              </ControlLabel>
-              <FormControl.Static>{information.established}</FormControl.Static>
-            </FormGroup>
-          )}
-          {/* <FormGroup>
-            <ControlLabel>
-              {props.translate("basic_certification")}
-            </ControlLabel>
-            <FormControl.Static>CE,CE</FormControl.Static>
-          </FormGroup> */}
+      </Row>
+      <Row>
+        <Col md={6}>
+          <Location />
+        </Col>
+        <Col md={6}>
+          <SellerVideo url={information.profileVideo} />
         </Col>
       </Row>
     </div>

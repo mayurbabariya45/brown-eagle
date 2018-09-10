@@ -14,11 +14,15 @@ const mapDispatchToProps = dispatch => ({
   handlePriceFilter: value => dispatch(a.handlePriceFilter(value)),
   handleRatingFilter: value => dispatch(a.handleRatingFilter(value)),
   searchProducts: (values, page) => dispatch(a.searchProducts(values, page)),
-  addToCart: item => dispatch(c.addToCart(item))
+  addToCart: (item, buyer) => dispatch(c.addToCart(item, buyer)),
+  removeCartItem: item => dispatch(c.removeCartItem(item)),
+  addToWishlistProduct: (product, authId, locale) =>
+    dispatch(a.addToWishlistProduct(product, authId, locale))
 });
 const mapStateToProps = state => ({
   ...state.product,
-  categories: state.categories.categories
+  categories: state.categories.categories,
+  auth: state.auth
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,

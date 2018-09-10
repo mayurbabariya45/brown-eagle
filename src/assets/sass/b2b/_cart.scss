@@ -225,7 +225,15 @@
     height: 70px;
   }
 }
-.order-success{
+.order-success, .plan-actived{
+  margin: 25px 0 0;
+  padding: 0;
+  .order-success-content{
+    text-align: center;
+  }
+}
+
+.plan-actived{
   margin: 25px 0 0;
   padding: 0;
   .order-success-content{

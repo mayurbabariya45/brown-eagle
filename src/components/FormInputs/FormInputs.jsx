@@ -107,6 +107,22 @@ const FieldGroup = ({
               </Col>
             </FormGroup>
           );
+        case "horizontal_icon":
+          return (
+            <FormGroup validationState={validationState} className={className}>
+              <Col componentClass={ControlLabel} sm={xsLabel || 3}>
+                {label}
+              </Col>
+              <Col sm={xsInput || 9}>
+                <InputGroup>
+                  <InputGroup.Addon>{bsIcon}</InputGroup.Addon>
+                  <FormControl {...props} />
+                  {errorText !== "Required" &&
+                    errorText && <HelpBlock>{errorText}</HelpBlock>}
+                </InputGroup>
+              </Col>
+            </FormGroup>
+          );
         case "horizontal":
           return (
             <FormGroup validationState={validationState} className={className}>

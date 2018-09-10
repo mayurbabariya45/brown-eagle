@@ -47,14 +47,15 @@ const mapDispatchToProps = dispatch => ({
   showNotification: (title, message, fail) =>
     dispatch(c.showNotification(title, message, fail)),
   getLocation: (lat, lng) => dispatch(d.getLocation(lat, lng)),
-  handleInputMap: type => dispatch(d.handleInputMap(type))
+  handleInputMap: type => dispatch(d.handleInputMap(type)),
+  location: location => dispatch(d.location(location))
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,
   ...actions,
   ...ownProps,
-  getLocation: (lat, lng, type) => {
-    actions.getLocation(lat, lng).then(response => {
+  getLocation: (lats, lngs, type) => {
+    actions.getLocation(lats, lngs).then(response => {
       if (response.type === "GET_LOCATION_SUCCESS") {
         if (_.isEmpty(response.payload.results)) {
           ownProps.showNotification(response.payload.error_message);
@@ -66,11 +67,13 @@ const mergeProps = (state, actions, ownProps) => ({
         const country = location.pop();
         const zipcode = location.pop();
         const city = location.pop();
+        const { lat, lng } = response.payload.results[0].geometry.location;
         if (type === "registeredAddress") {
           actions.changeFieldValue("r_city", city);
           actions.changeFieldValue("registeredAddress", location.join(","));
           actions.changeFieldValue("r_area_code", zipcode.split(" ").pop());
           actions.changeFieldValue("r_country", country);
+          actions.location([lat, lng]);
         } else {
           actions.changeFieldValue("o_city", city);
           actions.changeFieldValue("operationalAddress", location.join(","));

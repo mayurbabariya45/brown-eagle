@@ -8,7 +8,9 @@ const INITIAL_STATE = {
   servicesLoading: false,
   plans: [],
   plansNames: [],
-  service: []
+  service: [],
+  selectedPlan: {},
+  activeTabs: 1
 };
 
 /**
@@ -61,6 +63,30 @@ export default (state = INITIAL_STATE, action) => {
         servicesLoading: false,
         error: true,
         success: false
+      };
+    case a.SELECT_PLANS:
+      return {
+        ...state,
+        activeTabs: 2,
+        selectedPlan: _.find(state.plans, ["id", action.selectedPlan.plan])
+      };
+    case a.ADD_PAYMENT_REQUEST:
+      return {
+        ...state,
+        loading: false
+      };
+    case a.ADD_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        activeTabs: 3
+      };
+    case a.ADD_PAYMENT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true
       };
     default:
       return state;
