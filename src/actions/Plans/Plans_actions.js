@@ -34,7 +34,7 @@ export const selectedPlans = selectedPlan => dispatch => {
 
 export const payment = (seller, values) => ({
   [RSAA]: {
-    endpoint: `seller/${seller}/plans`,
+    endpoint: `seller/${seller}/plan`,
     method: "POST",
     body: JSON.stringify(values),
     headers: { "Content-Type": "application/json" },

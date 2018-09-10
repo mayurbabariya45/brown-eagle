@@ -101,6 +101,14 @@ class _SplitForm extends React.Component {
               plan: this.props.plan,
               token: token.id
             };
+            if (_.isEmpty(this.props.seller)) {
+              this.props.showNotification(
+                <span data-notify="icon" className="pe-7s-check" />,
+                <div>Please try again later</div>,
+                true
+              );
+              return false;
+            }
             this.props.payment(this.props.seller, values).then(payload => {
               if (payload.type === "ADD_PAYMENT_FAILURE") {
                 this.props.showNotification(
@@ -114,6 +122,7 @@ class _SplitForm extends React.Component {
                   <div>Payment has been done successfully</div>,
                   false
                 );
+                window.scrollTo(0, 0);
               }
               this.setState({
                 loading: false
@@ -164,6 +173,7 @@ const Payment = props => (
           plan={props.plan}
           showNotification={props.showNotification}
           translate={props.translate}
+          seller={props.seller}
         />
       </Elements>
     </StripeProvider>
