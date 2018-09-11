@@ -15,7 +15,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(a.getUserProfile(token, id, role)),
   getCartProducts: authId => dispatch(d.getCartProducts(authId)),
   createOrder: values => dispatch(c.createOrder(values)),
-  saveAddress: values => dispatch(c.saveAddress(values))
+  saveAddress: values => dispatch(c.saveAddress(values)),
+  flushCheckout: () => dispatch(c.flushCheckout())
 });
 
 const mergeProps = (state, actions, ownProps) => ({

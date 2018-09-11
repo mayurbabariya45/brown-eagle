@@ -44,6 +44,13 @@ export default (state = INITIAL_STATE, action) => {
         address: action.values,
         addAddress: true
       };
+    case a.FLUSH_ORDER:
+      return {
+        ...state,
+        orderSuccess: false,
+        addAddress: false,
+        address: {}
+      };
     default:
       return state;
   }

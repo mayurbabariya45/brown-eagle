@@ -24,6 +24,10 @@ class Checkout extends React.Component {
     const { getCartProducts } = this.props;
     getCartProducts();
   }
+  componentWillUnmount() {
+    const { flushCheckout } = this.props;
+    flushCheckout();
+  }
   handleOrderRemark(e) {
     const value = e.target.value;
     this.setState({
@@ -49,12 +53,15 @@ class Checkout extends React.Component {
           buyer,
           product: product._id,
           quantity: product.quantity,
-          value: {
+          price: {
             currency: product.currency,
-            value: product.quantity * product.productPrice
+            value: product.productPrice
           },
-          shippingAddress: address,
-          remarks: this.state.remarks
+          shippingAddress: {
+            ...address,
+            contactName: `${address.f_name}${address.l_name}`
+          },
+          remarks: this.state.remarks || "---"
         }
       );
       createOrder(createObjectValues).then(response => {
@@ -96,20 +103,22 @@ class Checkout extends React.Component {
     });
     if (orderSuccess) {
       return (
-        <Grid>
-          <Row>
-            <Col md={12} sm={12} xs={12}>
-              <div className="page-header">
-                <div className="title">
-                  <ul>
-                    <li>Checkout</li>
-                  </ul>
+        <section className="checkout-section">
+          <Grid>
+            <Row>
+              <Col md={12} sm={12} xs={12}>
+                <div className="page-header">
+                  <div className="title">
+                    <ul>
+                      <li>Checkout</li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
-          {orderSuccess && <OrderSuccess />}
-        </Grid>
+              </Col>
+            </Row>
+            {orderSuccess && <OrderSuccess />}
+          </Grid>
+        </section>
       );
     }
     return (
@@ -193,6 +202,7 @@ class Checkout extends React.Component {
             <ShippingAddressContainer
               translate={translate}
               saveAddress={saveAddress}
+              auth={auth}
             />
             <OrderRemarks
               handleOrderRemark={this.handleOrderRemark}

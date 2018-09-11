@@ -199,9 +199,11 @@ class Products extends Component {
   }
   addToCart(item) {
     const { addToCart, showNotification, auth, history } = this.props;
-    const objectProduct = Object.assign({}, item, { quantity: 1 });
+    const objectProduct = Object.assign({}, item, {
+      quantity: item.minQuantity
+    });
     const buyer = auth.user.id;
-    const authRole = auth.user.role;  
+    const authRole = auth.user.role;
     if (authRole !== "buyer") return false;
     addToCart(objectProduct, buyer).then(response => {
       if (response.type === "ADD_TO_CART_SUCCESS") {
@@ -219,7 +221,7 @@ class Products extends Component {
           {
             action: {
               label: "Clear",
-              callback: () => this.removeCartItem()
+              callback: () => this.removeCartItem(item)
             }
           }
         );
@@ -227,7 +229,7 @@ class Products extends Component {
     });
     return false;
   }
-  removeCartItem() {
+  removeCartItem(item) {
     const { removeCartItem, showNotification, auth } = this.props;
     const buyer = auth.user.id;
     removeCartItem(buyer).then(response => {
@@ -237,6 +239,7 @@ class Products extends Component {
           <div>Product has been deleted successfully.</div>,
           false
         );
+        this.addToCart(item);
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,

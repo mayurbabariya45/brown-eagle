@@ -27,9 +27,11 @@ const Profile = props => {
     handleEditCertificateForm,
     handleUploadCertificateForm,
     handleRemoveCertificate,
-    handleUploadVideo
+    handleUploadVideo,
+    locale
   } = props;
-  const { user, loading, activePlan } = props.auth;
+  const { user, loading } = props.auth;
+  const activePlan = (!_.isEmpty(user.activePlan) && user.activePlan) || {};
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
   const twitter = _.find(user.socialLinks, ["platform", "twitter"]);
   const google = _.find(user.socialLinks, ["platform", "google"]);
@@ -45,10 +47,12 @@ const Profile = props => {
          ${user.operationalAddress.country}
         `
     : "none";
+  const activedPlanName = activePlan.plan;
   const activePlanProducts = activePlan.product;
   const activePlanRfq = activePlan.rfq;
   const activePlanStorage = activePlan.storage;
-  const certificates = !_.isEmpty(user) ? user.certificates : [];  
+  const certificates = !_.isEmpty(user) ? user.certificates : [];
+
   return (
     <div className="profile">
       <Row>
@@ -119,7 +123,10 @@ const Profile = props => {
               header={
                 <div className="header card-header-action">
                   <h4 className="title">
-                    My Plan <small>{activePlan.name || ""}</small>
+                    My Plan{" "}
+                    <small>
+                      {!_.isEmpty(activedPlanName) && activedPlanName.name}
+                    </small>
                   </h4>
                   <div className="actions-label">
                     <div className="action text-bold">

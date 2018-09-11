@@ -27,9 +27,9 @@ export const cancelOrder = (orderId, status) => ({
     ]
   }
 });
-export const getOrderTransactions = orderId => ({
+export const getOrderTransactions = (buyer, orderId) => ({
   [RSAA]: {
-    endpoint: `order/${orderId}/transactions`,
+    endpoint: `order/${orderId}/transactions?buyer=${buyer}&type=order_update`,
     method: "GET",
     types: [
       a.GET_ORDER_TRANSACTIONS_REQUEST,

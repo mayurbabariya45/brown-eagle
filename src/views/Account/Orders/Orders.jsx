@@ -14,6 +14,7 @@ class Orders extends React.Component {
     };
     this.handleViewOrder = this.handleViewOrder.bind(this);
     this.clearViewOrderState = this.clearViewOrderState.bind(this);
+    this.handlePaymentMethod = this.handlePaymentMethod.bind(this);
   }
   componentWillMount() {
     const { getOrders, buyerId } = this.props;
@@ -32,6 +33,11 @@ class Orders extends React.Component {
   clearViewOrderState() {
     this.setState({ order: {}, viewOrder: false });
   }
+  handlePaymentMethod(){
+    const { getOrders, buyerId } = this.props;
+    getOrders(buyerId, this.state.currentPage);
+    this.setState({ order: {}, viewOrder: false });
+  }
   render() {
     const {
       translate,
@@ -42,6 +48,7 @@ class Orders extends React.Component {
       showNotification,
       getOrderTransactions,
       transactions,
+      buyerId,
       isLoading
     } = this.props;
     const { count, order } = orders;
@@ -92,6 +99,7 @@ class Orders extends React.Component {
             <Col md={12} sm={12} xs={12}>
               <div className="view-order">
                 <ViewOrder
+                  buyerId={buyerId}
                   payment={payment}
                   translate={translate}
                   handleBackButton={this.clearViewOrderState}
@@ -100,6 +108,7 @@ class Orders extends React.Component {
                   order={this.state.order}
                   transactions={transactions}
                   isLoading={isLoading}
+                  handlePaymentMethod={this.handlePaymentMethod}
                 />
               </div>
             </Col>

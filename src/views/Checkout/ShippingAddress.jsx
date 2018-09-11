@@ -88,7 +88,15 @@ class ShippingAddress extends React.Component {
     };
     this.handleFormShow = this.handleFormShow.bind(this);
   }
-
+  componentWillReceiveProps(nextProps) {
+    const { address, initialValues, saveAddress } = nextProps;
+    if (_.isEmpty(address)) {
+      saveAddress({ ...initialValues });
+      this.setState({
+        showForm: false
+      });
+    }
+  }
   handleFormShow() {
     this.setState({
       showForm: !this.state.showForm
@@ -96,7 +104,15 @@ class ShippingAddress extends React.Component {
   }
 
   render() {
-    const { translate, handleSubmit, saveAddress, address } = this.props;
+    const {
+      translate,
+      handleSubmit,
+      saveAddress,
+      address,
+      initialValues,
+      auth
+    } = this.props;
+    const { user } = auth;
     return (
       <div className="shipping-address">
         <Row>
@@ -122,13 +138,16 @@ class ShippingAddress extends React.Component {
               }
               content={
                 <div>
-                  {((this.state.showForm && _.isEmpty(address)) ||
+                  {((this.state.showForm &&
+                    (_.isEmpty(address) &&
+                      _.isEmpty(user.operationalAddress))) ||
                     (this.state.showForm && !_.isEmpty(address))) && (
                     <ShippingAddressForm
                       translate={translate}
                       handleSubmit={handleSubmit}
                       saveAddress={saveAddress}
                       handleFormShow={this.handleFormShow}
+                      initialValues={initialValues}
                     />
                   )}
                   {!this.state.showForm &&

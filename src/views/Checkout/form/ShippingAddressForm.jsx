@@ -39,7 +39,7 @@ class ShippingAddressForm extends React.Component {
     });
   }
   render() {
-    const { loading, handleSubmit, translate, initialValues } = this.props;
+    const { loading, handleSubmit, translate } = this.props;
     return (
       <div className="shipping-address-form">
         <BlockUi tag="div" blocking={loading}>
@@ -115,12 +115,6 @@ class ShippingAddressForm extends React.Component {
                     <FormGroup>
                       <ControlLabel>Country</ControlLabel>
                       <Select
-                        selectedValue={
-                          !_.isEmpty(initialValues) && {
-                            value: initialValues.country || "",
-                            label: initialValues.country || ""
-                          }
-                        }
                         searchable
                         options={countries}
                         handleCountry={this.handleLocation}
@@ -135,8 +129,7 @@ class ShippingAddressForm extends React.Component {
                       label: "Landmark",
                       type: "text",
                       bsClass: "form-control form-control-simple",
-                      name: "Landmark",
-                      validate: [required]
+                      name: "Landmark"
                     },
                     {
                       label: "Phone",

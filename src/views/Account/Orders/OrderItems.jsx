@@ -75,7 +75,7 @@ const OrderItem = props => {
         <div className="box-list-item-detail">
           <div className="box-list-item-desc">
             <p>
-              <span>Seller</span>: {props.seller.companyName}
+              <span>Seller</span>: {props.seller && props.seller.companyName}
             </p>
             <p>
               <span>Total</span>: {getCurrency(props.price.currency)}

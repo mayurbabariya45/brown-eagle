@@ -407,16 +407,17 @@ class ViewOrder extends React.Component {
     this.state = {};
   }
   componentWillMount() {
-    const { getOrderTransactions, order } = this.props;
+    const { getOrderTransactions, order, buyerId } = this.props;
     if (!_.isEmpty(order)) {
       const { id } = order;
-      getOrderTransactions(id);
+      getOrderTransactions(buyerId, id);
     }
   }
   render() {
     const {
       translate,
       handleBackButton,
+      handlePaymentMethod,
       order,
       payment,
       showNotification,
@@ -424,8 +425,6 @@ class ViewOrder extends React.Component {
       isLoading
     } = this.props;
     const { status, product, total, price, quantity, remark, shippingAddress } = order;
-    console.log(transactions);
-
     return (
       <div>
         <div className="go-back-button">
@@ -452,6 +451,7 @@ class ViewOrder extends React.Component {
             payment={payment}
             orderId={order.id}
             showNotification={showNotification}
+            handlePaymentMethod={handlePaymentMethod}
           />
         )}
         {/* <OrderButtons /> */}
@@ -471,7 +471,8 @@ ViewOrder.propTypes = {
   translate: PropTypes.func.isRequired,
   payment: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
-  getOrderTransactions: PropTypes.func.isRequired
+  getOrderTransactions: PropTypes.func.isRequired,
+  handlePaymentMethod: PropTypes.func.isRequired
 };
 
 export default ViewOrder;

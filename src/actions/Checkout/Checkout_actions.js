@@ -15,3 +15,7 @@ export const saveAddress = values => ({
   type: a.SAVE_SHIPPING_ADDRESS,
   values
 });
+
+export const flushCheckout = () => ({
+  type: a.FLUSH_ORDER
+});

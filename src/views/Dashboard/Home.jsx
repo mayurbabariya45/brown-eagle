@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -9,6 +10,8 @@ import avatar from "../../assets/img/avatar.png";
 const Home = props => {
   const { translate } = props;
   const { user, loader } = props.auth;
+  const activePlan = (!_.isEmpty(user.activePlan) && user.activePlan) || {};
+  const activedPlanName = activePlan.plan;
   return (
     <div className="dashboard">
       <ContentLoader height={100} inFight={loader}>
@@ -43,7 +46,7 @@ const Home = props => {
                           )}
                         </li>
                         <li>
-                          {translate("d_first_year")}
+                          {!_.isEmpty(activedPlanName) && activedPlanName.name}
                           <span>
                             <Link to="/plans">
                               <i className="fa fa-refresh" />{" "}

@@ -96,7 +96,6 @@ class _SplitForm extends React.Component {
       this.props.stripe.createToken().then(payload => {
         if (!_.isEmpty(payload)) {
           const { token, error } = payload;
-          console.log(error);
           if (token) {
             this.props.payment(this.props.orderId, token.id).then(payload => {
               if (payload.type === "ADD_PAYMENT_FAILURE") {
@@ -106,6 +105,7 @@ class _SplitForm extends React.Component {
                   true
                 );
               } else {
+                this.props.handlePaymentMethod();
                 this.props.showNotification(
                   <span data-notify="icon" className="pe-7s-check" />,
                   <div>Payment has been done successfully</div>,
@@ -161,6 +161,7 @@ const Payment = props => (
           orderId={props.orderId}
           showNotification={props.showNotification}
           translate={props.translate}
+          handlePaymentMethod={props.handlePaymentMethod}
         />
       </Elements>
     </StripeProvider>

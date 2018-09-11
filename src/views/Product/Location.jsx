@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+
 const MapWithMarker = withGoogleMap(props => (
   <GoogleMap defaultZoom={15} defaultCenter={props.location}>
     <Marker position={props.location} />
@@ -27,7 +27,6 @@ const MapMarker = props => {
   );
 };
 
-MapMarker.PropTypes = {
-  show: PropTypes.bool.isRequired
-};
+MapMarker.propTypes = {};
+
 export default MapMarker;

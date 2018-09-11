@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 
 const OrderSuccess = () => (
@@ -18,6 +19,13 @@ const OrderSuccess = () => (
                 <p className="lead">
                   Your Order has been created successfully.
                 </p>
+                <div className="actions">
+                  <div className="payment-buttons">
+                    <Link to="/my_account" className="btn-fill btn btn-warning">
+                      My Account
+                    </Link>
+                  </div>
+                </div>
                 <hr />
                 <p>
                   Having trouble? <a href="#">Contact us</a>

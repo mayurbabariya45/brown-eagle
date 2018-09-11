@@ -39,7 +39,7 @@ export default function AuthHoc(WrappedComponent, passedProps) {
             getUserProfile(webAuthToken, webAuthId, webAuthRole).then(
               profile => {
                 if (profile.payload.role === "seller") {
-                  getSellerActivePlans(profile.payload.id);
+                  // getSellerActivePlans(profile.payload.id);
                 }
                 if (profile.payload.role === type) {
                   return true;
@@ -56,7 +56,7 @@ export default function AuthHoc(WrappedComponent, passedProps) {
         if (user.role === type) {
           getUserProfile(webAuthToken, user.id, user.role).then(profile => {
             if (profile.payload.role === "seller") {
-              getSellerActivePlans(profile.payload.id);
+              // getSellerActivePlans(profile.payload.id);
             }
             if (profile.payload.role === type) {
               return true;
