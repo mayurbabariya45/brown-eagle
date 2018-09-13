@@ -11,7 +11,7 @@ import { getCurrency } from "../../variables/Variables";
 const preloader = () => <ContentLoader height={300} inFight />;
 
 const ProductItem = props => {
-  const { product, locale } = props;
+  const { product, locale, onIncrement, onDecrement } = props;
   let productImages;
   let productUrl;
   if (!_.isEmpty(product)) {
@@ -36,7 +36,13 @@ const ProductItem = props => {
           </Link>
         </div>
         <div className="cart-quantity">
-          <Quantity label quantity={product.quantity} />
+          <Quantity
+            label
+            min={product.minQuantity}
+            quantity={product.quantity}
+            onIncrement={onIncrement}
+            onDecrement={onDecrement}
+          />
         </div>
       </div>
       <div className="cart-item-details">

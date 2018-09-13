@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => ({
   getServices: () => dispatch(a.getServices()),
   selectedPlans: selectedPlan => dispatch(a.selectedPlans(selectedPlan)),
   payment: (seller, values) => dispatch(a.payment(seller, values)),
+  flushPlans: () => dispatch(a.payment())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

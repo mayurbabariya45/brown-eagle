@@ -41,3 +41,9 @@ export const payment = (seller, values) => ({
     types: [a.ADD_PAYMENT_REQUEST, a.ADD_PAYMENT_SUCCESS, a.ADD_PAYMENT_FAILURE]
   }
 });
+
+export const flushPlans = () => dispatch => {
+  dispatch({
+    type: a.FLUSH_PLANS
+  });
+};

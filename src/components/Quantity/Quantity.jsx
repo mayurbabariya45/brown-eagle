@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { ControlLabel, Button } from "react-bootstrap";
 
 const Quantity = props => {
-  const { quantity, onIncrement, onDecrement, label } = props;
+  const { quantity, onIncrement, onDecrement, label, min = 1 } = props;
   return (
     <div className="product-qty">
       {!label && <ControlLabel>Quantity</ControlLabel>}
       <div className="control custom-qty">
         <div className="btn-minus">
           <Button
-            disabled={quantity < 2}
+            disabled={quantity <= min}
             className="btn-radius btn-fill items"
             onClick={onDecrement}
           >

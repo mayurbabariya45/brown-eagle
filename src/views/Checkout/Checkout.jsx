@@ -28,6 +28,46 @@ class Checkout extends React.Component {
     const { flushCheckout } = this.props;
     flushCheckout();
   }
+  onIncrement(item) {
+    const { onIncrement, showNotification } = this.props;
+    onIncrement(item).then(response => {
+      if (response.type === "QUANTITY_INCREMENT_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{`${item.name} has been changed.`}</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>
+            {`${item.name} quantity not changed. Please try again later.`}
+          </div>,
+          true
+        );
+      }
+    });
+  }
+  onDecrement(item) {
+    const { onDecrement, showNotification } = this.props;
+    onDecrement(item).then(response => {
+      if (response.type === "QUANTITY_DECREMENT_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{`${item.name} has been changed.`}</div>,
+          false
+        );
+      } else {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-shield" />,
+          <div>
+            {`${item.name} quantity not changed. Please try again later.`}
+          </div>,
+          true
+        );
+      }
+    });
+  }
   handleOrderRemark(e) {
     const value = e.target.value;
     this.setState({
@@ -74,6 +114,7 @@ class Checkout extends React.Component {
         }
       });
     }
+    return false;
   }
   render() {
     const {
@@ -98,6 +139,8 @@ class Checkout extends React.Component {
           key={product.id}
           translate={translate}
           product={product}
+          onIncrement={() => this.onIncrement(product)}
+          onDecrement={() => this.onDecrement(product)}
         />
       );
     });

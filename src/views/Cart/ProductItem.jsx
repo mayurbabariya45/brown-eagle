@@ -51,6 +51,7 @@ const ProductItem = props => {
         <div className="cart-quantity">
           <Quantity
             label
+            min={product.minQuantity}
             quantity={product.quantity}
             onIncrement={onIncrement}
             onDecrement={onDecrement}

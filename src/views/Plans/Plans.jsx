@@ -13,6 +13,10 @@ class Plans extends React.Component {
     getPlans();
     getServices();
   }
+  componentWillUnmount(){
+    const { flushPlans } = this.props;
+    flushPlans();
+  }
   render() {
     const {
       translate,

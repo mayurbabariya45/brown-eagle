@@ -88,6 +88,15 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         error: true
       };
+    case a.FLUSH_PLANS:
+      return {
+        ...state,
+        plans: [],
+        plansNames: [],
+        service: [],
+        selectedPlan: {},
+        activeTabs: 1
+      };
     default:
       return state;
   }

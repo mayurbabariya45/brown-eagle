@@ -16,7 +16,9 @@ const mapDispatchToProps = dispatch => ({
   getCartProducts: authId => dispatch(d.getCartProducts(authId)),
   createOrder: values => dispatch(c.createOrder(values)),
   saveAddress: values => dispatch(c.saveAddress(values)),
-  flushCheckout: () => dispatch(c.flushCheckout())
+  flushCheckout: () => dispatch(c.flushCheckout()),
+  onIncrement: item => dispatch(d.onIncrement(item)),
+  onDecrement: item => dispatch(d.onDecrement(item))
 });
 
 const mergeProps = (state, actions, ownProps) => ({
