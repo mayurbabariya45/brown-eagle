@@ -28,22 +28,27 @@ export const getBuyerQuotations = (buyerId, page) => ({
   }
 });
 
-export const getSellerQuotations = (sellerId, page = 1) => ({
-  [RSAA]: {
-    endpoint: `rfq/suggestions/seller/${sellerId}?page=${page}`,
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    types: [
-      a.GET_SELLER_QUOTATIONS_REQUEST,
-      a.GET_SELLER_QUOTATIONS_SUCCESS,
-      a.GET_SELLER_QUOTATIONS_FAILURE
-    ]
+export const getSellerQuotations = (sellerId, status = "all", page = 1) => {
+  let endPoint = `rfq/suggestions/seller/${sellerId}?page=${page}`;
+  if (status !== "all") {
+    endPoint += `&status=${status}`;
   }
-});
-
+  return {
+    [RSAA]: {
+      endpoint: endPoint,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.GET_SELLER_QUOTATIONS_REQUEST,
+        a.GET_SELLER_QUOTATIONS_SUCCESS,
+        a.GET_SELLER_QUOTATIONS_FAILURE
+      ]
+    }
+  };
+};
 export const getSellerQuotes = (sellerId, page = 1) => ({
   [RSAA]: {
-    endpoint: `rfq?quote/seller/${sellerId}?page=${page}`,
+    endpoint: `rfq/quote/seller/${sellerId}?page=${page}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     types: [
@@ -96,6 +101,13 @@ export const selectFilters = value => ({
   value
 });
 
+export const onSelectCategory = value => dispatch => {
+  dispatch({
+    type: a.SELECTED_CATEGORY,
+    value
+  });
+};
+
 export const createQuotation = (quotation, locale) => dispatch =>
   dispatch({
     [RSAA]: {
@@ -128,7 +140,7 @@ export const searchQuotation = values => dispatch => {
   const { search, category, status, page } = values;
   let endCategory = "";
   if (!_.isEmpty(category)) {
-    endCategory = `&category=${category.id}`;
+    endCategory = `&category=${category}`;
   }
   dispatch({
     [RSAA]: {
@@ -161,3 +173,15 @@ export const submitQuote = (values, locale) => dispatch =>
       ]
     }
   });
+export const getSellerActivePlans = authId => ({
+  [RSAA]: {
+    endpoint: `seller/${authId}/plan`,
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    types: [
+      a.GET_SELLER_ACTIVE_PLAN_REQUEST,
+      a.GET_SELLER_ACTIVE_PLAN_SUCCESS,
+      a.GET_SELLER_ACTIVE_PLAN_FAILURE
+    ]
+  }
+});

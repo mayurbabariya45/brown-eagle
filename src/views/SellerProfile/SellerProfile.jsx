@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CategorySlider from "../../components/CategorySlider/CategorySlider";
+import Location from "./Location";
 
 const ImagesSlider = ({ video, image }) => {
   const settings = {
@@ -72,7 +73,8 @@ class SellerProfile extends React.Component {
       registeredAddress,
       established,
       employeeCount,
-      certificates
+      certificates,
+      coordinates
     } = profile;
 
     const aboutUs = !_.isEmpty(aboutUsTranslations)
@@ -212,6 +214,20 @@ class SellerProfile extends React.Component {
                   </tbody>
                 </table>
               </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <Location
+                location={
+                  !_.isEmpty(coordinates)
+                    ? {
+                        lat: coordinates.coordinates[0],
+                        lng: coordinates.coordinates[1]
+                      }
+                    : {}
+                }
+              />
             </Col>
           </Row>
           <Row>

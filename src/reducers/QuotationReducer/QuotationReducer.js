@@ -9,6 +9,8 @@ const initialState = {
   selectedFilter: "All",
   searchQuery: "",
   categories: [],
+  selectedCategory: {},
+  activePlan: {},
   sellerQuotation: {
     count: 0,
     page: 0,
@@ -224,6 +226,29 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedFilter: action.value
+      };
+    case a.SELECTED_CATEGORY:
+      return {
+        ...state,
+        selectedCategory: _.find(state.categories, ["name", action.value])
+      };
+    case a.GET_SELLER_ACTIVE_PLAN_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.GET_SELLER_ACTIVE_PLAN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        activePlan: action.payload.plan
+      };
+    case a.GET_SELLER_ACTIVE_PLAN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true
       };
     default:
       return state;

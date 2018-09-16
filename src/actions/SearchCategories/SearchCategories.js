@@ -1,10 +1,16 @@
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { actionTypes as a } from "../../constants/SearchCategories/SearchCategories";
 
-export const onChange = value => dispatch => {
+export const onChange = (value, category, locale = "en") => dispatch => {
+  let endpoint = `product/autocomplete?search=${value}&lang=${locale}`;
+  if (category.name !== "All Categories") {
+    endpoint = `product/autocomplete?search=${value}&category=${
+      category.id
+    }&lang=${locale}`;
+  }
   dispatch({
     [RSAA]: {
-      endpoint: `product/autocomplete?search=${value}&lang=en`,
+      endpoint,
       method: "GET",
       headers: { "Content-Type": "application/json" },
       types: [

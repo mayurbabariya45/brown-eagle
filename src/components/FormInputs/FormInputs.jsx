@@ -89,6 +89,16 @@ const FieldGroup = ({
               </InputGroup>
             </FormGroup>
           );
+        case "icon_text":
+          return (
+            <FormGroup validationState={validationState}>
+              {label && <ControlLabel>{label}</ControlLabel>}
+              <InputGroup>
+                <InputGroup.Addon>{bsIcon}</InputGroup.Addon>
+                <FormControl {...props} />
+              </InputGroup>
+            </FormGroup>
+          );
         case "checkbox_horizontal":
           return (
             <FormGroup validationState={validationState}>

@@ -59,9 +59,9 @@ const Home = props => {
                         {/* <li>
                         <a href="#profile">{translate("d_minisite")}</a>
                       </li> */}
-                        <li>
+                        {/* <li>
                           <a href="#profile">{translate("d_favorites")}</a>
-                        </li>
+                        </li> */}
                         {/* <li>
                           <a href="#profile">{translate("d_business_card")}</a>
                         </li> */}

@@ -56,10 +56,10 @@ class ContactInformationForm extends Component {
                 ncols={["col-md-6", "col-md-6"]}
                 proprieties={[
                   {
-                    label: translate("email"),
+                    label: translate("a_email"),
                     type: "email",
                     bsClass: "form-control form-control-simple",
-                    name: "email",
+                    name: "alternateEmail",
                     validate: [email]
                   },
                   {
@@ -72,15 +72,8 @@ class ContactInformationForm extends Component {
                 ]}
               />
               <FormInputs
-                ncols={["col-md-6", "col-md-6"]}
+                ncols={["col-md-12"]}
                 proprieties={[
-                  {
-                    label: translate("a_email"),
-                    type: "email",
-                    bsClass: "form-control form-control-simple",
-                    name: "alternateEmail",
-                    validate: [email]
-                  },
                   {
                     label: translate("telephone"),
                     type: "text",

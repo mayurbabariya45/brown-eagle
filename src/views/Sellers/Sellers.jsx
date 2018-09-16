@@ -173,7 +173,7 @@ class Sellers extends React.Component {
                 <Row>
                   <div className="section-header categories-title">
                     <div className="title">
-                      <h5>{_.capitalize(this.state.location)}</h5>
+                      <h5>Search Sellers</h5>
                       <small>
                         (Showing {start} – {end} Seller of {count || 0} Sellers)
                       </small>

@@ -37,7 +37,10 @@ class ViewQuotation extends React.Component {
               <div className="quotation-quantity">
                 <p>
                   {translate("q_quanity_required")} :{" "}
-                  <b>{quotation.purchaseQuantity}</b> {translate("q_pieces")}
+                  <b>{quotation.purchaseQuantity}</b>
+                </p>
+                <p>
+                  Unit Price : <b>{quotation.preferredUnitPrice.toFixed(2)}</b>
                 </p>
                 <p>
                   {translate("q_posted_in")} : <b>12/3/2018</b>

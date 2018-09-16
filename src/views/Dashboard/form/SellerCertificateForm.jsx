@@ -53,11 +53,9 @@ class SellerCertificateForm extends React.Component {
       _.map(this.state.files, (file, i) =>
         files.push(
           <div key={i} className="preview-box">
-            <img
-              src={file.preview}
-              className="img-blank"
-              alt="product-images"
-            />
+            <a href={file.url} target="blank">
+              <i className="fa fa-file-pdf-o" />
+            </a>
             <span
               className="remove-image"
               role="presentation"
@@ -93,7 +91,7 @@ class SellerCertificateForm extends React.Component {
                   <Col md={12}>
                     <FormGroup>
                       <Dropzone
-                        accept="image/jpeg, image/png"
+                        accept=".pdf"
                         onDrop={this.onImageDrop}
                         multiple={false}
                         className="dropzone-certificate"

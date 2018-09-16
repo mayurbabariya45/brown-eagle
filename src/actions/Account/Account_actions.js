@@ -39,3 +39,18 @@ export const addToWishlistProduct = (authId, productId) => ({
     ]
   }
 });
+
+export const resendEmail = (email, locale) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `auth/verify/resendEmail?ln=${locale}`,
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.VERIFY_EMAIL_REQUEST,
+        a.VERIFY_EMAIL_SUCCESS,
+        a.VERIFY_EMAIL_FAILURE
+      ]
+    }
+  });

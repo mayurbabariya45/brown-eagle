@@ -1012,7 +1012,9 @@ fieldset[disabled] .form-control {
   height: 40px;
   letter-spacing: 0.03em;
   line-height: 40px;
-  padding: 0 7px 0 10px; }
+  padding: 0 7px 0 10px;
+  overflow: hidden;
+  text-transform: capitalize; }
 
 .search-bar__suggestion--focused {
   background: #f5f5f5; }
@@ -2252,6 +2254,21 @@ section {
       float: left;
       color: #000; }
 
+.dashboard-references .section-header {
+  float: left;
+  width: 100%;
+  margin-bottom: 15px; }
+  .dashboard-references .section-header .title {
+    float: left;
+    padding-top: 10px; }
+  .dashboard-references .section-header .product-add-button {
+    float: right; }
+    .dashboard-references .section-header .product-add-button a {
+      color: #ffffff;
+      text-transform: capitalize; }
+      .dashboard-references .section-header .product-add-button a:hover {
+        color: #7d1516; }
+
 .dashboard-products .section-header {
   float: left;
   width: 100%; }
@@ -2268,6 +2285,43 @@ section {
 
 .dashboard-products .result-showing {
   margin-top: 10px; }
+
+.dashboard-products .products-filter .dropdown.open > .dropdown-toggle.btn-default:hover, .dashboard-products .products-filter .dropdown.open > .dropdown-toggle.btn-default:focus, .dashboard-products .products-filter .dropdown.open > .dropdown-toggle.btn-default:active {
+  background-color: transparent; }
+
+.dashboard-products .products-filter .dropdown .dropdown-menu {
+  background: #fff;
+  border-radius: 0px; }
+  .dashboard-products .products-filter .dropdown .dropdown-menu > li > a {
+    color: #000;
+    border-color: #f7f7f7; }
+    .dashboard-products .products-filter .dropdown .dropdown-menu > li > a:hover, .dashboard-products .products-filter .dropdown .dropdown-menu > li > a:focus {
+      background-color: #ddd;
+      border-left: none; }
+  .dashboard-products .products-filter .dropdown .dropdown-menu > li:first-child > a {
+    border-radius: 0px; }
+  .dashboard-products .products-filter .dropdown .dropdown-menu > li:last-child > a {
+    border-radius: 0px; }
+
+.dashboard-products .products-filter .dropdown .btn {
+  border: 1px solid #ddd;
+  border-radius: 0;
+  display: block;
+  opacity: 1;
+  padding: 9px 16px;
+  color: #808080;
+  text-transform: uppercase; }
+  .dashboard-products .products-filter .dropdown .btn .caret {
+    margin-left: 25px;
+    border-top-color: #808080; }
+
+.dashboard-products .product-lists .per-product {
+  display: block;
+  float: left;
+  width: 100%; }
+
+.dashboard-products .product-lists .left-product-text .product-name .product-item-link span {
+  margin-left: 10px; }
 
 .dashboard-product-reviews .section-header {
   float: left;
@@ -2609,6 +2663,35 @@ section {
 .account-orders .result-showing {
   margin-top: 10px; }
 
+.account-orders .orders-filter .dropdown.open > .dropdown-toggle.btn-default:hover, .account-orders .orders-filter .dropdown.open > .dropdown-toggle.btn-default:focus, .account-orders .orders-filter .dropdown.open > .dropdown-toggle.btn-default:active {
+  background-color: transparent; }
+
+.account-orders .orders-filter .dropdown .dropdown-menu {
+  background: #fff;
+  border-radius: 0px; }
+  .account-orders .orders-filter .dropdown .dropdown-menu > li > a {
+    color: #000;
+    border-color: #f7f7f7; }
+    .account-orders .orders-filter .dropdown .dropdown-menu > li > a:hover, .account-orders .orders-filter .dropdown .dropdown-menu > li > a:focus {
+      background-color: #ddd;
+      border-left: none; }
+  .account-orders .orders-filter .dropdown .dropdown-menu > li:first-child > a {
+    border-radius: 0px; }
+  .account-orders .orders-filter .dropdown .dropdown-menu > li:last-child > a {
+    border-radius: 0px; }
+
+.account-orders .orders-filter .dropdown .btn {
+  border: 1px solid #ddd;
+  border-radius: 0;
+  display: block;
+  opacity: 1;
+  padding: 9px 16px;
+  color: #808080;
+  text-transform: uppercase; }
+  .account-orders .orders-filter .dropdown .btn .caret {
+    margin-left: 25px;
+    border-top-color: #808080; }
+
 .account-orders .box-listings .box-list-items .box-list-item-details {
   float: left;
   width: 80%;
@@ -2761,6 +2844,19 @@ section {
   .product-share-buttons ul li {
     padding: 5px; }
 
+.seller-certificate-show .preview-box {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .seller-certificate-show .preview-box a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .seller-certificate-show .preview-box a i {
+      font-size: 5em; }
+
 .seller-certificate .dropzone-certificate {
   width: 100%;
   height: 200px;
@@ -2776,6 +2872,14 @@ section {
     display: flex;
     align-items: center;
     justify-content: center; }
+    .seller-certificate .images-preview .preview .preview-box a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .seller-certificate .images-preview .preview .preview-box a i {
+        font-size: 5em; }
 
 .seller-video .dropzone-video {
   width: 100%;
@@ -2790,7 +2894,14 @@ section {
   display: flex;
   height: 250px;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  margin: 20px 0;
+  padding: 0;
+  overflow: hidden; }
+  .seller-video .video-preview video {
+    width: 100%;
+    height: 250px;
+    object-fit: contain; }
 
 .seller-certificate-show .preview-box {
   margin-bottom: 10px !important; }
@@ -3106,6 +3217,9 @@ section {
 
 .location-filter .filter-categories .filter-category .category ul li {
   padding: 0; }
+
+.payment-form form {
+  margin-top: 15px; }
 
 .news-letter {
   background-color: #f8f8f8; }
@@ -3959,6 +4073,14 @@ section {
           display: inline-block;
           padding-left: 10px;
           font-size: 14px; }
+    .product.info.detailed .items-tabs .tab-content .transaction-overview .form-group {
+      margin: 0; }
+      .product.info.detailed .items-tabs .tab-content .transaction-overview .form-group .control-label {
+        margin: 0; }
+      .product.info.detailed .items-tabs .tab-content .transaction-overview .form-group .form-control-static {
+        display: inline-block;
+        padding-left: 10px;
+        font-size: 14px; }
     .product.info.detailed .items-tabs .tab-content .product-overview {
       float: left;
       width: 100%;
@@ -4491,7 +4613,7 @@ section {
       content: "\f105"; }
   .supplier-products .product-item > .product-item-info {
     border: 1px solid #dcdee3;
-    margin: 0 5px; }
+    margin: 0 5px 5px; }
     .supplier-products .product-item > .product-item-info .product-header {
       border-bottom: 1px solid #dcdee3;
       padding: 10px;
@@ -4975,6 +5097,11 @@ section {
   .editProductForm .dropzone_product p {
     margin-bottom: 0; }
 
+.editProductForm .input-group-addon {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #555; }
+
 .editProductForm .mutiple-form-group {
   position: relative; }
   .editProductForm .mutiple-form-group > .custom-form-group + span > .btn {
@@ -5382,7 +5509,8 @@ section {
     margin: 0;
     padding: 15px 15px 5px; }
   .quotation-section .quotations .view-quotation-item .quotation-item-details .quotation-item-detail {
-    padding-top: 0; }
+    padding-top: 0;
+    width: 100%; }
     .quotation-section .quotations .view-quotation-item .quotation-item-details .quotation-item-detail .quotation-quantity p {
       font-weight: bold;
       color: #cccccc; }
@@ -7040,6 +7168,15 @@ Main Components
   padding: 0 15px;
   float: left;
   width: 100%; }
+  .card-profile .action-edit {
+    border: 1px solid #1dc7ea;
+    line-height: 5px;
+    padding: 5px;
+    background: #42d0ed;
+    color: #fff;
+    border-radius: 3px;
+    float: right;
+    cursor: pointer; }
   .card-profile .content {
     float: left;
     width: 100%;
@@ -7059,6 +7196,10 @@ Main Components
         padding-top: 0;
         padding-bottom: 0;
         word-break: break-all; }
+        .card-profile .content .form-group .form-control-static .email-status {
+          display: inline-block; }
+          .card-profile .content .form-group .form-control-static .email-status .label-success {
+            cursor: pointer; }
         .card-profile .content .form-group .form-control-static span {
           margin-right: 5px; }
     .card-profile .content form .form-group {
@@ -7138,7 +7279,7 @@ Main Components
     min-height: 50px; }
 
 .card-numbers .small-content {
-  font-size: 16.5px; }
+  font-size: 14.5px; }
 
 .card.card-login {
   background-color: #24303e; }
@@ -9213,7 +9354,7 @@ Main Components
   padding: 0; }
 
 .company-profile .supplier-slider {
-  height: 210px;
+  height: 240px;
   float: left;
   width: 100%; }
 
@@ -9226,6 +9367,7 @@ Main Components
   margin-top: 20px; }
   .company-profile .company-profile-video .video-container {
     width: 100%;
+    height: 200px;
     display: block;
     position: relative; }
     .company-profile .company-profile-video .video-container video {
@@ -9233,6 +9375,10 @@ Main Components
       height: 100%;
       max-width: 100%;
       max-height: 100%; }
+    .company-profile .company-profile-video .video-container img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover; }
 
 .company-profile .information-content {
   float: left;

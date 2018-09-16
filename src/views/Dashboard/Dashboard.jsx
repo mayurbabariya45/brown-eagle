@@ -6,6 +6,7 @@ import { scroller, Element } from "react-scroll";
 import PasswordContainer from "../../containers/AuthContainer/PasswordContainer";
 import AvatarContainer from "../../containers/AuthContainer/AvatarContainer";
 import QuotationContainer from "../../containers/QuotationContainer/SellerQuotationContainer";
+import ReferencesContainer from "./References";
 import SellerQuotationContainer from "../../containers/QuotationContainer/SellerQuotesContainer";
 import ContentLoader from "../../components/Loader/Loader";
 import Home from "./Home";
@@ -13,6 +14,7 @@ import Profile from "./Profile";
 import Products from "./Products";
 import Sidebar from "./Sidebar";
 import OrdersContainer from "../../containers/DashboardContainer/OrderContainer";
+import PaymentContainer from "../../containers/PaymentContainer/PaymentContainer";
 import noAvatar from "../../assets/img/no-avatar.png";
 
 class Dashboard extends React.Component {
@@ -30,6 +32,7 @@ class Dashboard extends React.Component {
       this
     );
     this.handleEditCertificateForm = this.handleEditCertificateForm.bind(this);
+    this.handleEmailConfirmation = this.handleEmailConfirmation.bind(this);
     this.handleUploadVideo = this.handleUploadVideo.bind(this);
   }
   componentWillMount() {
@@ -63,6 +66,33 @@ class Dashboard extends React.Component {
     this.setState({
       certificateForm: !this.state.certificateForm
     });
+  }
+  handleEmailConfirmation() {
+    const {
+      resendEmail,
+      locale,
+      auth,
+      showNotification,
+      translate
+    } = this.props;
+    const { user } = auth;
+    if (!_.isEmpty(user)) {
+      resendEmail(user.email, locale).then(payload => {
+        if (payload.type === "VERIFY_EMAIL_SUCCESS") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-check" />,
+            <div>{translate("notification_resend_email")}</div>,
+            false
+          );
+        } else {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-shield" />,
+            <div>{payload.payload.response.message}</div>,
+            true
+          );
+        }
+      });
+    }
   }
   handleUploadCertificateForm(values) {
     const {
@@ -205,9 +235,11 @@ class Dashboard extends React.Component {
       editProductReview,
       changeProductReviewStatus,
       getSellerActivePlans,
+      selectFilters,
+      selectedFilter,
       error
     } = this.props;
-    const { user, loader, activePlan } = this.props.auth;
+    const { user, loader, activePlan, references, isLoading } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
     return (
       <section className="section-dashboard">
@@ -263,6 +295,7 @@ class Dashboard extends React.Component {
                           }
                           handleUploadVideo={this.handleUploadVideo}
                           showNotification={error}
+                          handleEmailConfirmation={this.handleEmailConfirmation}
                         />
                       </Element>
                     </Tab.Pane>
@@ -283,6 +316,8 @@ class Dashboard extends React.Component {
                           productReviews={productReviews}
                           getProductReview={getProductReview}
                           editProductReview={editProductReview}
+                          selectFilters={selectFilters}
+                          selectedFilter={selectedFilter}
                           changeProductReviewStatus={changeProductReviewStatus}
                         />
                       )}
@@ -293,6 +328,24 @@ class Dashboard extends React.Component {
                         hanldePasswordForm={this.hanldePasswordForm}
                         showNotification={showNotification}
                       />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="twelve">
+                      <PaymentContainer
+                        translate={translate}
+                        showNotification={showNotification}
+                      />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="five">
+                      {!_.isEmpty(user) && (
+                        <ReferencesContainer
+                          seller={user && user.id}
+                          translate={translate}
+                          references={user.references}
+                          loading={isLoading}
+                          locale={locale}
+                          showNotification={showNotification}
+                        />
+                      )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="six">
                       {!_.isEmpty(user) && (

@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import Time from "react-time";
 import BlockUi from "react-block-ui";
+import { Confirm } from "../../components/Confirm/Confirm";
 import Button from "../../elements/CustomButton/CustomButton";
 import { Card } from "../../components/Card/Card";
 import ImageLoader from "../../components/ImageLoader/ImageLoader";
@@ -104,14 +105,17 @@ const ProductDetails = props => {
                 {_.capitalize(props.product.nameTranslations[props.locale])}
               </div>
               <div className="product-name">
-                <OrderQuantity
+                {`${props.price.currency} ${props.price.value} x ${
+                  props.quantity
+                } Units`}
+                {/* <OrderQuantity
                   quantity={props.quantity}
                   price={props.price.value}
                   handleQuantity={props.handleQuantity}
                   handlePrice={props.handlePrice}
                   priceError={props.priceError}
                   quantityError={props.quantityError}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -233,33 +237,33 @@ const OrderButtons = props => (
     plain
     content={
       <div className="order-action-buttons">
-        {props.status === "pending" &&
-          (!props.quantityError && !props.priceError) && (
-            <Button
-              fill
-              radius
-              bsStyle="warning"
-              onClick={() =>
-                props.handleOrderStatus(
-                  "confirmed",
-                  props.touched,
-                  props.values
-                )
-              }
-            >
+        {props.status === "pending" && (
+          <Confirm
+            onConfirm={() => props.handleOrderStatus("confirmed")}
+            title={props.translate("confirm_title")}
+            body={props.translate("confirm_confired_order_title")}
+            confirmBSStyle="danger"
+            confirmText={props.translate("confirm_button_yes")}
+            cancelText={props.translate("confirm_cancelText")}
+          >
+            <Button fill radius bsStyle="warning">
               CONFIRM
             </Button>
-          )}
+          </Confirm>
+        )}
         {props.status !== "rejected" && (
-          <Button
-            fill
-            radius
-            pullRight
-            bsStyle="warning"
-            onClick={() => props.handleOrderStatus("rejected")}
+          <Confirm
+            onConfirm={() => props.handleOrderStatus("rejected")}
+            title={props.translate("confirm_title")}
+            body={props.translate("confirm_rejected_order_title")}
+            confirmBSStyle="danger"
+            confirmText={props.translate("confirm_button_yes")}
+            cancelText={props.translate("confirm_cancelText")}
           >
-            REJECTED
-          </Button>
+            <Button fill radius pullRight bsStyle="warning">
+              REJECT
+            </Button>
+          </Confirm>
         )}
       </div>
     }
@@ -410,16 +414,7 @@ class ViewOrder extends React.Component {
                 handleOrderStatus={handleOrderStatus}
                 priceError={this.state.priceError}
                 quantityError={this.state.quantityError}
-                values={{
-                  id,
-                  quantity: this.state.quantity,
-                  price: {
-                    ...price,
-                    value: this.state.price
-                  },
-                  total: this.state.total
-                }}
-                touched={this.state.touched}
+                translate={translate}
               />
             )}
           </div>

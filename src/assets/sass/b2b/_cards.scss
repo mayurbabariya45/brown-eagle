@@ -364,6 +364,16 @@
   padding: 0 15px;
   float: left;
   width: 100%;
+  .action-edit {
+    border: 1px solid #1dc7ea;
+    line-height: 5px;
+    padding: 5px;
+    background: #42d0ed;
+    color: #fff;
+    border-radius: 3px;
+    float: right;
+    cursor: pointer;
+  }
   .content {
     float: left;
     width: 100%;
@@ -384,6 +394,12 @@
         padding-top: 0;
         padding-bottom: 0;
         word-break: break-all;
+        .email-status{
+          display: inline-block;
+          .label-success{
+            cursor: pointer;
+          }
+        }
         span {
           margin-right: 5px;
         }
@@ -493,7 +509,7 @@
     }
   }
   .small-content {
-    font-size: 16.5px;
+    font-size: 14.5px;
   }
 }
 .card.card-login {

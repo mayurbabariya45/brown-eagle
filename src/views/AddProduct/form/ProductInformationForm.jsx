@@ -184,6 +184,72 @@ class ProductInformationForm extends Component {
                     </Col>
                   </Row>
                 </div>
+                <div className="form-horizontal-box">
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal_icon",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_weight"),
+                        type: "number",
+                        bsIcon: translate("a_grams"),
+                        bsClass: "form-control form-control-simple",
+                        name: "weight",
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal_icon",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_width"),
+                        type: "number",
+                        bsIcon: translate("a_inches"),
+                        bsClass: "form-control form-control-simple",
+                        name: "width",
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal_icon",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_height"),
+                        type: "number",
+                        bsIcon: translate("a_inches"),
+                        bsClass: "form-control form-control-simple",
+                        name: "height",
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                  <FormInputs
+                    ncols={["col-md-12"]}
+                    proprieties={[
+                      {
+                        inputGroup: "horizontal_icon",
+                        xsLabel: 2,
+                        xsInput: 5,
+                        label: translate("a_depth"),
+                        type: "number",
+                        bsIcon: translate("a_inches"),
+                        bsClass: "form-control form-control-simple",
+                        name: "depth",
+                        validate: [required]
+                      }
+                    ]}
+                  />
+                </div>
                 <FieldArray name="product_label" component={renderInputs} />
                 <FormInputs
                   ncols={["col-md-12"]}

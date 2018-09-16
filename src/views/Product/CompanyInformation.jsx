@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -42,7 +43,27 @@ const CompanyInfromation = props => {
             <ControlLabel>
               {props.translate("basic_certification")}
             </ControlLabel>
-            <FormControl.Static>CE,CE</FormControl.Static>
+            <FormControl.Static>
+              {_.map(information.certificates, (certificate, index) => {
+                const lastIndex = _.size(information.certificates) - 1;
+                if (index === lastIndex) {
+                  if (_.has(certificate, "title")) {
+                    return (
+                      <a href={certificate.url} target="new">
+                        {certificate.titleTranslations[props.locale]}
+                      </a>
+                    );
+                  }
+                }
+                if (_.has(certificate, "title")) {
+                  return (
+                    <a href={certificate.url} target="new">
+                      {certificate.titleTranslations[props.locale]},
+                    </a>
+                  );
+                }
+              })}
+            </FormControl.Static>
           </FormGroup>
           <FormGroup>
             <ControlLabel>{props.translate("contact_person")}</ControlLabel>
@@ -83,7 +104,16 @@ const CompanyInfromation = props => {
       </Row>
       <Row>
         <Col md={6}>
-          <Location />
+          <Location
+            location={
+              !_.isEmpty(information.coordinates)
+                ? {
+                    lat: information.coordinates.coordinates[0],
+                    lng: information.coordinates.coordinates[1]
+                  }
+                : {}
+            }
+          />
         </Col>
         <Col md={6}>
           <SellerVideo url={information.profileVideo} />

@@ -19,7 +19,12 @@ const notificationOpts = {
  *
  * @returns
  */
-export const showNotification = (title, message, fail, action = {}) => dispatch => {
+export const showNotification = (
+  title,
+  message,
+  fail,
+  action = {}
+) => dispatch => {
   if (fail) {
     dispatch(
       error({
@@ -191,6 +196,7 @@ export const verifyEmail = (token, locale) => dispatch =>
       ]
     }
   });
+
 export const verificationEmail = (token, locale) => dispatch =>
   dispatch({
     [RSAA]: {
@@ -225,7 +231,8 @@ export const changePassword = value => ({
   }
 });
 export const getUserProfile = (token, id, role) => dispatch => {
-  const promise = role === "seller" ? `seller/${id}` : `buyer/${id}`;
+  const promise =
+    role === "seller" ? `seller/${id}?refrence=true` : `buyer/${id}`;
   return dispatch({
     [RSAA]: {
       endpoint: promise,
@@ -312,6 +319,7 @@ export const updateCertificate = (
       endpoint: `seller/${profileId}/certificate/${certificateId}`,
       method: "POST",
       body: JSON.stringify(value),
+      headers: { "Content-Type": "application/json" },
       types: [
         a.UPDATE_CERTIFICATE_REQUEST,
         a.UPDATE_CERTIFICATE_SUCCESS,
@@ -346,6 +354,43 @@ export const deleteCertificate = (profileId, certificateId) => dispatch =>
           meta: certificateId
         },
         a.DELETE_CERTIFICATE_FAILURE
+      ]
+    }
+  });
+
+export const createReference = (values, seller, locale) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `seller/${seller}/reference?ln=${locale}`,
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.ADD_NEW_REFERENCE_REQUEST,
+        a.ADD_NEW_REFERENCE_SUCCESS,
+        a.ADD_NEW_REFERENCE_FAILURE
+      ]
+    }
+  });
+export const editReference = (
+  values,
+  referenceId,
+  seller,
+  locale
+) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `seller/${seller}/reference/${referenceId}?ln=${locale}`,
+      method: "PATCH",
+      body: JSON.stringify(values),
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.EDIT_REFERENCE_REQUEST,
+        {
+          type: a.EDIT_REFERENCE_SUCCESS,
+          meta: referenceId
+        },
+        a.EDIT_REFERENCE_FAILURE
       ]
     }
   });

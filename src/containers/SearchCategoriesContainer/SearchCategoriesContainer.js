@@ -8,10 +8,10 @@ const mapStateToProps = state => ({
   categories: state.categories.categories
 });
 const mapDispatchToProps = dispatch => ({
-  onChange: value => dispatch(a.onChange(value)),
+  onChange: (value, category) => dispatch(a.onChange(value, category)),
   onClear: () => dispatch(a.onClear()),
   onSelectCategory: value => dispatch(a.onSelectCategory(value)),
-  onSearch: value => dispatch(a.onChange(value))
+  onSearch: (value, category) => dispatch(a.onChange(value, category))
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,

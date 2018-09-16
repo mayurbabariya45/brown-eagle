@@ -1,17 +1,23 @@
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { ActionTypes as a } from "../../constants/Dashboard/Orders_action_type";
 
-export const getOrders = (authId, page) => ({
-  [RSAA]: {
-    endpoint: `order?page=${page}&perPage=20&seller=${authId}`,
-    method: "GET",
-    types: [
-      a.GET_SELLER_ORDERS_REQUEST,
-      a.GET_SELLER_ORDERS_SUCCESS,
-      a.GET_SELLER_ORDERS_FAILURE
-    ]
+export const getOrders = (authId, status = "all", page) => {
+  let endStatus = "";
+  if (status !== "all") {
+    endStatus = `&status=${status}`;
   }
-});
+  return {
+    [RSAA]: {
+      endpoint: `order?page=${page}&perPage=20&seller=${authId}${endStatus}`,
+      method: "GET",
+      types: [
+        a.GET_SELLER_ORDERS_REQUEST,
+        a.GET_SELLER_ORDERS_SUCCESS,
+        a.GET_SELLER_ORDERS_FAILURE
+      ]
+    }
+  };
+};
 
 export const changeOrderStatus = (orderId, status) => ({
   [RSAA]: {
@@ -49,4 +55,9 @@ export const getOrderTransactions = (orderId, seller) => ({
       a.GET_SELLER_ORDER_TRANSACTIONS_FAILURE
     ]
   }
+});
+
+export const selectFilters = value => ({
+  type: a.SELECT_FILTER,
+  value
 });

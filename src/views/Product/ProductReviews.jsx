@@ -1,5 +1,6 @@
 import _ from "lodash";
 import React from "react";
+import Button from "../../elements/CustomButton/CustomButton";
 
 const ProductReviews = props => (
   <div className="review-lists">
@@ -24,13 +25,25 @@ const ProductReviews = props => (
             By{" "}
             <span>
               {_.upperCase(
-                review.buyer.firstName + " " + review.buyer.lastName
+                `${review.buyer.firstName} ${review.buyer.lastName}`
               )}
             </span>
           </p>
         </div>
       ))}
     </div>
+    {props.count !== _.size(props.productReview) && (
+      <div className="review-load-more">
+        <Button
+          bsStyle="warning"
+          fill
+          onClick={props.handleLoadMore}
+          disabled={props.isLoading}
+        >
+          {props.isLoading ? "loading...." : props.translate("load_more")}
+        </Button>
+      </div>
+    )}
   </div>
 );
 

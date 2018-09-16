@@ -5,7 +5,9 @@ const INITIAL_STATE = {
   success: false,
   error: false,
   suggestions: [],
-  selectedCategory: "All Categories"
+  selectedCategory: {
+    name: "All Categories"
+  }
 };
 
 /**
@@ -29,6 +31,7 @@ export default (state = INITIAL_STATE, action) => {
         key: action.payload
       });
     case a.SELECT_CATEGORIES:
+      console.log(action);
       return Object.assign({}, state, {
         selectedCategory: action.value
       });

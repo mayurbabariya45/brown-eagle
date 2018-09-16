@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { Col, Row, Form, FormGroup, ControlLabel } from "react-bootstrap";
 import { date, numericality, format } from "redux-form-validators";
 import BlockUi from "react-block-ui";
-import "react-block-ui/style.css";
 import Select from "react-select";
 import Modal from "../../../components/Modal/Modal";
 import GoogleMap from "../../../components/Map/Map";

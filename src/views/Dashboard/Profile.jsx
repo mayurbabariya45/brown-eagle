@@ -28,7 +28,10 @@ const Profile = props => {
     handleUploadCertificateForm,
     handleRemoveCertificate,
     handleUploadVideo,
-    locale
+    handleEmailConfirmation,
+    isLoading,
+    locale,
+    isResendEmail
   } = props;
   const { user, loading } = props.auth;
   const activePlan = (!_.isEmpty(user.activePlan) && user.activePlan) || {};
@@ -57,60 +60,78 @@ const Profile = props => {
     <div className="profile">
       <Row>
         <Col md={12}>
-          <Row>
-            <Card
-              className="card-profile"
-              plain
-              footer
-              header={
-                <div className="header card-header-action">
-                  <h4 className="title">
-                    {user && `${user.firstName} ${user.lastName}`}{" "}
-                    {user.isProfileVerified === "pending" ? (
-                      <span className="label label-warning">pending</span>
-                    ) : (
-                      <span className="label label-info">
-                        {user.isProfileVerified}
-                      </span>
-                    )}
-                  </h4>
-                  {/* <div className="actions-label">
+          <BlockUi blocking={isLoading}>
+            <Row>
+              <Card
+                className="card-profile"
+                plain
+                footer
+                header={
+                  <div className="header card-header-action">
+                    <h4 className="title">
+                      {user && `${user.firstName} ${user.lastName}`}{" "}
+                      {user.isProfileVerified === "pending" ? (
+                        <span className="label label-warning">
+                          {translate("status_pending")}
+                        </span>
+                      ) : (
+                        <span className="label label-info">
+                          {user.isProfileVerified}
+                        </span>
+                      )}
+                    </h4>
+                    {/* <div className="actions-label">
                    
                   </div> */}
-                </div>
-              }
-              content={
-                <Row>
-                  <Col md={6} xs={12}>
-                    <FormGroup>
-                      <ControlLabel>at</ControlLabel>
-                      <FormControl.Static>
-                        {user && `${user.firstName} ${user.lastName}`}
-                      </FormControl.Static>
-                    </FormGroup>
-                    <FormGroup>
-                      <ControlLabel>Email</ControlLabel>
-                      <FormControl.Static>
-                        {user && user.email}{" "}
-                        {user.isEmailVerified && (
-                          <span className="label label-info">verified</span>
-                        )}
-                        {!user.isEmailVerified && (
-                          <span className="label label-warning">pending</span>
-                        )}
-                      </FormControl.Static>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6} xs={12}>
-                    <FormGroup>
-                      <ControlLabel>Joined BrownEgle.com in</ControlLabel>
-                      <FormControl.Static>2018</FormControl.Static>
-                    </FormGroup>
-                  </Col>
-                </Row>
-              }
-            />
-          </Row>
+                  </div>
+                }
+                content={
+                  <Row>
+                    <Col md={6} xs={12}>
+                      <FormGroup>
+                        <ControlLabel>at</ControlLabel>
+                        <FormControl.Static>
+                          {user && `${user.firstName} ${user.lastName}`}
+                        </FormControl.Static>
+                      </FormGroup>
+                      <FormGroup>
+                        <ControlLabel>Email</ControlLabel>
+                        <FormControl.Static>
+                          {user && user.email}{" "}
+                          {user.isEmailVerified && (
+                            <span className="label label-info">
+                              {translate("status_verified")}
+                            </span>
+                          )}
+                          {!user.isEmailVerified && (
+                            <div className="email-status">
+                              <span className="label label-warning">
+                                {translate("status_pending")}
+                              </span>{" "}
+                              {!isResendEmail && (
+                                <span
+                                  className="label label-success"
+                                  onClick={handleEmailConfirmation}
+                                >
+                                  {translate("resend_button")}
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </FormControl.Static>
+                      </FormGroup>
+                    </Col>
+                    <Col md={6} xs={12}>
+                      <FormGroup>
+                        <ControlLabel>Joined BrownEgle.com in</ControlLabel>
+                        <FormControl.Static>2018</FormControl.Static>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                }
+              />
+            </Row>
+          </BlockUi>
         </Col>
       </Row>
       <Row>
@@ -197,7 +218,7 @@ const Profile = props => {
                         <div className="icon-text">
                           <div className="numbers">
                             {(activePlanStorage && activePlanStorage.total) ||
-                              0}
+                              0} MB
                           </div>
                           <div className="icon-big text-right icon-warning">
                             <i className="pe-7s-refresh-cloud" />
@@ -210,12 +231,12 @@ const Profile = props => {
                               Remaining{" "}
                               {(activePlanStorage &&
                                 activePlanStorage.remaining) ||
-                                0}
+                                0} MB
                             </span>{" "}
                             <span>
                               Used{" "}
                               {(activePlanStorage && activePlanStorage.used) ||
-                                0}
+                                0} MB
                             </span>
                           </div>
                         </div>
@@ -398,12 +419,12 @@ const Profile = props => {
                         <ControlLabel>{translate("m_products")}</ControlLabel>
                         <FormControl.Static>
                           {user
-                            ? _.map(user.mainProducts, product => (
-                              <span
-                                  key={product}
+                            ? _.map(user.mainProducts, (product, index) => (
+                                <span
+                                  key={index}
                                   className="label label-warning"
-                                >
-                                    {product}
+                              >
+                                {product}
                                 </span>
                               ))
                             : "none"}
@@ -479,11 +500,9 @@ const Profile = props => {
                           <div className="preview">
                             {_.map(certificates, (file, i) => (
                               <div key={i} className="preview-box">
-                                <img
-                                  src={file.url}
-                                  className="img-blank"
-                                  alt="product-images"
-                                />
+                                <a href={file.url} target="blank">
+                                  <i className="fa fa-file-pdf-o" />
+                                </a>
                                 <span
                                   className="remove-image"
                                   role="presentation"

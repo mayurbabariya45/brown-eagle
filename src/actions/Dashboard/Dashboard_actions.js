@@ -1,18 +1,24 @@
 import { RSAA } from "../../middleware/redux-api/symbol";
 import { ActionTypes as a } from "../../constants/Dashboard/Dashboard_action_type";
 
-export const getProducts = (id, page = 1) => ({
-  [RSAA]: {
-    endpoint: `product?seller=${id}&page=${page}`,
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    types: [
-      a.GET_PRODUCTS_REQUEST,
-      a.GET_PRODUCTS_SUCCESS,
-      a.GET_PRODUCTS_FAILURE
-    ]
+export const getProducts = (id, status = "all", page = 1) => {
+  let endPoint = `product?seller=${id}&page=${page}`;
+  if (status !== "all") {
+    endPoint += `&status=${status}`;
   }
-});
+  return {
+    [RSAA]: {
+      endpoint: endPoint,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.GET_PRODUCTS_REQUEST,
+        a.GET_PRODUCTS_SUCCESS,
+        a.GET_PRODUCTS_FAILURE
+      ]
+    }
+  };
+};
 export const getProduct = product => ({
   type: a.GET_PRODUCT_SUCCESS,
   product
@@ -43,8 +49,6 @@ export const getCategories = () => dispatch =>
       ]
     }
   });
-
-
 
 export const deleteProductImage = (productId, imageId) => ({
   [RSAA]: {
@@ -152,4 +156,23 @@ export const editProductReview = (values, productId, reviewId) => ({
       a.EDIT_PRODUCT_REVIEW_FAILURE
     ]
   }
+});
+
+export const resendEmail = (email, locale) => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `auth/verify/resendEmail?ln=${locale}`,
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.VERIFY_EMAIL_REQUEST,
+        a.VERIFY_EMAIL_SUCCESS,
+        a.VERIFY_EMAIL_FAILURE
+      ]
+    }
+  });
+export const selectFilters = value => ({
+  type: a.SELECT_FILTER,
+  value
 });

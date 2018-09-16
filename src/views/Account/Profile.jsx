@@ -7,6 +7,7 @@ import {
   FormControl,
   FormGroup
 } from "react-bootstrap";
+import BlockUi from "react-block-ui";
 import { Card } from "../../components/Card/Card";
 import ContentLoader from "../../components/Loader/Loader";
 import ContactInformationFormContainer from "../../containers/AccountContainer/ContactInformationFormContainer";
@@ -18,7 +19,10 @@ const Profile = props => {
     handleEditForm,
     contactForm,
     companyForm,
-    handleSubmitForm
+    handleSubmitForm,
+    isResendEmail,
+    isLoading,
+    handleEmailConfirmation
   } = props;
   const { user, loader, loading } = props.auth;
   const facebook = _.find(user.socialLinks, ["platform", "facebook"]);
@@ -41,53 +45,64 @@ const Profile = props => {
       <ContentLoader height={50} inFight={loader}>
         <Row>
           <Col md={12}>
-            <Row>
-              <Card
-                className="card-profile"
-                plain
-                footer
-                header={
-                  <div className="header card-header-action">
-                    <h4 className="title">
-                      {user && `${user.firstName} ${user.lastName}`}
-                    </h4>
-                    <div className="actions-label">
-                      <div className="action">IN</div>
+            <BlockUi blocking={isLoading}>
+              <Row>
+                <Card
+                  className="card-profile"
+                  plain
+                  footer
+                  header={
+                    <div className="header card-header-action">
+                      <h4 className="title">
+                        {user && `${user.firstName} ${user.lastName}`}
+                      </h4>
+                      <div className="actions-label">
+                        <div className="action">IN</div>
+                      </div>
                     </div>
-                  </div>
-                }
-                content={
-                  <Row>
-                    <Col md={6} xs={12}>
-                      <FormGroup>
-                        <ControlLabel>at</ControlLabel>
-                        <FormControl.Static>
-                          {user && `${user.firstName} ${user.lastName}`}
-                        </FormControl.Static>
-                      </FormGroup>
-                      <FormGroup>
-                        <ControlLabel>Email</ControlLabel>
-                        <FormControl.Static>
-                          {user && user.email}{" "}
-                          {user.isEmailVerified && (
-                            <span className="label label-info">verified</span>
-                          )}
-                          {!user.isEmailVerified && (
-                            <span className="label label-warning">pending</span>
-                          )}
-                        </FormControl.Static>
-                      </FormGroup>
-                    </Col>
-                    <Col md={6} xs={12}>
-                      <FormGroup>
-                        <ControlLabel>Joined BrownEgle.com in</ControlLabel>
-                        <FormControl.Static>2018</FormControl.Static>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                }
-              />
-            </Row>
+                  }
+                  content={
+                    <Row>
+                      <Col md={6} xs={12}>
+                        <FormGroup>
+                          <ControlLabel>at</ControlLabel>
+                          <FormControl.Static>
+                            {user && `${user.firstName} ${user.lastName}`}
+                          </FormControl.Static>
+                        </FormGroup>
+                        <FormGroup>
+                          <ControlLabel>Email</ControlLabel>
+                          <FormControl.Static>
+                            {user && user.email}{" "}
+                            {!user.isEmailVerified && (
+                              <div className="email-status">
+                                <span className="label label-warning">
+                                  {translate("status_pending")}
+                                </span>{" "}
+                                {!isResendEmail && (
+                                  <span
+                                    className="label label-success"
+                                    onClick={handleEmailConfirmation}
+                                  >
+                                    {translate("resend_button")}
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                          </FormControl.Static>
+                        </FormGroup>
+                      </Col>
+                      <Col md={6} xs={12}>
+                        <FormGroup>
+                          <ControlLabel>Joined BrownEgle.com in</ControlLabel>
+                          <FormControl.Static>2018</FormControl.Static>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  }
+                />
+              </Row>
+            </BlockUi>
           </Col>
         </Row>
       </ContentLoader>

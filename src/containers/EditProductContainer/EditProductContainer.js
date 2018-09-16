@@ -69,7 +69,8 @@ const mapStateToProps = state => {
       value: setProductValue,
       product_label: productLabels,
       value_product_label: productValues,
-      label: setProductLabel
+      label: setProductLabel,
+      ...state.dashboard.product.productDimensions
     }
   };
 };

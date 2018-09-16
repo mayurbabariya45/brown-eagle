@@ -48,7 +48,10 @@ export const en = {
       confirm_delete_product: "Are you sure you want to delete this product?",
       confirm_button_yes: "Yes",
       confirm_cancelText: "Cancel",
-
+      confirm_rejected_order_title:
+        "Are you sure you want to reject this order.",
+      confirm_confired_order_title:
+        "Are you sure you want to confirm this order.",
       // verification email
       go_to_sign_in: "Login",
       verification_msg: "Your Email Verification has been successful.",
@@ -149,7 +152,12 @@ export const en = {
       a_brand_name: "Brand Name",
       a_add_more: "Add More",
       a_description: "Product Description",
-
+      a_height: "Height",
+      a_width: "Width",
+      a_weight: "Weight",
+      a_depth: "Depth",
+      a_grams: "Grams",
+      a_inches: "Inches",
       // Register
       r_complete: "Complete",
       r_verification: "Verification",
@@ -228,14 +236,15 @@ export const en = {
       d_do_list: "To Do List",
       d_pending_orders: "Pending Orders",
       d_unread_messages: "Unread Messages",
-      d_request_connection: "Requests from Connections",
-      d_rejected_requests: "Rejected Buying Requests",
+      d_request_connection: "Requests from Quotations",
+      d_rejected_requests: "Confirmed Orders",
       p_contact_information: "Contact Information",
       p_company_information: "Company Information",
       p_seller_certificate: "My Certificate",
       d_change_password: "Change Password",
       d_products: "My Products",
       d_messages: "Message Center",
+      d_references: "My References",
       d_orders: "Orders",
       d_all_orders: "All Orders",
       d_manage_feedback: "Manage Feedback",
@@ -443,7 +452,7 @@ export const en = {
       table_td_plan_services_description: "Services Description",
       // dashboard product review
       d_products_review: "Reviews",
-
+      d_my_references: "My References",
       // favourites
       my_favourites: "Product Favourites",
       c_person: "Contact Person",
@@ -486,6 +495,29 @@ export const en = {
       payment_date_label: "Expiration date",
       payment_cvc_label: "CVC",
       payment_code_label: "Postal code",
+
+      // notification message
+      notification_actived_plan: "Your plan has been upgraded successfully.",
+      notification_try_again: "Please try again later",
+      notification_resend_email: "Email has been resend successfully.",
+      // profile
+      status_verified: "verified",
+      status_pending: "pending",
+      status_confired: "confirm",
+      resend_button: "Resend Email",
+      load_more: "Load More",
+
+      // new
+      buying_requests: "Buying Requests",
+      // add new reference
+      add_new_reference_title: "Add New Reference",
+      edit_reference_title: "Edit Reference",
+      add_new_reference_desc: "Description",
+      add_new_reference_name: "Name",
+      add_new_reference_company_Name: "Company Name",
+      add_new_reference_phone: "Phone",
+      add_new_reference_email: "Email",
+      add_new_reference_website: "Website",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

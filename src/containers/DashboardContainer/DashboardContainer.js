@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
   uploadVideo: (value, profileId) => dispatch(a.uploadVideo(value, profileId)),
   deleteCertificate: (profileId, certificateId) =>
     dispatch(a.deleteCertificate(profileId, certificateId)),
-  getProducts: (id, page) => dispatch(d.getProducts(id, page)),
+  getProducts: (id, status, page) => dispatch(d.getProducts(id, status, page)),
   getProduct: product => dispatch(d.getProduct(product)),
   getProductImage: (id, token) => dispatch(d.getProductImage(id, token)),
   deleteProduct: id => dispatch(d.deleteProduct(id)),
@@ -27,8 +27,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(d.editProductReview(values, productId, reviewId, locale)),
   changeProductReviewStatus: (productId, reviewId, status, locale) =>
     dispatch(d.changeProductReviewStatus(productId, reviewId, status, locale)),
-  verifyEmail: (token, locale) => dispatch(a.verifyEmail(token, locale)),
-  resetForm: formName => dispatch(reset(formName))
+  resendEmail: (email, locale) => dispatch(d.resendEmail(email, locale)),
+  resetForm: formName => dispatch(reset(formName)),
+  selectFilters: value => dispatch(d.selectFilters(value))
 });
 
 const mergeProps = (state, actions, ownProps) => ({

@@ -96,11 +96,11 @@ class SearchCategories extends Component {
     }
   }
   handleDebouncedChange(searchTerm) {
-    const { onChange } = this.props;
+    const { onChange, selectedCategory } = this.props;
     this.setState({
       searchTerm
     });
-    onChange(searchTerm);
+    onChange(searchTerm, selectedCategory);
   }
   handleChange(event) {
     const { value } = event.target;
@@ -146,8 +146,9 @@ class SearchCategories extends Component {
     });
   }
   handleSearch() {
+    const { selectedCategory } = this.props;
     this.props.onClear();
-    this.props.onSearch(this.state.value.trim());
+    this.props.onSearch(this.state.value.trim(), selectedCategory);
   }
   handleEscape() {
     this.setState({
@@ -190,7 +191,7 @@ class SearchCategories extends Component {
     // const renderClearButton = this.state.value && renderClearButton;
     const renderSuggestions = value && suggestions.length > 0;
     const selectCategories = _.map(categories, category => (
-      <MenuItem key={category.id} eventKey={category.name}>
+      <MenuItem key={category.id} eventKey={category}>
         {category.name}
       </MenuItem>
     ));
@@ -216,7 +217,7 @@ class SearchCategories extends Component {
                   className="btn-fill"
                   id="main-categories"
                   onSelect={this.handleDropdown}
-                  title={selectedCategory}
+                  title={selectedCategory.name}
                 >
                   {selectCategories}
                 </DropdownButton>

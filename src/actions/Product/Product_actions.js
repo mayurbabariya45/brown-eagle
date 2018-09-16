@@ -133,10 +133,10 @@ export const getProduct = (productId, locale, authId) => dispatch => {
     }
   });
 };
-export const getProductReview = (productId, locale) => dispatch => {
+export const getProductReview = (productId, locale, page) => dispatch => {
   dispatch({
     [RSAA]: {
-      endpoint: `product/${productId}/review?status=enabled`,
+      endpoint: `product/${productId}/review?status=enabled&lang=${locale}&page=${page}&perPage=20`,
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [

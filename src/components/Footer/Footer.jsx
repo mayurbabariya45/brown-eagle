@@ -182,14 +182,14 @@ const Footer = props => {
                 <Col sm={4}>
                   <img src={footerLogo} width="180" alt="footer logo" />
                 </Col>
-                <Col sm={4}>
+                {/* <Col sm={4}>
                   <div className="languages">
                     <Languages {...props} dropdownButton />
                     <a href="/#/" className="btn btn-default">
                       United States
                     </a>
                   </div>
-                </Col>
+                </Col> */}
               </div>
             </Col>
           </Row>

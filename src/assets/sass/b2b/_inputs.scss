@@ -348,6 +348,8 @@ fieldset[disabled] .form-control {
   letter-spacing: 0.03em;
   line-height: 40px;
   padding: 0 7px 0 10px;
+  overflow: hidden;
+  text-transform: capitalize;
 }
 .search-bar__suggestion--focused {
   background: #f5f5f5;

@@ -22,6 +22,7 @@ class Account extends Component {
     };
     this.handleEditForm = this.handleEditForm.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
+    this.handleEmailConfirmation = this.handleEmailConfirmation.bind(this);
   }
   componentWillMount() {
     const { removeAll } = this.props;
@@ -48,6 +49,33 @@ class Account extends Component {
       } else {
         scroller.scrollTo("myScrollToElement", { offset: -100, smooth: true });
       }
+    }
+  }
+  handleEmailConfirmation() {
+    const {
+      resendEmail,
+      locale,
+      auth,
+      showNotification,
+      translate
+    } = this.props;
+    const { user } = auth;
+    if (!_.isEmpty(user)) {
+      resendEmail(user.email, locale).then(payload => {
+        if (payload.type === "VERIFY_EMAIL_SUCCESS") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-check" />,
+            <div>{translate("notification_resend_email")}</div>,
+            false
+          );
+        } else {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-shield" />,
+            <div>{payload.payload.response.message}</div>,
+            true
+          );
+        }
+      });
     }
   }
   handleSubmitForm(values) {
@@ -169,6 +197,7 @@ class Account extends Component {
                         companyForm={this.state.companyForm}
                         handleEditForm={this.handleEditForm}
                         handleSubmitForm={this.handleSubmitForm}
+                        handleEmailConfirmation={this.handleEmailConfirmation}
                       />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">

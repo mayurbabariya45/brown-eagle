@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import OrderItems from "./OrderItems";
 import ViewOrder from "./ViewOrder";
+import StatusFilter from "./OrderStatus";
 
 class Orders extends React.Component {
   constructor(props) {
@@ -20,13 +21,13 @@ class Orders extends React.Component {
   }
   componentWillMount() {
     const { getOrders, seller } = this.props;
-    getOrders(seller, this.state.currentPage);
+    getOrders(seller, "all", this.state.currentPage);
   }
   onPageChanged = data => {
     const { currentPage } = data;
-    const { getOrders, seller } = this.props;
+    const { getOrders, seller, selectedFilter } = this.props;
     this.setState({ currentPage });
-    getOrders(seller, currentPage);
+    getOrders(seller, _.lowerCase(selectedFilter), currentPage);
     return false;
   };
   showOrderStatusModal(orderId) {
@@ -39,7 +40,7 @@ class Orders extends React.Component {
     const {
       changeOrderStatus,
       showNotification,
-      updateOrder,
+      selectedFilter,
       getOrders,
       seller
     } = this.props;
@@ -53,21 +54,8 @@ class Orders extends React.Component {
           true
         );
       } else {
-        this.setState({ showModal: false });
-        if (touched) {
-          updateOrder(values).then(() => {
-            this.setState({ order: {}, viewOrder: false });
-            getOrders(seller, this.state.currentPage);
-            showNotification(
-              <span data-notify="icon" className="pe-7s-check" />,
-              <div>Order Status has been changed successfully.</div>,
-              false
-            );
-          });
-          return false;
-        }
-        this.setState({ order: {}, viewOrder: false });
-        getOrders(seller, this.state.currentPage);
+        this.setState({ order: {}, viewOrder: false, showModal: false });
+        getOrders(seller, _.lowerCase(selectedFilter), this.state.currentPage);
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
           <div>Order Status has been changed successfully.</div>,
@@ -94,6 +82,9 @@ class Orders extends React.Component {
       getOrderTransactions,
       transactions,
       isLoading,
+      selectFilters,
+      selectedFilter,
+      getOrders,
       seller
     } = this.props;
     const { count, order } = orders;
@@ -121,6 +112,20 @@ class Orders extends React.Component {
                 <p>
                   Showing {start} – {end} Order of {count} Orders
                 </p>
+              </div>
+            </Col>
+          </Row>
+        )}
+        {!this.state.viewOrder && (
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <div className="orders-filter">
+                <StatusFilter
+                  seller={seller}
+                  getOrders={getOrders}
+                  selectFilters={selectFilters}
+                  selectedFilter={selectedFilter}
+                />
               </div>
             </Col>
           </Row>

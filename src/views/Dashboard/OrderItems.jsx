@@ -77,7 +77,10 @@ const OrderItem = props => {
           <div className="box-list-item-desc">
             <p>
               {!_.isEmpty(props.buyer.companyName) &&
-                `Buyer: ${props.buyer.companyName}`}
+                `Buyer: ${props.buyer.companyName}`}{" "}
+              {props.buyer.isProfileApproved === "verified" && (
+                <i className="icon-static icon-checked " />
+              )}
             </p>
             <p>
               <span>Total</span>: {getCurrency(props.price.currency)}

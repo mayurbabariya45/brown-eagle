@@ -7,12 +7,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getOrders: (authId, page) => dispatch(a.getOrders(authId, page)),
+  getOrders: (authId, status, page) =>
+    dispatch(a.getOrders(authId, status, page)),
   changeOrderStatus: (orderId, status) =>
     dispatch(a.changeOrderStatus(orderId, status)),
   updateOrder: values => dispatch(a.updateOrder(values)),
   getOrderTransactions: (orderId, seller) =>
-    dispatch(a.getOrderTransactions(orderId, seller))
+    dispatch(a.getOrderTransactions(orderId, seller)),
+  selectFilters: value => dispatch(a.selectFilters(value))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);

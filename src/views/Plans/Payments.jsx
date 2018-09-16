@@ -104,7 +104,7 @@ class _SplitForm extends React.Component {
             if (_.isEmpty(this.props.seller)) {
               this.props.showNotification(
                 <span data-notify="icon" className="pe-7s-check" />,
-                <div>Please try again later</div>,
+                <div>{this.props.translate("notification_try_again")}</div>,
                 true
               );
               return false;
@@ -119,7 +119,7 @@ class _SplitForm extends React.Component {
               } else {
                 this.props.showNotification(
                   <span data-notify="icon" className="pe-7s-check" />,
-                  <div>Payment has been done successfully</div>,
+                  <div>{this.props.translate("notification_actived_plan")}</div>,
                   false
                 );
                 window.scrollTo(0, 0);

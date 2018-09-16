@@ -421,6 +421,11 @@
       margin-bottom: 0;
     }
   }
+  .input-group-addon{
+    background-color: #eee;
+    border: 1px solid #ccc;
+    color: #555;
+  }
   .mutiple-form-group {
     position: relative;
     > .custom-form-group {

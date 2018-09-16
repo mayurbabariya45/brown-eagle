@@ -24,9 +24,16 @@ class Quotations extends React.Component {
     this.clearViewQuotationState = this.clearViewQuotationState.bind(this);
   }
   componentWillMount() {
-    const { getSellerQuotations, seller } = this.props;
+    const {
+      getSellerQuotations,
+      getCategories,
+      getSellerActivePlans,
+      seller
+    } = this.props;
     if (!_.isEmpty(seller)) {
       getSellerQuotations(seller);
+      getCategories();
+      getSellerActivePlans(seller);
     }
   }
   onPageChanged = data => {
@@ -76,7 +83,8 @@ class Quotations extends React.Component {
       showNotification,
       getSellerQuotations,
       flushSearchQuery,
-      getSellerActivePlans
+      getSellerActivePlans,
+      selectFilters
     } = this.props;
     const { currentPage } = this.state;
     const { count, rfqs } = quotation.sellerQuotation;
@@ -84,7 +92,7 @@ class Quotations extends React.Component {
     let end = currentPage * 20 || 0;
     if (end > count) {
       end = count;
-    }
+    }    
     return (
       <div className="quotation-section">
         <Row>
@@ -103,7 +111,7 @@ class Quotations extends React.Component {
             />
           </Col>
         </Row>
-        {/* {!this.state.viewQuotation && (
+        {!this.state.viewQuotation && (
           <Row>
             <Col md={12} sm={12} xs={12}>
               <div className="quotations-filter">
@@ -119,7 +127,7 @@ class Quotations extends React.Component {
               </div>
             </Col>
           </Row>
-        )} */}
+        )}
         {!this.state.viewQuotation && (
           <Row>
             <Col md={12} sm={12} xs={12}>
@@ -187,6 +195,7 @@ class Quotations extends React.Component {
 Quotations.propTypes = {
   translate: PropTypes.func.isRequired,
   onSelectCategory: PropTypes.func.isRequired,
+  getCategories: PropTypes.func.isRequired,
   selectFilters: PropTypes.func.isRequired,
   searchQuotation: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,

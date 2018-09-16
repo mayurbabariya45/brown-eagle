@@ -29,6 +29,7 @@ import ProductOverview from "./ProductOverview";
 import Companyinformation from "./CompanyInformation";
 import TradeAssurance from "./TradeAssurance";
 import ProductLikes from "./ProductLikes";
+import Transactions from "./Transactions";
 import ProductRatingContainer from "../../containers/ProductRatingContainer/ProductRatingContainer";
 import { getCurrency } from "../../variables/Variables";
 
@@ -42,6 +43,7 @@ class Product extends Component {
     this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
     this.handleAddToWishlist = this.handleAddToWishlist.bind(this);
     this.handleAddToCompare = this.handleAddToCompare.bind(this);
+    this.handleLoadMoreReview = this.handleLoadMoreReview.bind(this);
   }
   componentWillMount() {
     const {
@@ -59,7 +61,7 @@ class Product extends Component {
       const webAuthRole = localStorage.getItem("webAuthRole");
       const buyer = webAuthRole === "buyer" ? webAuthId : "";
       getProduct(productId, locale, buyer);
-      getProductReview(productId, locale);
+      getProductReview(productId, locale, 1);
       getSimilarProduct(productId, locale);
     } else {
       history.goBack();
@@ -198,7 +200,7 @@ class Product extends Component {
           <div>Product has been deleted successfully.</div>,
           false
         );
-        this.addToCart(item)
+        this.addToCart(item);
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
@@ -218,6 +220,15 @@ class Product extends Component {
       false
     );
   }
+  handleLoadMoreReview() {
+    const { getProductReview, reviews, match, locale } = this.props;
+    const { productName, productId } = match.params;
+    const { count, pages, productReview } = reviews;
+    if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
+      const nextPage = count !== _.size(productReview) ? pages + 1 : pages;
+      getProductReview(productId, locale, nextPage);
+    }
+  }
   render() {
     const {
       translate,
@@ -228,7 +239,8 @@ class Product extends Component {
       reviews,
       locale,
       loading,
-      similarProducts
+      similarProducts,
+      isLoading
     } = this.props;
     const objectProduct = product || {};
     const authRole = auth.user.role;
@@ -244,9 +256,10 @@ class Product extends Component {
       currency,
       isReviewed,
       ratingAggregate,
-      quickDetails
+      quickDetails,
+      transactions
     } = objectProduct;
-    const { productReview } = reviews;
+    const { productReview, count, pages } = reviews;
     return (
       <section className="product-view">
         <Grid>
@@ -467,6 +480,7 @@ class Product extends Component {
                               <Companyinformation
                                 translate={translate}
                                 information={seller || {}}
+                                locale={locale}
                               />
                             </div>
                           </div>
@@ -476,7 +490,7 @@ class Product extends Component {
                           title={translate("product_transaction_overview")}
                         >
                           <div className="transaction-overview">
-                            Transactions Overview
+                            <Transactions transactions={transactions || {}} />
                           </div>
                         </Tab>
                       </Tabs>
@@ -496,8 +510,12 @@ class Product extends Component {
                     </div>
                     <ProductReviews
                       translate={translate}
+                      count={count || 0}
+                      isLoading={isLoading}
+                      pages={pages}
                       productReview={productReview}
                       locale={locale}
+                      handleLoadMore={this.handleLoadMoreReview}
                     />
                   </div>
                 </Row>

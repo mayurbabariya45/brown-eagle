@@ -9,8 +9,8 @@ const mapDispatchToProps = dispatch => ({
   onDecrement: () => dispatch(a.onDecrement()),
   getProduct: (productId, locale, authId) =>
     dispatch(a.getProduct(productId, locale, authId)),
-  getProductReview: (productId, locale) =>
-    dispatch(a.getProductReview(productId, locale)),
+  getProductReview: (productId, locale, page) =>
+    dispatch(a.getProductReview(productId, locale, page)),
   getSimilarProduct: (productId, locale) =>
     dispatch(a.getSimilarProduct(productId, locale)),
   flushProduct: () => dispatch(a.flushProduct()),

@@ -4,6 +4,7 @@ import { ActionTypes as a } from "../../constants/Auth/Auth_action_type";
 const INITIAL_STATE = {
   loginForm: false,
   loading: false,
+  isLoading: false,
   loader: false,
   success: false,
   errors: false,
@@ -391,6 +392,58 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         error: true,
         loading: false
+      };
+    case a.ADD_NEW_REFERENCE_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case a.ADD_NEW_REFERENCE_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        isLoading: false,
+        user: {
+          ...state.user,
+          references: state.user.references.concat(action.payload)
+        }
+      };
+    case a.ADD_NEW_REFERENCE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        isLoading: false
+      };
+    case a.EDIT_REFERENCE_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case a.EDIT_REFERENCE_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        isLoading: false,
+        user: {
+          ...state.user,
+          references: _.map(state.user.references, reference => {
+            if (reference._id === action.meta) {
+              return {
+                _id: action.payload.id,
+                ...action.payload
+              };
+            }
+            return {
+              ...reference
+            };
+          })
+        }
+      };
+    case a.EDIT_REFERENCE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        isLoading: false
       };
     default:
       return state;

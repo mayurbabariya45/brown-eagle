@@ -22,10 +22,10 @@ class CompareProduct extends React.Component {
     this.updateTopScrolling = this.updateTopScrolling.bind(this);
   }
   componentDidMount() {
-    window.addEventListener("scroll", this.updateTopScrolling, false);
+    // window.addEventListener("scroll", this.updateTopScrolling, false);
   }
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.updateTopScrolling, false);
+    // window.removeEventListener("scroll", this.updateTopScrolling, false);
   }
   updateTopScrolling() {
     if (_.isEmpty(this.props.products)) return false;

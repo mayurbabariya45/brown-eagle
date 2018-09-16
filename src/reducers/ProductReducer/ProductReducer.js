@@ -7,6 +7,7 @@ const initialState = {
   success: false,
   loadProduct: false,
   loading: false,
+  isLoading: false,
   loader: false,
   selectedLang: "",
   activeCategory: {},
@@ -20,7 +21,11 @@ const initialState = {
   selectedCategory: {},
   selectedSubCategory: {},
   product: {},
-  reviews: [],
+  reviews: {
+    pages: 0,
+    count: 0,
+    productReview: []
+  },
   filter: {
     category: {
       category: "",
@@ -306,16 +311,24 @@ export default (state = initialState, action) => {
     // GET_REVIEW
     case a.GET_PRODUCT_REVIEW_REQUEST:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case a.GET_PRODUCT_REVIEW_SUCCESS:
       return {
         ...state,
-        reviews: action.payload
+        isLoading: false,
+        reviews: {
+          ...action.payload,
+          productReview: state.reviews.productReview.concat(
+            action.payload.productReview
+          )
+        }
       };
     case a.GET_PRODUCT_REVIEW_FAILURE:
       return {
-        ...state
+        ...state,
+        isLoading: false
       };
     // SELECT_FILTER
     case a.SELECT_SORT_FILTER:

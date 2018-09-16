@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   loading: false,
   error: false,
   success: false,
+  isLoading: false,
+  isResendEmail: false,
   wishList: []
 };
 
@@ -70,6 +72,22 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: false
+      };
+    case a.VERIFY_EMAIL_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case a.VERIFY_EMAIL_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isResendEmail: true
+      };
+    case a.VERIFY_EMAIL_FAILURE:
+      return {
+        ...state,
+        isLoading: false
       };
     default:
       return state;

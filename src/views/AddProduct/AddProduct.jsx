@@ -47,8 +47,25 @@ class AddProduct extends React.Component {
     }
     let object = Object.assign(
       {},
-      { ...value, category, keywords, seller, productAvailability, quickDetails }
+      {
+        ...value,
+        category,
+        keywords,
+        seller,
+        productAvailability,
+        quickDetails,
+        productDimensions: {
+          weight: value.weight,
+          width: value.width,
+          height: value.height,
+          depth: value.depth
+        }
+      }
     );
+    delete object.weight;
+    delete object.width;
+    delete object.height;
+    delete object.depth;
     if (!_.isEmpty(subCategory)) {
       object = Object.assign(
         {},

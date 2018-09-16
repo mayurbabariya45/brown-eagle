@@ -3,6 +3,8 @@ import { ActionTypes as a } from "../../constants/Dashboard/Dashboard_action_typ
 
 const INITIAL_STATE = {
   loading: false,
+  isLoading: false,
+  isResendEmail: false,
   error: false,
   success: false,
   upldateProductLoading: false,
@@ -23,7 +25,8 @@ const INITIAL_STATE = {
   coordinates: {
     type: "Point",
     coordinates: []
-  }
+  },
+  selectedFilter: "All"
 };
 
 /**
@@ -294,6 +297,27 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         success: false,
         error: true
+      };
+    case a.VERIFY_EMAIL_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case a.VERIFY_EMAIL_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isResendEmail: true
+      };
+    case a.VERIFY_EMAIL_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case a.SELECT_FILTER:
+      return {
+        ...state,
+        selectedFilter: action.value
       };
     default:
       return state;

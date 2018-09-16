@@ -8,6 +8,7 @@ import Product from "../../components/ProductSlider/Products";
 import EditProductContainer from "../../containers/EditProductContainer/EditProductContainer";
 import Pagination from "../../components/Pagination/Pagination";
 import ProductReviews from "./ProductReviews";
+import ProductStatus from "./ProductFilter";
 
 class Products extends Component {
   constructor(props) {
@@ -67,7 +68,10 @@ class Products extends Component {
       productReviews,
       getProductReview,
       editProductReview,
-      changeProductReviewStatus
+      changeProductReviewStatus,
+      selectFilters,
+      selectedFilter,
+      getProducts
     } = this.props;
     const { currentPage } = this.state;
     const { count, products } = myProducts;
@@ -118,6 +122,20 @@ class Products extends Component {
                     </p>
                   </div>
                 </Col>
+                {!this.state.viewOrder && (
+                  <Row>
+                    <Col md={12} sm={12} xs={12}>
+                      <div className="products-filter">
+                        <ProductStatus
+                          seller={id}
+                          getProducts={getProducts}
+                          selectFilters={selectFilters}
+                          selectedFilter={selectedFilter}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                )}
                 <Col md={12}>
                   <div className="products list items product-items product-lists">
                     <Row>

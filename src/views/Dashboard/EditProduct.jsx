@@ -15,6 +15,7 @@ import {
 import Select from "react-select";
 import Dropzone from "react-dropzone";
 import BlockUi from "react-block-ui";
+import { getCurrency } from "../../variables/Variables";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import { required } from "../../formValidationRules/FormValidationRules";
 import Button from "../../elements/CustomButton/CustomButton";
@@ -250,8 +251,18 @@ class EditProduct extends Component {
       category: this.state.selectedCategory.value,
       subCategory: this.state.selectedSubCategory.value,
       keywords,
-      quickDetails
+      quickDetails,
+      productDimensions: {
+        weight: values.weight,
+        width: values.width,
+        height: values.height,
+        depth: values.depth
+      }
     });
+    delete product.weight;
+    delete product.width;
+    delete product.height;
+    delete product.depth;
     updateProduct(product, "en").then(payload => {
       if (payload.type === "UPDATE_PRODUCT_SUCCESS") {
         showNotification(
@@ -410,8 +421,10 @@ class EditProduct extends Component {
                   ncols={["col-md-6", "col-md-6"]}
                   proprieties={[
                     {
+                      inputGroup: "icon_text",
+                      bsIcon: getCurrency("EUR"),
                       label: translate("a_product_price"),
-                      type: "text",
+                      type: "number",
                       bsClass: "form-control form-control-simple",
                       name: "productPrice"
                     },
@@ -451,6 +464,62 @@ class EditProduct extends Component {
                   ]}
                 />
                 <FieldArray name="product_label" component={renderInputs} />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      bsIcon: translate("a_grams"),
+                      label: translate("a_weight"),
+                      type: "number",
+                      bsClass: "form-control form-control-simple",
+                      name: "weight",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      bsIcon: translate("a_inches"),
+                      label: translate("a_width"),
+                      type: "number",
+                      bsClass: "form-control form-control-simple",
+                      name: "width",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      bsIcon: translate("a_inches"),
+                      label: translate("a_height"),
+                      type: "number",
+                      bsClass: "form-control form-control-simple",
+                      name: "height",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      label: translate("a_depth"),
+                      type: "number",
+                      bsIcon: translate("a_inches"),
+                      bsClass: "form-control form-control-simple",
+                      name: "depth",
+                      validate: [required]
+                    }
+                  ]}
+                />
                 <FormInputs
                   ncols={["col-md-12"]}
                   proprieties={[
