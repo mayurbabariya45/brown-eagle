@@ -27,6 +27,7 @@ class QuotationSlider extends React.Component {
       slidesToScroll: 1,
       className: "quotation-images-slider"
     };
+    console.log(productImages);
     return (
       <Slider {...sliderSetting}>
         {_.map(productImages, image => (

@@ -5423,6 +5423,16 @@ section {
           font-size: 16px;
           font-weight: bold;
           color: #808080; }
+          .quotation-section .quotations .quotation-item .quotation-item-details .quotation-product-title h3 span.open {
+            background-color: #00cf59;
+            border-color: #00cf59;
+            text-transform: uppercase;
+            cursor: default; }
+          .quotation-section .quotations .quotation-item .quotation-item-details .quotation-product-title h3 span.closed, .quotation-section .quotations .quotation-item .quotation-item-details .quotation-product-title h3 span.rejected {
+            background-color: #d02023;
+            border-color: #d02023;
+            text-transform: uppercase;
+            cursor: default; }
       .quotation-section .quotations .quotation-item .quotation-item-details .image-container {
         width: 20%;
         float: left;
@@ -5489,7 +5499,8 @@ section {
           color: #808080;
           margin-top: 10px; }
         .quotation-section .quotations .quotation-item .quotation-container-button .quotation-button .btn-quote {
-          padding: 5px 15px; }
+          padding: 5px 15px;
+          margin-top: 5px; }
         .quotation-section .quotations .quotation-item .quotation-container-button .quotation-button .open {
           background-color: #00cf59;
           border-color: #00cf59;
@@ -5727,7 +5738,8 @@ section {
         .account-quotation .quotations .quotation-item .quotation-container-button .quotation-button .quote-count {
           color: #808080; }
         .account-quotation .quotations .quotation-item .quotation-container-button .quotation-button .btn-quote {
-          padding: 5px 15px; }
+          padding: 5px 15px;
+          margin-top: 5px; }
         .account-quotation .quotations .quotation-item .quotation-container-button .quotation-button .open {
           background-color: #00cf59;
           border-color: #00cf59;
@@ -5987,6 +5999,18 @@ section {
 .dashboard-quotes .result-showing {
   margin-top: 10px; }
 
+.dashboard-quotes .go-back-button {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .dashboard-quotes .go-back-button .btn.btn-fill {
+    color: #000; }
+    .dashboard-quotes .go-back-button .btn.btn-fill i {
+      vertical-align: middle;
+      font-size: 18px;
+      padding-right: 5px;
+      line-height: 0;
+      font-weight: bold; }
+
 .dashboard-quotes .quotation-item {
   float: left;
   width: 100%;
@@ -6009,7 +6033,11 @@ section {
         padding: 0px;
         font-size: 16px;
         font-weight: bold;
-        color: #808080; }
+        color: #808080;
+        float: left; }
+      .dashboard-quotes .quotation-item .quotation-item-details .quotation-product-title .btn-warning.btn-fill {
+        float: right;
+        padding: 1px 12px; }
     .dashboard-quotes .quotation-item .quotation-item-details .quotation-item-detail {
       float: left;
       width: 100%;
@@ -6033,6 +6061,76 @@ section {
             vertical-align: middle;
             font-size: 18px;
             line-height: 0; }
+
+.dashboard-quotes .view-quotation-item .quotation-item-details {
+  float: left;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0; }
+  .dashboard-quotes .view-quotation-item .quotation-item-details .quotation-item-detail .quotation-quantity p {
+    margin-bottom: 0px;
+    margin-top: 10px; }
+  .dashboard-quotes .view-quotation-item .quotation-item-details .quotation-item-detail .quotation-posted {
+    display: flex;
+    align-items: baseline;
+    padding-top: 10px; }
+    .dashboard-quotes .view-quotation-item .quotation-item-details .quotation-item-detail .quotation-posted .btn-warning.btn-fill {
+      display: inline-block;
+      margin-right: 10px; }
+
+.dashboard-quotes .view-quotation-item .quotation-container-button {
+  float: left;
+  width: 20%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center; }
+  .dashboard-quotes .view-quotation-item .quotation-container-button .quotation-button {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 145px; }
+    .dashboard-quotes .view-quotation-item .quotation-container-button .quotation-button .open {
+      background-color: #00cf59;
+      border-color: #00cf59;
+      padding: 2px 30px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      cursor: default; }
+    .dashboard-quotes .view-quotation-item .quotation-container-button .quotation-button .closed,
+    .dashboard-quotes .view-quotation-item .quotation-container-button .quotation-button .rejected {
+      background-color: #d02023;
+      border-color: #d02023;
+      padding: 2px 25px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      cursor: default; }
+
+.dashboard-quotes .quotations {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto; }
+  .dashboard-quotes .quotations .view-quotation-slider-item {
+    padding: 15px 25px;
+    margin: 0 auto; }
+    .dashboard-quotes .quotations .view-quotation-slider-item .slider-title {
+      margin: 0; }
+      .dashboard-quotes .quotations .view-quotation-slider-item .slider-title h3 {
+        margin: 0px;
+        padding: 10px 0;
+        font-size: 20px;
+        font-weight: bold;
+        color: #808080; }
+    .dashboard-quotes .quotations .view-quotation-slider-item .quotation-product-images .item .image-container {
+      float: left;
+      height: 180px;
+      width: 180px;
+      margin: 0 auto;
+      padding: 10px;
+      overflow: hidden;
+      border: 1px solid #ebebeb;
+      border-radius: 5px; }
 
 .section-plans .section-page-header {
   display: block;

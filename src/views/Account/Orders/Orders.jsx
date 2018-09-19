@@ -1,8 +1,10 @@
+import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import OrderItems from "./OrderItems";
 import ViewOrder from "./ViewOrder";
+import StatusFilter from "./OrderStatus";
 
 class Orders extends React.Component {
   constructor(props) {
@@ -17,14 +19,14 @@ class Orders extends React.Component {
     this.handlePaymentMethod = this.handlePaymentMethod.bind(this);
   }
   componentWillMount() {
-    const { getOrders, buyerId } = this.props;
-    getOrders(buyerId, this.state.currentPage);
+    const { getOrders, buyerId, selectedFilter } = this.props;
+    getOrders(buyerId, this.state.currentPage, selectedFilter.status);
   }
   onPageChanged = data => {
     const { currentPage } = data;
-    const { getOrders, buyerId } = this.props;
+    const { getOrders, buyerId, selectedFilter } = this.props;
     this.setState({ currentPage });
-    getOrders(buyerId, currentPage);
+    getOrders(buyerId, currentPage, selectedFilter.status);
     return false;
   };
   handleViewOrder(order) {
@@ -33,9 +35,9 @@ class Orders extends React.Component {
   clearViewOrderState() {
     this.setState({ order: {}, viewOrder: false });
   }
-  handlePaymentMethod(){
-    const { getOrders, buyerId } = this.props;
-    getOrders(buyerId, this.state.currentPage);
+  handlePaymentMethod() {
+    const { getOrders, buyerId, selectedFilter } = this.props;
+    getOrders(buyerId, this.state.currentPage, _.lowerCase(selectedFilter));
     this.setState({ order: {}, viewOrder: false });
   }
   render() {
@@ -49,7 +51,10 @@ class Orders extends React.Component {
       getOrderTransactions,
       transactions,
       buyerId,
-      isLoading
+      isLoading,
+      getOrders,
+      selectFilters,
+      selectedFilter
     } = this.props;
     const { count, order } = orders;
     const { currentPage } = this.state;
@@ -76,6 +81,20 @@ class Orders extends React.Component {
                 <p>
                   Showing {start} – {end} Order of {count} Orders
                 </p>
+              </div>
+            </Col>
+          </Row>
+        )}
+        {!this.state.viewOrder && (
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <div className="orders-filter">
+                <StatusFilter
+                  buyer={buyerId}
+                  getOrders={getOrders}
+                  selectFilters={selectFilters}
+                  selectedFilter={selectedFilter}
+                />
               </div>
             </Col>
           </Row>

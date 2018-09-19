@@ -6,7 +6,11 @@ const INITIAL_STATE = {
   error: false,
   isLoading: false,
   orders: [],
-  transactions: []
+  transactions: [],
+  selectedFilter: {
+    name: "All",
+    status: "all"
+  }
 };
 
 /**
@@ -80,6 +84,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: false
+      };
+    case a.SELECT_FILTER:
+      return {
+        ...state,
+        selectedFilter: action.value
       };
     default:
       return state;

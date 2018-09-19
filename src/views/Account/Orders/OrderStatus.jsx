@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -30,17 +29,17 @@ class OrderStatus extends React.Component {
     this.state = {};
     this.handleDropdown = this.handleDropdown.bind(this);
   }
-  handleDropdown(value) {
-    const { selectFilters, getOrders, seller } = this.props;
-    selectFilters(value);
-    getOrders(seller, value.status, 1);
+  handleDropdown(values) {
+    const { selectFilters, getOrders, buyer } = this.props;
+    selectFilters(values);
+    getOrders(buyer, 1, values.status);
     return false;
   }
   render() {
     const { selectedFilter } = this.props;
     const selectedStatus = <span>{selectedFilter.name}</span>;
-    const renderStatus = status.map(data => (
-      <MenuItem key={data} eventKey={data}>
+    const renderStatus = status.map((data, index) => (
+      <MenuItem key={index} eventKey={data}>
         {data.name}
       </MenuItem>
     ));
@@ -68,10 +67,9 @@ class OrderStatus extends React.Component {
 OrderStatus.propTypes = {
   selectFilters: PropTypes.func.isRequired,
   getOrders: PropTypes.func.isRequired,
-  seller: PropTypes.string,
-  selectedFilter: PropTypes.string.isRequired
+  buyer: PropTypes.string
 };
 OrderStatus.defaultProps = {
-  seller: ""
+  buyer: ""
 };
 export default OrderStatus;

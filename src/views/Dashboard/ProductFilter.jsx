@@ -6,8 +6,7 @@ import {
   MenuItem,
   FormGroup,
   InputGroup,
-  Col,
-  Row
+  Col
 } from "react-bootstrap";
 
 const status = ["All", "Rejected", "Pending", "Approved"];

@@ -9,7 +9,6 @@ class ViewQuotation extends React.Component {
     super(props);
     this.state = {};
   }
-
   render() {
     const {
       quotation,
@@ -34,6 +33,17 @@ class ViewQuotation extends React.Component {
               <h3>{_.capitalize(quotation.titleTranslations[locale])}</h3>
             </div>
             <div className="quotation-item-detail">
+              <div className="quotation-quantity">
+                <p>
+                  Category: <b>{quotation.category.nameTranslations[locale]}</b>
+                </p>
+                {_.has(quotation, "subCategory") && (
+                  <p>
+                    Sub Category :
+                    <b>{quotation.subCategory.nameTranslations[locale]}</b>
+                  </p>
+                )}
+              </div>
               <div className="quotation-quantity">
                 <p>
                   {translate("q_quanity_required")} :{" "}

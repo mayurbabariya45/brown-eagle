@@ -113,7 +113,7 @@ class Sidebar extends Component {
             <Collapse in={this.state.collapse.quotation}>
               <div>
                 <Nav>
-                  {/* <NavItem eventKey="ten">{translate("d_my_quotes")}</NavItem> */}
+                  <NavItem eventKey="ten">{translate("d_my_quotes")}</NavItem>
                   <NavItem eventKey="eleven">
                     {translate("buying_requests")}
                   </NavItem>
@@ -125,7 +125,6 @@ class Sidebar extends Component {
             <i className="pe-7s-lock" />
             {translate("d_change_password")}
           </NavItem>
-         
           <Confirm
             onConfirm={() => {
               logout();

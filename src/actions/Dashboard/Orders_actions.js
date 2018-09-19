@@ -58,6 +58,6 @@ export const getOrderTransactions = (orderId, seller) => ({
 });
 
 export const selectFilters = value => ({
-  type: a.SELECT_FILTER,
+  type: a.SELECT_ORDER_FILTER,
   value
 });

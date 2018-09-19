@@ -11,7 +11,7 @@ const preloader = () => <ContentLoader height={300} inFight />;
 const SellerQuotationStatus = props => (
   <div className="quotation-container-button">
     <div className="quotation-button">
-      {props.status === "open" && (
+      {/* {props.status === "open" && (
         <Button fill bsStyle="warning" className="open">
           {props.translate("q_status_open")}
         </Button>
@@ -20,7 +20,15 @@ const SellerQuotationStatus = props => (
         <Button fill bsStyle="warning" className="closed">
           {props.status}
         </Button>
-      )}
+      )} */}
+      <Button
+        fill
+        bsStyle="success"
+        className="view-quotation"
+        onClick={props.handleViewQuotation}
+      >
+        View Quotation
+      </Button>
       {props.status === "open" &&
         !props.isQuoted && (
           <Button
@@ -41,7 +49,7 @@ const SellerQuotationStatus = props => (
 const BuyerQuotationStatus = props => (
   <div className="quotation-container-button">
     <div className="quotation-button">
-      {props.status === "open" && (
+      {/* {props.status === "open" && (
         <Button fill bsStyle="warning" className="open">
           {props.translate("q_status_open")}
         </Button>
@@ -50,7 +58,15 @@ const BuyerQuotationStatus = props => (
         <Button fill bsStyle="warning" className="closed">
           {props.status}
         </Button>
-      )}
+      )} */}
+      <Button
+        fill
+        bsStyle="success"
+        className="view-quotation"
+        onClick={props.handleViewQuotation}
+      >
+        View Quotation
+      </Button>
     </div>
   </div>
 );
@@ -69,7 +85,20 @@ const QuotationItem = props => {
     <div className="quotation-item">
       <div className="quotation-item-details">
         <div className="quotation-product-title">
-          <h3>{_.capitalize(quotation.titleTranslations[locale])}</h3>
+          <h3>
+            {_.capitalize(quotation.titleTranslations[locale])}{" "}
+            {quotation.status === "open" && (
+              <span className="label label-warning open">
+                {props.translate("q_status_open")}
+              </span>
+            )}
+            {(quotation.status === "close" ||
+              quotation.status === "rejected") && (
+              <span className="label label-warning closed">
+                {quotation.status}
+              </span>
+            )}
+          </h3>
         </div>
         <div className="image-container">
           <div className="product-image-container">
@@ -85,6 +114,17 @@ const QuotationItem = props => {
         <div className="quotation-item-detail">
           <div className="desc">
             <p>{quotation.descriptionTranslations[locale]}</p>
+          </div>
+          <div className="quotation-quantity">
+            <p>
+              Category: <b>{quotation.category.nameTranslations[locale]}</b>
+            </p>
+            {_.has(quotation, "subCategory") && (
+              <p>
+                Sub Category :
+                <b>{quotation.subCategory.nameTranslations[locale]}</b>
+              </p>
+            )}
           </div>
           <div className="quotation-quantity">
             <p>
@@ -121,10 +161,15 @@ const QuotationItem = props => {
           opneSubmitQuoteModal={props.opneSubmitQuoteModal}
           translate={translate}
           quoteRemianing={props.quoteRemianing}
+          handleViewQuotation={props.handleViewQuotation}
         />
       )}
       {buyer && (
-        <BuyerQuotationStatus status={quotation.status} translate={translate} />
+        <BuyerQuotationStatus
+          status={quotation.status}
+          translate={translate}
+          handleViewQuotation={props.handleViewQuotation}
+        />
       )}
     </div>
   );

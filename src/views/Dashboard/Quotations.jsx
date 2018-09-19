@@ -92,7 +92,7 @@ class Quotations extends React.Component {
     let end = currentPage * 20 || 0;
     if (end > count) {
       end = count;
-    }    
+    }
     return (
       <div className="quotation-section">
         <Row>

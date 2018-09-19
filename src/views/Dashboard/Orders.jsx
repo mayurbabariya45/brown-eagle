@@ -27,7 +27,7 @@ class Orders extends React.Component {
     const { currentPage } = data;
     const { getOrders, seller, selectedFilter } = this.props;
     this.setState({ currentPage });
-    getOrders(seller, _.lowerCase(selectedFilter), currentPage);
+    getOrders(seller, selectedFilter.status, currentPage);
     return false;
   };
   showOrderStatusModal(orderId) {
@@ -83,7 +83,7 @@ class Orders extends React.Component {
       transactions,
       isLoading,
       selectFilters,
-      selectedFilter,
+      selectedOrderFilter,
       getOrders,
       seller
     } = this.props;
@@ -124,7 +124,7 @@ class Orders extends React.Component {
                   seller={seller}
                   getOrders={getOrders}
                   selectFilters={selectFilters}
-                  selectedFilter={selectedFilter}
+                  selectedFilter={selectedOrderFilter}
                 />
               </div>
             </Col>
