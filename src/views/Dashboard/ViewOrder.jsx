@@ -55,9 +55,8 @@ const OrderQuantity = ({
   </div>
 );
 const ProductDetails = props => {
-  const { product } = props;
-  const { seller } = product;
-  const { companyName } = seller;
+  const { buyer } = props;
+  const { companyName, isProfileApproved } = buyer;
   let productImages;
   let productUrl = "/products";
   if (!_.isEmpty(props.product)) {
@@ -86,7 +85,20 @@ const ProductDetails = props => {
         <div className="product-infromation">
           <div className="seller-infromation">
             <div className="seller-company-name">
-              <p>{companyName}</p>
+              <p>
+                {companyName}{" "}
+                {isProfileApproved === "pending" ? (
+                  <span className="profile-pending label label-warning">
+                    <i className="fa fa-clock-o" />{" "}
+                    {props.translate("d_verify")}
+                  </span>
+                ) : (
+                  <div>
+                    <i className="icon-static icon-checked" />{" "}
+                    <span>{props.translate("d_approved")}</span>
+                  </div>
+                )}
+              </p>
             </div>
             <div className="chat-button">
               <Link to="#" className="btn btn-fill btn-warning">
@@ -121,8 +133,16 @@ const ProductDetails = props => {
           </div>
           <div className="product-total">
             <p>
-              <span>Total: </span>
-              {props.price.currency} {props.total}
+              <span>Commission: </span>
+              {props.price.currency} {props.commission.toFixed(2)}
+            </p>
+            <p>
+              <span>Seller Share: </span>
+              {props.price.currency} {props.sellerShare.toFixed(2)}
+            </p>
+            <p>
+              <span>Order Total: </span>
+              {props.price.currency} {props.total.toFixed(2)}
             </p>
           </div>
         </div>
@@ -376,7 +396,16 @@ class ViewOrder extends React.Component {
       transactions,
       isLoading
     } = this.props;
-    const { status, product, id, price, remark, shippingAddress } = order;
+    const {
+      status,
+      product,
+      price,
+      remark,
+      shippingAddress,
+      buyer,
+      commission,
+      sellerShare
+    } = order;
     return (
       <div className="seller-order-view">
         <div className="go-back-button">
@@ -390,8 +419,11 @@ class ViewOrder extends React.Component {
             <ProductDetails
               translate={translate}
               product={product}
+              buyer={buyer}
               total={this.state.total}
               price={price}
+              commission={commission}
+              sellerShare={sellerShare}
               productPrice={this.state.price}
               quantity={this.state.quantity}
               locale={locale}

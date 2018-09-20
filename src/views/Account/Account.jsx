@@ -122,7 +122,7 @@ class Account extends Component {
   }
   render() {
     const { translate, logout, history, showNotification, locale } = this.props;
-    const { user, loading } = this.props.auth;
+    const { user, loader } = this.props.auth;
     const avatar = user ? (user.picture ? user.picture : noAvatar) : "";
     return (
       <section className="section-dashboard">
@@ -131,7 +131,7 @@ class Account extends Component {
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Col md={12}>
                 <Col sm={3}>
-                  <ContentLoader height={950} inFight={loading}>
+                  <ContentLoader height={950} inFight={loader}>
                     <div className="sidebar">
                         <div className="sidebar-user">
                         <div className="image" />

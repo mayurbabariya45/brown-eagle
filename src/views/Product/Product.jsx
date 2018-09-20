@@ -305,7 +305,7 @@ class Product extends Component {
                       <p>Port: SHANGHAI </p>
                     </div> */}
                       <div className="product-add-cart">
-                        {authRole === "buyer" && (
+                        {(authRole === "buyer" || authRole === "") && (
                           <div className="box-tocart">
                             <div className="actions add-to-cart">
                               <Button

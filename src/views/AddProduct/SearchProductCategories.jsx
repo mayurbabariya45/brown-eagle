@@ -94,6 +94,7 @@ class SearchProductCategories extends Component {
       sCategories,
       locale
     } = this.props;
+    console.log(selectedSubCategory);
     return (
       <div className="box-search">
         <Row>
@@ -128,8 +129,21 @@ class SearchProductCategories extends Component {
                   </div>
                 )}
                 <div className="selected-category">
-                  <div className="title">Commission : </div>
+                  <div className="title">
+                    {translate("a_category_commission")}
+                  </div>
                   <div className="category">{selectedCategory.commission}%</div>
+                  <br />
+                  {!_.isEmpty(selectedSubCategory) && (
+                    <div>
+                      <div className="title">
+                        {translate("a_sub_category_commission")}
+                      </div>
+                      <div className="category">
+                        {selectedSubCategory.commission || 0}%
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <Button
                   bsStyle="link"

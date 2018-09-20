@@ -67,11 +67,26 @@ const BuyerQuotationStatus = props => (
       >
         View Quotation
       </Button>
+      <Button
+        fill
+        bsStyle="warning"
+        className="view-quotes"
+        onClick={props.showSellerQuotes}
+      >
+        View Submmited Quotes
+      </Button>
     </div>
   </div>
 );
 const QuotationItem = props => {
-  const { quotation, locale, handleViewQuotation, buyer, translate } = props;
+  const {
+    quotation,
+    locale,
+    handleViewQuotation,
+    showSellerQuotes,
+    buyer,
+    translate
+  } = props;
   let productImages;
   if (!_.isEmpty(quotation)) {
     const { rfqPictures } = quotation;
@@ -168,6 +183,7 @@ const QuotationItem = props => {
         <BuyerQuotationStatus
           status={quotation.status}
           translate={translate}
+          showSellerQuotes={showSellerQuotes}
           handleViewQuotation={props.handleViewQuotation}
         />
       )}

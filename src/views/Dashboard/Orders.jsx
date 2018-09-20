@@ -140,6 +140,7 @@ class Orders extends React.Component {
                   orders={order}
                   loading={loading}
                   locale={locale}
+                  translate={translate}
                   showModal={this.state.showModal}
                   showOrderStatusModal={this.showOrderStatusModal}
                   handleChangeOrderStatus={this.handleChangeOrderStatus}

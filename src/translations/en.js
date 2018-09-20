@@ -158,6 +158,8 @@ export const en = {
       a_depth: "Depth",
       a_grams: "Grams",
       a_inches: "Inches",
+      a_category_commission: "Category Commission :",
+      a_sub_category_commission: "Sub Category Commission :",
       // Register
       r_complete: "Complete",
       r_verification: "Verification",

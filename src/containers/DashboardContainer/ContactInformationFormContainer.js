@@ -7,6 +7,9 @@ import ContactInformationForm from "../../views/Dashboard/form/ContactInformatio
 const mapStateToProps = state => {
   const initialValues = {
     email: state.auth.user.email,
+    firstName: state.auth.user.firstName,
+    lastName: state.auth.user.lastName,
+    username: state.auth.user.username,
     fax: state.auth.user.fax,
     id: state.auth.user.id,
     phone: state.auth.user.phone,

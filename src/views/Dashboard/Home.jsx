@@ -68,21 +68,23 @@ const Home = props => {
                       </ul>
                       <ul>
                         <li>
-                          <a href="#profile">
+                          <Link to="/dashboard">
                             {translate("d_received", { number: 0 })} |{" "}
                             {translate("d_sent", { number: 0 })}
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#profile">{translate("d_accumulated")}</a>
+                          <Link to="/dashboard">
+                            {translate("d_accumulated")}
+                          </Link>
                         </li>
                       </ul>
                       <ul>
                         <li>
-                          <a href="#profile">
+                          <Link to="/dashboard">
                             {translate("d_points", { number: "0" })} |{" "}
                             {translate("d_time", { number: "0" })}
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>

@@ -33,7 +33,9 @@ const renderInputs = ({ fields, meta: { error } }) => (
       <div className="mutiple-form-group">
         <FormGroup className="custom-form-group ">
           <Col componentClass={ControlLabel} sm={2}>
-            Product Details
+            Quick Details
+            <br />
+            <small>[ex- Color: Black]</small>
           </Col>
           <Field name="label" type="text" component={renderField} />
           <Field name="value" size={3} type="text" component={renderField} />

@@ -23,8 +23,6 @@ const ProductItem = props => {
     handleCheckoutButton,
     buttons
   } = props;
-  console.log(product);
-  
   let productImages;
   let productUrl;
   if (!_.isEmpty(product)) {
@@ -70,7 +68,9 @@ const ProductItem = props => {
             <span className="text-warning">Price -</span>
             <span>
               {getCurrency(product.currency)}
-              {product ? product.productPrice.toFixed(2) : "0.00"}/-
+              {_.has(product, "productPrice")
+                ? product.productPrice.toFixed(2)
+                : "0.00"}/-
             </span>
             {/* <span>₹2,997 40% Off 1 Offer Available</span> */}
           </p>

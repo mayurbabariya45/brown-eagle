@@ -469,6 +469,7 @@
         .go-back-button {
             .btn.btn-fill {
                 color: #000;
+                margin-top: 10px;
                 &:hover,
                 &:focus,
                 &:active {
@@ -591,6 +592,14 @@
                         text-transform: uppercase;
                         margin-bottom: 5px;
                         cursor: default;
+                    }
+                    .view-quotation{
+                        padding: 2px 30px;
+                    }
+                    .view-quotes{
+                        padding: 4px 8px;
+                        margin-top: 10px;
+                        font-size: 13px;
                     }
                     .closed,
                     .rejected {
@@ -734,6 +743,29 @@
         }
         .paginations {
             margin: 15px 0;
+        }
+    }
+    .quotation-quotes{
+        .quotation-item {
+            .quotation-item-details{
+                width: 100%;
+                .quotation-product-title{
+                    float: left;
+                    width: 100%;
+                    h3{
+                        float: left;
+                        margin: 15px 0 0;
+                    }
+                    .btn-warning.btn-fill{
+                        float: right;
+                    }
+                }
+                .quotation-item-detail{
+                    width: 100%;
+                    padding-left: 0;
+                    padding-top: 5px;
+                }
+            }
         }
     }
 }

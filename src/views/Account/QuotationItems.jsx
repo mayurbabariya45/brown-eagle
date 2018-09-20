@@ -24,6 +24,7 @@ const QuotationItems = props => (
                     e.preventDefault();
                     props.handleViewQuotation(data);
                   }}
+                  showSellerQuotes={() => props.showSellerQuotes(data.id)}
                 />
               ))}
             </Col>

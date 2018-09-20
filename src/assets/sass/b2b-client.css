@@ -5646,7 +5646,8 @@ section {
   padding: 0;
   margin: 0 auto; }
   .account-quotation .quotations .go-back-button .btn.btn-fill {
-    color: #000; }
+    color: #000;
+    margin-top: 10px; }
     .account-quotation .quotations .go-back-button .btn.btn-fill:hover, .account-quotation .quotations .go-back-button .btn.btn-fill:focus, .account-quotation .quotations .go-back-button .btn.btn-fill:active {
       text-decoration: none; }
     .account-quotation .quotations .go-back-button .btn.btn-fill i {
@@ -5747,6 +5748,12 @@ section {
           text-transform: uppercase;
           margin-bottom: 5px;
           cursor: default; }
+        .account-quotation .quotations .quotation-item .quotation-container-button .quotation-button .view-quotation {
+          padding: 2px 30px; }
+        .account-quotation .quotations .quotation-item .quotation-container-button .quotation-button .view-quotes {
+          padding: 4px 8px;
+          margin-top: 10px;
+          font-size: 13px; }
         .account-quotation .quotations .quotation-item .quotation-container-button .quotation-button .closed,
         .account-quotation .quotations .quotation-item .quotation-container-button .quotation-button .rejected {
           background-color: #d02023;
@@ -5848,6 +5855,21 @@ section {
             height: 100%; }
   .account-quotation .quotations .paginations {
     margin: 15px 0; }
+
+.account-quotation .quotation-quotes .quotation-item .quotation-item-details {
+  width: 100%; }
+  .account-quotation .quotation-quotes .quotation-item .quotation-item-details .quotation-product-title {
+    float: left;
+    width: 100%; }
+    .account-quotation .quotation-quotes .quotation-item .quotation-item-details .quotation-product-title h3 {
+      float: left;
+      margin: 15px 0 0; }
+    .account-quotation .quotation-quotes .quotation-item .quotation-item-details .quotation-product-title .btn-warning.btn-fill {
+      float: right; }
+  .account-quotation .quotation-quotes .quotation-item .quotation-item-details .quotation-item-detail {
+    width: 100%;
+    padding-left: 0;
+    padding-top: 5px; }
 
 .request_quotation .request_quotation_form .form-header .title h4 {
   margin: 10px auto;

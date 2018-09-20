@@ -78,8 +78,15 @@ const OrderItem = props => {
             <p>
               {!_.isEmpty(props.buyer.companyName) &&
                 `Buyer: ${props.buyer.companyName}`}{" "}
-              {props.buyer.isProfileApproved === "verified" && (
-                <i className="icon-static icon-checked " />
+              {props.buyer.isProfileApproved === "pending" ? (
+                <span className="profile-pending label label-warning">
+                  <i className="fa fa-clock-o" /> {props.translate("d_verify")}
+                </span>
+              ) : (
+                <div>
+                  <i className="icon-static icon-checked" />{" "}
+                  <span>{props.translate("d_approved")}</span>
+                </div>
               )}
             </p>
             <p>
@@ -116,6 +123,7 @@ const OrderItems = props => (
               <OrderItem
                 key={order.id}
                 {...order}
+                translate={props.translate}
                 locale={props.locale}
                 showOrderStatusModal={() =>
                   props.showOrderStatusModal(order.id)

@@ -26,6 +26,11 @@ const initialState = {
     page: 0,
     rfqs: []
   },
+  quotationQuotes: {
+    count: 0,
+    page: 0,
+    quotation: []
+  },
   quotationImages: []
 };
 
@@ -249,6 +254,22 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: true
+      };
+    case a.GET_QUOTATION_QUOTES_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.GET_QUOTATION_QUOTES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        quotationQuotes: action.payload
+      };
+    case a.GET_QUOTATION_QUOTES_FAILURE:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;

@@ -35,7 +35,7 @@ class RequestQuotation extends Component {
     });
   }
   hanldeSubmitForm(values) {
-    const { createQuotation, locale, auth } = this.props;
+    const { createQuotation, locale, auth, showNotification } = this.props;
     const { user } = auth;
     if (_.isEmpty(user)) return false;
     const buyer = user.id;
@@ -45,7 +45,24 @@ class RequestQuotation extends Component {
       {},
       { ...values, buyer, category, subCategory }
     );
-    createQuotation(objectValues, locale);
+    createQuotation(objectValues, locale).then(payload => {
+      if (payload.type === "ADD_QUOTATION_FAILURE") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>{payload.payload.response.message}</div>,
+          true
+        );
+        return false;
+      } else if (payload.type === "ADD_QUOTATION_SUCCESS") {
+        showNotification(
+          <span data-notify="icon" className="pe-7s-check" />,
+          <div>Request for Quotation has been created successfully.</div>,
+          false
+        );
+        return false;
+      }
+      return false;
+    });
     return true;
   }
   render() {

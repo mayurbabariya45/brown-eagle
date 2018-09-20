@@ -18,6 +18,7 @@ const status = [
   { status: "pending", name: "Waiting for order confirmation" },
   { status: "payment_pending", name: "Waiting for payment" },
   { status: "confirmed", name: "Confirmed orders" },
+  { status: "shipping", name: "Shipping orders" },
   { status: "shipped", name: "Shipped orders" },
   { status: "delivered", name: "Delivered orders" },
   { status: "rejected", name: "Rejected orders" },
@@ -40,7 +41,7 @@ class OrderStatus extends React.Component {
     const { selectedFilter } = this.props;
     const selectedStatus = <span>{selectedFilter.name}</span>;
     const renderStatus = status.map(data => (
-      <MenuItem key={data} eventKey={data}>
+      <MenuItem key={data.name} eventKey={data}>
         {data.name}
       </MenuItem>
     ));

@@ -12,6 +12,9 @@ const mapStateToProps = state => {
     phone: state.auth.user.phone,
     telephone: state.auth.user.telephone,
     alternateEmail: state.auth.user.alternateEmail,
+    firstName: state.auth.user.firstName,
+    lastName: state.auth.user.lastName,
+    username: state.auth.user.username,
     facebook: _.find(state.auth.user.socialLinks, ["platform", "facebook"])
       ? _.find(state.auth.user.socialLinks, ["platform", "facebook"]).link
       : "http://www.facebook.com/",

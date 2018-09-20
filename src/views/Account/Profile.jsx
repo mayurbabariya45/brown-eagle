@@ -54,7 +54,7 @@ const Profile = props => {
                   header={
                     <div className="header card-header-action">
                       <h4 className="title">
-                        {user && `${user.firstName} ${user.lastName}`}
+                        {user && `${user.firstName} ${user.lastName}`}{" "}
                       </h4>
                       <div className="actions-label">
                         <div className="action">IN</div>
@@ -96,6 +96,40 @@ const Profile = props => {
                         <FormGroup>
                           <ControlLabel>Joined BrownEgle.com in</ControlLabel>
                           <FormControl.Static>2018</FormControl.Static>
+                        </FormGroup>
+                      </Col>
+                      <Col md={6} xs={12}>
+                        <FormGroup>
+                          <ControlLabel>Profile Verification:</ControlLabel>
+                          <FormControl.Static>
+                            {user.isProfileVerified === "pending" ? (
+                              <span className="label label-warning">
+                                {translate("status_pending")}
+                              </span>
+                            ) : (
+                              <span className="label label-info">
+                                {user.isProfileVerified}
+                              </span>
+                            )}
+                          </FormControl.Static>
+                        </FormGroup>
+                      </Col>
+                      <Col md={6} xs={12}>
+                        <FormGroup>
+                          <ControlLabel>Profile Approval:</ControlLabel>
+                          <FormControl.Static>
+                            {user.isProfileApproved === "pending" ? (
+                              <span className="profile-pending">
+                                <i className="fa fa-clock-o" />{" "}
+                                {translate("d_verify")}
+                              </span>
+                            ) : (
+                              <div>
+                                <i className="icon-static icon-checked" />{" "}
+                                <span>{translate("d_approved")}</span>
+                              </div>
+                            )}
+                          </FormControl.Static>
                         </FormGroup>
                       </Col>
                     </Row>

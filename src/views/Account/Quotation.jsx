@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import QuotationItems from "./QuotationItems";
 import ViewQuotation from "./ViewQuotation";
+import SellerQuotes from "./SellerQuotes";
 
 class Quotation extends React.Component {
   constructor(props) {
@@ -11,10 +12,14 @@ class Quotation extends React.Component {
     this.state = {
       currentPage: 1,
       quotation: {},
-      viewQuotation: false
+      viewQuotation: false,
+      showQuotes: false,
+      quotationId: null
     };
     this.handleViewQuotation = this.handleViewQuotation.bind(this);
     this.clearViewQuotationState = this.clearViewQuotationState.bind(this);
+    this.showSellerQuotes = this.showSellerQuotes.bind(this);
+    this.hideSellerQuotes = this.hideSellerQuotes.bind(this);
   }
   componentWillMount() {
     const { getBuyerQuotations, buyerId } = this.props;
@@ -35,8 +40,14 @@ class Quotation extends React.Component {
   clearViewQuotationState() {
     this.setState({ quotation: {}, viewQuotation: false });
   }
+  showSellerQuotes(quotationId) {
+    this.setState({ showQuotes: true, quotationId });
+  }
+  hideSellerQuotes() {
+    this.setState({ showQuotes: false, quotationId: null });
+  }
   render() {
-    const { translate, quotation, locale } = this.props;
+    const { translate, quotation, locale, getQuotationQuotes } = this.props;
     const { currentPage } = this.state;
     const { count, rfqs } = quotation.buyerQuotation;
     const start = (currentPage - 1) * 20 + 1 || 0;
@@ -63,39 +74,53 @@ class Quotation extends React.Component {
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col md={12}>
-            <div className="result-showing">
-              <p>
-                Showing {start} – {end} Quotation of {count} Quotations
-              </p>
-            </div>
-          </Col>
-        </Row>
-        {this.state.viewQuotation && (
-          <Col md={12} sm={12} xs={12}>
-            <div className="quotations">
-              <ViewQuotation
-                translate={translate}
-                quotation={this.state.quotation}
-                locale={locale}
-                handleBackButton={this.clearViewQuotationState}
-                opneSubmitQuoteModal={() =>
-                  this.handleSubmitQuoteModal(this.state.quotation.id)
-                }
-              />
-            </div>
-          </Col>
+        {!this.state.showQuotes && (
+          <Row>
+            <Col md={12}>
+              <div className="result-showing">
+                <p>
+                  Showing {start} – {end} Quotation of {count} Quotations
+                </p>
+              </div>
+            </Col>
+          </Row>
         )}
-        {!this.state.viewQuotation && (
-          <QuotationItems
+        {this.state.viewQuotation &&
+          !this.state.showQuotes && (
+            <Col md={12} sm={12} xs={12}>
+              <div className="quotations">
+                <ViewQuotation
+                  translate={translate}
+                  quotation={this.state.quotation}
+                  locale={locale}
+                  handleBackButton={this.clearViewQuotationState}
+                />
+              </div>
+            </Col>
+          )}
+        {!this.state.viewQuotation &&
+          !this.state.showQuotes && (
+            <QuotationItems
+              translate={translate}
+              quotations={rfqs}
+              loading={quotation.loading}
+              locale={locale}
+              totalItems={count}
+              handleViewQuotation={this.handleViewQuotation}
+              showSellerQuotes={this.showSellerQuotes}
+              onPageChanged={this.onPageChanged}
+            />
+          )}
+        {this.state.showQuotes && (
+          <SellerQuotes
             translate={translate}
-            quotations={rfqs}
-            loading={quotation.loading}
             locale={locale}
-            totalItems={count}
-            handleViewQuotation={this.handleViewQuotation}
-            onPageChanged={this.onPageChanged}
+            loading={quotation.loading}
+            quotationQuotes={quotation.quotationQuotes}
+            quotationId={this.state.quotationId}
+            showSellerQuotes={this.showSellerQuotes}
+            getQuotationQuotes={getQuotationQuotes}
+            handleBackButton={this.hideSellerQuotes}
           />
         )}
       </div>

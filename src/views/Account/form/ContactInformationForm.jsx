@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { Col, Row, Form } from "react-bootstrap";
 import { format, length } from "redux-form-validators";
 import BlockUi from "react-block-ui";
-import "react-block-ui/style.css";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
 import {
+  required,
   normalizePhone,
   phoneNumber,
   email
@@ -60,6 +60,7 @@ class ContactInformationForm extends Component {
                     type: "email",
                     bsClass: "form-control form-control-simple",
                     name: "email",
+                    readOnly: "readOnly",
                     validate: [email]
                   },
                   {
@@ -68,6 +69,37 @@ class ContactInformationForm extends Component {
                     bsClass: "form-control form-control-simple",
                     name: "fax",
                     validate: [length({ min: 6, allowBlank: true })]
+                  }
+                ]}
+              />
+              <FormInputs
+                ncols={["col-md-12"]}
+                proprieties={[
+                  {
+                    label: translate("r_username"),
+                    type: "text",
+                    bsClass: "form-control form-control-simple",
+                    name: "username",
+                    validate: [required]
+                  }
+                ]}
+              />
+              <FormInputs
+                ncols={["col-md-6", "col-md-6"]}
+                proprieties={[
+                  {
+                    label: translate("r_firstname"),
+                    type: "text",
+                    bsClass: "form-control form-control-simple",
+                    name: "firstName",
+                    validate: [required]
+                  },
+                  {
+                    label: translate("r_lastname"),
+                    type: "text",
+                    bsClass: "form-control form-control-simple",
+                    name: "lastName",
+                    validate: [required]
                   }
                 ]}
               />

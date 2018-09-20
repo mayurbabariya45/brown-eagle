@@ -27,7 +27,24 @@ export const getBuyerQuotations = (buyerId, page) => ({
     ]
   }
 });
-
+export const getQuotationQuotes = (quotationId, status = "all", page = 1) => {
+  let endPoint = `rfq/${quotationId}/quote?page=${page}&perPage=20`;
+  if (status !== "all") {
+    endPoint += `&status=${status}`;
+  }
+  return {
+    [RSAA]: {
+      endpoint: endPoint,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      types: [
+        a.GET_QUOTATION_QUOTES_REQUEST,
+        a.GET_QUOTATION_QUOTES_SUCCESS,
+        a.GET_QUOTATION_QUOTES_FAILURE
+      ]
+    }
+  };
+};
 export const getSellerQuotations = (sellerId, status = "all", page = 1) => {
   let endPoint = `rfq/suggestions/seller/${sellerId}?page=${page}`;
   if (status !== "all") {
@@ -46,6 +63,7 @@ export const getSellerQuotations = (sellerId, status = "all", page = 1) => {
     }
   };
 };
+
 export const getSellerQuotes = (sellerId, page = 1) => ({
   [RSAA]: {
     endpoint: `rfq/quote/seller/${sellerId}?page=${page}`,
