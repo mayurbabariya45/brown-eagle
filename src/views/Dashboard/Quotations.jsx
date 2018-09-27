@@ -74,6 +74,7 @@ class Quotations extends React.Component {
       translate,
       locale,
       activePlan,
+      sellerProducts,
       onSelectCategory,
       searchQuotation,
       quotation,
@@ -178,6 +179,7 @@ class Quotations extends React.Component {
           translate={translate}
           locale={locale}
           seller={seller}
+          sellerProducts={sellerProducts}
           quotationId={this.state.quotationId}
           showNotification={showNotification}
           showModal={this.state.showModal}

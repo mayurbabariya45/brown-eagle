@@ -372,6 +372,7 @@ class Dashboard extends React.Component {
                           seller={user && user.id}
                           activePlan={activePlan}
                           translate={translate}
+                          sellerProducts={products}
                           showNotification={showNotification}
                           getSellerActivePlans={getSellerActivePlans}
                           locale={locale}

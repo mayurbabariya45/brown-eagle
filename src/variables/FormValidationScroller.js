@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { scroller } from "react-scroll";
 
 function flatten(arr) {
@@ -36,6 +37,7 @@ function getErrorFieldNames(obj, name = "") {
 }
 
 export default function formValidationScroller(errors) {
+  if (_.isEmpty(errors)) return false;
   const errorFields = getErrorFieldNames(errors);
   // Using breakable for loop
   for (let i = 0; i < errorFields.length; i++) {
@@ -46,4 +48,5 @@ export default function formValidationScroller(errors) {
       break;
     }
   }
+  return false;
 }

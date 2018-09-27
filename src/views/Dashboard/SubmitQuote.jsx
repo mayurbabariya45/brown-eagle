@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import { Field } from "redux-form";
 import { Link } from "react-router-dom";
 import { Modal, Form, Row, Col } from "react-bootstrap";
 import { numericality } from "redux-form-validators";
@@ -8,6 +9,7 @@ import BlockUi from "react-block-ui";
 import { required } from "../../formValidationRules/FormValidationRules";
 import { FormInputs } from "../../components/FormInputs/FormInputs";
 import Button from "../../elements/CustomButton/CustomButton";
+import CustomReduxSelect from "../../elements/CustomReduxSelect/CustomReduxSelect";
 
 class SubmitQuote extends React.Component {
   constructor(props) {
@@ -25,14 +27,14 @@ class SubmitQuote extends React.Component {
       onHide,
       locale,
       seller,
-      quotationId
+      quotationId,
+      selectedFilter
     } = this.props;
     if (!_.isEmpty(values)) {
       submitQuote(
         {
           ...values,
           seller,
-          product: "5b43b42e2e0870239a0a12ea",
           id: quotationId
         },
         locale
@@ -40,7 +42,7 @@ class SubmitQuote extends React.Component {
         if (payload.type === "SUBMIT_QUOTE_SUCCESS") {
           onHide();
           getSellerActivePlans(seller);
-          getSellerQuotations(seller, currentPage);
+          getSellerQuotations(seller, _.lowerCase(selectedFilter), currentPage);
           showNotification(
             <span data-notify="icon" className="pe-7s-check" />,
             <div>Quote has been sent successfully.</div>,
@@ -61,10 +63,17 @@ class SubmitQuote extends React.Component {
       translate,
       showModal,
       onHide,
+      locale,
       quoteRemianing,
+      sellerProducts,
       handleSubmit,
       submitQuoteLoading
     } = this.props;
+    const { products } = sellerProducts;
+    const productOptions = _.map(products, product => ({
+      label: product.nameTranslations[locale],
+      value: product.id
+    }));
     return (
       <div className="submit-quote">
         <Modal
@@ -135,6 +144,12 @@ class SubmitQuote extends React.Component {
                         }
                       ]}
                     />
+                    <Field
+                      name="product"
+                      label={translate("quote_form_quote_product")}
+                      options={productOptions}
+                      component={CustomReduxSelect}
+                    />
                     <FormInputs
                       ncols={["col-md-12"]}
                       proprieties={[
@@ -167,7 +182,8 @@ class SubmitQuote extends React.Component {
                       </Button>
                     )}
                     {quoteRemianing < 1 && (
-                      <Link to="/plans"
+                      <Link
+                        to="/plans"
                         className="text-capitalize btn btn-warning btn-fill btn-radius"
                       >
                         Upgrade Plan

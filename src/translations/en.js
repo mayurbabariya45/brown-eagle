@@ -377,6 +377,10 @@ export const en = {
       quote_form_quote_quantity: "Quote Minimum Quantity",
       quote_form_quote_delivery_time: "Estimated Delivery Time",
       quote_form_description: "Cover Letter",
+      quote_form_quote_product: "Select Your Product",
+      quote_form_product_price: "Price",
+      quote_form_product_quantity: "Product Minimum Quantity",
+      quote_form_product_availability: "Product Availability",
       // Top Supllier
       top_selected_suppliers: "TOP SELECTED SUPPLIERS",
       // Recent View

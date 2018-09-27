@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getBuyerQuotations: (buyerId, page) =>
     dispatch(a.getBuyerQuotations(buyerId, page)),
-    getQuotationQuotes: (quotationId, status, page) =>
+  getQuotationQuotes: (quotationId, status, page) =>
     dispatch(a.getQuotationQuotes(quotationId, status, page))
 });
 
