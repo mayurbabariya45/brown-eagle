@@ -320,6 +320,7 @@ export default (state = initialState, action) => {
         isLoading: false,
         reviews: {
           ...action.payload,
+          currentPage: action.meta,
           productReview: state.reviews.productReview.concat(
             action.payload.productReview
           )
@@ -329,6 +330,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false
+      };
+    case a.FLUSH_PRODUCT_REVIEWS:
+      return {
+        ...state,
+        reviews: {
+          count: 0,
+          pages: 1,
+          currentPage: 1,
+          productReview: []
+        }
       };
     // SELECT_FILTER
     case a.SELECT_SORT_FILTER:

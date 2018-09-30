@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   selectFilterProduct: item => dispatch(a.selectFilterProduct(item)),
+  removeProduct: item => dispatch(a.removeProduct(item)),
   setFilterProduct: item => dispatch(a.setFilterProduct(item)),
   resetFilterProduct: item => dispatch(a.resetFilterProduct(item))
 });

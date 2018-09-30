@@ -9,6 +9,7 @@ const CompareItems = props => (
         key={product.id}
         {...product}
         handleSelectProduct={() => props.handleSelectProduct(product.id)}
+        handleRemoveProduct={() => props.handleRemoveProduct(product.id)}
       />
     ))}
   </ul>

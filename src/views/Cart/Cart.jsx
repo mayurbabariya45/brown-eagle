@@ -231,7 +231,7 @@ class Cart extends Component {
               </div>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col md={9}>
               <Row>
                 <Col md={12}>
@@ -293,7 +293,7 @@ class Cart extends Component {
                 </div>
               </div>
             </Col>
-          </Row>
+          </Row> */}
         </Grid>
       </section>
     );

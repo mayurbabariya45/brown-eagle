@@ -506,6 +506,7 @@ export const en = {
       notification_actived_plan: "Your plan has been upgraded successfully.",
       notification_try_again: "Please try again later",
       notification_resend_email: "Email has been resend successfully.",
+
       // profile
       status_verified: "verified",
       status_pending: "pending",
@@ -524,6 +525,22 @@ export const en = {
       add_new_reference_phone: "Phone",
       add_new_reference_email: "Email",
       add_new_reference_website: "Website",
+
+      // new keywords
+      p_filters: "Filters",
+      p_filter_category: "CATEGORIES",
+      p_filter_price: "price",
+      p_filter_rating: "Rating",
+      p_showing_products_result:
+        "(Showing {start} – {end} products of {count} products)",
+      p_short_by: "Sort By",
+      p_min_order: "Min. Order:",
+      p_leave_message: "Leave Messages",
+      p_add_to_compare: "Add to Compare",
+      p_add_to_fav: "Add to Favorites",
+      p_share: "Share",
+      p_product_desc: "Product Description",
+      p_product_rating: "Product Ratings",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

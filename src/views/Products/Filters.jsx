@@ -27,6 +27,7 @@ class Filters extends Component {
       categories,
       locale,
       loadProduct,
+      translate,
       handleCategoryFilter,
       handleSubCategoryFilter
     } = this.props;
@@ -34,7 +35,7 @@ class Filters extends Component {
       <div>
         <div className="section-header filter-header">
           <div className="title">
-            <h5>Filters</h5>
+            <h5>{translate("p_filters")}</h5>
           </div>
           {/* <div className="filter-clear">
             <span>Clear all</span>
@@ -42,7 +43,7 @@ class Filters extends Component {
         </div>
         <div className="section-header filter-categories">
           <div className="title">
-            <h6>CATEGORIES</h6>
+            <h6>{translate("p_filter_category")}</h6>
           </div>
           <div className="filter-category">
             <BlockUi tag="div" blocking={loadProduct}>
@@ -58,7 +59,7 @@ class Filters extends Component {
                           onClick={handleCategoryFilter}
                           value={category.id}
                         />
-                        {!_.isEmpty(category.subCategoryList) && (
+                        {/* {!_.isEmpty(category.subCategoryList) && (
                           <ul>
                             {_.map(category.subCategoryList, subCategory => (
                               <li key={subCategory._id}>
@@ -72,7 +73,7 @@ class Filters extends Component {
                               </li>
                             ))}
                           </ul>
-                        )}
+                        )} */}
                       </div>
                     </li>
                   ))}
@@ -83,7 +84,7 @@ class Filters extends Component {
         </div>
         <div className="section-header filter-products-price">
           <div className="title">
-            <h6>price</h6>
+            <h6>{translate("p_filter_price")}</h6>
           </div>
           {/* <div className="filter-clear">
             <span>Clear</span>
@@ -103,7 +104,7 @@ class Filters extends Component {
         </div>
         <div className="section-header filter-products-rating">
           <div className="title">
-            <h6>Rating</h6>
+            <h6>{translate("p_filter_rating")}</h6>
           </div>
           {/* <div className="filter-clear">
             <span>Clear</span>

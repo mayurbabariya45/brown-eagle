@@ -25,10 +25,10 @@ const Footer = props => {
                     <a href="/#/advantage">{translate("advantage")}</a>
                   </li>
                   <li>
-                    <a href="/#/privacy-policy">{translate("contact_us")}</a>
+                    <a href="/#/contact-us">{translate("contact_us")}</a>
                   </li>
                   <li>
-                    <a href="/#/term">{translate("sitemap")}</a>
+                    <a href="/#/sitemap">{translate("sitemap")}</a>
                   </li>
                 </ul>
               </nav>

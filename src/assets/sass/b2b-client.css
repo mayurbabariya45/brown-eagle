@@ -4018,13 +4018,17 @@ section {
 
 .product-info-main .product-info-price .price-box.price-final_price {
   padding-bottom: 0px;
-  padding-top: 5px; }
+  padding-top: 5px;
+  float: left;
+  width: 100%; }
   .product-info-main .product-info-price .price-box.price-final_price .price {
     font-size: 16px;
     color: #878787;
     font-weight: 700;
     font-family: 'DIN-Regular', sans-serif;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    float: left;
+    margin-right: 10px; }
     .product-info-main .product-info-price .price-box.price-final_price .price span {
       color: #7d1516; }
 
@@ -6773,6 +6777,16 @@ Main Components
   height: 16px;
   width: 16px;
   margin: 0 auto 1em; }
+
+.cd-products-table .top-info .action-delete {
+  position: relative;
+  float: right;
+  height: 25px;
+  width: 25px;
+  margin: 0 auto 1em;
+  color: #ff4a55; }
+  .cd-products-table .top-info .action-delete i {
+    font-size: 25px; }
 
 .cd-products-table .top-info .check::after,
 .cd-products-table .top-info .check::before {

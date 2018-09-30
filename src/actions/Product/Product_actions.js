@@ -133,15 +133,21 @@ export const getProduct = (productId, locale, authId) => dispatch => {
     }
   });
 };
+export const flushReviews = () => ({
+  type: a.FLUSH_PRODUCT_REVIEWS
+});
 export const getProductReview = (productId, locale, page) => dispatch => {
   dispatch({
     [RSAA]: {
-      endpoint: `product/${productId}/review?status=enabled&lang=${locale}&page=${page}&perPage=20`,
+      endpoint: `product/${productId}/review?status=enabled&lang=${locale}&page=${page}&perPage=10`,
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [
         a.GET_PRODUCT_REVIEW_REQUEST,
-        a.GET_PRODUCT_REVIEW_SUCCESS,
+        {
+          type: a.GET_PRODUCT_REVIEW_SUCCESS,
+          meta: page
+        },
         a.GET_PRODUCT_REVIEW_FAILURE
       ]
     }

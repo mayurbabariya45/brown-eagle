@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { ActionTypes as a } from "../../constants/Account/Account_action_type";
 
 const INITIAL_STATE = {
@@ -6,7 +7,13 @@ const INITIAL_STATE = {
   success: false,
   isLoading: false,
   isResendEmail: false,
-  wishList: []
+  wishList: [],
+  location: "",
+  activeMap: "registeredAddress",
+  coordinates: {
+    type: "Point",
+    coordinates: []
+  }
 };
 
 /**
@@ -88,6 +95,34 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: false
+      };
+    case a.SHOW_BUYER_MAP:
+      return {
+        ...state,
+        activeMap: action.types
+      };
+    case a.ADD_BUYER_LOCATION:
+      return {
+        ...state,
+        coordinates: {
+          ...state.coordinates,
+          coordinates: action.coordinates
+        }
+      };
+    case a.GET_BUYER_LOCATION_REQUEST:
+      return {
+        ...state
+      };
+    case a.GET_BUYER_LOCATION_SUCCESS:
+      return {
+        ...state,
+        location: !_.isEmpty(action.payload.results)
+          ? action.payload.results[0].formatted_address
+          : {}
+      };
+    case a.GET_BUYER_LOCATION_FAILURE:
+      return {
+        ...state
       };
     default:
       return state;

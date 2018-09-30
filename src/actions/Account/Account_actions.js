@@ -54,3 +54,27 @@ export const resendEmail = (email, locale) => dispatch =>
       ]
     }
   });
+export const getLocation = (lat, lng) => ({
+  [RSAA]: {
+    endpoint: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBWPufkpoBVSbyfwu-xVuXPea5YZQJj3OY`,
+    method: "GET",
+    types: [
+      a.GET_BUYER_LOCATION_REQUEST,
+      a.GET_BUYER_LOCATION_SUCCESS,
+      a.GET_BUYER_LOCATION_FAILURE
+    ]
+  }
+});
+
+export const handleInputMap = types => dispatch => {
+  dispatch({
+    type: a.SHOW_BUYER_MAP,
+    types
+  });
+};
+export const location = coordinates => dispatch => {
+  dispatch({
+    type: a.ADD_BUYER_LOCATION,
+    coordinates
+  });
+};

@@ -19,7 +19,9 @@ const TradeAssurance = props => (
                 `${props.seller.firstName} ${props.seller.lastName}`
               )}
           </h3> */}
-          <p className="trade-txt">India | Trading Company</p>
+          <p className="trade-txt">
+            {props.seller && props.seller.companyName}
+          </p>
         </div>
         <div className="trade-row">
           <p>
@@ -45,7 +47,7 @@ const TradeAssurance = props => (
           </p>
           <p>
             {props.translate("product_response_rate")}{" "}
-            <i className="fa fa-share" /> {" "}<b> 0.4% </b>
+            <i className="fa fa-share" /> <b> 0.4% </b>
           </p>
         </div>
       </div>

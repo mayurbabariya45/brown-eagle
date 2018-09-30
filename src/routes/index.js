@@ -41,6 +41,8 @@ import ThirdServices from "../views/static/ThirdServices";
 import LogisticServices from "../views/static/LogisticServices";
 import SecurePayment from "../views/static/SecurePayment";
 import InspectionService from "../views/static/InspectionService";
+import Sitemap from "../views/static/Sitemap";
+import ContactUs from "../views/static/ContactUs";
 
 const appRoutes = [
   { path: "/", exact: true, name: "Home", component: HomeContainer },
@@ -283,6 +285,16 @@ const appRoutes = [
     path: "/inspection_service",
     name: "inspection_service",
     component: InspectionService
+  },
+  {
+    path: "/contact-us",
+    name: "ContactUs",
+    component: ContactUs
+  },
+  {
+    path: "/sitemap",
+    name: "SiteMap",
+    component: Sitemap
   }
 ];
 

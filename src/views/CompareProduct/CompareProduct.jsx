@@ -20,6 +20,7 @@ class CompareProduct extends React.Component {
     this.handleResetFilter = this.handleResetFilter.bind(this);
     this.handleSelectProduct = this.handleSelectProduct.bind(this);
     this.updateTopScrolling = this.updateTopScrolling.bind(this);
+    this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
   }
   componentDidMount() {
     // window.addEventListener("scroll", this.updateTopScrolling, false);
@@ -78,6 +79,10 @@ class CompareProduct extends React.Component {
     if (this.state.filtered) return false;
     selectFilterProduct(item);
     return false;
+  }
+  handleRemoveProduct(productId){
+    const { removeProduct } = this.props;
+    removeProduct(productId);
   }
   render() {
     const { products, translate } = this.props;
@@ -149,6 +154,7 @@ class CompareProduct extends React.Component {
                     <CompareItems
                       products={products}
                       handleSelectProduct={this.handleSelectProduct}
+                      handleRemoveProduct={this.handleRemoveProduct}
                       width={this.state.width}
                     />
                   </div>

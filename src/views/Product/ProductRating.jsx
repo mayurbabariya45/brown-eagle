@@ -21,13 +21,10 @@ const ProductRating = props => (
     <div className="product-rating">
       <div className="count-rating">
         <div className="rating-number">
-          <h1>{props.totalRatingsCount}</h1>
+          <h1>{props.rating && props.rating.toFixed(1) || 0}</h1>
         </div>
         <div className="product-rating-stars">
-          <div
-            className="rating-result"
-            title={`${props.rating / 5 * 100}%`}
-          >
+          <div className="rating-result" title={`${props.rating / 5 * 100}%`}>
             <span
               style={{
                 width: `${props.rating / 5 * 100}%`
@@ -37,15 +34,15 @@ const ProductRating = props => (
             </span>
           </div>
           <div className="review-count">
-            {props.totalRatingsCount} Product Ratings
+            {props.totalRatingsCount} {props.translate("p_product_rating")}
           </div>
         </div>
       </div>
       <div className="rating-show">
         <ul>
-          {_.map(props.ratingAggregate, (value) => {
+          {_.map(props.ratingAggregate, value => {
             const { rating, count } = value;
-            return(
+            return (
               <li key={rating}>
                 <div className="rate-list rate-count">
                   <span className="number">{rating}</span>
@@ -54,9 +51,12 @@ const ProductRating = props => (
                 <div className="rate-list rating-progress">
                   <div className="rate-progress">
                     <span
-                      style={{ width: `${count / props.totalRatingsCount * 100}%` }}
-                      className={className("rate-progress-bar",{
-                        "progress-success": (rating === 5 || rating === 4 || rating === 3),
+                      style={{
+                        width: `${count / props.totalRatingsCount * 100}%`
+                      }}
+                      className={className("rate-progress-bar", {
+                        "progress-success":
+                          rating === 5 || rating === 4 || rating === 3,
                         "progress-warning": rating === 2,
                         "progress-danger": rating === 1
                       })}
@@ -66,7 +66,9 @@ const ProductRating = props => (
                 <div className="rate-list rating-counts">
                   <div className="numbers"> {count}</div>
                 </div>
-              </li>)})}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

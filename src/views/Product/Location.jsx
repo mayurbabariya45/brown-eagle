@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
@@ -11,10 +12,13 @@ const MapMarker = props => {
   const latLng = Object.assign(
     {},
     {
-      lat: (location && parseFloat(location.lat)) || -34.397,
-      lng: (location && parseFloat(location.lng)) || 150.644
+      lat: location && parseFloat(location.lat),
+      lng: location && parseFloat(location.lng)
     }
   );
+  if (_.isEmpty(location)) {
+    return null;
+  }
   return (
     <div className="map-container">
       <MapWithMarker

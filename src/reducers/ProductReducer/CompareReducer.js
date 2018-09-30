@@ -22,6 +22,14 @@ export default (state = initialState, action) => {
       return {
         ...state
       };
+    case a.REMOVE_COMPARE_PRODUCT:
+      return {
+        ...state,
+        products: _.filter(
+          state.products,
+          product => product.id !== action.item
+        )
+      };
     case a.SELECT_FILTER_PRODUCT:
       return {
         ...state,

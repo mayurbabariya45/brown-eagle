@@ -393,6 +393,17 @@ Main Components
     width: 16px;
     margin: 0 auto 1em;
 }
+.cd-products-table .top-info .action-delete {
+    position: relative;
+    float: right;
+    height: 25px;
+    width: 25px;
+    margin: 0 auto 1em;
+    color: #ff4a55;
+    i {
+        font-size: 25px;
+    }
+}
 
 .cd-products-table .top-info .check::after,
 .cd-products-table .top-info .check::before {

@@ -129,7 +129,9 @@ class Product extends Component {
       match,
       locale,
       auth,
-      getProductReview
+      getProductReview,
+      resetRatingForm,
+      flushReviews
     } = this.props;
     const { productId } = match.params;
     const buyer = auth.user.id;
@@ -148,7 +150,9 @@ class Product extends Component {
         );
       } else if (response.type === "ADD_PRODUCT_REVIEW_SUCCESS") {
         this.setState({ showRatingModal: false });
+        flushReviews();
         getProductReview(productId, locale);
+        resetRatingForm();
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
           <div>Review has been added successfully</div>,
@@ -223,9 +227,9 @@ class Product extends Component {
   handleLoadMoreReview() {
     const { getProductReview, reviews, match, locale } = this.props;
     const { productName, productId } = match.params;
-    const { count, pages, productReview } = reviews;
+    const { count, productReview, currentPage } = reviews;
     if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
-      const nextPage = count !== _.size(productReview) ? pages + 1 : pages;
+      const nextPage = count !== _.size(productReview) ? currentPage + 1 : currentPage;
       getProductReview(productId, locale, nextPage);
     }
   }
@@ -257,15 +261,35 @@ class Product extends Component {
       isReviewed,
       ratingAggregate,
       quickDetails,
+      minQuantity,
       transactions
     } = objectProduct;
     const { productReview, count, pages } = reviews;
+    const breadcrumb = [];
+    if (!_.isEmpty(objectProduct)) {
+      if (_.has(objectProduct, "category")) {
+        const selectedCategoryName = objectProduct.category.name;
+        breadcrumb.push({
+          pathname: `/#/products/${_.kebabCase(selectedCategoryName)}`,
+          name: selectedCategoryName
+        });
+      }
+      if (_.has(objectProduct, "subCategory")) {
+        const selectedCategoryName = objectProduct.subCategory.name;
+        breadcrumb.push({
+          pathname: `/#/products/${_.kebabCase(
+            objectProduct.category.name
+          )}/${_.kebabCase(selectedCategoryName)}`,
+          name: selectedCategoryName
+        });
+      }
+    }
     return (
       <section className="product-view">
         <Grid>
           <Row>
             <Col sm={12}>
-              <Breadcrumbs />
+              <Breadcrumbs breadcrumb={breadcrumb} />
             </Col>
           </Row>
           <BlockUi tag="div" blocking={loading}>
@@ -293,8 +317,11 @@ class Product extends Component {
                             <span>
                               {getCurrency(currency)}
                               {productPrice ? productPrice.toFixed(2) : "0.00"}
-                            </span>{" "}
-                            / Peice
+                            </span>
+                          </p>
+                          <p className="price">
+                            {translate("p_min_order")}{" "}
+                            <span>{minQuantity || "0"}</span>
                           </p>
                         </div>
                       </div>
@@ -333,7 +360,7 @@ class Product extends Component {
                         <div className="product-messages">
                           <a href="#" className="message-links">
                             <i className="fa fa-envelope-o" />
-                            Leave Messages
+                            {translate("p_leave_message")}
                           </a>
                         </div>
                         <div className="payment-method">
@@ -350,13 +377,13 @@ class Product extends Component {
                                 className="fa fa-square-o"
                                 aria-hidden="true"
                               />{" "}
-                              Add to Compare
+                              {translate("p_add_to_compare")}
                             </a>
                           </li>
                           <li>
                             <a href="#" onClick={this.handleAddToWishlist}>
                               <i className="fa fa-heart-o" aria-hidden="true" />{" "}
-                              Add to Favorites
+                              {translate("p_add_to_fav")}
                             </a>
                           </li>
                           <li>
@@ -414,7 +441,7 @@ class Product extends Component {
                                   className="fa fa-share-square-o"
                                   aria-hidden="true"
                                 />{" "}
-                                Share
+                                {translate("p_share")}
                               </a>
                             </OverlayTrigger>
                           </li>
@@ -457,7 +484,7 @@ class Product extends Component {
                           </div>
                           <div className="product-description">
                             <div className="title">
-                              <h5>Product Description</h5>
+                              <h5>{translate("p_product_desc")}</h5>
                             </div>
                             <div className="description">
                               <p>

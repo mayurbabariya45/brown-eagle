@@ -87,6 +87,7 @@ class Products extends Component {
     );
   }
   handleCategoryFilter(isChecked, value) {
+    if (_.isEmpty(value)) return false;
     const { categoryFilter } = this.state;
     const { handleCategoryFilter, searchProducts } = this.props;
     if (!isChecked) {
@@ -108,6 +109,7 @@ class Products extends Component {
       },
       1
     );
+    return false;
   }
   handleSubCategoryFilter(isChecked, value) {
     const { subCategoryFilter } = this.state;
@@ -310,6 +312,7 @@ class Products extends Component {
                   categories={categories}
                   locale={locale}
                   loadProduct={loadProduct}
+                  translate={translate}
                   handlePriceFilter={this.handlePriceFilter}
                   handleRatingFilter={this.handleRatingFilter}
                   handleCategoryFilter={this.handleCategoryFilter}
@@ -325,13 +328,16 @@ class Products extends Component {
                       <div className="title">
                         <h5>{selectedCategoryName}</h5>
                         <small>
-                          (Showing {start} – {end} products of {count || 0}{" "}
-                          products)
+                          {translate("p_showing_products_result", {
+                            start,
+                            end,
+                            count
+                          })}
                         </small>
                       </div>
                       <div className="toolbar-sorter sorter">
                         <span className="sort">
-                          <span>Sort By</span>
+                          <span>{translate("p_short_by")}</span>
                         </span>
                         <ul>
                           <li

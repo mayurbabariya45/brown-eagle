@@ -6,6 +6,8 @@ import { date, numericality, format } from "redux-form-validators";
 import BlockUi from "react-block-ui";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import Button from "../../../elements/CustomButton/CustomButton";
+import Modal from "../../../components/Modal/Modal";
+import GoogleMap from "../../../components/Map/Map";
 import {
   required,
   normalizePhone,
@@ -21,6 +23,56 @@ class CompanyInformationForm extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChecked = this.handleChecked.bind(this);
+    this.handleInputFocus = this.handleInputFocus.bind(this);
+    this.handleHideMap = this.handleHideMap.bind(this);
+    this.onDraggableChanged = this.onDraggableChanged.bind(this);
+  }
+  onDraggableChanged(lat, lng) {
+    const { getLocation } = this.props;
+    getLocation(lat, lng, this.state.activeInput);
+  }
+  handleInputFocus(event) {
+    const { locationLatLng } = this.state;
+    this.setState({
+      showMapModal: true,
+      loading: true,
+      activeInput: event.target.name
+    });
+    event.target.blur();
+    this.props.handleInputMap(event.target.name);
+    if (!_.isEmpty(locationLatLng)) {
+      this.setState({ loading: false });
+      return false;
+    }
+    navigator.geolocation.getCurrentPosition(
+      p => {
+        const LatLngBounds = Object.assign(
+          {},
+          {
+            lat: p.coords.latitude,
+            lng: p.coords.longitude
+          }
+        );
+        this.props.getLocation(
+          p.coords.latitude,
+          p.coords.longitude,
+          event.target.name
+        );
+        this.setState({ locationLatLng: LatLngBounds, loading: false });
+      },
+      () => {
+        const LatLngBounds = {
+          lat: 19.230526955858,
+          lng: 72.9730803
+        };
+        this.props.getLocation(19.230526955858, 72.9730803, event.target.name);
+        this.setState({ locationLatLng: LatLngBounds, loading: false });
+      }
+    );
+    return false;
+  }
+  handleHideMap() {
+    this.setState({ showMapModal: false });
   }
   handleChecked(e, value) {
     const { changeFieldValue, companyInformationForm } = this.props;
@@ -130,6 +182,7 @@ class CompanyInformationForm extends Component {
                     type: "text",
                     bsClass: "form-control form-control-simple",
                     name: "registeredAddress",
+                    onFocus: this.handleInputFocus,
                     validate: [required]
                   }
                 ]}
@@ -304,6 +357,29 @@ class CompanyInformationForm extends Component {
             </Form>
           </Col>
         </BlockUi>
+        <Modal
+          className="map-modal"
+          show={this.state.showMapModal}
+          bHeader="Location Search"
+          onHide={this.handleHideMap}
+          bsSize="large"
+          bContent={
+            this.state.loading ? (
+              <Col className="container-loader">
+                <div className="loader">
+                  <i className="fa fa-refresh fa-spin" />
+                  <h5>Loading map...</h5>
+                </div>
+              </Col>
+            ) : (
+              <GoogleMap
+                isMarkerShown
+                onDrag={this.onDraggableChanged}
+                center={this.state.locationLatLng}
+              />
+            )
+          }
+        />
       </div>
     );
   }

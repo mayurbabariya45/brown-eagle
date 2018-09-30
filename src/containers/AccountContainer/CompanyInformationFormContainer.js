@@ -1,9 +1,10 @@
-// import _ from "lodash";
+import _ from "lodash";
 import { connect } from "react-redux";
 import { reduxForm, change, formValueSelector } from "redux-form";
 import formValidationScroller from "../../variables/FormValidationScroller";
 import CompanyInformationForm from "../../views/Account/form/CompanyInformationForm";
 import * as c from "../../actions/Auth/Auth_actions";
+import * as a from "../../actions/Account/Account_actions";
 
 const mapStateToProps = state => {
   const selector = formValueSelector("companyInformationForm");
@@ -42,12 +43,45 @@ const mapDispatchToProps = dispatch => ({
   changeFieldValue: (field, value) =>
     dispatch(change("companyInformationForm", field, value)),
   showNotification: (title, message, fail) =>
-    dispatch(c.showNotification(title, message, fail))
+    dispatch(c.showNotification(title, message, fail)),
+  getLocation: (lat, lng) => dispatch(a.getLocation(lat, lng)),
+  handleInputMap: type => dispatch(a.handleInputMap(type)),
+  location: location => dispatch(a.location(location))
 });
 const mergeProps = (state, actions, ownProps) => ({
   ...state,
   ...actions,
-  ...ownProps
+  ...ownProps,
+  getLocation: (lats, lngs, type) => {
+    actions.getLocation(lats, lngs).then(response => {
+      if (response.type === "GET_BUYER_LOCATION_SUCCESS") {
+        if (_.isEmpty(response.payload.results)) {
+          ownProps.showNotification(response.payload.error_message);
+          return false;
+        }
+        const location = response.payload.results[0].formatted_address.split(
+          ","
+        );
+        const country = location.pop();
+        const zipcode = location.pop();
+        const city = location.pop();
+        const { lat, lng } = response.payload.results[0].geometry.location;
+        if (type === "registeredAddress") {
+          actions.changeFieldValue("r_city", city);
+          actions.changeFieldValue("registeredAddress", location.join(","));
+          actions.changeFieldValue("r_area_code", zipcode.split(" ").pop());
+          actions.changeFieldValue("r_country", country);
+          actions.location([lat, lng]);
+        } else {
+          actions.changeFieldValue("o_city", city);
+          actions.changeFieldValue("operationalAddress", location.join(","));
+          actions.changeFieldValue("o_area_code", zipcode.split(" ").pop());
+          actions.changeFieldValue("o_country", country);
+        }
+      }
+      return false;
+    });
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(

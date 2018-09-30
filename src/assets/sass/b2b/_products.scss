@@ -909,12 +909,16 @@
     .price-box.price-final_price {
       padding-bottom: 0px;
       padding-top: 5px;
+      float: left;
+      width: 100%;
       .price {
         font-size: 16px;
         color: #878787;
         font-weight: 700;
         font-family: 'DIN-Regular', sans-serif;
         text-transform: uppercase;
+        float: left;
+        margin-right: 10px;
         span {
           color: $warning-color;
         }

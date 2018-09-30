@@ -5,6 +5,11 @@ export const addToCompare = item => ({
   item
 });
 
+export const removeProduct = item => ({
+  type: a.REMOVE_COMPARE_PRODUCT,
+  item
+});
+
 export const selectFilterProduct = item => ({
   type: a.SELECT_FILTER_PRODUCT,
   item

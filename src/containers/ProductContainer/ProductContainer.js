@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { reset } from "redux-form";
 import Product from "../../views/Product/Product";
 import * as a from "../../actions/Product/Product_actions";
 import * as c from "../../actions/Cart/Cart_actions";
@@ -21,7 +22,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(a.addProductReview(value, id, locale)),
   addToWishlistProduct: (product, authId, locale) =>
     dispatch(a.addToWishlistProduct(product, authId, locale)),
-  removeCartItem: item => dispatch(c.removeCartItem(item))
+  removeCartItem: item => dispatch(c.removeCartItem(item)),
+  resetRatingForm: () => dispatch(reset("ProductRatingForm")),
+  flushReviews: () => dispatch(a.flushReviews())
 });
 const mapStateToProps = state => ({
   ...state.product,

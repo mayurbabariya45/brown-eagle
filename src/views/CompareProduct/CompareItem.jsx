@@ -1,18 +1,21 @@
 import _ from "lodash";
 import React from "react";
 import classname from "classnames";
-import product from "../../assets/img/products/product.png";
 import { getCurrency } from "../../variables/Variables";
 import ImageLoader from "../../components/ImageLoader/ImageLoader";
 import ContentLoader from "../../components/Loader/Loader";
 import defaultImage from "../../assets/img/no-product.png";
+import Button from "../../elements/CustomButton/CustomButton";
 
 const preloader = () => <ContentLoader height={300} inFight />;
 
 const CompareItem = props => (
   <li className={classname("product", { selected: props.selected })}>
-    <div className="top-info" onClick={props.handleSelectProduct}>
-      <div className="check" />
+    <div className="top-info">
+      <div className="check" onClick={props.handleSelectProduct} />
+      <div className="action-delete" onClick={props.handleRemoveProduct}>
+        <i className="pe-7s-trash" />
+      </div>
       <ImageLoader
         preloader={preloader}
         src={
