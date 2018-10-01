@@ -25,22 +25,24 @@ const Tabs = props => {
         >
           <div className="box">
             <BlockUi tag="div" blocking={loading}>
-              <div className="box-header">
-                <div className="title">{translate("a_category")}</div>
-                {/* <div className="text">
+              <Row>
+                <Col md={12}>
+                  <div className="box-header">
+                    <div className="title">{translate("a_category")}</div>
+                    {/* <div className="text">
                   <a href="#quick">{translate("a_quick")}</a>
                 </div> */}
-              </div>
-              <div className="box-navbar">
-                <ButtonGroup>
-                  <Button fill radius simple>
-                    {translate("a_search")}
-                  </Button>
-                  {/* <Button fill radius simple>
+                  </div>
+                  <div className="box-navbar">
+                    <ButtonGroup>
+                      <Button fill radius simple>
+                        {translate("a_search")}
+                      </Button>
+                      {/* <Button fill radius simple>
                     {translate("a_used")}
                   </Button> */}
-                </ButtonGroup>
-                {/* <div className="box-language">
+                    </ButtonGroup>
+                    {/* <div className="box-language">
                   <div className="box-language-title">
                     {translate("a_language")}
                   </div>
@@ -53,27 +55,27 @@ const Tabs = props => {
                     />
                   </div>
                 </div> */}
-              </div>
-              <div className="box-content">
-                <SearchProductCategories {...props} />
-                {!_.isEmpty(selectedCategory) && (
-                  <Row>
-                    <Col md={6} />
-                    <Col md={6}>
-                      <div className="bottom-text">
-                        <Button
-                          bsStyle="warning"
-                          onClick={props.addCategory}
-                          pullRight
-                          fill
-                          block
-                          radius
-                          simple
-                        >
-                          {translate("a_button_text")}
-                        </Button>
-                      </div>
-                      {/* <Button
+                  </div>
+                  <div className="box-content">
+                    <SearchProductCategories {...props} />
+                    {!_.isEmpty(selectedCategory) && (
+                      <Row>
+                        <Col md={6} />
+                        <Col md={6}>
+                          <div className="bottom-text">
+                            <Button
+                              bsStyle="warning"
+                              onClick={props.addCategory}
+                              pullRight
+                              fill
+                              block
+                              radius
+                              simple
+                            >
+                              {translate("a_button_text")}
+                            </Button>
+                          </div>
+                          {/* <Button
                         bsStyle="warning"
                         onClick={props.addCategory}
                         pullRight
@@ -83,10 +85,12 @@ const Tabs = props => {
                       >
                         {translate("r_next")}
                       </Button> */}
-                    </Col>
-                  </Row>
-                )}
-              </div>
+                        </Col>
+                      </Row>
+                    )}
+                  </div>
+                </Col>
+              </Row>
             </BlockUi>
           </div>
         </div>
@@ -95,19 +99,23 @@ const Tabs = props => {
     case 2:
       tabsContent = (
         <BlockUi tag="div" blocking={loading}>
-          <div
-            className={className("fade tab-pane", {
-              active: activeTabs === 2,
-              in: activeTabs === 2
-            })}
-          >
-            <div className="product-information">
-              <div className="product-box-title">
-                <p>{translate("a_box_title")}</p>
+          <Row>
+            <Col md={12}>
+              <div
+                className={className("fade tab-pane", {
+                  active: activeTabs === 2,
+                  in: activeTabs === 2
+                })}
+              >
+                <div className="product-information">
+                  <div className="product-box-title">
+                    <p>{translate("a_box_title")}</p>
+                  </div>
+                  <ProductInformationForm {...props} />
+                </div>
               </div>
-              <ProductInformationForm {...props} />
-            </div>
-          </div>
+            </Col>
+          </Row>
         </BlockUi>
       );
       break;

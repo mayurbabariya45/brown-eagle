@@ -31,6 +31,7 @@ class SuppliersSlider extends Component {
     };
     const showEmpty = !loading && suppliers.length < 1;
     const renderLoader = [];
+    let countMainProduct = 0;
     if (loading) {
       for (let i = 1; i <= 4; i++) {
         const contentLoader = (
@@ -45,7 +46,7 @@ class SuppliersSlider extends Component {
         );
         renderLoader.push(contentLoader);
       }
-    }    
+    }
     const renderSuppliers = _.map(suppliers, value => (
       <div key={value.id} className="item product product-item">
         <div className="product-item-info">
@@ -86,6 +87,10 @@ class SuppliersSlider extends Component {
           <div className="product-footer">
             <div className="product-row">
               {_.map(value.mainProducts, (product, index) => {
+                if (countMainProduct > 2) {
+                  return null;
+                }
+                countMainProduct++;
                 let productImages;
                 let productUrl = "/products";
                 if (!_.isEmpty(product)) {

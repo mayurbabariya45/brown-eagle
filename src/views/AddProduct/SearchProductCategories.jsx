@@ -94,7 +94,6 @@ class SearchProductCategories extends Component {
       sCategories,
       locale
     } = this.props;
-    console.log(selectedSubCategory);
     return (
       <div className="box-search">
         <Row>

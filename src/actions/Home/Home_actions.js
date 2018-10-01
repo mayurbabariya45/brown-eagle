@@ -36,7 +36,7 @@ export const getProducts = category => dispatch =>
 export const getTopBanners = () => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: "home/image?status=enabled&position=top",
+      endpoint: "home/image?status=enabled&position=top&type=web",
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [
@@ -62,7 +62,7 @@ export const getTopSuppliers = () => dispatch =>
 export const getCenterBanners = () => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: "home/image?status=enabled&position=center",
+      endpoint: "home/image?status=enabled&position=center&type=web",
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [
@@ -75,7 +75,7 @@ export const getCenterBanners = () => dispatch =>
 export const getBottomBanners = () => dispatch =>
   dispatch({
     [RSAA]: {
-      endpoint: "home/image?status=enabled&position=bottom",
+      endpoint: "home/image?status=enabled&position=bottom&type=web",
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       types: [

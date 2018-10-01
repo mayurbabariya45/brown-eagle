@@ -27,22 +27,22 @@ const renderMutipleField = ({ input, size }) => (
     <FormControl {...input} bsClass="form-control form-control-simple" />
   </Col>
 );
-const renderInputs = ({ fields, meta: { error } }) => (
+const renderInputs = ({ fields, translate, meta: { error } }) => (
   <Row>
     <Col md={12}>
       <div className="mutiple-form-group">
         <FormGroup className="custom-form-group ">
           <Col componentClass={ControlLabel} sm={2}>
-            Quick Details
+            {translate("a_quick_details")}
             <br />
-            <small>[ex- Color: Black]</small>
+            <small>[{translate("a_ex_product")}]</small>
           </Col>
           <Field name="label" type="text" component={renderField} />
           <Field name="value" size={3} type="text" component={renderField} />
         </FormGroup>
         <span>
           <Button fill onClick={() => fields.push()}>
-            Add More
+            {translate("add_more")}
           </Button>
         </span>
         {fields.map((name, index) => (
@@ -181,7 +181,7 @@ class ProductInformationForm extends Component {
                           }
                         ]}
                       >
-                        <b>Product Availability</b>
+                        <b>{translate("p_add_product")}</b>
                       </FormInputs>
                     </Col>
                   </Row>
@@ -252,7 +252,11 @@ class ProductInformationForm extends Component {
                     ]}
                   />
                 </div>
-                <FieldArray name="product_label" component={renderInputs} />
+                <FieldArray
+                  name="product_label"
+                  translate={translate}
+                  component={renderInputs}
+                />
                 <FormInputs
                   ncols={["col-md-12"]}
                   proprieties={[

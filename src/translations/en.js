@@ -160,6 +160,9 @@ export const en = {
       a_inches: "Inches",
       a_category_commission: "Category Commission :",
       a_sub_category_commission: "Sub Category Commission :",
+      a_quick_details: "Quick Details",
+      a_ex_product: "ex- Color: Black",
+
       // Register
       r_complete: "Complete",
       r_verification: "Verification",
@@ -257,7 +260,6 @@ export const en = {
       d_my_quotes: "My Quotes",
 
       // Validation Messages
-
       phone_number_validation: "Invalid phone number, must be 10 digits",
       email_validation: "Invalid email address",
       min_length_validation: "Must be {min} characters or more",
@@ -273,7 +275,6 @@ export const en = {
       a_shipping_address: "Shipping Address",
 
       // Products
-
       availability: "Availability:",
       in_stock: "In stock",
       out_of_stock: "Out Of Stock",
@@ -516,6 +517,7 @@ export const en = {
 
       // new
       buying_requests: "Buying Requests",
+
       // add new reference
       add_new_reference_title: "Add New Reference",
       edit_reference_title: "Edit Reference",
@@ -541,6 +543,8 @@ export const en = {
       p_share: "Share",
       p_product_desc: "Product Description",
       p_product_rating: "Product Ratings",
+      p_add_product: "Product Availability",
+      add_more: "Add More",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

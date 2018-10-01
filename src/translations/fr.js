@@ -200,7 +200,6 @@ export const fr = {
       d_my_quotes: "Mes citations",
 
       // Products
-
       availability: "Disponibilité:",
       in_stock: "En stock",
       out_of_stock: "En rupture de stock",
@@ -242,6 +241,7 @@ export const fr = {
       product_response_time: "Temps de réponse",
       product_response_rate: "Taux de réponse",
       product_like_title: "Tu peux aimer",
+
       // basic information
       basic_bussiness_type: "Type d'entreprise:",
       basic_main_product: "Principaux produits:",
@@ -310,7 +310,6 @@ export const fr = {
       // Top Supllier
       top_selected_suppliers: "TOP FOURNISSEURS SÉLECTIONNÉS",
       // Recent View
-
       my_recent_view: "MES VUES RECENTES",
       // Request Quotation section
       request_quotation_quotes: "Obtenez des devis pour votre",
@@ -376,47 +375,58 @@ export const fr = {
         "Votre produit est actuellement en cours de révision.",
       a_dashboard: "Tableau de bord",
       // Product Information form labels
-      a_product_name: "* Product Name",
-      a_product_keyword: "* Product Keyword",
-      a_product_price: "* Product Price",
-      a_product_quantity: "* Minimum Quantity",
-      a_product_group: "Product Group",
-      a_brake: "Brake (F/R)",
-      a_model_number: "Model Number",
-      a_origin: "Place of Origin",
-      a_brand_name: "Brand Name",
-      a_add_more: "Add More",
-      a_description: "Product Description",
+      a_product_name: "* Nom du produit",
+      a_product_keyword: "* Mot-clé de produit",
+      a_product_price: "* Prix du produit",
+      a_product_quantity: "* Quantité minimum",
+      a_product_group: "Groupe de produits",
+      a_brake: "Frein (F / R)",
+      a_model_number: "Numéro de modèle",
+      a_origin: "Lieu d'origine",
+      a_brand_name: "Marque",
+      a_add_more: "Ajouter plus",
+      a_description: "Description du produit",
+      a_height: "la taille",
+      a_width: "Largeur",
+      a_weight: "Poids",
+      a_depth: "Profondeur",
+      a_grams: "Des grammes",
+      a_inches: "Pouces",
+      a_category_commission: "Catégorie Commission:",
+      a_sub_category_commission: "Sous catégorie Commission:",
+      a_quick_details: "Détails rapides",
+      a_ex_product: "ex- Couleur: Noir",
       // bussiness type
       d_manufacturer: "Fabricant",
       d_key_supplier: "Fournisseur",
-       // plans
-       p_title_text: "Demande de services payants BROWN EAGLE",
-       p_tab_link_apply: "Appliquer",
-       p_tab_link_payment: "Effectuer le paiement",
-       p_tab_apply_title_text: "Les fournisseurs reçoivent en moyenne 22 fois plus de demandes",
-       p_tab_services_agreement: "Contrat de service fournisseur",
-       p_tab_plans_option_text:
-         "Démarrez votre activité en ligne avec Brown Supplier Eagle's Supplier Membership.",
-       p_tab_plans_option_label: "Options d'adhésion:",
-       p_tab_plans_agreement_label:
-         "En procédant au paiement pour passer au fournisseur, je reconnais et accepte ce qui suit:",
-       p_tab_services_agreement_checkbox:
-         "- le contrat de services fournisseur browneagle.com",
-       p_tab_privacy_checkbox: "- la politique de confidentialité",
-       p_tab_marketing_label:
-         "- recevoir les communications marketing, services et membres de browneagle.com",
-       p_continue_button: "Continuer",
-       p_table_head_text: "Adhésion fournisseurs",
-       p_table_head_free: "Adhésion gratuite",
-       table_td_ranking: "Classement Prioritaire",
-       table_td_description: "Description du plan",
-       table_td_product: "Liste de produits",
-       table_td_storage: "Espace de rangement",
-       table_td_cost: "Plan Prix",
-       table_td_plan_services: "Services de plan",
-       table_td_price_services: "Services Prix",
-       table_td_plan_services_description: "Services Description",
+      // plans
+      p_title_text: "Demande de services payants BROWN EAGLE",
+      p_tab_link_apply: "Appliquer",
+      p_tab_link_payment: "Effectuer le paiement",
+      p_tab_apply_title_text:
+        "Les fournisseurs reçoivent en moyenne 22 fois plus de demandes",
+      p_tab_services_agreement: "Contrat de service fournisseur",
+      p_tab_plans_option_text:
+        "Démarrez votre activité en ligne avec Brown Supplier Eagle's Supplier Membership.",
+      p_tab_plans_option_label: "Options d'adhésion:",
+      p_tab_plans_agreement_label:
+        "En procédant au paiement pour passer au fournisseur, je reconnais et accepte ce qui suit:",
+      p_tab_services_agreement_checkbox:
+        "- le contrat de services fournisseur browneagle.com",
+      p_tab_privacy_checkbox: "- la politique de confidentialité",
+      p_tab_marketing_label:
+        "- recevoir les communications marketing, services et membres de browneagle.com",
+      p_continue_button: "Continuer",
+      p_table_head_text: "Adhésion fournisseurs",
+      p_table_head_free: "Adhésion gratuite",
+      table_td_ranking: "Classement Prioritaire",
+      table_td_description: "Description du plan",
+      table_td_product: "Liste de produits",
+      table_td_storage: "Espace de rangement",
+      table_td_cost: "Plan Prix",
+      table_td_plan_services: "Services de plan",
+      table_td_price_services: "Services Prix",
+      table_td_plan_services_description: "Services Description",
       // Footer
       about_us: "à propos de nous",
       sell_on_brown_eagle: "Vendre sur aigle marron",

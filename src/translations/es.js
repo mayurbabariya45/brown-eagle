@@ -122,6 +122,7 @@ export const es = {
       a_approved_text: "A la espera de la aprobación",
       a_approved_product_text: "Su producto está ahora bajo revisión.",
       a_dashboard: "Tablero",
+
       // Product Information form labels
       a_product_name: "* Nombre del producto",
       a_product_keyword: "* Palabra clave del producto",
@@ -133,7 +134,17 @@ export const es = {
       a_origin: "Lugar de origen",
       a_brand_name: "Nombre de la marca",
       a_add_more: "Añadir más",
-
+      a_description: "Descripción del producto",
+      a_height: "Altura",
+      a_width: "Anchura",
+      a_weight: "Peso",
+      a_depth: "Profundidad",
+      a_grams: "Gramos",
+      a_inches: "Pulgadas",
+      a_category_commission: "Comisión de Categoría:",
+      a_sub_category_commission: "Comisión de subcategorías:",
+      a_quick_details: "Detalles Rápidos",
+      a_ex_product: "ex- Color: negro",
       // Register
       r_complete: "Completar",
       r_verification: "Verificación",
@@ -320,14 +331,17 @@ export const es = {
         "Cuanto más específica sea su información, con mayor precisión podemos hacer coincidir su solicitud con los proveedores correctos.",
       request_quotation_form_product_name:
         "Palabras clave del producto que estás buscando",
-      request_quotation_form_name_label: "Por favor ingrese el nombre del producto",
+      request_quotation_form_name_label:
+        "Por favor ingrese el nombre del producto",
       request_quotation_form_description_label:
         "Informe a los proveedores sobre sus requisitos detallados. Puede incluir: color, tamaño, material, grado / estándar, etc.",
       request_quotation_form_description_name:
         "Estimado señor / señora: Estoy buscando productos con las siguientes especificaciones",
-      request_quotation_form_product_categories: "Porfavor seleccione una categoría",
+      request_quotation_form_product_categories:
+        "Porfavor seleccione una categoría",
       request_quotation_form_product_sub_categories: "Seleccionar subcategoría",
-      request_quotation_form_sub_category_placehholder: "Seleccionar subcategoría",
+      request_quotation_form_sub_category_placehholder:
+        "Seleccionar subcategoría",
       request_quotation_form_category_placehholder: "selecciona una categoría",
       request_quotation_form_quote_condition:
         "Acepto compartir mi tarjeta de visita con proveedores de cotizaciones.",
@@ -350,7 +364,6 @@ export const es = {
       // Top Supllier
       top_selected_suppliers: "LOS PRINCIPALES PROVEEDORES SELECCIONADOS",
       // Recent View
-
       my_recent_view: "MIS VISTAS RECIENTES",
       // Request Quotation section
       request_quotation_quotes: "Obtenga cotizaciones para su",
@@ -394,34 +407,128 @@ export const es = {
       d_manufacturer: "Fabricante",
       d_key_supplier: "Proveedor",
 
-       // plans
-       p_title_text: "Solicite los servicios pagados de EAGLE MARRÓN",
-       p_tab_link_apply: "Aplicar",
-       p_tab_link_payment: "Hacer el pago",
-       p_tab_apply_title_text:
-         "Los proveedores en promedio reciben 22 veces más consultas",
-       p_tab_services_agreement: "Acuerdo de servicio del proveedor",
-       p_tab_plans_option_text:
-         "Arranque su negocio en línea con la membresía de proveedores de brown eagle.com.",
-       p_tab_plans_option_label: "Opciones de membresía:",
-       p_tab_plans_agreement_label:
-         "Al continuar con el pago para actualizar al proveedor, reconozco y acepto lo siguiente:",
-       p_tab_services_agreement_checkbox:
-         "- el acuerdo de servicios del proveedor de browneagle.com",
-       p_tab_privacy_checkbox: "- la política de privacidad",
-       p_tab_marketing_label:
-         "- para recibir comunicaciones de marketing, servicios y membresía relacionadas con browneagle.com",
-       p_continue_button: "Continuar",
-       p_table_head_text: "Membresía de proveedores",
-       p_table_head_free: "Membresía gratis",
-       table_td_ranking: "Ranking prioritario",
-       table_td_description: "Descripción del plan",
-       table_td_product: "Listado de productos",
-       table_td_storage: "Almacenamiento",
-       table_td_cost: "Precio plan",
-       table_td_plan_services: "Servicios del plan",
-       table_td_price_services: "Servicios Precio",
-       table_td_plan_services_description: "Descripción de servicios",
+      // plans
+      p_title_text: "Solicite los servicios pagados de EAGLE MARRÓN",
+      p_tab_link_apply: "Aplicar",
+      p_tab_link_payment: "Hacer el pago",
+      p_tab_apply_title_text:
+        "Los proveedores en promedio reciben 22 veces más consultas",
+      p_tab_services_agreement: "Acuerdo de servicio del proveedor",
+      p_tab_plans_option_text:
+        "Arranque su negocio en línea con la membresía de proveedores de brown eagle.com.",
+      p_tab_plans_option_label: "Opciones de membresía:",
+      p_tab_plans_agreement_label:
+        "Al continuar con el pago para actualizar al proveedor, reconozco y acepto lo siguiente:",
+      p_tab_services_agreement_checkbox:
+        "- el acuerdo de servicios del proveedor de browneagle.com",
+      p_tab_privacy_checkbox: "- la política de privacidad",
+      p_tab_marketing_label:
+        "- para recibir comunicaciones de marketing, servicios y membresía relacionadas con browneagle.com",
+      p_continue_button: "Continuar",
+      p_table_head_text: "Membresía de proveedores",
+      p_table_head_free: "Membresía gratis",
+      table_td_ranking: "Ranking prioritario",
+      table_td_description: "Descripción del plan",
+      table_td_product: "Listado de productos",
+      table_td_storage: "Almacenamiento",
+      table_td_cost: "Precio plan",
+      table_td_plan_services: "Servicios del plan",
+      table_td_price_services: "Servicios Precio",
+      table_td_plan_services_description: "Descripción de servicios",
+
+      // dashboard product review
+      d_products_review: "Comentarios",
+      d_my_references: "Mis referencias",
+
+      // favourites
+      my_favourites: "Favoritos del producto",
+      c_person: "Persona de contacto",
+
+      // verification profile
+      v_alert_title: "Enviar un correo",
+      v_alert_text: "Verifica tu perfil",
+
+      // compare products
+      cm_page_title: "Comparar productos",
+      cm_reset: "Reiniciar",
+      cm_filter: "Filtrar",
+      cm_models: "Modelos",
+      cm_name: "Nombre",
+      cm_keywords: "Palabras clave",
+      cm_min_quanity: "Cantidad mínima",
+      cm_price: "Precio",
+      cm_available: "Disponible",
+      cm_ratings: "Clasificación",
+      cm_reviews: "Comentarios",
+      cm_description: "Descripción",
+      // viewOrders
+      o_product_details_label: "Información del proveedor y producto",
+      o_seller_product_details_label:
+        "Información del comprador y del producto",
+      o_transactions: "Transacciones de orden",
+      o_payment_title: "Método de pago",
+      o_shipping_address: "Dirección de Envío",
+      o_order_details: "Observación de orden",
+      o_order_status: "Estado del producto",
+      o_order_number: "Número de orden",
+      o_order_submitted: "orden enviada",
+
+      // order status
+      o_start_order: "Orden de inicio",
+      o_seller_confirm: "El vendedor confirma",
+      o_payment: "Pago",
+      o_shipment: "Envío",
+      o_success: "Éxito",
+
+      // Payment Method
+      payment_card_label: "Número de tarjeta",
+      payment_date_label: "Fecha de caducidad",
+      payment_cvc_label: "CVC",
+      payment_code_label: "código postal",
+
+      // notification message
+      notification_actived_plan: "Su plan se ha actualizado con éxito.",
+      notification_try_again: "Por favor, inténtelo de nuevo más tarde",
+      notification_resend_email:
+        "El correo electrónico ha sido reenviado exitosamente.",
+
+      // profile
+      status_verified: "verificado",
+      status_pending: "pendiente",
+      status_confired: "confirmar",
+      resend_button: "Reenviar email",
+      load_more: "Carga más",
+
+      // new
+      buying_requests: "Solicitudes de compra",
+
+      // add new reference
+      add_new_reference_title: "Agregar nueva referencia",
+      edit_reference_title: "Editar referencia",
+      add_new_reference_desc: "Descripción",
+      add_new_reference_name: "Nombre",
+      add_new_reference_company_Name: "nombre de empresa",
+      add_new_reference_phone: "Teléfono",
+      add_new_reference_email: "Email",
+      add_new_reference_website: "Sitio web",
+
+      // new keywords
+      p_filters: "Filtros",
+      p_filter_category: "CATEGORÍAS",
+      p_filter_price: "precio",
+      p_filter_rating: "Clasificación",
+      p_showing_products_result:
+        "(Mostrando {start} - {end} productos de {count} productos)",
+      p_short_by: "Ordenar por",
+      p_min_order: "Min. Orden:",
+      p_leave_message: "Deja mensajes",
+      p_add_to_compare: "Añadir a comparar",
+      p_add_to_fav: "Agregar a los favoritos",
+      p_share: "Compartir",
+      p_product_desc: "Descripción del producto",
+      p_product_rating: "Calificaciones de productos",
+      p_add_product: "Disponibilidad de producto",
+
       // Footer
       about_us: "sobre nosotros",
       sell_on_brown_eagle: "Vender en Brown Eagle",
