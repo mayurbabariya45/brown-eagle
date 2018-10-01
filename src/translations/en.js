@@ -316,6 +316,7 @@ export const en = {
       product_response_time: "Response Time",
       product_response_rate: "Response Rate",
       product_like_title: "You May Like",
+
       // basic information
       basic_bussiness_type: "Business Type: ",
       basic_main_product: "Main Products:  ",
@@ -332,6 +333,7 @@ export const en = {
       product_rating_label_modal: "Rating",
       product_review_title_label_modal: "Review Title",
       product_review_title_placeholder: "Title",
+
       // shopping cart
       cart_title: "Shopping Cart",
       cart_trading: "Trading",
@@ -371,6 +373,7 @@ export const en = {
         "Enter estimated bulk order quantity first even if you're requesting for samples",
       compare_quotes: "Compare Quotes",
       contact_suppliers: "Contact Supplier",
+
       // Submit Quote
       submit_quote_title: "Submit Quote",
       quote_form_name: "Title",
@@ -382,8 +385,10 @@ export const en = {
       quote_form_product_price: "Price",
       quote_form_product_quantity: "Product Minimum Quantity",
       quote_form_product_availability: "Product Availability",
+
       // Top Supllier
       top_selected_suppliers: "TOP SELECTED SUPPLIERS",
+
       // Recent View
 
       my_recent_view: "MY RECENT VIEWS",
@@ -507,6 +512,23 @@ export const en = {
       notification_actived_plan: "Your plan has been upgraded successfully.",
       notification_try_again: "Please try again later",
       notification_resend_email: "Email has been resend successfully.",
+      notification_buyer_login: "Please Login to buyer account",
+      notification_seller_fav: "Seller not avible to add to favourite",
+      notification_seller_cart: "Seller not avible to add to cart",
+      notification_fav: "Product has been added favourite",
+      notification_review_added: "Review has been added successfully",
+      notification_cart_added: "{name} has been added successfully in cart.",
+      notification_compare_added:
+        "{name} has been added successfully in compare.",
+      notification_cart_removed: "Product has been deleted successfully.",
+      notification_cart_not_removed:
+        "Product not deleted. Please try again later.",
+      notification_cart_deleted: "{name} has been deleted successfully.",
+      notification_cart_not_deleted:
+        "{name} not deleted. Please try again later.",
+      notification_cart_quantity_changed: "{name} has been changed.",
+      notification_cart_quantity_not_changed:
+        "{name} quantity not changed. Please try again later.",
 
       // profile
       status_verified: "verified",
@@ -545,6 +567,11 @@ export const en = {
       p_product_rating: "Product Ratings",
       p_add_product: "Product Availability",
       add_more: "Add More",
+      // cart page
+      c_empty_msg: "Your card is empty.",
+      c_total_price: "Price ({cartProductTotal} item)",
+      c_delivery_charge: "Delivery Charges",
+      c_total_amount: "Amount Payable",
       // Footer
       about_us: "about us",
       sell_on_brown_eagle: "Sell On Brown Eagle",

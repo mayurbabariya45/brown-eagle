@@ -81,7 +81,8 @@ class Product extends Component {
       showNotification,
       locale,
       auth,
-      match
+      match,
+      translate
     } = this.props;
     const { productId } = match.params;
     const buyer = auth.user.id;
@@ -90,7 +91,7 @@ class Product extends Component {
     if (_.isEmpty(buyer)) {
       showNotification(
         <span data-notify="icon" className="pe-7s-shield" />,
-        <div>Please Login to buyer account</div>,
+        <div>{translate("notification_buyer_login")}</div>,
         true
       );
       return false;
@@ -98,7 +99,7 @@ class Product extends Component {
     if (authRole !== "buyer") {
       showNotification(
         <span data-notify="icon" className="pe-7s-shield" />,
-        <div>Seller not avible to add to favourite</div>,
+        <div>{translate("notification_seller_fav")}</div>,
         true
       );
       return false;
@@ -114,7 +115,7 @@ class Product extends Component {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
           <div>
-            {response.payload.message || "Product has been added favourite"}
+            {response.payload.message || translate("notification_fav")}
           </div>,
           false
         );
@@ -131,7 +132,8 @@ class Product extends Component {
       auth,
       getProductReview,
       resetRatingForm,
-      flushReviews
+      flushReviews,
+      translate
     } = this.props;
     const { productId } = match.params;
     const buyer = auth.user.id;
@@ -155,7 +157,7 @@ class Product extends Component {
         resetRatingForm();
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>Review has been added successfully</div>,
+          <div>{translate("notification_review_added")}</div>,
           false
         );
       }
@@ -163,18 +165,40 @@ class Product extends Component {
     return false;
   }
   addToCart(item) {
-    const { addToCart, showNotification, auth, history } = this.props;
+    const {
+      addToCart,
+      translate,
+      showNotification,
+      auth,
+      history
+    } = this.props;
     const objectProduct = Object.assign({}, item, {
       quantity: item.minQuantity
     });
     const buyer = auth.user.id;
     const authRole = auth.user.role;
-    if (authRole !== "buyer") return false;
+    if (_.isEmpty(authRole)) {
+      history.push({
+        pathname: "/login",
+        search: `?redirect-url=${this.props.location.pathname}`
+      });
+      return false;
+    }
+    if (authRole !== "buyer") {
+      showNotification(
+        <span data-notify="icon" className="pe-7s-shield" />,
+        <div>{translate("notification_seller_cart")}</div>,
+        true
+      );
+      return false;
+    }
     addToCart(objectProduct, buyer).then(response => {
       if (response.type === "ADD_TO_CART_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>{`${item.name} has been added successfully in cart.`}</div>,
+          <div>
+            {translate("notification_cart_added", { name: item.name })}
+          </div>,
           false
         );
         history.push("/cart");
@@ -195,20 +219,20 @@ class Product extends Component {
     return false;
   }
   removeCartItem(item) {
-    const { removeCartItem, showNotification, auth } = this.props;
+    const { removeCartItem, translate, showNotification, auth } = this.props;
     const buyer = auth.user.id;
     removeCartItem(buyer).then(response => {
       if (response.type === "REMOVE_CART_PRODUCT_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>Product has been deleted successfully.</div>,
+          <div>{translate("notification_cart_removed")}</div>,
           false
         );
         this.addToCart(item);
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
-          <div>Product not deleted. Please try again later.</div>,
+          <div>{translate("notification_cart_not_removed")}</div>,
           true
         );
       }
@@ -216,11 +240,13 @@ class Product extends Component {
   }
   handleAddToCompare(e) {
     e.preventDefault();
-    const { addToCompare, showNotification, product } = this.props;
+    const { addToCompare, showNotification, product, translate } = this.props;
     addToCompare(product);
     showNotification(
       <span data-notify="icon" className="pe-7s-check" />,
-      <div>{`${product.name} has been added successfully in compare.`}</div>,
+      <div>
+        {translate("notification_compare_added", { name: product.name })}
+      </div>,
       false
     );
   }
@@ -229,7 +255,8 @@ class Product extends Component {
     const { productName, productId } = match.params;
     const { count, productReview, currentPage } = reviews;
     if (!_.isEmpty(productName) && !_.isEmpty(productId)) {
-      const nextPage = count !== _.size(productReview) ? currentPage + 1 : currentPage;
+      const nextPage =
+        count !== _.size(productReview) ? currentPage + 1 : currentPage;
       getProductReview(productId, locale, nextPage);
     }
   }
@@ -332,7 +359,8 @@ class Product extends Component {
                       <p>Port: SHANGHAI </p>
                     </div> */}
                       <div className="product-add-cart">
-                        {(authRole === "buyer" || authRole === "") && (
+                        {(authRole === "buyer" ||
+                          typeof authRole === typeof undefined) && (
                           <div className="box-tocart">
                             <div className="actions add-to-cart">
                               <Button
@@ -370,82 +398,87 @@ class Product extends Component {
                         </div>
                       </div>
                       <div className="product-nav">
-                        <ul className="product-nav-items">
-                          <li>
-                            <a href="#" onClick={this.handleAddToCompare}>
-                              <i
-                                className="fa fa-square-o"
-                                aria-hidden="true"
-                              />{" "}
-                              {translate("p_add_to_compare")}
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#" onClick={this.handleAddToWishlist}>
-                              <i className="fa fa-heart-o" aria-hidden="true" />{" "}
-                              {translate("p_add_to_fav")}
-                            </a>
-                          </li>
-                          <li>
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              overlay={
-                                <Popover
-                                  id="social-icons"
-                                  className="product-share-buttons"
-                                >
-                                  <ul>
-                                    <li>
-                                      <FacebookShareButton
-                                        title={
-                                          !_.isEmpty(product)
-                                            ? nameTranslations[locale]
-                                            : ""
-                                        }
-                                        url={sharingUrl}
-                                      >
-                                        <FacebookIcon size={32} round />
-                                      </FacebookShareButton>
-                                    </li>
-                                    <li>
-                                      <GooglePlusShareButton
-                                        title={
-                                          !_.isEmpty(product)
-                                            ? nameTranslations[locale]
-                                            : ""
-                                        }
-                                        url={sharingUrl}
-                                      >
-                                        <GooglePlusIcon size={32} round />
-                                      </GooglePlusShareButton>
-                                    </li>
-                                    <li>
-                                      <TwitterShareButton
-                                        title={
-                                          !_.isEmpty(product)
-                                            ? nameTranslations[locale]
-                                            : ""
-                                        }
-                                        url={sharingUrl}
-                                      >
-                                        <TwitterIcon size={32} round />
-                                      </TwitterShareButton>
-                                    </li>
-                                  </ul>
-                                </Popover>
-                              }
-                            >
-                              <a href="javascript:void(0);">
+                        {!_.isEmpty(product) && (
+                          <ul className="product-nav-items">
+                            <li>
+                              <a href="#" onClick={this.handleAddToCompare}>
                                 <i
-                                  className="fa fa-share-square-o"
+                                  className="fa fa-square-o"
                                   aria-hidden="true"
                                 />{" "}
-                                {translate("p_share")}
+                                {translate("p_add_to_compare")}
                               </a>
-                            </OverlayTrigger>
-                          </li>
-                        </ul>
+                            </li>
+                            <li>
+                              <a href="#" onClick={this.handleAddToWishlist}>
+                                <i
+                                  className="fa fa-heart-o"
+                                  aria-hidden="true"
+                                />{" "}
+                                {translate("p_add_to_fav")}
+                              </a>
+                            </li>
+                            <li>
+                              <OverlayTrigger
+                                trigger="click"
+                                placement="top"
+                                overlay={
+                                  <Popover
+                                    id="social-icons"
+                                    className="product-share-buttons"
+                                  >
+                                    <ul>
+                                      <li>
+                                        <FacebookShareButton
+                                          title={
+                                            !_.isEmpty(product)
+                                              ? nameTranslations[locale]
+                                              : ""
+                                          }
+                                          url={sharingUrl}
+                                        >
+                                          <FacebookIcon size={32} round />
+                                        </FacebookShareButton>
+                                      </li>
+                                      <li>
+                                        <GooglePlusShareButton
+                                          title={
+                                            !_.isEmpty(product)
+                                              ? nameTranslations[locale]
+                                              : ""
+                                          }
+                                          url={sharingUrl}
+                                        >
+                                          <GooglePlusIcon size={32} round />
+                                        </GooglePlusShareButton>
+                                      </li>
+                                      <li>
+                                        <TwitterShareButton
+                                          title={
+                                            !_.isEmpty(product)
+                                              ? nameTranslations[locale]
+                                              : ""
+                                          }
+                                          url={sharingUrl}
+                                        >
+                                          <TwitterIcon size={32} round />
+                                        </TwitterShareButton>
+                                      </li>
+                                    </ul>
+                                  </Popover>
+                                }
+                              >
+                                <a href="javascript:void(0);">
+                                  <i
+                                    className="fa fa-share-square-o"
+                                    aria-hidden="true"
+                                  />{" "}
+                                  {translate("p_share")}
+                                </a>
+                              </OverlayTrigger>
+                            </li>
+                          </ul>
+                        )}
                       </div>
                       <ProductRating
                         translate={translate}

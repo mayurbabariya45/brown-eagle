@@ -158,6 +158,7 @@ class Products extends Component {
       showNotification,
       locale,
       auth,
+      translate,
       match
     } = this.props;
     const { productId } = match.params;
@@ -191,7 +192,7 @@ class Products extends Component {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
           <div>
-            {response.payload.message || "Product has been added favourite"}
+            {response.payload.message || translate("notification_fav")}
           </div>,
           false
         );
@@ -200,18 +201,40 @@ class Products extends Component {
     return false;
   }
   addToCart(item) {
-    const { addToCart, showNotification, auth, history } = this.props;
+    const {
+      addToCart,
+      showNotification,
+      auth,
+      history,
+      translate
+    } = this.props;
     const objectProduct = Object.assign({}, item, {
       quantity: item.minQuantity
     });
     const buyer = auth.user.id;
     const authRole = auth.user.role;
-    if (authRole !== "buyer") return false;
+    if (_.isEmpty(authRole)) {
+      history.push({
+        pathname: "/login",
+        search: `?redirect-url=${this.props.location.pathname}`
+      });
+      return false;
+    }
+    if (authRole !== "buyer") {
+      showNotification(
+        <span data-notify="icon" className="pe-7s-shield" />,
+        <div>{translate("notification_seller_cart")}</div>,
+        true
+      );
+      return false;
+    }
     addToCart(objectProduct, buyer).then(response => {
       if (response.type === "ADD_TO_CART_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>{`${item.name} has been added successfully in cart.`}</div>,
+          <div>
+            {translate("notification_cart_added", { name: item.name })}
+          </div>,
           false
         );
         history.push("/cart");
@@ -232,20 +255,20 @@ class Products extends Component {
     return false;
   }
   removeCartItem(item) {
-    const { removeCartItem, showNotification, auth } = this.props;
+    const { removeCartItem, showNotification, auth, translate } = this.props;
     const buyer = auth.user.id;
     removeCartItem(buyer).then(response => {
       if (response.type === "REMOVE_CART_PRODUCT_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>Product has been deleted successfully.</div>,
+          <div>{translate("notification_cart_removed")}</div>,
           false
         );
         this.addToCart(item);
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
-          <div>Product not deleted. Please try again later.</div>,
+          <div>{translate("notification_cart_not_removed")}</div>,
           true
         );
       }

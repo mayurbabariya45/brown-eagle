@@ -14,10 +14,10 @@ const ProductReviews = props => (
           <div className="rating-result" title={`${review.rating / 5 * 100}%`}>
             <span
               style={{
-                width: `${review.rating / 5 * 100}%`
+                width: `${review.rating / 5 * 90}%`
               }}
             >
-              <span>{review.rating / 5 * 100}%</span>
+              <span>{review.rating / 5 * 90}%</span>
             </span>
           </div>
           <p>{review.commentTranslations[props.locale]}</p>

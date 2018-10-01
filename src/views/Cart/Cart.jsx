@@ -37,19 +37,25 @@ class Cart extends Component {
     getCartProducts();
   }
   onIncrement(item) {
-    const { onIncrement, showNotification } = this.props;
+    const { onIncrement, showNotification, translate } = this.props;
     onIncrement(item).then(response => {
       if (response.type === "QUANTITY_INCREMENT_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>{`${item.name} has been changed.`}</div>,
+          <div>
+            {translate("notification_cart_quantity_changed", {
+              name: item.name
+            })}
+          </div>,
           false
         );
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
           <div>
-            {`${item.name} quantity not changed. Please try again later.`}
+            {translate("notification_cart_quantity_not_changed", {
+              name: item.name
+            })}
           </div>,
           true
         );
@@ -57,19 +63,25 @@ class Cart extends Component {
     });
   }
   onDecrement(item) {
-    const { onDecrement, showNotification } = this.props;
+    const { onDecrement, showNotification, translate } = this.props;
     onDecrement(item).then(response => {
       if (response.type === "QUANTITY_DECREMENT_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>{`${item.name} has been changed.`}</div>,
+          <div>
+            {translate("notification_cart_quantity_changed", {
+              name: item.name
+            })}
+          </div>,
           false
         );
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
           <div>
-            {`${item.name} quantity not changed. Please try again later.`}
+            {translate("notification_cart_quantity_not_changed", {
+              name: item.name
+            })}
           </div>,
           true
         );
@@ -77,37 +89,43 @@ class Cart extends Component {
     });
   }
   removeCartItem(item) {
-    const { removeCartItem, showNotification, auth } = this.props;
+    const { removeCartItem, showNotification, translate, auth } = this.props;
     const buyer = auth.user.id;
     removeCartItem(buyer).then(response => {
       if (response.type === "REMOVE_CART_PRODUCT_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>{`${item.name} has been deleted successfully.`}</div>,
+          <div>
+            {translate("notification_cart_deleted", { name: item.name })}
+          </div>,
           false
         );
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
-          <div>{`${item.name} not deleted. Please try again later.`}</div>,
+          <div>
+            {translate("notification_cart_not_deleted", { name: item.name })}
+          </div>,
           true
         );
       }
     });
   }
   addToWhishlist(item) {
-    const { addToWhishlist, showNotification } = this.props;
+    const { addToWhishlist, showNotification, translate } = this.props;
     addToWhishlist(item).then(response => {
       if (response.type === "ADD_TO_WISHLIST_SUCCESS") {
         showNotification(
           <span data-notify="icon" className="pe-7s-check" />,
-          <div>{`${item.name} has been added successfully.`}</div>,
+          <div>{response.payload.response.message}</div>,
           false
         );
       } else {
         showNotification(
           <span data-notify="icon" className="pe-7s-shield" />,
-          <div>{`${item.name} not added. Please try again later.`}</div>,
+          <div>
+            {response.payload.message || translate("notification_fav")}
+          </div>,
           true
         );
       }
@@ -118,8 +136,25 @@ class Cart extends Component {
     history.push("/products");
   }
   handleCheckoutButton() {
-    const { history } = this.props;
+    const { history, auth, showNotification, translate } = this.props;
+    const authRole = auth.user.role;
+    if (_.isEmpty(authRole)) {
+      history.push({
+        pathname: "/login",
+        search: `?redirect-url=${this.props.location.pathname}`
+      });
+      return false;
+    }
+    if (authRole !== "buyer") {
+      showNotification(
+        <span data-notify="icon" className="pe-7s-shield" />,
+        <div>{translate("notification_seller_fav")}</div>,
+        true
+      );
+      return false;
+    }
     history.push("/checkout");
+    return false;
   }
   render() {
     const { translate, products, loading, cartProductTotal, cart } = this.props;
@@ -174,7 +209,7 @@ class Cart extends Component {
                             {cartProductTotal < 1 && (
                               <div className="cart-item-empty">
                                 <div className="cart-content">
-                                  <p>Your card is empty.</p>
+                                  <p>{translate("c_empty_msg")}</p>
                                 </div>
                                 <div className="cart-actions">
                                   <Button
@@ -199,18 +234,24 @@ class Cart extends Component {
                               <div className="cart-detail">
                                 <ul>
                                   <li>
-                                    <span>Price ({cartProductTotal} item)</span>
+                                    <span>
+                                      {translate("c_total_price", {
+                                        cartProductTotal
+                                      })}
+                                    </span>
                                     <span>
                                       {getCurrency(cartPriceCurrency)}{" "}
                                       {cartTotalPrice.toFixed(2)}
                                     </span>
                                   </li>
                                   <li>
-                                    <span>Delivery Charges</span>
+                                    <span>
+                                      {translate("c_delivery_charge")}
+                                    </span>
                                     <span className="text-warning">FREE</span>
                                   </li>
                                   <li>
-                                    <span>Amount Payable</span>
+                                    <span>{translate("c_total_amount")}</span>
                                     <span>
                                       {getCurrency(cartPriceCurrency)}{" "}
                                       {cartTotalPrice.toFixed(2)}
