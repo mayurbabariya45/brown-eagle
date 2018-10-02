@@ -160,7 +160,7 @@ const Products = props => {
         {!lists && (
           <div>
             <h2 className="product name product-item-name product-name">
-              <Link to={`/${productUrl}`} className="product-item-link">
+              <Link to={`${productUrl}`} className="product-item-link">
                 {!_.isEmpty(product)
                   ? product.name
                   : "Safescan 2210 Banknote Counter"}

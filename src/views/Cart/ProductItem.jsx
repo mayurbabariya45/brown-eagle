@@ -32,7 +32,7 @@ const ProductItem = props => {
     } else {
       productImages = noProduct;
     }
-    productUrl = `/product/${_.kebabCase(product.name)}/${product.id}`;
+    productUrl = `/product/${_.kebabCase(product.name)}/${product.id || product._id}`;
   }
   return (
     <div className="cart-item">
