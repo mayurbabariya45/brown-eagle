@@ -7,7 +7,11 @@ const INITIAL_STATE = {
   addAddress: false,
   orderLoading: false,
   orderSuccess: false,
-  address: {}
+  showOrder: false,
+  address: {},
+  shippingOptions: [],
+  selectedShipping: {},
+  isShippingError: false
 };
 
 /**
@@ -38,12 +42,38 @@ export default (state = INITIAL_STATE, action) => {
         error: true,
         loading: false
       };
+    case a.GET_SHIPPING_OPTIONS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case a.GET_SHIPPING_OPTIONS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        shippingOptions: action.payload,
+        isShippingError: false,
+        showOrder: true
+      };
+    case a.GET_SHIPPING_OPTIONS_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+        isShippingError: true
+      };
     case a.SAVE_SHIPPING_ADDRESS:
       return {
         ...state,
         address: action.values,
         addAddress: true
       };
+    case a.SELECT_SHIPPING_OPTION: 
+    return {
+      ...state,
+      selectedShipping: action.option
+    }  
     case a.FLUSH_ORDER:
       return {
         ...state,

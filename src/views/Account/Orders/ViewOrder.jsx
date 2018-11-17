@@ -10,6 +10,7 @@ import {
   ControlLabel,
   FormControl
 } from "react-bootstrap";
+import moment from "moment";
 import BlockUi from "react-block-ui";
 import Time from "react-time";
 import Button from "../../../elements/CustomButton/CustomButton";
@@ -309,6 +310,69 @@ const ShippingAddress = props => (
     }
   />
 );
+const ShippingOptions = props => {
+  if (_.isEmpty(props.shippingMethod)) return null;
+  const { TotalNet, Charges, DeliveryTime } = props.shippingMethod;
+  return (
+    <Card
+      className="card-profile"
+      plain
+      header={
+        <div className="header card-header-action">
+          <h4 className="title">{props.translate("o_shipping_options")}</h4>
+        </div>
+      }
+      content={
+        <div>
+          <Row>
+            <Col md={12}>
+              <Row>
+                {!_.isEmpty(Charges) && (
+                  <Col md={6}>
+                    <FormGroup>
+                      <ControlLabel>Selected Shipping: </ControlLabel>
+                      <FormControl.Static>
+                        {Charges.Charge[0].ChargeType}
+                      </FormControl.Static>
+                    </FormGroup>
+                  </Col>
+                )}
+                {!_.isEmpty(Charges) && (
+                  <Col md={6}>
+                    <FormGroup>
+                      <ControlLabel>Selected Shipping Charge: </ControlLabel>
+                      <FormControl.Static>
+                        {Charges.Currency || "EUR"}{" "}
+                        {Charges.Charge[0].ChargeAmount}
+                      </FormControl.Static>
+                    </FormGroup>
+                  </Col>
+                )}
+                <Col md={6}>
+                  <FormGroup>
+                    <ControlLabel>Delivery Charge:</ControlLabel>
+                    <FormControl.Static>
+                      {TotalNet && TotalNet.Currency}{" "}
+                      {TotalNet && TotalNet.Amount}
+                    </FormControl.Static>
+                  </FormGroup>
+                </Col>
+                <Col md={6}>
+                  <FormGroup>
+                    <ControlLabel>Delivery Date: </ControlLabel>
+                    <FormControl.Static>
+                      {moment(DeliveryTime).format("DD/MM/YYYY")}
+                    </FormControl.Static>
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </div>
+      }
+    />
+  );
+};
 const OrderDetails = props => (
   <Card
     className="card-profile"
@@ -323,7 +387,7 @@ const OrderDetails = props => (
         <Row>
           <Col md={12}>
             <div className="order-remark">
-              <p>{props.remark || "----"}</p>
+              <p>{props.remarks || "----"}</p>
             </div>
           </Col>
         </Row>
@@ -424,7 +488,16 @@ class ViewOrder extends React.Component {
       transactions,
       isLoading
     } = this.props;
-    const { status, product, total, price, quantity, remark, shippingAddress } = order;
+    const {
+      status,
+      product,
+      total,
+      price,
+      quantity,
+      remarks,
+      shippingAddress,
+      shippingMethod
+    } = order;
     return (
       <div>
         <div className="go-back-button">
@@ -444,7 +517,11 @@ class ViewOrder extends React.Component {
           quantity={quantity}
         />
         <ShippingAddress translate={translate} {...shippingAddress} />
-        <OrderDetails translate={translate} remark={remark} />
+        <ShippingOptions
+          translate={translate}
+          shippingMethod={shippingMethod || {}}
+        />
+        <OrderDetails translate={translate} remarks={remarks} />
         {status === "payment_pending" && (
           <PaymentMethod
             translate={translate}

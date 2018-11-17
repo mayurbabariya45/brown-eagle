@@ -59,6 +59,15 @@ class AddProduct extends React.Component {
           width: value.width,
           height: value.height,
           depth: value.depth
+        },
+        packageDetails: {
+          boxSize: {
+            length: value.box_length,
+            width: value.box_width,
+            height: value.box_height
+          },
+          units: value.box_units,
+          weight: value.box_weight
         }
       }
     );
@@ -66,6 +75,11 @@ class AddProduct extends React.Component {
     delete object.width;
     delete object.height;
     delete object.depth;
+    delete object.box_length;
+    delete object.box_width;
+    delete object.box_height;
+    delete object.box_units;
+    delete object.box_weight;
     if (!_.isEmpty(subCategory)) {
       object = Object.assign(
         {},

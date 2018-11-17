@@ -21,6 +21,9 @@ const mapStateToProps = state => {
   const quickDetails = !_.isEmpty(state.dashboard.product)
     ? state.dashboard.product.quickDetails
     : [];
+  const packageDetails = _.has(state.dashboard.product, "packageDetails")
+    ? state.dashboard.product.packageDetails
+    : {};
   const newKeywords = [];
   let setKeyword = "";
   if (!_.isEmpty(productKeywords)) {
@@ -39,7 +42,7 @@ const mapStateToProps = state => {
   let setProductValue = "";
   if (!_.isEmpty(quickDetails)) {
     _.map(quickDetails, (value, index) => {
-      if(index === 0){
+      if (index === 0) {
         setProductLabel = _.keys(value)[0];
         setProductValue = value[_.keys(value)[0]];
         return false;
@@ -47,6 +50,16 @@ const mapStateToProps = state => {
       productLabels.push(_.keys(value)[0]);
       productValues.push(value[_.keys(value)[0]]);
     });
+  }
+  let packageDetailsValues = {};
+  if (!_.isEmpty(packageDetails)) {
+    packageDetailsValues = {
+      box_length: packageDetails.boxSize.length,
+      box_width: packageDetails.boxSize.width,
+      box_height: packageDetails.boxSize.height,
+      box_units: packageDetails.units,
+      box_weight: packageDetails.weight
+    };
   }
   return {
     categories: state.dashboard.categories,
@@ -70,7 +83,8 @@ const mapStateToProps = state => {
       product_label: productLabels,
       value_product_label: productValues,
       label: setProductLabel,
-      ...state.dashboard.product.productDimensions
+      ...state.dashboard.product.productDimensions,
+      ...packageDetailsValues
     }
   };
 };

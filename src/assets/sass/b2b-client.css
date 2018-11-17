@@ -5306,6 +5306,9 @@ section {
   border: none;
   height: 70px; }
 
+.order-remarks .shipping-options-charges {
+  margin-top: 10px; }
+
 .order-success, .plan-actived {
   margin: 25px 0 0;
   padding: 0; }
@@ -5317,6 +5320,9 @@ section {
   padding: 0; }
   .plan-actived .order-success-content {
     text-align: center; }
+
+.checkout-section .shipping-address {
+  margin-top: 25px; }
 
 .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:hover, .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:focus, .quotation-section .quotations-filter .dropdown.open > .dropdown-toggle.btn-default:active {
   background-color: transparent; }

@@ -257,12 +257,26 @@ class EditProduct extends Component {
         width: values.width,
         height: values.height,
         depth: values.depth
+      },
+      packageDetails: {
+        boxSize: {
+          length: values.box_length,
+          width: values.box_width,
+          height: values.box_height
+        },
+        units: values.box_units,
+        weight: values.box_weight
       }
     });
     delete product.weight;
     delete product.width;
     delete product.height;
     delete product.depth;
+    delete product.box_length;
+    delete product.box_width;
+    delete product.box_height;
+    delete product.box_units;
+    delete product.box_weight;
     updateProduct(product, "en").then(payload => {
       if (payload.type === "UPDATE_PRODUCT_SUCCESS") {
         showNotification(
@@ -516,6 +530,74 @@ class EditProduct extends Component {
                       bsIcon: translate("a_inches"),
                       bsClass: "form-control form-control-simple",
                       name: "depth",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      label: translate("a_box_length"),
+                      type: "number",
+                      bsIcon: translate("a_inches"),
+                      bsClass: "form-control form-control-simple",
+                      name: "box_length",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      label: translate("a_box_width"),
+                      type: "number",
+                      bsIcon: translate("a_inches"),
+                      bsClass: "form-control form-control-simple",
+                      name: "box_width",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      label: translate("a_box_height"),
+                      type: "number",
+                      bsIcon: translate("a_inches"),
+                      bsClass: "form-control form-control-simple",
+                      name: "box_height",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "icon_text",
+                      label: translate("a_box_weight"),
+                      bsIcon: translate("a_inches"),
+                      type: "number",
+                      bsClass: "form-control form-control-simple",
+                      name: "box_weight",
+                      validate: [required]
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      label: translate("a_box_units"),
+                      type: "number",
+                      bsClass: "form-control form-control-simple",
+                      name: "box_units",
                       validate: [required]
                     }
                   ]}

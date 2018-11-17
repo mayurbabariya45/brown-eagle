@@ -17,25 +17,55 @@ class ShippingAddressForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      country: ""
+      country: {}
     };
     this.handleLocation = this.handleLocation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(values) {
-    const { saveAddress, handleFormShow } = this.props;
+    const {
+      saveAddress,
+      getShippingOptions,
+      showNotification,
+      handleFormShow,
+      productId,
+      productUnits
+    } = this.props;
     if (!_.isEmpty(values)) {
       saveAddress(
         Object.assign({}, values, {
-          country: this.state.country
+          country: this.state.country.label
         })
       );
+      getShippingOptions(
+        Object.assign(
+          {},
+          {
+            product: productId,
+            address: {
+              city: values.city,
+              postalCode: values.zipCode,
+              country: this.state.country.value
+            },
+            units: productUnits,
+            shippingDate: ""
+          }
+        )
+      ).then(response => {
+        if (response.type === "GET_SHIPPING_OPTIONS_FAILURE") {
+          showNotification(
+            <span data-notify="icon" className="pe-7s-shield" />,
+            <div>{response.payload.response.message}</div>,
+            true
+          );
+        }
+      });
       handleFormShow();
     }
   }
   handleLocation(values) {
     this.setState({
-      country: values.label
+      country: values
     });
   }
   render() {
@@ -150,7 +180,7 @@ class ShippingAddressForm extends React.Component {
                       className="text-capitalize"
                       type="submit"
                     >
-                      {translate("d_submit")}
+                      {translate("r_next")}
                     </Button>
                   </Col>
                 </Row>

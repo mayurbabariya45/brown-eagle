@@ -88,15 +88,15 @@ class ShippingAddress extends React.Component {
     };
     this.handleFormShow = this.handleFormShow.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
-    const { address, initialValues, saveAddress } = nextProps;
-    if (_.isEmpty(address)) {
-      saveAddress({ ...initialValues });
-      this.setState({
-        showForm: false
-      });
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const { address, initialValues, saveAddress } = nextProps;
+  //   if (_.isEmpty(address)) {
+  //     saveAddress({ ...initialValues });
+  //     this.setState({
+  //       showForm: false
+  //     });
+  //   }
+  // }
   handleFormShow() {
     this.setState({
       showForm: !this.state.showForm
@@ -108,9 +108,15 @@ class ShippingAddress extends React.Component {
       translate,
       handleSubmit,
       saveAddress,
+      getShippingOptions,
+      productId,
+      productUnits,
       address,
       initialValues,
-      auth
+      showNotification,
+      isShippingError,
+      auth,
+      loading
     } = this.props;
     const { user } = auth;
     return (
@@ -124,36 +130,38 @@ class ShippingAddress extends React.Component {
               header={
                 <div className="header card-header-action">
                   <h4 className="title">Shipping Address</h4>
-                  <div className="actions-label">
+                  {/* <div className="actions-label">
                     {!_.isEmpty(address) && (
-                     <div
+                      <div
                         className="action action-link"
-                       onClick={this.handleFormShow}
-                     >
+                        onClick={this.handleFormShow}
+                        role="presentation"
+                      >
                         {!this.state.showForm ? "Change" : "Close"}
-                     </div>
+                      </div>
                     )}
-                  </div>
+                    </div> */}
                 </div>
               }
               content={
                 <div>
-                  {((this.state.showForm &&
-                    (_.isEmpty(address) &&
-                      _.isEmpty(user.operationalAddress))) ||
-                    (this.state.showForm && !_.isEmpty(address))) && (
-                    <ShippingAddressForm
-                      translate={translate}
-                      handleSubmit={handleSubmit}
-                      saveAddress={saveAddress}
-                      handleFormShow={this.handleFormShow}
-                      initialValues={initialValues}
-                    />
-                  )}
-                  {!this.state.showForm &&
+                  <ShippingAddressForm
+                    translate={translate}
+                    handleSubmit={handleSubmit}
+                    saveAddress={saveAddress}
+                    getShippingOptions={getShippingOptions}
+                    handleFormShow={this.handleFormShow}
+                    initialValues={initialValues}
+                    productId={productId}
+                    productUnits={productUnits}
+                    showNotification={showNotification}
+                    isShippingError={isShippingError}
+                    loading={loading}
+                  />
+                  {/*! this.state.showForm &&
                     !_.isEmpty(address) && (
                       <ShippingAddressValues {...address} />
-                    )}
+                    ) */}
                 </div>
               }
             />
@@ -165,7 +173,8 @@ class ShippingAddress extends React.Component {
 }
 
 ShippingAddress.propTypes = {
-  translate: PropTypes.func.isRequired
+  translate: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default ShippingAddress;

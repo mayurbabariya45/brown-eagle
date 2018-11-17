@@ -3,13 +3,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Row, Col } from "react-bootstrap";
 import BlockUi from "react-block-ui";
-import { Card } from "../../components/Card/Card";
 import Button from "../../elements/CustomButton/CustomButton";
 import ProductItems from "./ProductItem";
 import ShippingAddressContainer from "../../containers/CheckoutContainer/ShippingContainer";
 import OrderRemarks from "./OrderRemark";
 import OrderSuccess from "./OrderSuccess";
-import { getCurrency } from "../../variables/Variables";
+import CartTotal from "./CartTotal";
+import ShippingOptions from "./ShippingOptions";
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -80,7 +80,8 @@ class Checkout extends React.Component {
       createOrder,
       checkout,
       showNotification,
-      products
+      products,
+      selectedShipping
     } = this.props;
     const { address } = checkout;
     const buyer = auth.user.id;
@@ -100,6 +101,9 @@ class Checkout extends React.Component {
           shippingAddress: {
             ...address,
             contactName: `${address.f_name}${address.l_name}`
+          },
+          shippingMethod: {
+            ...selectedShipping
           },
           remarks: this.state.remarks || "---"
         }
@@ -123,20 +127,35 @@ class Checkout extends React.Component {
       cartProductTotal,
       products,
       saveAddress,
+      getShippingOptions,
+      showNotification,
+      selectShippingOption,
       locale,
       price,
       checkout,
       auth
     } = this.props;
-    const { address, orderSuccess, orderLoading } = checkout;
+    const {
+      address,
+      orderSuccess,
+      orderLoading,
+      showOrder,
+      shippingOptions,
+      selectedShipping,
+      isShippingError
+    } = checkout;
     const authId = auth.user.id;
     let cartTotalPrice = 0;
+    let productId = 0;
+    let productUnits = 0;
     const cartItems = _.map(products, product => {
       cartTotalPrice += product.productPrice * product.quantity;
+      productId = product.id || product._id;
+      productUnits = product.quantity;
       return (
         <ProductItems
+          key={product.id || product._id}
           locale={locale}
-          key={product.id}
           translate={translate}
           product={product}
           onIncrement={() => this.onIncrement(product)}
@@ -179,99 +198,61 @@ class Checkout extends React.Component {
             </Col>
           </Row>
           <BlockUi tag="div" blocking={orderLoading}>
-            <Row>
-              <Col md={12}>
-                <div className="cart">
-                  <Card
-                    className="card-text"
-                    plain
-                    content={
-                      <BlockUi tag="div" blocking={loading}>
-                        <Row>
-                          <Col md={cartProductTotal > 0 ? 9 : 12}>
-                            <div className="cart-items">{cartItems}</div>
-                          </Col>
-                          {cartProductTotal > 0 && (
-                            <Col md={3}>
-                              <div className="cart-details">
-                                <div className="cart-details-header">
-                                  <h4>{translate("cart_details")}</h4>
-                                </div>
-                                <div className="cart-detail">
-                                  <ul>
-                                    <li>
-                                      <span>
-                                        Price ({cartProductTotal} item)
-                                      </span>
-                                      <span>
-                                        {getCurrency(
-                                          (!_.isEmpty(price) &&
-                                            price.currency) ||
-                                            "EUR"
-                                        )}{" "}
-                                        {cartTotalPrice.toFixed(2)}
-                                      </span>
-                                    </li>
-                                    <li>
-                                      <span>Delivery Charges</span>
-                                      <span className="text-warning">FREE</span>
-                                    </li>
-                                    <li>
-                                      <span>Amount Payable</span>
-                                      <span>
-                                        {getCurrency(
-                                          (!_.isEmpty(price) &&
-                                            price.currency) ||
-                                            "EUR"
-                                        )}{" "}
-                                        {cartTotalPrice.toFixed(2)}
-                                      </span>
-                                    </li>
-                                  </ul>
-                                </div>
-                                <div className="cart-details-footer">
-                                  {/* <p>{translate("cart_total_label")}</p> */}
-                                </div>
-                              </div>
-                            </Col>
-                          )}
-                        </Row>
-                      </BlockUi>
-                    }
-                  />
-                </div>
-              </Col>
-            </Row>
-            <ShippingAddressContainer
-              translate={translate}
-              saveAddress={saveAddress}
-              auth={auth}
-            />
-            <OrderRemarks
-              handleOrderRemark={this.handleOrderRemark}
-              value={this.state.remarks}
-            />
-            {!_.isEmpty(products) &&
-              !_.isEmpty(address) &&
-              authId &&
-              !_.isEmpty(address) && (
-                <Row>
-                  <Col md={12}>
-                    <div className="checkout-button">
-                      <Button
-                        radius
-                        fill
-                        pullRight
-                        bsStyle="warning"
-                        className="text-capitalize"
-                        onClick={this.handlePlaceOrderButton}
-                      >
-                        Place Order
-                      </Button>
-                    </div>
-                  </Col>
-                </Row>
-              )}
+            {!showOrder && (
+              <ShippingAddressContainer
+                translate={translate}
+                productId={productId}
+                productUnits={productUnits}
+                saveAddress={saveAddress}
+                getShippingOptions={getShippingOptions}
+                showNotification={showNotification}
+                isShippingError={isShippingError}
+                auth={auth}
+              />
+            )}
+            {showOrder && (
+              <div>
+                <CartTotal
+                  translate={translate}
+                  loading={loading}
+                  cartItems={cartItems}
+                  cartProductTotal={cartProductTotal}
+                  cartTotalPrice={cartTotalPrice}
+                  price={price}
+                />
+                <ShippingOptions
+                  translate={translate}
+                  selectShippingOption={selectShippingOption}
+                  selectedShipping={selectedShipping}
+                  shippingOptions={shippingOptions}
+                />
+                <OrderRemarks
+                  handleOrderRemark={this.handleOrderRemark}
+                  value={this.state.remarks}
+                />
+                {!_.isEmpty(products) &&
+                  !_.isEmpty(address) &&
+                  authId &&
+                  !_.isEmpty(address) && (
+                    <Row>
+                      <Col md={12}>
+                        <div className="checkout-button">
+                          <Button
+                            radius
+                            fill
+                            pullRight
+                            bsStyle="warning"
+                            className="text-capitalize"
+                            onClick={this.handlePlaceOrderButton}
+                          >
+                            Place Order
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                  )}
+              </div>
+            )}
           </BlockUi>
         </Grid>
       </section>

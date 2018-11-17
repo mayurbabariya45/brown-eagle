@@ -16,6 +16,8 @@ const mapDispatchToProps = dispatch => ({
   getCartProducts: authId => dispatch(d.getCartProducts(authId)),
   createOrder: values => dispatch(c.createOrder(values)),
   saveAddress: values => dispatch(c.saveAddress(values)),
+  selectShippingOption: value => dispatch(c.selectShippingOption(value)),
+  getShippingOptions: values => dispatch(c.getShippingOptions(values)),
   flushCheckout: () => dispatch(c.flushCheckout()),
   onIncrement: item => dispatch(d.onIncrement(item)),
   onDecrement: item => dispatch(d.onDecrement(item))

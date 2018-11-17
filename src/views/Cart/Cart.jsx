@@ -244,12 +244,12 @@ class Cart extends Component {
                                       {cartTotalPrice.toFixed(2)}
                                     </span>
                                   </li>
-                                  <li>
+                                  {/* <li>
                                     <span>
                                       {translate("c_delivery_charge")}
                                     </span>
                                     <span className="text-warning">FREE</span>
-                                  </li>
+                                  </li> */}
                                   <li>
                                     <span>{translate("c_total_amount")}</span>
                                     <span>
