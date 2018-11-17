@@ -1867,3 +1867,11 @@ $product-main-color: #7d1516;
     }
   }
 }
+.form-control-static-flex{
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  span{
+    margin-bottom: 5px;
+  }
+}

@@ -3224,6 +3224,13 @@ section {
 .form-group.has-error .Select-control {
   border-color: #ff4a55; }
 
+.form-control-static-flex {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap; }
+  .form-control-static-flex span {
+    margin-bottom: 5px; }
+
 .news-letter {
   background-color: #f8f8f8; }
   .news-letter .card.card-stats .content {

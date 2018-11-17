@@ -417,7 +417,7 @@ const Profile = props => {
                     <Col md={6}>
                       <FormGroup>
                         <ControlLabel>{translate("m_products")}</ControlLabel>
-                        <FormControl.Static>
+                        <FormControl.Static className="form-control-static-flex">
                           {user
                             ? _.map(user.mainProducts, (product, index) => (
                                 <span
