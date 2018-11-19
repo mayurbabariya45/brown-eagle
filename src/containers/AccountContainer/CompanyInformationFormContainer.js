@@ -62,9 +62,19 @@ const mergeProps = (state, actions, ownProps) => ({
         const location = response.payload.results[0].formatted_address.split(
           ","
         );
+        const postCode = _.find(
+          response.payload.results[0].address_components,
+          value => value.types[0] === "postal_code"
+        );
+        const locality = _.find(
+          response.payload.results[0].address_components,
+          value => value.types[0] === "locality"
+        );
         const country = location.pop();
-        const zipcode = location.pop();
-        const city = location.pop();
+        const zipcode = postCode.long_name;
+        location.pop();
+        location.pop();
+        const city = locality.long_name;
         const { lat, lng } = response.payload.results[0].geometry.location;
         if (type === "registeredAddress") {
           actions.changeFieldValue("r_city", city);
