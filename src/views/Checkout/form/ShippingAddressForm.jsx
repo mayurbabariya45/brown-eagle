@@ -48,7 +48,7 @@ class ShippingAddressForm extends React.Component {
               country: this.state.country.value
             },
             units: productUnits,
-            shippingDate: ""
+            shippingDate: new Date()
           }
         )
       ).then(response => {
