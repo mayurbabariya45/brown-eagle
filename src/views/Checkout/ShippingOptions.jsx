@@ -28,7 +28,7 @@ class ShippingOptions extends React.Component {
     options = _.map(shippingOptions, (option, index) => {
       if (!_.isEmpty(option.Charges)) {
         chargeOptions.push(option.Charges.Charge);
-        const { ChargeType } = option.Charges.Charge;
+        const { ChargeType } = option.Charges.Charge[0];
         return {
           value: index,
           label: ChargeType

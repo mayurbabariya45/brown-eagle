@@ -90,9 +90,9 @@ class Account extends Component {
         phone: values.phone
       }
     });
-    delete values.name;
-    delete values.email;
-    delete values.phone;
+    delete mergedValues.name;
+    delete mergedValues.email;
+    delete mergedValues.phone;
     updateProfile(mergedValues, authId, authRole).then(payload => {
       if (payload.type === "UPDATE_PROFILE_SUCCESS") {
         window.scrollTo(0, 0);
