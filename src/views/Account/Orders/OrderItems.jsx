@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import BlockUi from "react-block-ui";
+import moment from "moment";
 import Pagination from "../../../components/Pagination/Pagination";
 import ImageLoader from "../../../components/ImageLoader/ImageLoader";
 import ContentLoader from "../../../components/Loader/Loader";
@@ -84,6 +85,10 @@ const OrderItem = props => {
             <p>
               <span>Quantity</span>:
               {props.quantity}
+            </p>
+            <p>
+              <span>Date</span>:
+              {moment(props.createdAt).format("DD/MM/YYYY")}
             </p>
           </div>
         </div>

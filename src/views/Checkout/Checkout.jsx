@@ -80,10 +80,9 @@ class Checkout extends React.Component {
       createOrder,
       checkout,
       showNotification,
-      products,
-      selectedShipping
+      products
     } = this.props;
-    const { address } = checkout;
+    const { address, selectedShipping } = checkout;
     const buyer = auth.user.id;
     if (_.isEmpty(products)) return false;
     if (buyer) {
@@ -218,6 +217,7 @@ class Checkout extends React.Component {
                   cartItems={cartItems}
                   cartProductTotal={cartProductTotal}
                   cartTotalPrice={cartTotalPrice}
+                  selectedShipping={selectedShipping}
                   price={price}
                 />
                 <ShippingOptions

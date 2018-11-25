@@ -2980,7 +2980,7 @@ section {
         text-transform: capitalize; }
   .view-order .product-infromation .product-total {
     float: left;
-    width: 100%;
+    width: 50%;
     margin: 0;
     padding: 10px 0 0; }
     .view-order .product-infromation .product-total p {

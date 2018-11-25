@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import BlockUi from "react-block-ui";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import Pagination from "../../components/Pagination/Pagination";
 import ImageLoader from "../../components/ImageLoader/ImageLoader";
 import ContentLoader from "../../components/Loader/Loader";
@@ -100,6 +101,11 @@ const OrderItem = props => {
             <p>
               <span>Order remarks</span>:
               {props.remarks}
+            </p>
+            <p>
+              <span>Date</span>:
+              {!_.isEmpty(props.createdAt) &&
+                moment(props.createdAt).format("DD/MM/YYYY")}{" "}
             </p>
           </div>
         </div>

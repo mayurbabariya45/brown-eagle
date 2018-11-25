@@ -153,7 +153,7 @@ const Introduce = () => (
   </div>
 );
 const ProductDetails = props => {
-  const { product } = props;
+  const { product, grandTotal, shippingCharges, createdAt } = props;
   const { seller } = product;
   const { companyName } = seller;
   let productImages;
@@ -211,6 +211,28 @@ const ProductDetails = props => {
             <p>
               <span>Total: </span>
               {props.price.currency} {props.total}
+            </p>
+          </div>
+          <div className="product-total">
+            <p>
+              <span>Grand Total: </span>
+              {(!_.isEmpty(grandTotal) && grandTotal.currency) || "EUR"}{" "}
+              {(!_.isEmpty(grandTotal) && grandTotal.value) || "0"}
+            </p>
+          </div>
+          <div className="product-total">
+            <p>
+              <span>Shipping Charge: </span>
+              {(!_.isEmpty(shippingCharges) && shippingCharges.currency) ||
+                "EUR"}{" "}
+              {(!_.isEmpty(shippingCharges) && shippingCharges.value) || "0"}
+            </p>
+          </div>
+          <div className="product-total">
+            <p>
+              <span>Date: </span>
+              {!_.isEmpty(createdAt) &&
+                moment(createdAt).format("DD/MM/YYYY")}{" "}
             </p>
           </div>
         </div>
@@ -496,7 +518,10 @@ class ViewOrder extends React.Component {
       quantity,
       remarks,
       shippingAddress,
-      shippingMethod
+      grandTotal,
+      shippingCharges,
+      shippingMethod,
+      createdAt
     } = order;
     return (
       <div>
@@ -514,7 +539,10 @@ class ViewOrder extends React.Component {
           product={product}
           total={total}
           price={price}
+          createdAt={createdAt}
           quantity={quantity}
+          grandTotal={grandTotal}
+          shippingCharges={shippingCharges}
         />
         <ShippingAddress translate={translate} {...shippingAddress} />
         <ShippingOptions

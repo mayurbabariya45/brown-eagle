@@ -56,7 +56,7 @@ const OrderQuantity = ({
   </div>
 );
 const ProductDetails = props => {
-  const { buyer } = props;
+  const { buyer, grandTotal, shippingCharges, createdAt } = props;
   const { companyName, isProfileApproved } = buyer;
   let productImages;
   let productUrl = "/products";
@@ -137,13 +137,39 @@ const ProductDetails = props => {
               <span>Commission: </span>
               {props.price.currency} {props.commission.toFixed(2)}
             </p>
+          </div>
+          <div className="product-total">
             <p>
               <span>Seller Share: </span>
               {props.price.currency} {props.sellerShare.toFixed(2)}
             </p>
+          </div>
+          <div className="product-total">
             <p>
               <span>Order Total: </span>
               {props.price.currency} {props.total.toFixed(2)}
+            </p>
+          </div>
+          <div className="product-total">
+            <p>
+              <span>Grand Total: </span>
+              {(!_.isEmpty(grandTotal) && grandTotal.currency) || "EUR"}{" "}
+              {(!_.isEmpty(grandTotal) && grandTotal.value) || "0"}
+            </p>
+          </div>
+          <div className="product-total">
+            <p>
+              <span>Shipping Charge: </span>
+              {(!_.isEmpty(shippingCharges) && shippingCharges.currency) ||
+                "EUR"}{" "}
+              {(!_.isEmpty(shippingCharges) && shippingCharges.value) || "0"}
+            </p>
+          </div>
+          <div className="product-total">
+            <p>
+              <span>Date: </span>
+              {!_.isEmpty(createdAt) &&
+                moment(createdAt).format("DD/MM/YYYY")}{" "}
             </p>
           </div>
         </div>
@@ -469,7 +495,10 @@ class ViewOrder extends React.Component {
       shippingMethod,
       buyer,
       commission,
-      sellerShare
+      sellerShare,
+      grandTotal,
+      shippingCharges,
+      createdAt
     } = order;
     return (
       <div className="seller-order-view">
@@ -496,6 +525,9 @@ class ViewOrder extends React.Component {
               handleQuantity={this.handleQuantity}
               priceError={this.state.priceError}
               quantityError={this.state.quantityError}
+              grandTotal={grandTotal}
+              shippingCharges={shippingCharges}
+              createdAt={createdAt}
             />
             <ShippingAddress translate={translate} {...shippingAddress} />
             <ShippingOptions

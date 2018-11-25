@@ -13,8 +13,12 @@ const CartTotal = props => {
     cartItems,
     cartProductTotal,
     cartTotalPrice,
-    price
+    price,
+    selectedShipping
   } = props;
+  const cardTotal = !_.isEmpty(selectedShipping)
+    ? selectedShipping.TotalNet.Amount + cartTotalPrice
+    : cartTotalPrice;
   return (
     <Row>
       <Col md={12}>
@@ -52,7 +56,7 @@ const CartTotal = props => {
                                 {getCurrency(
                                   (!_.isEmpty(price) && price.currency) || "EUR"
                                 )}{" "}
-                                {cartTotalPrice.toFixed(2)}
+                                {cardTotal.toFixed(2)}
                               </span>
                             </li>
                           </ul>
