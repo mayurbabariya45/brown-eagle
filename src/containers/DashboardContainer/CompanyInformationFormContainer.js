@@ -73,7 +73,9 @@ const mergeProps = (state, actions, ownProps) => ({
           value => value.types[0] === "locality"
         );
         const country = location.pop();
-        const zipcode = postCode.long_name;
+        const zipcode = _.hasIn(postCode, "long_name")
+          ? postCode.long_name
+          : "";
         location.pop();
         location.pop();
         const city = locality.long_name;

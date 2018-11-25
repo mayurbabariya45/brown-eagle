@@ -206,7 +206,15 @@ const FieldGroup = ({
                   />
                 </Col>
               </Row>
-              <FormControl {...props} />
+              <InputGroup>
+                <FormControl {...props} />
+                {bsStyle &&
+                  bsText && (
+                    <InputGroup.Button>
+                      <Button {...bsStyle}>{bsText}</Button>
+                    </InputGroup.Button>
+                  )}
+              </InputGroup>
             </FormGroup>
           );
         default:

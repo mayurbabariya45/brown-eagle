@@ -31,15 +31,14 @@ class CompanyInformationForm extends Component {
     const { getLocation } = this.props;
     getLocation(lat, lng, this.state.activeInput);
   }
-  handleInputFocus(event) {
+  handleInputFocus(name) {
     const { locationLatLng } = this.state;
     this.setState({
       showMapModal: true,
       loading: true,
-      activeInput: event.target.name
+      activeInput: name
     });
-    event.target.blur();
-    this.props.handleInputMap(event.target.name);
+    this.props.handleInputMap(name);
     if (!_.isEmpty(locationLatLng)) {
       this.setState({ loading: false });
       return false;
@@ -53,11 +52,7 @@ class CompanyInformationForm extends Component {
             lng: p.coords.longitude
           }
         );
-        this.props.getLocation(
-          p.coords.latitude,
-          p.coords.longitude,
-          event.target.name
-        );
+        this.props.getLocation(p.coords.latitude, p.coords.longitude, name);
         this.setState({ locationLatLng: LatLngBounds, loading: false });
       },
       () => {
@@ -65,7 +60,7 @@ class CompanyInformationForm extends Component {
           lat: 19.230526955858,
           lng: 72.9730803
         };
-        this.props.getLocation(19.230526955858, 72.9730803, event.target.name);
+        this.props.getLocation(19.230526955858, 72.9730803, name);
         this.setState({ locationLatLng: LatLngBounds, loading: false });
       }
     );
@@ -178,11 +173,17 @@ class CompanyInformationForm extends Component {
                 ncols={["col-md-12"]}
                 proprieties={[
                   {
+                    inputGroup: "button",
+                    bsStyle: {
+                      className: "btn btn-default btn-warning btn-fill",
+                      onClick: () => this.handleInputFocus("registeredAddress")
+                    },
+                    bsText: "Locate Me",
                     label: translate("r_address"),
                     type: "text",
                     bsClass: "form-control form-control-simple",
                     name: "registeredAddress",
-                    onFocus: this.handleInputFocus,
+                    // onFocus: this.handleInputFocus,
                     validate: [required]
                   }
                 ]}
@@ -232,7 +233,12 @@ class CompanyInformationForm extends Component {
                     type: "text",
                     bsClass: "form-control form-control-simple",
                     name: "operationalAddress",
-                    onFocus: this.handleInputFocus,
+                    bsStyle: {
+                      className: "btn btn-default btn-warning btn-fill",
+                      onClick: () => this.handleInputFocus("operationalAddress")
+                    },
+                    bsText: "Locate Me",
+                   // onFocus: this.handleInputFocus,
                     disabled: this.state.sameAddress,
                     handleChecked: this.handleChecked,
                     validate: [required]

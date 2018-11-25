@@ -71,7 +71,9 @@ const mergeProps = (state, actions, ownProps) => ({
           value => value.types[0] === "locality"
         );
         const country = location.pop();
-        const zipcode = postCode.long_name;
+        const zipcode = _.hasIn(postCode, "long_name")
+          ? postCode.long_name
+          : "";
         location.pop();
         location.pop();
         const city = locality.long_name;
@@ -79,13 +81,13 @@ const mergeProps = (state, actions, ownProps) => ({
         if (type === "registeredAddress") {
           actions.changeFieldValue("r_city", city);
           actions.changeFieldValue("registeredAddress", location.join(","));
-          actions.changeFieldValue("r_area_code", zipcode.split(" ").pop());
+          actions.changeFieldValue("r_area_code", zipcode);
           actions.changeFieldValue("r_country", country);
           actions.location([lat, lng]);
         } else {
           actions.changeFieldValue("o_city", city);
           actions.changeFieldValue("operationalAddress", location.join(","));
-          actions.changeFieldValue("o_area_code", zipcode.split(" ").pop());
+          actions.changeFieldValue("o_area_code", zipcode);
           actions.changeFieldValue("o_country", country);
         }
       }
