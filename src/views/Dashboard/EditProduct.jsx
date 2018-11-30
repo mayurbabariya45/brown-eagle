@@ -616,6 +616,20 @@ class EditProduct extends Component {
                     }
                   ]}
                 />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      label: translate("a_term_of_condition"),
+                      type: "text",
+                      componentClass: "textarea",
+                      style: { height: 100 },
+                      bsClass: "form-control form-control-simple",
+                      name: "termAndCondition",
+                      validate: [required]
+                    }
+                  ]}
+                />
                 <Row>
                   <Col md={12} sm={12} xs={12}>
                     <div className="image-form">

@@ -11,6 +11,11 @@
         letter-spacing: 0.025em;
         display: block;
     }
+    .has-error {
+        label{
+            color: #a94442;
+        }
+    }
     input,
     .StripeElement {
         display: block;

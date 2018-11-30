@@ -152,6 +152,7 @@ export const en = {
       a_brand_name: "Brand Name",
       a_add_more: "Add More",
       a_description: "Product Description",
+      a_term_of_condition: "Term Of Condition",
       a_height: "Height",
       a_width: "Width",
       a_weight: "Weight",

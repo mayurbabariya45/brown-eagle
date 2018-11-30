@@ -94,6 +94,9 @@
             -webkit-border-radius: 4px;
             border-radius: 4px;
             border: 1px solid $medium-dark-blue;
+            min-height: 300px;
+            max-height: 300px;
+            overflow: auto;
             > .level-one-inner {
               margin: 20px 20px 0;
               width: 600px;

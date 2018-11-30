@@ -1249,7 +1249,10 @@ fieldset[disabled] .form-control {
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
         border-radius: 4px;
-        border: 1px solid #24303e; }
+        border: 1px solid #24303e;
+        min-height: 300px;
+        max-height: 300px;
+        overflow: auto; }
         .navbar .navbar-nav > li.header-category-wrapper > .header-category li .level-one-list > .level-one-inner {
           margin: 20px 20px 0;
           width: 600px; }
@@ -9592,6 +9595,9 @@ Main Components
   font-weight: 300;
   letter-spacing: 0.025em;
   display: block; }
+
+.payment-method .has-error label {
+  color: #a94442; }
 
 .payment-method input,
 .payment-method .StripeElement {

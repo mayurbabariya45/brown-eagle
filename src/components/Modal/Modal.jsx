@@ -31,7 +31,7 @@ Component.propTypes = {
 };
 
 Component.defaultProps = {
-  bsSize: "small",
+  bsSize: "",
   className: ""
 };
 

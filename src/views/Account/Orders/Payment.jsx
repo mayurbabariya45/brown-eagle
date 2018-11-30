@@ -13,6 +13,7 @@ import {
 } from "react-stripe-elements";
 import BlockUi from "react-block-ui";
 import Button from "../../../elements/CustomButton/CustomButton";
+import TermsAndCondition from "./TermsAndCondition";
 
 const createOptions = (fontSize, padding) => ({
   style: {
@@ -84,9 +85,15 @@ class _SplitForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      isShow: false
     };
   }
+  hanldeSubmitForm = () => {
+    this.setState({
+      isShow: true
+    });
+  };
   handleSubmit = ev => {
     ev.preventDefault();
     this.setState({
@@ -139,11 +146,16 @@ class _SplitForm extends React.Component {
     return (
       <BlockUi blocking={this.state.loading}>
         <div className="payment-method">
-          <PaymentForm
-            fontSize={this.props.fontSize}
-            handleSubmit={this.handleSubmit}
-            translate={this.props.translate}
-          />
+          {this.state.isShow && (
+            <PaymentForm
+              fontSize={this.props.fontSize}
+              handleSubmit={this.handleSubmit}
+              translate={this.props.translate}
+            />
+          )}
+          {!this.state.isShow && (
+            <TermsAndCondition hanldeSubmitForm={this.hanldeSubmitForm} />
+          )}
         </div>
       </BlockUi>
     );

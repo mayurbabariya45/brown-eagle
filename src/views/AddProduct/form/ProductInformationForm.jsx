@@ -355,6 +355,23 @@ class ProductInformationForm extends Component {
                     }
                   ]}
                 />
+                <FormInputs
+                  ncols={["col-md-12"]}
+                  proprieties={[
+                    {
+                      inputGroup: "horizontal",
+                      xsLabel: 2,
+                      xsInput: 5,
+                      label: translate("a_term_of_condition"),
+                      type: "text",
+                      componentClass: "textarea",
+                      style: { height: 100 },
+                      bsClass: "form-control form-control-simple",
+                      name: "termAndCondition",
+                      validate: [required]
+                    }
+                  ]}
+                />
               </div>
             </div>
           </div>
