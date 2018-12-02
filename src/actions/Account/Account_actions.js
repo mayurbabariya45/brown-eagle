@@ -78,3 +78,15 @@ export const location = coordinates => dispatch => {
     coordinates
   });
 };
+export const getTermAndCondition = loc => dispatch =>
+  dispatch({
+    [RSAA]: {
+      endpoint: `terms?location=${loc}&page=1&perPage=1`,
+      method: "GET",
+      types: [
+        a.GET_TERMS_CONDTION_REQUEST,
+        a.GET_TERMS_CONDTION_SUCCESS,
+        a.GET_TERMS_CONDTION_FAILURE
+      ]
+    }
+  });

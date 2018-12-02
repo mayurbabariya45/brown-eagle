@@ -204,6 +204,7 @@ class Account extends Component {
                       {!_.isEmpty(user) && (
                         <OrdersContainer
                           buyerId={user.id}
+                          location={user.location}
                           locale={locale}
                           translate={translate}
                           showNotification={showNotification}

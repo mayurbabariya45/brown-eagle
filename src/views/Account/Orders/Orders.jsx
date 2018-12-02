@@ -50,13 +50,16 @@ class Orders extends React.Component {
       showNotification,
       getOrderTransactions,
       transactions,
+      termsAndConditions,
       buyerId,
+      location,
       isLoading,
       getOrders,
       selectFilters,
-      selectedFilter
+      selectedFilter,
+      getTermAndCondition
     } = this.props;
-    const { count, order } = orders;
+    const { count, order,  } = orders;
     const { currentPage } = this.state;
     const start = (currentPage - 1) * 20 + 1 || 0;
     let end = currentPage * 20 || 0;
@@ -127,7 +130,10 @@ class Orders extends React.Component {
                   order={this.state.order}
                   transactions={transactions}
                   isLoading={isLoading}
+                  location={location}
                   handlePaymentMethod={this.handlePaymentMethod}
+                  getTermAndCondition={getTermAndCondition}
+                  termsAndConditions={termsAndConditions}
                 />
               </div>
             </Col>

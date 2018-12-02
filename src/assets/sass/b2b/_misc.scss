@@ -1875,3 +1875,19 @@ $product-main-color: #7d1516;
     margin-bottom: 5px;
   }
 }
+.company-profile{
+  .transaction-overview{
+    margin-top: 30px;
+    & .section-header{
+      margin-bottom: 20px;
+    }
+    .form-group{
+      margin-bottom: 0;
+      .form-control-static{
+        margin-left: 10px;
+        vertical-align: middle;
+        display: inline-block;
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ const mapDispatchToProps = dispatch => ({
   getOrders: (authId, page, status) =>
     dispatch(a.getOrders(authId, page, status)),
   payment: (orderId, token) => dispatch(a.payment(orderId, token)),
+  getTermAndCondition: loc => dispatch(a.getTermAndCondition(loc)),
   cancelOrder: (orderId, status) => dispatch(a.cancelOrder(orderId, status)),
   getOrderTransactions: (buyer, status) =>
     dispatch(a.getOrderTransactions(buyer, status)),

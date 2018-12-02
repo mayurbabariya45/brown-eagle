@@ -493,10 +493,17 @@ class ViewOrder extends React.Component {
     this.state = {};
   }
   componentWillMount() {
-    const { getOrderTransactions, order, buyerId } = this.props;
+    const {
+      getOrderTransactions,
+      getTermAndCondition,
+      order,
+      location,
+      buyerId
+    } = this.props;
     if (!_.isEmpty(order)) {
       const { id } = order;
       getOrderTransactions(buyerId, id);
+      getTermAndCondition(location);
     }
   }
   render() {
@@ -508,7 +515,8 @@ class ViewOrder extends React.Component {
       payment,
       showNotification,
       transactions,
-      isLoading
+      isLoading,
+      termsAndConditions
     } = this.props;
     const {
       status,
@@ -557,6 +565,7 @@ class ViewOrder extends React.Component {
             orderId={order.id}
             showNotification={showNotification}
             handlePaymentMethod={handlePaymentMethod}
+            termsAndConditions={termsAndConditions}
           />
         )}
         {/* <OrderButtons /> */}

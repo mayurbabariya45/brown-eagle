@@ -10,7 +10,8 @@ const INITIAL_STATE = {
   selectedFilter: {
     name: "All",
     status: "all"
-  }
+  },
+  termAndConditions:[]
 };
 
 /**
@@ -81,6 +82,22 @@ export default (state = INITIAL_STATE, action) => {
         transactions: action.payload.transactions
       };
     case a.GET_ORDER_TRANSACTIONS_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case a.GET_TERMS_CONDTION_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case a.GET_TERMS_CONDTION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        termAndConditions: action.payload.termsAndConditions
+      };
+    case a.GET_TERMS_CONDTION_FAILURE:
       return {
         ...state,
         isLoading: false

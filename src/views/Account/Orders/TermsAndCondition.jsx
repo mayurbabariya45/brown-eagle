@@ -44,7 +44,7 @@ class TermsAndCondition extends React.Component {
               }
             ]}
           >
-            Accept Product{" "}
+            I accept Seller{" "}
             <Link to="#" onClick={this.handleClick}>
               Terms and condition
             </Link>
@@ -59,8 +59,8 @@ class TermsAndCondition extends React.Component {
               }
             ]}
           >
-            Accept DHL{" "}
-            <Link to="#" onClick={this.handleClick}>
+            I accept DHL{" "}
+            <Link to="#" >
               Terms and condition
             </Link>
           </FormInputs>
@@ -74,7 +74,7 @@ class TermsAndCondition extends React.Component {
               }
             ]}
           >
-            Accept BE{" "}
+            I accept BE{" "}
             <Link to="#" onClick={this.handleClick}>
               Terms and condition
             </Link>

@@ -367,7 +367,7 @@ class ProductInformationForm extends Component {
                       componentClass: "textarea",
                       style: { height: 100 },
                       bsClass: "form-control form-control-simple",
-                      name: "termAndCondition",
+                      name: "termsAndConditions",
                       validate: [required]
                     }
                   ]}

@@ -2,7 +2,7 @@ import React from "react";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
 const MapWithMarker = withGoogleMap(props => (
-  <GoogleMap defaultZoom={15} defaultCenter={props.location}>
+  <GoogleMap defaultZoom={13} defaultCenter={props.location}>
     <Marker position={props.location} />
   </GoogleMap>
 ));
@@ -14,7 +14,7 @@ const MapMarker = props => {
       lat: (location && parseFloat(location.lat)) || -34.397,
       lng: (location && parseFloat(location.lng)) || 150.644
     }
-  );
+  );  
   return (
     <div className="map-container">
       <MapWithMarker

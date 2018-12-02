@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CategorySlider from "../../components/CategorySlider/CategorySlider";
 import Location from "./Location";
+import SendMessageContainer from "../../containers/SendMessageContainer/SendMessageContainer";
+import Transactions from "./Transactions";
 
 const ImagesSlider = ({ video, image }) => {
   const settings = {
@@ -70,11 +72,14 @@ class SellerProfile extends React.Component {
       companyName,
       businessType,
       aboutUsTranslations,
+      location,
       registeredAddress,
+      transactions,
       established,
       employeeCount,
       certificates,
-      coordinates
+      coordinates,
+      contactPerson
     } = profile;
 
     const aboutUs = !_.isEmpty(aboutUsTranslations)
@@ -95,7 +100,9 @@ class SellerProfile extends React.Component {
           <Row>
             <Col md={4}>
               <div className="supplier-slider">
-                <ImagesSlider video={profileVideo} image={picture} />
+                {(profileVideo || picture) && (
+                  <ImagesSlider video={profileVideo} image={picture} />
+                )}
               </div>
             </Col>
             <Col md={8}>
@@ -116,9 +123,7 @@ class SellerProfile extends React.Component {
                     </tr>
                     <tr>
                       <th className="col-title">Location:</th>
-                      <td className="col-value">
-                        {registeredAddress && registeredAddress.country}
-                      </td>
+                      <td className="col-value">{location && location}</td>
                       <td className="col-verify">
                         <span
                           className="company-verified-icon icon-onsite"
@@ -143,6 +148,20 @@ class SellerProfile extends React.Component {
                     <tr>
                       <th className="col-title">Year Established:</th>
                       <td className="col-value">{established}</td>
+                      <td className="col-verify">
+                        <span
+                          className="company-verified-icon icon-onsite"
+                          title="Indicates information has been verified onsite by a certification specialist"
+                        >
+                          {/* <i className="ui2-icon ui2-icon-checkmark verified-icon" />Verified */}
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="col-title">Contact Person:</th>
+                      <td className="col-value">
+                        {contactPerson && contactPerson.name}
+                      </td>
                       <td className="col-verify">
                         <span
                           className="company-verified-icon icon-onsite"
@@ -218,16 +237,26 @@ class SellerProfile extends React.Component {
           </Row>
           <Row>
             <Col md={12}>
-              <Location
-                location={
-                  !_.isEmpty(coordinates)
-                    ? {
-                        lat: coordinates.coordinates[0],
-                        lng: coordinates.coordinates[1]
-                      }
-                    : {}
-                }
-              />
+              {!_.isEmpty(coordinates) && (
+                <Location
+                  location={{
+                    lat: coordinates.coordinates[0],
+                    lng: coordinates.coordinates[1]
+                  }}
+                />
+              )}
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <div className="transaction-overview">
+                <div className="section-header">
+                  <div className="title">
+                    <h5>Transaction Overview</h5>
+                  </div>
+                </div>
+                <Transactions transactions={transactions || {}} />
+              </div>
             </Col>
           </Row>
           <Row>
@@ -284,6 +313,16 @@ class SellerProfile extends React.Component {
                 }}
               />
             </Col>
+          </Row>
+          <Row>
+            <div className="send-supplier-messages">
+              <Col sm={12}>
+                <div className="title">
+                  <h4>{translate("product_message_title")}</h4>
+                </div>
+                <SendMessageContainer translate={translate} />
+              </Col>
+            </div>
           </Row>
         </Grid>
       </section>

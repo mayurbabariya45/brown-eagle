@@ -3234,6 +3234,17 @@ section {
   .form-control-static-flex span {
     margin-bottom: 5px; }
 
+.company-profile .transaction-overview {
+  margin-top: 30px; }
+  .company-profile .transaction-overview .section-header {
+    margin-bottom: 20px; }
+  .company-profile .transaction-overview .form-group {
+    margin-bottom: 0; }
+    .company-profile .transaction-overview .form-group .form-control-static {
+      margin-left: 10px;
+      vertical-align: middle;
+      display: inline-block; }
+
 .news-letter {
   background-color: #f8f8f8; }
   .news-letter .card.card-stats .content {
