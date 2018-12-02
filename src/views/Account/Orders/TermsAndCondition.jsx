@@ -60,7 +60,7 @@ class TermsAndCondition extends React.Component {
             ]}
           >
             I accept DHL{" "}
-            <Link to="#" >
+            <Link to="http://www.dhl.co.in/en/express/shipping/shipping_advice/terms_conditions.htmlShipmentTermsAndConditions.html" >
               Terms and condition
             </Link>
           </FormInputs>
