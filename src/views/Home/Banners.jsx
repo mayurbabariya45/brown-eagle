@@ -19,7 +19,7 @@ const Banners = props => {
         <Col md={12}>
           <div className="home-banners">
             {isBannersLoading && (
-              <Col md={12}>
+              <Col md={12} sm={12} xs={12}>
                 <div className="image-banner-container">
                   <ContentLoader height={150} inFight />
                 </div>
@@ -29,7 +29,7 @@ const Banners = props => {
               _.map(props.banners, banner => {
                 const bannerLink = ValidURL(banner.redirectUrl);
                 return (
-                  <Col md={6} key={banner.id}>
+                  <Col md={6} sm={6} xs={12} key={banner.id}>
                     <div className="image-banner-container">
                       <a href={bannerLink}>
                         <Image src={banner.url} />

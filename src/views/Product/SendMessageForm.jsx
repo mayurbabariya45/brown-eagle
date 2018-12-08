@@ -8,7 +8,7 @@ const SendMessageForm = props => (
   <div className="send-message-form">
     <div className="form-horizontal-box">
       <FormInputs
-        ncols={["col-md-8"]}
+        ncols={["col-md-8 col-xs-12"]}
         proprieties={[
           {
             inputGroup: "horizontal",
@@ -24,7 +24,7 @@ const SendMessageForm = props => (
         ]}
       />
       <FormInputs
-        ncols={["col-md-5", "col-md-3"]}
+        ncols={["col-md-5 col-xs-12", "col-md-3 col-xs-12"]}
         proprieties={[
           {
             inputGroup: "horizontal",
@@ -46,7 +46,7 @@ const SendMessageForm = props => (
       </FormInputs>
 
       <Row>
-        <Col sm={12}>
+        <Col sm={12} xs={12}>
           <FormInputs
             proprieties={[
               {
@@ -61,7 +61,7 @@ const SendMessageForm = props => (
         </Col>
       </Row>
       <Row>
-        <Col sm={12}>
+        <Col sm={12} xs={12}>
           <FormInputs
             proprieties={[
               {
@@ -77,7 +77,7 @@ const SendMessageForm = props => (
       </Row>
 
       <Row>
-        <Col md={12}>
+        <Col md={12} xs={12}>
           <Button bsStyle="warning" type="submit" fill radius simple>
             {props.translate("product_message_send")}
           </Button>

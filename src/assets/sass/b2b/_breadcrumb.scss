@@ -13,7 +13,10 @@
             background: $white-color-top;
             padding: $breadcrumb-padding;
             color:$breadcrumb-color-link;
-        } 
+        }
+        @media (max-width: 800px) {
+            margin-bottom: 30px; 
+        }
     }
     > .active{
         color:$breadcrumb-color-link;

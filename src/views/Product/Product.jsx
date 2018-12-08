@@ -315,7 +315,7 @@ class Product extends Component {
       <section className="product-view">
         <Grid>
           <Row>
-            <Col sm={12}>
+            <Col sm={12} xs={12}>
               <Breadcrumbs breadcrumb={breadcrumb} />
             </Col>
           </Row>
@@ -557,7 +557,7 @@ class Product extends Component {
                     </Col>
                   </div>
                   <div className="send-supplier-messages">
-                    <Col sm={12}>
+                    <Col sm={12} xs={12}>
                       <div className="title">
                         <h4>{translate("product_message_title")}</h4>
                       </div>
@@ -580,7 +580,7 @@ class Product extends Component {
                   </div>
                 </Row>
               </Col>
-              <Col sm={3}>
+              <Col sm={3} xs={12}>
                 <TradeAssurance translate={translate} seller={seller} />
                 <ProductLikes
                   translate={translate}

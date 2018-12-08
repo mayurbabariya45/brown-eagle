@@ -11,7 +11,7 @@ const Footer = props => {
       <Grid>
         <div className="footers">
           <Row>
-            <Col lg={2} md={2} sm={3} xs={3}>
+            <Col lg={2} md={2} sm={3} xs={6}>
               <h3 className="title">{translate("about_us")}</h3>
               <nav>
                 <ul>
@@ -33,7 +33,7 @@ const Footer = props => {
                 </ul>
               </nav>
             </Col>
-            <Col lg={3} md={3} sm={3} xs={3}>
+            <Col lg={3} md={3} sm={3} xs={6}>
               <h3 className="title">{translate("sell_on_brown_eagle")}</h3>
               <nav>
                 <ul>
@@ -56,7 +56,7 @@ const Footer = props => {
                 </ul>
               </nav>
             </Col>
-            <Col lg={2} md={2} sm={3} xs={3}>
+            <Col lg={2} md={2} sm={3} xs={12}>
               <h3 className="title"> {translate("buy_on_brown_eagle")} </h3>
               <nav>
                 <ul>
@@ -76,7 +76,7 @@ const Footer = props => {
                 </ul>
               </nav>
             </Col>
-            <Col lg={3} md={3} sm={3} xs={3}>
+            <Col lg={3} md={3} sm={3} xs={6}>
               <h3 className="title">{translate("customer_services")}</h3>
               <nav>
                 <ul>
@@ -102,7 +102,7 @@ const Footer = props => {
                 </ul>
               </nav>
             </Col>
-            <Col lg={2} md={2} sm={3} xs={3}>
+            <Col lg={2} md={2} sm={3} xs={6}>
               <h3 className="title">{translate("trade_service")}</h3>
               <nav>
                 <ul>
@@ -199,7 +199,7 @@ const Footer = props => {
         <Grid>
           <Row>
             <Col md={12}>
-              <Col sm={3}>
+              <Col sm={3} xs={6}>
                 <ul>
                   <li>
                     <a href="/#/">
@@ -221,7 +221,7 @@ const Footer = props => {
                   </li>
                 </ul>
               </Col>
-              <Col sm={3}>
+              <Col sm={3} xs={6}>
                 <ul>
                   <li>
                     <a href="../advance-ai.html">
@@ -243,7 +243,7 @@ const Footer = props => {
                   </li>
                 </ul>
               </Col>
-              <Col sm={3}>
+              <Col sm={3} xs={6}>
                 <ul>
                   <li>
                     <a href="/#/">
@@ -265,7 +265,7 @@ const Footer = props => {
                   </li>
                 </ul>
               </Col>
-              <Col sm={3}>
+              <Col sm={3} xs={6}>
                 <ul>
                   <li>
                     <a href="/#/">
