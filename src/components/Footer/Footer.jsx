@@ -152,12 +152,12 @@ const Footer = props => {
                     <h3>{translate("follow_us")}</h3>
                     <ul>
                       <li>
-                        <a href="/#/">
+                        <a href="https://www.facebook.com/BrownEagleINC">
                           <i className="fa fa-facebook" />
                         </a>
                       </li>
                       <li>
-                        <a href="/#/">
+                        <a href="https://twitter.com/BrownEagleINC">
                           <i className="fa fa-twitter" />
                         </a>
                       </li>
@@ -167,12 +167,12 @@ const Footer = props => {
                         </a>
                       </li>
                       <li>
-                        <a href="/#/">
+                        <a href="https://www.instagram.com/browneagleinc">
                           <i className="fa fa-instagram" />
                         </a>
                       </li>
                       <li>
-                        <a href="/#/">
+                        <a href="https//www.linkedin.com/company/brown-eagle-inc">
                           <i className="fa fa-linkedin" />
                         </a>
                       </li>

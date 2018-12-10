@@ -582,7 +582,7 @@ class EditProduct extends Component {
                     {
                       inputGroup: "icon_text",
                       label: translate("a_box_weight"),
-                      bsIcon: translate("a_inches"),
+                      bsIcon: translate("a_grams"),
                       type: "number",
                       bsClass: "form-control form-control-simple",
                       name: "box_weight",
