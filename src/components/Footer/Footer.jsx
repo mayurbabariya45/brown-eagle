@@ -1,11 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap";
 import Languages from "../Languages/Languages";
 import footerLogo from "../../assets/img/footer/logo4.png";
 
 const Footer = props => {
-  const { translate } = props;
+  const { translate, isLogging } = props;
+  const linkUrl = isLogging
+  ? "/buyer/request_quotation"
+  : {
+      pathname: "/login",
+      search: "?redirect-url=/buyer/request_quotation"
+    };
   return (
     <footer className="footer">
       <Grid>
@@ -51,7 +58,7 @@ const Footer = props => {
                     <a href="/#/wholesale">{translate("wholesale")}</a>
                   </li>
                   <li>
-                    <a href="/#/verified">{translate("verified")}</a>
+                    <a href="/#/sellers">{translate("verified")}</a>
                   </li>
                 </ul>
               </nav>
@@ -61,18 +68,18 @@ const Footer = props => {
               <nav>
                 <ul>
                   <li>
-                    <a href="/#/request_quotation">
+                    <Link to={linkUrl}>
                       {translate("request_for_quotation")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a href="/#/market_trends">{translate("market_trends")}</a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="/#/verified_buyers">
                       {translate("verified_buyers")}
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </nav>
             </Col>
@@ -172,7 +179,7 @@ const Footer = props => {
                         </a>
                       </li>
                       <li>
-                        <a href="https//www.linkedin.com/company/brown-eagle-inc">
+                        <a href="https://www.linkedin.com/company/brown-eagle-inc">
                           <i className="fa fa-linkedin" />
                         </a>
                       </li>

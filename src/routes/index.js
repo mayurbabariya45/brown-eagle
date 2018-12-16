@@ -43,6 +43,8 @@ import SecurePayment from "../views/static/SecurePayment";
 import InspectionService from "../views/static/InspectionService";
 import Sitemap from "../views/static/Sitemap";
 import ContactUs from "../views/static/ContactUs";
+import Terms from "../views/static/Terms";
+import Condition from "../views/static/Conditions";
 
 const appRoutes = [
   { path: "/", exact: true, name: "Home", component: HomeContainer },
@@ -140,7 +142,7 @@ const appRoutes = [
     component: ProductsContainer
   },
   {
-    path: "/sellers/:country",
+    path: "/sellers/:country?",
     name: "Sellers",
     component: FilterSellersContainer
   },
@@ -290,6 +292,16 @@ const appRoutes = [
     path: "/sitemap",
     name: "SiteMap",
     component: Sitemap
+  },
+  {
+    path: "/conditions-of-use",
+    name: "Condition",
+    component: Condition
+  },
+  {
+    path: "/terms",
+    name: "Terms",
+    component: Terms
   }
 ];
 

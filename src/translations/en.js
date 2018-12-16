@@ -638,7 +638,7 @@ export const en = {
       crypto_currency: "Crypto Currency",
       go_virtual: "Go virtual",
       save_more: "save more",
-      copyright: `<a href="#">Conditions of Use</a> <a href="#">Privacy Notice</a> &copy; ${new Date().getFullYear()}, Brown-Eagle.com, Inc. or its affiliates`
+      copyright: `<a href="/#/conditions-of-use">Conditions of Use</a> <a href="/#/terms">Privacy Notice</a> &copy; ${new Date().getFullYear()}, Brown-Eagle, BV. or its affiliates`
     }
   }
 };
