@@ -8,12 +8,23 @@ import Logo from "../../assets/img/logo.png";
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      sidebarExists: false
+    };
+    this.mobileSidebarToggle = this.mobileSidebarToggle.bind(this);
     this.handleLanguage = this.handleLanguage.bind(this);
   }
   handleLanguage(lang) {
     const { setLocale } = this.props;
     setLocale(lang);
+  }
+  mobileSidebarToggle(e) {
+    if (this.state.sidebarExists === false) {
+      this.setState({
+        sidebarExists: true
+      });
+    }
+    e.preventDefault();
   }
   render() {
     const { navLinks } = this.props;
@@ -25,7 +36,7 @@ class Header extends Component {
               <img src={Logo} alt="Brown Eagle" />
             </a>
           </Navbar.Brand>
-          <Navbar.Toggle />
+          <Navbar.Toggle onClick={this.mobileSidebarToggle} />
         </Navbar.Header>
         <Navbar.Collapse>
           <HeaderLinks {...this.props} handleLanguage={this.handleLanguage} />

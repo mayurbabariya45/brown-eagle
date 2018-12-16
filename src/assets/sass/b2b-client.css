@@ -4754,7 +4754,8 @@ section {
     padding: 10px;
     width: auto;
     height: auto;
-    z-index: 8; }
+    z-index: 8;
+    left: -10px; }
     .supplier-products .slick-prev::before {
       content: "\f104"; }
   .supplier-products .slick-next {
@@ -4765,7 +4766,8 @@ section {
     background: white;
     padding: 10px;
     width: auto;
-    height: auto; }
+    height: auto;
+    right: -8px; }
     .supplier-products .slick-next::before {
       content: "\f105"; }
   .supplier-products .product-item > .product-item-info {
@@ -9036,10 +9038,8 @@ Main Components
     -ms-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
     transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
     position: relative; }
-  .navbar .navbar-collapse.collapse,
-  .navbar .navbar-collapse.collapse.in,
-  .navbar .navbar-collapse.collapsing {
-    display: none !important; }
+  .xs-menu-items {
+    padding: 0 17px; }
   .navbar-nav > li {
     float: none;
     position: relative;
@@ -9448,7 +9448,14 @@ Main Components
     overflow-x: scroll;
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    -webkit-overflow-scrolling: touch; } }
+    -webkit-overflow-scrolling: touch; }
+  .nav.navbar-nav.navbar-right {
+    float: left;
+    width: 100%; }
+    .nav.navbar-nav.navbar-right > li {
+      float: left;
+      position: relative;
+      display: block; } }
 
 @keyframes toastify-bounceInRight {
   from,

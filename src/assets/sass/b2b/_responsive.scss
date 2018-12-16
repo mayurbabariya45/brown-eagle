@@ -101,9 +101,11 @@
   .navbar .navbar-collapse.collapse,
   .navbar .navbar-collapse.collapse.in,
   .navbar .navbar-collapse.collapsing {
-    display: none !important;
+   // display: none !important;
   }
-
+  .xs-menu-items{
+    padding: 0 17px;
+  }
   .navbar-nav > li {
     float: none;
     position: relative;
@@ -462,5 +464,14 @@
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch;
+  }
+  .nav.navbar-nav.navbar-right{
+    float: left;
+    width: 100%;
+    > li {
+      float: left;
+      position: relative;
+      display: block;
+    }
   }
 }

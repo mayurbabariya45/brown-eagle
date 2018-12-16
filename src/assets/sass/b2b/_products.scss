@@ -1669,6 +1669,7 @@
     width: auto;
     height: auto;
     z-index: 8;
+    left: -10px;
     &::before {
       content: "\f104";
     }
@@ -1682,6 +1683,7 @@
     padding: 10px;
     width: auto;
     height: auto;
+    right: -8px;
     &::before {
       content: "\f105";
     }
