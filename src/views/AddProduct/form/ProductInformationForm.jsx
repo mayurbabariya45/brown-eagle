@@ -9,7 +9,7 @@ import {
   ControlLabel,
   FormControl
 } from "react-bootstrap";
-import { numericality } from "redux-form-validators";
+import { numericality, length } from "redux-form-validators";
 import { FormInputs } from "../../../components/FormInputs/FormInputs";
 import ProductImageForm from "./ProductImageForm";
 import { required } from "../../../formValidationRules/FormValidationRules";
@@ -351,7 +351,7 @@ class ProductInformationForm extends Component {
                       style: { height: 100 },
                       bsClass: "form-control form-control-simple",
                       name: "description",
-                      validate: [required]
+                      validate: [required, length({ max: 200 })]
                     }
                   ]}
                 />
@@ -368,7 +368,7 @@ class ProductInformationForm extends Component {
                       style: { height: 100 },
                       bsClass: "form-control form-control-simple",
                       name: "termsAndConditions",
-                      validate: [required]
+                      validate: [required, length({ max: 200 })]
                     }
                   ]}
                 />

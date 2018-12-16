@@ -96,7 +96,7 @@ class SellerCertificateForm extends React.Component {
                         multiple={false}
                         className="dropzone-certificate"
                       >
-                        Dropping your certificate here
+                        Dropping your pdf certificate here
                       </Dropzone>
                     </FormGroup>
                     {_.size(files) > 0 && (

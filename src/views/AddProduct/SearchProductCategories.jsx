@@ -8,6 +8,7 @@ import {
   FormGroup,
   InputGroup,
   FormControl,
+  ControlLabel,
   Collapse
 } from "react-bootstrap";
 import Button from "../../elements/CustomButton/CustomButton";
@@ -99,6 +100,10 @@ class SearchProductCategories extends Component {
         <Row>
           <Col md={6}>
             <FormGroup>
+              <p>
+                Enter any keyword and click on search button to show category
+                list
+              </p>
               <InputGroup>
                 <FormControl type="text" onChange={this.handleOnChangeInput} />
                 <InputGroup.Button>
@@ -144,14 +149,9 @@ class SearchProductCategories extends Component {
                     </div>
                   )}
                 </div>
-                <Button
-                  bsStyle="link"
-                  onClick={() => this.setState({ open: !this.state.open })}
-                >
-                  *Term and Conditions
-                </Button>
+                <p> *Term and Conditions</p>
                 {/* <Collapse in={this.state.open}> */}
-                <div className="collapse">
+                <div className="collapse show">
                   <div className="selected-category-terms">
                     {selectedCategory.termsAndConditionsTranslations[locale]}
                   </div>

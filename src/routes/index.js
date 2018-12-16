@@ -198,11 +198,6 @@ const appRoutes = [
   },
   {
     path: "/training-center",
-    name: "SellerMembership",
-    component: SellerMembership
-  },
-  {
-    path: "/training-center",
     name: "TrainingCenter",
     component: TrainingCenter
   },

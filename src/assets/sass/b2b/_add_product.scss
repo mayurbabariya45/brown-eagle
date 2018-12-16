@@ -167,7 +167,9 @@
               color: $white-color;
             }
             > ul {
-              display: block;
+              width: 100%;
+              overflow: auto;
+              height: 300px;
               > li {
                 color: $white-color;
                 > p {

@@ -83,6 +83,7 @@ const mapStateToProps = state => {
       product_label: productLabels,
       value_product_label: productValues,
       label: setProductLabel,
+      termsAndConditions: state.dashboard.product.termsAndConditions,
       ...state.dashboard.product.productDimensions,
       ...packageDetailsValues
     }

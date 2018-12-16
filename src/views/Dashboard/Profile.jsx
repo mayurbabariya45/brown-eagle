@@ -9,6 +9,7 @@ import {
   FormGroup
 } from "react-bootstrap";
 import BlockUi from "react-block-ui";
+import ShowMoreText from "react-show-more-text";
 import { Card } from "../../components/Card/Card";
 import CompanyInformationFormContainer from "../../containers/DashboardContainer/CompanyInformationFormContainer";
 import ContactInformationFormContainer from "../../containers/DashboardContainer/ContactInformationFormContainer";
@@ -218,7 +219,8 @@ const Profile = props => {
                         <div className="icon-text">
                           <div className="numbers">
                             {(activePlanStorage && activePlanStorage.total) ||
-                              0} MB
+                              0}{" "}
+                            MB
                           </div>
                           <div className="icon-big text-right icon-warning">
                             <i className="pe-7s-refresh-cloud" />
@@ -231,12 +233,14 @@ const Profile = props => {
                               Remaining{" "}
                               {(activePlanStorage &&
                                 activePlanStorage.remaining) ||
-                                0} MB
+                                0}{" "}
+                              MB
                             </span>{" "}
                             <span>
                               Used{" "}
                               {(activePlanStorage && activePlanStorage.used) ||
-                                0} MB
+                                0}{" "}
+                              MB
                             </span>
                           </div>
                         </div>
@@ -453,7 +457,14 @@ const Profile = props => {
                       <FormGroup>
                         <ControlLabel>{translate("about_us")}</ControlLabel>
                         <FormControl.Static>
-                          {user ? user.aboutUs : "none"}
+                          <ShowMoreText
+                            lines={4}
+                            more="Show more"
+                            less="Show less"
+                            anchorClass=""
+                          >
+                            {user ? user.aboutUs : "none"}
+                          </ShowMoreText>
                         </FormControl.Static>
                       </FormGroup>
                     </Col>

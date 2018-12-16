@@ -2518,7 +2518,8 @@ section {
     .static-page .page-header h1 {
       color: #7d1516;
       padding-bottom: 8px;
-      font-size: 28px; }
+      font-size: 28px;
+      text-transform: uppercase; }
 
 .fluid {
   max-width: 1200px;
@@ -3269,6 +3270,86 @@ section {
       margin-left: 10px;
       vertical-align: middle;
       display: inline-block; }
+
+.flex-col-c-m {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center; }
+
+.size1 {
+  width: 355px;
+  max-width: 100%; }
+
+.flex-w {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.p-b-47 {
+  padding-bottom: 47px; }
+
+.p-b-20 {
+  padding-bottom: 20px; }
+
+.txt1 {
+  font-size: 18px;
+  line-height: 1.2;
+  color: #000; }
+
+.size2 {
+  width: calc(100% - 43px); }
+
+.flex-col {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column; }
+
+.static-content {
+  float: left;
+  width: 100%;
+  margin-top: 6%;
+  margin-bottom: 30px; }
+
+.banner-container {
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover; }
+
+.content-container {
+  float: left;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0; }
+  .content-container .content {
+    float: left;
+    margin: 0 auto;
+    padding: 60px 10%;
+    text-align: justify;
+    font-weight: bold; }
 
 .news-letter {
   background-color: #f8f8f8; }
@@ -4989,7 +5070,9 @@ section {
           .box .box-content .box-search .box-search-result ul > li.active > p {
             color: #ffffff; }
           .box .box-content .box-search .box-search-result ul > li.active > ul {
-            display: block; }
+            width: 100%;
+            overflow: auto;
+            height: 300px; }
             .box .box-content .box-search .box-search-result ul > li.active > ul > li {
               color: #ffffff; }
               .box .box-content .box-search .box-search-result ul > li.active > ul > li > p {

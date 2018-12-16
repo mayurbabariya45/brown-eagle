@@ -115,9 +115,9 @@ class EmailLoginForm extends Component {
             }
             stats={
               <div className="social-login-links">
-                <span>{translate("l_sign_with")}</span>
+                {/* <span>{translate("l_sign_with")}</span> */}
                 <div className="social-links">
-                  <Button
+                  {/* <Button
                     simple
                     social
                     className="btn-facebook"
@@ -132,7 +132,7 @@ class EmailLoginForm extends Component {
                     onClick={() => handleSocialLogin("google")}
                   >
                     <i className="fa fa-google social-icon-auth" />
-                  </Button>
+                  </Button> */}
                 </div>
                 <div className="languages">
                   <Languages
